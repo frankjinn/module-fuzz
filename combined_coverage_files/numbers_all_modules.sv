@@ -2,7 +2,7 @@
 // Module: constant
 // Exercises numeric literal parsing: decimal, binary, octal, hex, sized, unsized.
 //------------------------------------------------------------------------------
-module constant (
+module numbers_constant (
     output wire [31:0] const_dec,
     output wire [15:0] const_bin,
     output wire [11:0] const_oct,
@@ -26,7 +26,7 @@ endmodule
 // Module: arithmetic
 // Exercises +, −, *, /, % with signed/unsigned operands and width promotion.
 //------------------------------------------------------------------------------
-module arithmetic #(
+module numbers_numbers_arithmetic #(
     parameter integer W_A = 8,
     parameter integer W_B = 4
 ) (
@@ -53,7 +53,7 @@ endmodule
 // Module: bitwise_reduce
 // Exercises reduction operators: &, |, ^.
 //------------------------------------------------------------------------------
-module bitwise_reduce (
+module numbers_bitwise_reduce (
     input  wire [7:0] in_vec,
     output wire       red_and,
     output wire       red_or,
@@ -69,7 +69,7 @@ endmodule
 // Module: bitwise_logic
 // Exercises bitwise &, |, ^ between two vectors.
 //------------------------------------------------------------------------------
-module bitwise_logic (
+module numbers_bitwise_logic (
     input  wire [7:0] x,
     input  wire [7:0] y,
     output wire [7:0] and_xy,
@@ -86,7 +86,7 @@ endmodule
 // Module: concat_repl
 // Exercises concatenation ({}) and replication ({N{…}}).
 //------------------------------------------------------------------------------
-module concat_repl (
+module numbers_concat_repl (
     input  wire [3:0] a,
     input  wire [1:0] b,
     output wire [7:0] cat_ab,
@@ -106,7 +106,7 @@ endmodule
 // Module: shift
 // Exercises shift left (<<) and shift right (>>).
 //------------------------------------------------------------------------------
-module shift (
+module numbers_shift (
     input  wire [7:0] data_in,
     input  wire [2:0] shift_amt,
     output wire [7:0] shl_out,
@@ -121,7 +121,7 @@ endmodule
 // Module: select
 // Exercises static and dynamic part‐select, plus overflow detection.
 //------------------------------------------------------------------------------
-module select (
+module numbers_select (
     input  wire [15:0] data_in,
     input  wire [3:0]  idx,          // allow up to 15
     output wire [3:0]  static_ps,    // bits [7:4]
@@ -141,7 +141,7 @@ endmodule
 // Module: relational
 // Exercises equality, inequality, relational, case-equality (===), case-inequality (!==).
 //------------------------------------------------------------------------------
-module relational (
+module numbers_relational (
     input  wire [3:0] x,
     input  wire [3:0] y,
     output wire       eq,       // x == y (logical equality)
@@ -168,7 +168,7 @@ endmodule
 // Module: logical_op
 // Exercises logical AND (&&), logical OR (||), and logical NOT (!) on single‐bit inputs.
 //------------------------------------------------------------------------------
-module logical_op (
+module numbers_logical_op (
     input  wire a,
     input  wire b,
     output wire land_ab,
@@ -185,7 +185,7 @@ endmodule
 // Module: reduce_case
 // Exercises wildcard (case) equality with X/Z bits.
 //------------------------------------------------------------------------------
-module reduce_case (
+module numbers_reduce_case (
     input  wire [3:0] a,
     input  wire [3:0] b,
     output wire       wild_eq,  // bitwise comparison treating X/Z as wildcard
@@ -207,10 +207,10 @@ endmodule
 
 //------------------------------------------------------------------------------
 // Module: arithmetic_reduce
-// A composite module to combine several arithmetic and reduction operations.
+// A composite module numbers_to combine several arithmetic and reduction operations.
 // Ensures multi-operator coverage in a single expression.
 //------------------------------------------------------------------------------
-module arithmetic_reduce (
+module numbers_arithmetic_reduce (
     input  wire [7:0]  p,
     input  wire [7:0]  q,
     output wire [7:0]  complex_expr,

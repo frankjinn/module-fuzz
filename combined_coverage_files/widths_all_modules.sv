@@ -2,7 +2,7 @@
 // Module: enum
 // Replaces the SV typedef‐enum with simple localparam constants.
 //------------------------------------------------------------------------------
-module enum (
+module widths_enum_mod (
     input  wire [3:0] e_in,      // pass enum value
     output wire [3:0] e_out_eq,  // 1 if e_in == E2, else 0
     output wire       is_E2
@@ -23,7 +23,7 @@ endmodule
 // Module: struct
 // Simply wires inputs directly to outputs (flattened version of SV struct).
 //------------------------------------------------------------------------------
-module struct (
+module widths_struct_mod (
     input  wire [7:0]  a_in,
     input  wire signed [3:0] b_in,
     output wire [7:0]  a_out,
@@ -39,7 +39,7 @@ endmodule
 // Module: union
 // Splits a 16‐bit input into low and high bytes (flat version of SV union).
 //------------------------------------------------------------------------------
-module union (
+module widths_union_mod (
     input  wire [15:0] u_in,
     output wire [7:0]  u_low,
     output wire [7:0]  u_high
@@ -53,7 +53,7 @@ endmodule
 // Module: arith
 // Exercises arithmetic, signed/unsigned casts, and width promotion.
 //------------------------------------------------------------------------------
-module arith #(
+module widths_arith #(
     parameter integer W_A = 8,
     parameter integer W_B = 4
 ) (
@@ -80,7 +80,7 @@ endmodule
 // Module: logic
 // Logical, reduction, and comparison operations on 4‐bit vectors.
 //------------------------------------------------------------------------------
-module logic (
+module widths_logic_mod (
     input  wire [3:0]  x,
     input  wire [3:0]  y,
     output wire        eq,      // x == y
@@ -103,7 +103,7 @@ endmodule
 // Module: concat_repl
 // Concatenation and replication (Verilog‐2005 syntax).
 //------------------------------------------------------------------------------
-module concat_repl (
+module widths_concat_repl (
     input  wire [3:0]  a,
     input  wire [1:0]  b,
     output wire [7:0]  cat_ab,
@@ -126,7 +126,7 @@ endmodule
 // Module: conditional
 // Ternary operator with mixed signed/unsigned resolution.
 //------------------------------------------------------------------------------
-module conditional (
+module widths_conditional (
     input  wire        sel,
     input  wire [3:0]  x,
     input  wire signed [3:0] y,
@@ -142,7 +142,7 @@ endmodule
 // Module: shift
 // Simple left/right shifts.
 //------------------------------------------------------------------------------
-module shift (
+module widths_shift (
     input  wire [7:0] data_in,
     input  wire [2:0] shift_amt,
     output wire [7:0] shl_out,
@@ -157,7 +157,7 @@ endmodule
 // Module: cast
 // Zero‐extension/truncation between 4 and 8 bits.
 //------------------------------------------------------------------------------
-module cast (
+module widths_cast (
     input  wire [3:0]  in4,
     input  wire [7:0]  in8,
     output wire [7:0]  cast_up,
@@ -174,7 +174,7 @@ endmodule
 // Module: partselect
 // Uses static [7:4] and dynamic [idx +:4]; also checks overflow.
 //------------------------------------------------------------------------------
-module partselect (
+module widths_partselect (
     input  wire [15:0] data_in,
     input  wire [2:0]  idx,
     output wire [3:0]  static_ps,
@@ -196,7 +196,7 @@ endmodule
 // Module: array
 // “Flattened” version of unpacked‐array handling. 4 separate 4‐bit inputs→4 outputs.
 //------------------------------------------------------------------------------
-module array (
+module widths_array (
     input  wire        clk,
     input  wire        rstn,
     input  wire [3:0]  din0,
@@ -228,7 +228,7 @@ endmodule
 // Module: param
 // Parameterized widths and concatenation.
 //------------------------------------------------------------------------------
-module param #(
+module widths_param #(
     parameter integer WIDTH_A = 5,
     parameter integer WIDTH_B = 3
 ) (

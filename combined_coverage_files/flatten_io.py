@@ -13,7 +13,9 @@ module such that:
     module and packs them into `out_flat`.
 
 Additionally, each generated wrapper file now automatically includes the original
-module’s file at the top (assuming the original file is named `<module>.sv`).
+module’s file at the top, based on the source filename, and outputs wrapper files
+named `<source_filename_without_ext>_wrapper.sv` to avoid mismatches when module
+names differ from filenames.
 
 Usage:
     python3 generate_wrappers.py <input_directory> <output_directory>
@@ -22,11 +24,11 @@ Example:
     python3 generate_wrappers.py sv_sources wrappers_out
 
 Result:
-    For each file `foo.sv` containing `module foo (...)`, you’ll get a file
+    For each file `foo.sv` containing `module bar (...)`, you’ll get a file
     `foo_wrapper.sv` in `wrappers_out/` that contains:
 
       `include "foo.sv"
-      module foo_wrapper (...)
+      module bar_wrapper (...)
         ...
       endmodule
 """
@@ -85,7 +87,6 @@ def parse_module_ports_from_text(text: str):
     port_lines = port_list_text.splitlines()
     input_ports = []
     output_ports = []
-    range_pattern = re.compile(r'\[\s*(\d+)\s*:\s*(\d+)\s*\]')
 
     for raw_line in port_lines:
         line = raw_line.split('//', 1)[0].strip()
@@ -93,10 +94,12 @@ def parse_module_ports_from_text(text: str):
             continue
         line = line.rstrip(',;').strip()
 
-        m_in = re.match(r'^\s*input\b(?:\s+(?:wire|reg))?(?:\s+signed)?(?:\s+(\[\s*\d+\s*:\s*\d+\s*\]))?\s+(\w+)\s*$', line)
+        m_in = re.match(
+            r'^\s*input\b(?:\s+(?:wire|reg))?(?:\s+signed)?(?:\s+(\[\s*\d+\s*:\s*\d+\s*\]))?\s+(\w+)\s*$',
+            line
+        )
         if m_in:
-            range_str = m_in.group(1)
-            port_name = m_in.group(2)
+            range_str, port_name = m_in.group(1), m_in.group(2)
             if range_str:
                 msb, lsb = map(int, re.findall(r'\d+', range_str))
                 width = abs(msb - lsb) + 1
@@ -105,10 +108,12 @@ def parse_module_ports_from_text(text: str):
             input_ports.append((port_name, width))
             continue
 
-        m_out = re.match(r'^\s*output\b(?:\s+(?:wire|reg))?(?:\s+signed)?(?:\s+(\[\s*\d+\s*:\s*\d+\s*\]))?\s+(\w+)\s*$', line)
+        m_out = re.match(
+            r'^\s*output\b(?:\s+(?:wire|reg))?(?:\s+signed)?(?:\s+(\[\s*\d+\s*:\s*\d+\s*\]))?\s+(\w+)\s*$',
+            line
+        )
         if m_out:
-            range_str = m_out.group(1)
-            port_name = m_out.group(2)
+            range_str, port_name = m_out.group(1), m_out.group(2)
             if range_str:
                 msb, lsb = map(int, re.findall(r'\d+', range_str))
                 width = abs(msb - lsb) + 1
@@ -125,9 +130,16 @@ def parse_module_ports_from_text(text: str):
 
 def generate_wrapper_sv(module_name: str,
                         input_ports: list,
-                        output_ports: list) -> str:
+                        output_ports: list,
+                        source_filename: str) -> str:
     """
-    Generates a flattened wrapper for `module_name` and includes the original module.
+    Generates a flattened wrapper for `module_name` and includes the original file.
+
+    Args:
+      module_name: name of the original module (e.g. "foo")
+      input_ports: list of (port_name, width) for inputs
+      output_ports: list of (port_name, width) for outputs
+      source_filename: the .sv filename (including extension) to `include` at top
     """
     wrapper_name = f"{module_name}_wrapper"
 
@@ -135,8 +147,8 @@ def generate_wrapper_sv(module_name: str,
     total_out_bits = sum(w for (_, w) in output_ports)
 
     sv_lines = []
-    # Add include for the original module
-    sv_lines.append(f"`include \"{module_name}.sv\"")
+    # Include original file by filename
+    sv_lines.append(f"`include \"{source_filename}\"")
     sv_lines.append("")
     sv_lines.append(f"//------------------------------------------------------------------------------")
     sv_lines.append(f"// Wrapper for {module_name}")
@@ -149,6 +161,7 @@ def generate_wrapper_sv(module_name: str,
     sv_lines.append(f");")
     sv_lines.append("")
 
+    # Slice inputs
     sv_lines.append(f"  // Slice `in_flat` into original inputs")
     current_idx = total_in_bits - 1
     for port_name, width in input_ports:
@@ -162,6 +175,7 @@ def generate_wrapper_sv(module_name: str,
             current_idx -= width
     sv_lines.append("")
 
+    # Capture outputs
     sv_lines.append(f"  // Wires to capture original module outputs")
     for port_name, width in output_ports:
         if width == 1:
@@ -170,6 +184,7 @@ def generate_wrapper_sv(module_name: str,
             sv_lines.append(f"  wire [{width-1}:0] {port_name};")
     sv_lines.append("")
 
+    # Instantiate original module
     sv_lines.append(f"  // Instantiate the original module")
     sv_lines.append(f"  {module_name} u_{module_name} (")
     all_ports = input_ports + output_ports
@@ -179,6 +194,7 @@ def generate_wrapper_sv(module_name: str,
     sv_lines.append(f"  );")
     sv_lines.append("")
 
+    # Pack outputs
     sv_lines.append(f"  // Pack original outputs into `out_flat`")
     current_o_idx = total_out_bits - 1
     for port_name, width in output_ports:
@@ -215,12 +231,14 @@ def generate_wrappers_in_directory(input_dir: str, output_dir: str):
             print(f"Skipping {fname}: {e}")
             continue
 
-        wrapper_code = generate_wrapper_sv(module_name, input_ports, output_ports)
-        out_fname = f"{module_name}_wrapper.sv"
+        # Use the source filename stem for the wrapper file name
+        stem = os.path.splitext(fname)[0]
+        wrapper_code = generate_wrapper_sv(module_name, input_ports, output_ports, fname)
+        out_fname = f"{stem}_wrapper.sv"
         out_path = os.path.join(output_dir, out_fname)
         with open(out_path, 'w') as out_f:
             out_f.write(wrapper_code)
-        print(f"Generated wrapper for module '{module_name}' → {out_path}")
+        print(f"Generated wrapper for '{fname}' → {out_path}")
 
 
 if __name__ == "__main__":
