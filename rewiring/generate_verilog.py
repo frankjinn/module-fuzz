@@ -95,6 +95,9 @@ def generate_connections(io_map, input_size, output_size = None, output_internal
                         external_output_set = unwired_connections + random.sample(internal_output_list[:len(internal_input_set)], output_size - len(unwired_connections))
                     else:
                         external_output_set = unwired_connections
+            else:
+                # Output all wires if no output width is specified.
+                external_output_set = unwired_connections + wired_connections
             connections.append(wired_connections)
         else:
             # If theres more internal inputs than internal outputs, then we connect internal outputs to more than 1 internal input.

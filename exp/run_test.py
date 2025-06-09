@@ -72,7 +72,7 @@ TB_TEMPLATE = textwrap.dedent("""\
     """)
 
 MAIN_CPP_TEMPLATE = textwrap.dedent("""\
-    #include "V{tb_name}.h"
+    #include "Vtb.h"
     #include "verilated.h"
     int main(int argc, char **argv) {{
       Verilated::commandArgs(argc, argv);
@@ -100,12 +100,17 @@ def generate_tb(args):
 def run_verilator(args):
     # ensure output directory exists
     if os.path.isdir(OBJ_DIR):
-        subprocess.run(["rm", "-rf", OBJ_DIR], check=True)
+        subprocess.run(["rm", "-rf", OBJ_DIR], check=True)    
     cmd = [
-        "verilator",
+        "/verilator/bin/verilator",
         "--cc",
-        *args.dut,
-        TB_SV_FILE,
+        "--timing",
+        "--top-module", TB_NAME,     # <- force ‘tb’ as the top
+        TB_SV_FILE,                  # put your TB first
+        *args.dut,                   # then the DUT(s)
+        "-I/module-fuzz/exp/curr_run/wrapper_modules",
+        "-I/module-fuzz/exp/curr_run/base_modules",
+        "-Wno-fatal",
         "--exe", MAIN_CPP,
         "--build",
         "--Mdir", OBJ_DIR

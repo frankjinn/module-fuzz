@@ -1,24 +1,29 @@
+`timescale 1ns/1ps
+`default_nettype none
 
-
-//------------------------------------------------------------------------------
-// Module: reduce_case
-// Exercises wildcard (case) equality with X/Z bits.
-//------------------------------------------------------------------------------
 module numbers_reduce_case (
-    input  wire [3:0] a,
-    input  wire [3:0] b,
-    output wire       wild_eq,  // bitwise comparison treating X/Z as wildcard
-    output wire       wild_neq  // bitwise not equal with wildcard
+    input  logic [3:0] a,
+    input  logic [3:0] b,
+    output logic       wild_eq,   // treat b’s X/Z bits as “don’t care”
+    output logic       wild_neq
 );
-    // In Verilog, '===' and '!==' compare X/Z bits exactly, not wildcard.
-    // To treat X/Z in b as “don’t care” (wildcard), we can use conditional:
-    //   a matches b if for all bits i: (b[i] is X/Z) OR (a[i] == b[i]).
-    wire [3:0] b_is_xz = (b ^ b);  // if b bit is X or Z, then b ^ b = X/Z, else 0
-    // But simpler: use case equality and then mask:
-    assign wild_eq  = ( ( (a ^ b) & ~({4{1'b0}}) ) == 4'b0000 ) ||      // a==b exactly
-                      (&( (b ^ 4'bzzzz) === 4'bzzzz ));                // all bits of b are X/Z
-    // Actually, for a general wildcard, you'd need bitwise logic per bit; but to exercise V3Number's wildcard functions,
-    // we rely on '===' and '!==' operators.
-    assign wild_eq  = (a === b);
-    assign wild_neq = (a !== b);
+
+  // per-bit match: if b[i] is X/Z → match, else require a[i]===b[i]
+  logic [3:0] match_bits;
+
+  always_comb begin
+    for (int i = 0; i < 4; i++) begin
+      if ($isunknown(b[i]))
+        match_bits[i] = 1'b1;
+      else
+        match_bits[i] = (a[i] === b[i]);
+    end
+  end
+
+  // all bits must match for equality; not-equal is its complement
+  assign wild_eq  = &match_bits;
+  assign wild_neq = ~wild_eq;
+
 endmodule
+
+`default_nettype wire
