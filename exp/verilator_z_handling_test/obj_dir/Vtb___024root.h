@@ -16,20 +16,16 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb___024root final : public VerilatedModule 
 
     // DESIGN SPECIFIC STATE
     CData/*5:0*/ tb__DOT__in_flat;
+    CData/*7:0*/ tb__DOT__out_flat__en;
     CData/*2:0*/ tb__DOT__dut__DOT__adder_wrapper_out_flat;
-    CData/*3:0*/ tb__DOT__dut__DOT__multiplier_wrapper_in_flat;
-    CData/*4:0*/ tb__DOT__dut__DOT__u_multiplier_wrapper__DOT__data_out;
-    CData/*3:0*/ __Vtrigprevexpr___TOP__tb__DOT__dut__DOT__multiplier_wrapper_in_flat__0;
-    CData/*0:0*/ __VstlDidInit;
+    CData/*1:0*/ tb__DOT__dut__DOT__u_multiplier_wrapper__DOT__b;
     CData/*0:0*/ __VstlFirstIteration;
-    CData/*3:0*/ __Vtrigprevexpr___TOP__tb__DOT__dut__DOT__multiplier_wrapper_in_flat__1;
-    CData/*0:0*/ __VactDidInit;
     CData/*0:0*/ __VactContinue;
     IData/*31:0*/ __VactIterCount;
     VlDelayScheduler __VdlySched;
-    VlTriggerVec<2> __VstlTriggered;
-    VlTriggerVec<2> __VactTriggered;
-    VlTriggerVec<2> __VnbaTriggered;
+    VlTriggerVec<1> __VstlTriggered;
+    VlTriggerVec<1> __VactTriggered;
+    VlTriggerVec<1> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vtb__Syms* const vlSymsp;

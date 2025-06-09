@@ -43,11 +43,9 @@ module tb;
 
       // count bit-states
       for (int j = 0; j < OUT_WIDTH; j++) begin
-        casez (out_flat[j])
-          1'bz: z_count++;
-          1'bx: x_count++;
-          default: normal_count++;
-        endcase
+        if      (out_flat[j] === 1'bx)      x_count++;
+        else if (out_flat[j] === 1'bz)      z_count++;
+        else                                 normal_count++;
       end
     end
 
