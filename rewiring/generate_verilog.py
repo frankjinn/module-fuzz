@@ -299,5 +299,5 @@ def generate_verilog(library_folder, output_folder, input_size, output_size = No
     (connections, external_input_set, external_output_set) = generate_connections(io_map, input_size, output_size, output_internal_wires, random_internal_assignment)
     verilog_file = generate_top_module(io_map, connections, external_input_set, external_output_set)
 
-    with open(output_folder + "/my_file.sv", "w") as file:
+    with open(output_folder + "/top.sv", "w") as file:
         file.write(verilog_file)
