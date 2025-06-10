@@ -31,8 +31,11 @@ def create_IO_map(library_path):
     """
     Given a list of paths to Verilog/SystemVerilog files, create a mapping of input and output ports
     """
-    in_map = {}
-    out_map = {}
+    bitwise_in_map = {}
+    bitwise_out_map = {}
+    module_in_map = {}
+    module_out_map = {}
+    module_list = []
     input_port_counter = 0
     output_port_counter = 0
 
@@ -46,18 +49,22 @@ def create_IO_map(library_path):
         except RuntimeError as e:
             print(f"Error parsing {path}: {e}")
             continue
+        
+        module_list.append(module_name)
 
         # Map input ports
         for i in range(total_input_bits):
             input_value = f"{module_name}_input_{i}"
-            in_map[input_port_counter] = input_value
+            bitwise_in_map[input_port_counter] = input_value
+            module_in_map[input_port_counter] = module_name
             input_port_counter += 1
 
 
         for j in range(total_output_bits):
             output_value = f"{module_name}_output_{j}"
-            out_map[output_port_counter] = output_value
+            bitwise_out_map[output_port_counter] = output_value
+            module_out_map[output_port_counter] = module_name
             output_port_counter += 1
 
-    io_map = {'input': in_map, 'output': out_map}
+    io_map = {'bit_input': bitwise_in_map, 'bit_output': bitwise_out_map, 'mod_input': module_in_map, 'mod_output':module_out_map, 'mod_list':module_list}
     return io_map

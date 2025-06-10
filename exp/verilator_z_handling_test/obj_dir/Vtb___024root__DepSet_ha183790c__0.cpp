@@ -32,16 +32,22 @@ VL_INLINE_OPT void Vtb___024root___act_sequent__TOP__0(Vtb___024root* vlSelf) {
     Vtb__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
-    vlSelfRef.tb__DOT__dut__DOT__adder_wrapper_out_flat 
-        = (7U & (((2U & ((IData)(vlSelfRef.tb__DOT__in_flat) 
-                         >> 1U)) | (1U & ((IData)(vlSelfRef.tb__DOT__in_flat) 
-                                          >> 3U))) 
-                 + ((2U & ((IData)(vlSelfRef.tb__DOT__in_flat) 
-                           >> 3U)) | (1U & (IData)(vlSelfRef.tb__DOT__in_flat)))));
+    vlSelfRef.tb__DOT__dut__DOT__u_adder_wrapper__DOT__a 
+        = ((2U & ((IData)(vlSelfRef.tb__DOT__in_flat) 
+                  >> 6U)) | (1U & ((IData)(vlSelfRef.tb__DOT__in_flat) 
+                                   >> 3U)));
+    vlSelfRef.tb__DOT__dut__DOT__u_adder_wrapper__DOT__b 
+        = ((2U & ((IData)(vlSelfRef.tb__DOT__in_flat) 
+                  << 1U)) | (1U & ((IData)(vlSelfRef.tb__DOT__in_flat) 
+                                   >> 4U)));
+    vlSelfRef.tb__DOT__dut__DOT__u_multiplier_wrapper__DOT__a 
+        = ((2U & (IData)(vlSelfRef.tb__DOT__in_flat)) 
+           | (1U & ((IData)(vlSelfRef.tb__DOT__in_flat) 
+                    >> 6U)));
     vlSelfRef.tb__DOT__dut__DOT__u_multiplier_wrapper__DOT__b 
         = ((2U & ((IData)(vlSelfRef.tb__DOT__in_flat) 
-                  >> 4U)) | (1U & ((IData)(vlSelfRef.tb__DOT__in_flat) 
-                                   >> 1U)));
+                  >> 1U)) | (1U & ((IData)(vlSelfRef.tb__DOT__in_flat) 
+                                   >> 5U)));
 }
 
 void Vtb___024root___eval_nba(Vtb___024root* vlSelf) {

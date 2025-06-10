@@ -29,7 +29,7 @@ TB_TEMPLATE = textwrap.dedent("""\
 
       // counters
       integer i;
-      integer z_count, x_count, normal_count;
+      integer z_count, normal_count;
 
 
       initial begin
@@ -37,7 +37,6 @@ TB_TEMPLATE = textwrap.dedent("""\
         $dumpvars(0, {tb_name});
 
         z_count      = 0;
-        x_count      = 0;
         normal_count = 0;
 
         $display("Starting randomized testbench for top");
@@ -53,14 +52,12 @@ TB_TEMPLATE = textwrap.dedent("""\
 
           // count bit-states
           for (int j = 0; j < OUT_WIDTH; j++) begin
-            if      (out_flat[j] === 1'bx)      x_count++;
-            else if (out_flat[j] === 1'bz)      z_count++;
-            else                                 normal_count++;
+            if (out_flat[j] === 1'bz)      z_count++;
+            else                           normal_count++;
           end
         end
 
         $display("TOTAL_Z_BITS:      %0d", z_count);
-        $display("TOTAL_X_BITS:      %0d", x_count);
         $display("TOTAL_NORMAL_BITS: %0d", normal_count);
         $finish;
       end
@@ -120,11 +117,10 @@ def run_simulation():
 
 def parse_and_report(output):
     z = int(re.search(r"TOTAL_Z_BITS:\s+(\d+)",      output).group(1))
-    x = int(re.search(r"TOTAL_X_BITS:\s+(\d+)",      output).group(1))
     n = int(re.search(r"TOTAL_NORMAL_BITS:\s+(\d+)", output).group(1))
     print(output.strip())
-    ratio = (z+x) / n if n else float('inf')
-    print(f"\nRatio (Z+X) / NORMAL = {z + x} / {n} = {ratio:.3f}")
+    ratio = (z) / n if n else float('inf')
+    print(f"\nRatio (Z) / NORMAL = {z} / {n} = {ratio:.3f}")
 
 def main():
     p = argparse.ArgumentParser(

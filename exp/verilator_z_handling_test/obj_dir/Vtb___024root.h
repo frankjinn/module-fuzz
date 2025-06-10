@@ -15,9 +15,11 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb___024root final : public VerilatedModule 
   public:
 
     // DESIGN SPECIFIC STATE
-    CData/*5:0*/ tb__DOT__in_flat;
+    CData/*7:0*/ tb__DOT__in_flat;
     CData/*7:0*/ tb__DOT__out_flat__en;
-    CData/*2:0*/ tb__DOT__dut__DOT__adder_wrapper_out_flat;
+    CData/*1:0*/ tb__DOT__dut__DOT__u_adder_wrapper__DOT__a;
+    CData/*1:0*/ tb__DOT__dut__DOT__u_adder_wrapper__DOT__b;
+    CData/*1:0*/ tb__DOT__dut__DOT__u_multiplier_wrapper__DOT__a;
     CData/*1:0*/ tb__DOT__dut__DOT__u_multiplier_wrapper__DOT__b;
     CData/*0:0*/ __VstlFirstIteration;
     CData/*0:0*/ __VactContinue;

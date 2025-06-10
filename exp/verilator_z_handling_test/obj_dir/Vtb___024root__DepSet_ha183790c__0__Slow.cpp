@@ -129,8 +129,10 @@ VL_ATTR_COLD void Vtb___024root___ctor_var_reset(Vtb___024root* vlSelf) {
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
     const uint64_t __VscopeHash = VL_MURMUR64_HASH(vlSelf->name());
-    vlSelf->tb__DOT__in_flat = VL_SCOPED_RAND_RESET_I(6, __VscopeHash, 3857637888228684149ull);
+    vlSelf->tb__DOT__in_flat = VL_SCOPED_RAND_RESET_I(8, __VscopeHash, 3857637888228684149ull);
     vlSelf->tb__DOT__out_flat__en = VL_SCOPED_RAND_RESET_I(8, __VscopeHash, 7084829784487224863ull);
-    vlSelf->tb__DOT__dut__DOT__adder_wrapper_out_flat = VL_SCOPED_RAND_RESET_I(3, __VscopeHash, 17500651952785092706ull);
+    vlSelf->tb__DOT__dut__DOT__u_adder_wrapper__DOT__a = VL_SCOPED_RAND_RESET_I(2, __VscopeHash, 11941173288312028010ull);
+    vlSelf->tb__DOT__dut__DOT__u_adder_wrapper__DOT__b = VL_SCOPED_RAND_RESET_I(2, __VscopeHash, 16716786597330903247ull);
+    vlSelf->tb__DOT__dut__DOT__u_multiplier_wrapper__DOT__a = VL_SCOPED_RAND_RESET_I(2, __VscopeHash, 16357543034561328170ull);
     vlSelf->tb__DOT__dut__DOT__u_multiplier_wrapper__DOT__b = VL_SCOPED_RAND_RESET_I(2, __VscopeHash, 1799876437394090497ull);
     }
