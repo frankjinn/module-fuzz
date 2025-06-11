@@ -16,12 +16,12 @@ def generate_connections(io_map, input_size, output_size = None, output_internal
         (connections, external_input_set, external_output_set): Length-2 list of internal outputs and internal inputs. List of external input ports to the module. List of external output ports to the module
 
     """
-    assert(input_size <= len(io_map['input']))
+    assert(input_size <= len(io_map['bit_input']))
     if output_size:
-        assert(output_size <= len(io_map['output']))
+        assert(output_size <= len(io_map['bit_output']))
 
-    input_sample_space = len(io_map['input'])
-    output_sample_space = len(io_map['output'])
+    input_sample_space = len(io_map['bit_input'])
+    output_sample_space = len(io_map['bit_output'])
 
     # Since external inputs to the module is always defined, we can set them immediately.
     external_input_set = random.sample(range(input_sample_space), input_size)
@@ -34,8 +34,8 @@ def generate_connections(io_map, input_size, output_size = None, output_internal
 
     # If we're not doing random_internal_assignment or output_internal_wires, then output_size can be determined
     if not random_internal_assignment and not output_internal_wires:
-        if not output_size or (len(io_map['input']) - input_size) < len(io_map['output']):
-            output_size = len(io_map['output']) - len(io_map['input']) + input_size
+        if not output_size or (len(io_map['bit_input']) - input_size) < len(io_map['bit_output']):
+            output_size = len(io_map['bit_output']) - len(io_map['bit_input']) + input_size
     
     connections = []
 
@@ -121,7 +121,7 @@ def generate_connections(io_map, input_size, output_size = None, output_internal
 
 """
 Given:
-  • io_map: a dict with two keys 'input' and 'output', each mapping a global_bit_index
+  • io_map: a dict with two keys 'bit_input' and 'bit_output', each mapping a global_bit_index
     → "<module>_input_<bitIdx>" or "<module>_output_<bitIdx>"
   • connections: a two‐element list [internal_outputs, internal_inputs], where each is 
     a list of global_bit_indices of equal length.  For each k:
@@ -143,17 +143,17 @@ Generates a Verilog “top” module that:
     where inWidth = number of bits that module consumes, outWidth = number of bits it produces.
  4. Assigns:
        a) Top‐level inputs → module inputs:
-            Let global = external_inputs[i], and io_map['input'][global] = "<mod>_input_<bitIdx>".
+            Let global = external_inputs[i], and io_map['bit_input'][global] = "<mod>_input_<bitIdx>".
             Then generate:
               assign <mod>_in_flat[bitIdx] = in_flat[i];
        b) Module outputs → Top‐level outputs:
-            Let global = external_outputs[j], and io_map['output'][global] = "<mod>_output_<bitIdx>".
+            Let global = external_outputs[j], and io_map['bit_output'][global] = "<mod>_output_<bitIdx>".
             Then generate:
               assign out_flat[j] = <mod>_out_flat[bitIdx];
        c) Internal connections:
             For each pair (srcG, dstG) in connections:
-              io_map['output'][srcG] = "<srcMod>_output_<srcBit>"
-              io_map['input'][dstG]  = "<dstMod>_input_<dstBit>"
+              io_map['bit_output'][srcG] = "<srcMod>_output_<srcBit>"
+              io_map['bit_input'][dstG]  = "<dstMod>_input_<dstBit>"
             Then:
               assign <dstMod>_in_flat[dstBit] = <srcMod>_out_flat[srcBit];
  5. Instantiates each module wrapper as:
@@ -192,12 +192,12 @@ def generate_top_module(io_map, connections, external_inputs, external_outputs):
     in_re  = re.compile(r'^(\w+)_input_(\d+)$')
     out_re = re.compile(r'^(\w+)_output_(\d+)$')
 
-    for gidx, name in io_map['input'].items():
+    for gidx, name in io_map['bit_input'].items():
         m = in_re.match(name)
         if not m: raise RuntimeError(f"Bad input name: {name}")
         mod, bit = m.group(1), int(m.group(2))
         mod_in_bits.setdefault(mod, set()).add(bit)
-    for gidx, name in io_map['output'].items():
+    for gidx, name in io_map['bit_output'].items():
         m = out_re.match(name)
         if not m: raise RuntimeError(f"Bad output name: {name}")
         mod, bit = m.group(1), int(m.group(2))
@@ -251,7 +251,7 @@ def generate_top_module(io_map, connections, external_inputs, external_outputs):
         lines.append("  // Drive module inputs from top-level in_flat")
         for g in sorted(external_inputs):
             pos = ext_in_pos[g]
-            m = in_re.match(io_map['input'][g])
+            m = in_re.match(io_map['bit_input'][g])
             mod, bit = m.group(1), int(m.group(2))
             lines.append(f"  assign {mod}_in_flat[{bit}] = in_flat[{pos}];")
         lines.append("")
@@ -261,8 +261,8 @@ def generate_top_module(io_map, connections, external_inputs, external_outputs):
     if outs:
         lines.append("  // Internal connections: module-out → module-in")
         for srcG, dstG in zip(outs, ins):
-            msrc = out_re.match(io_map['output'][srcG])
-            dstm = in_re.match(io_map['input'][dstG])
+            msrc = out_re.match(io_map['bit_output'][srcG])
+            dstm = in_re.match(io_map['bit_input'][dstG])
             lines.append(f"  assign {dstm.group(1)}_in_flat[{dstm.group(2)}] = {msrc.group(1)}_out_flat[{msrc.group(2)}];")
         lines.append("")
 
@@ -271,7 +271,7 @@ def generate_top_module(io_map, connections, external_inputs, external_outputs):
         lines.append("  // Drive top-level out_flat from module outputs")
         for g in sorted(external_outputs):
             pos = ext_out_pos[g]
-            m = out_re.match(io_map['output'][g])
+            m = out_re.match(io_map['bit_output'][g])
             lines.append(f"  assign out_flat[{pos}] = {m.group(1)}_out_flat[{m.group(2)}];")
         lines.append("")
 
