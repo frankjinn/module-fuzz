@@ -2,69 +2,114 @@
 """
 IO_map.py
 
-When given a folder of modules, generates a mapping of input and output ports to a key, 
-which is a number that uniquely identifies the port.
-
-Assumptions:
-  1. No file has more than one module.
-  2. No overlapping names for modules.
-
-Usage as script:
-    python3 IO_map.py path_to_module_library
+When given a folder of modules, generates a mapping of input and output ports to a unique Wire object.
 """
 
 import os
 import count_IO as count_IO
+from enum import Enum
+
+class Wire:
+    # M = module, I = input, O = output
+    class Wire_Type(Enum):
+        MTM = 1
+        ITM = 2
+        MTO = 3
+
+    def __init__(self, wire_id, wire_in, wire_out, wire_type, pathID):
+
+        self.id = wire_id       # unique integer ID for this wire
+        self.input = wire_in       # module that the wire input is attached to
+        self.output = [wire_out]   # list of modules this wire drives
+        self.type = wire_type
+
+        self.paths = set()
+        self.paths.add(pathID)
+        self.loops = set()
+
+    def __str__(self):
+        """
+        Return a human-readable description of the Wire.
+        """
+        return (f"Wire(id={self.wire_id}, name='{self.wire_name}', "
+                f"in='{self.wire_in}', out={self.wire_out})")
+
+    def __repr__(self):
+        """
+        Return an unambiguous string representation of the Wire.
+        """
+        return (f"Wire(wire_id={self.wire_id}, wire_name='{self.wire_name}', "
+                f"wire_in='{self.wire_in}', wire_out={self.wire_out})")
 
 def list_all_files_walk(root_dir):
-    """
-    Recursively traverse `root_dir` and return a list of all file paths.
-    """
     file_paths = []
     for dirpath, dirnames, filenames in os.walk(root_dir):
         for fname in filenames:
-            full_path = os.path.join(dirpath, fname)
-            file_paths.append(full_path)
+            file_paths.append(os.path.join(dirpath, fname))
     return file_paths
 
 def create_IO_map(library_path):
     """
-    Given a list of paths to Verilog/SystemVerilog files, create a mapping of input and output ports
+    Given a folder of .sv/.v files, returns a dict with:
+      - 'bit_input'  : { bit_index: Wire(...) }
+      - 'bit_output' : { bit_index: Wire(...) }
+      - 'mod_input'  : { bit_index: module_name }
+      - 'mod_output' : { bit_index: module_name }
+      - 'mod_list'   : [ module_name, ... ]
     """
-    bitwise_in_map = {}
+    bitwise_in_map  = {}
     bitwise_out_map = {}
-    module_in_map = {}
-    module_out_map = {}
-    module_list = []
-    input_port_counter = 0
-    output_port_counter = 0
+    module_in_map   = {}
+    module_out_map  = {}
+    module_list     = []
+    port_counter  = 0
+    paths = {}
+    port_to_module = {}
+    module_to_port = {}
 
-    paths = list_all_files_walk(library_path)
-    if not paths:
+    file_paths = list_all_files_walk(library_path)
+    if not file_paths:
         raise RuntimeError(f"No files found in directory: {library_path}")
-    
-    for path in paths:
+
+    for file_path in file_paths:
         try:
-            module_name, num_inputs, total_input_bits, num_outputs, total_output_bits = count_IO.parse_sv_ports(path)
+            (module_name,
+             num_inputs, total_input_bits,
+             num_outputs, total_output_bits) = count_IO.parse_sv_ports(file_path)
         except RuntimeError as e:
-            print(f"Error parsing {path}: {e}")
+            print(f"Error parsing {file_path}: {e}")
             continue
-        
-        module_list.append(module_name)
 
-        # Map input ports
+        paths[module_name] = set()
+        # module_to_port[module_name] = {'inputs' : [], 'outputs' : []}
+
+        # create Wire objects for every input bit
         for i in range(total_input_bits):
-            input_value = f"{module_name}_input_{i}"
-            bitwise_in_map[input_port_counter] = input_value
-            module_in_map[input_port_counter] = module_name
-            input_port_counter += 1
+            port_name = f"{module_name}_input_{i}"
+            paths[module_name].add(port_counter) # port_counter = Wire ID
+            port_to_module[port_counter] = (module_name, 'input')
 
+            w = Wire(port_counter, "input", port_name, Wire.Wire_Type.ITM, module_name)
+            bitwise_in_map[port_counter] = w
+            module_in_map[port_counter] = module_name
+            port_counter += 1
 
+        # create Wire objects for every output bit
         for j in range(total_output_bits):
-            output_value = f"{module_name}_output_{j}"
-            bitwise_out_map[output_port_counter] = output_value
-            module_out_map[output_port_counter] = module_name
-            output_port_counter += 1
+            wire_name = f"{module_name}_output_{j}"
+            paths[module_name].add(port_counter)
+            port_to_module[port_counter] = (module_name, 'output')
 
-    io_map = {'bit_input': bitwise_in_map, 'bit_output': bitwise_out_map, 'mod_input': module_in_map, 'mod_output':module_out_map, 'mod_list':module_list}
-    return io_map
+            w = Wire(port_counter, module_name, "output", Wire.Wire_Type.MTO, module_name)
+            bitwise_out_map[port_counter] = w
+            module_out_map[port_counter] = module_name
+            port_counter += 1
+
+    io_map = {
+        'bit_input':  bitwise_in_map,
+        'bit_output': bitwise_out_map,
+        'mod_input':  module_in_map,
+        'mod_output': module_out_map,
+        'mod_list':   module_list
+    }
+    return paths, port_to_module, io_map
