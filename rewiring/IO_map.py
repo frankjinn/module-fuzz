@@ -16,15 +16,12 @@ class Wire:
         ITM = 2
         MTO = 3
 
-    def __init__(self, wire_id, wire_in, wire_out, wire_type, pathID):
+    def __init__(self, wire_id, wire_in, wire_out, wire_type):
 
         self.id = wire_id       # unique integer ID for this wire
         self.input = wire_in       # module that the wire input is attached to
         self.output = [wire_out]   # list of modules this wire drives
         self.type = wire_type
-
-        self.paths = set()
-        self.paths.add(pathID)
         self.loops = set()
 
     def __str__(self):
@@ -56,16 +53,15 @@ def create_IO_map(library_path):
       - 'mod_input'  : { bit_index: module_name }
       - 'mod_output' : { bit_index: module_name }
       - 'mod_list'   : [ module_name, ... ]
+      - 'mod_IO'     : {'module': {'input': set(input_wire_idx), 'output': set(output_wire_idx)} }
     """
     bitwise_in_map  = {}
     bitwise_out_map = {}
-    module_in_map   = {}
+    module_in_map   = {} 
     module_out_map  = {}
     module_list     = []
+    mod_IO          = {}
     port_counter  = 0
-    paths = {}
-    port_to_module = {}
-    module_to_port = {}
 
     file_paths = list_all_files_walk(library_path)
     if not file_paths:
@@ -80,29 +76,29 @@ def create_IO_map(library_path):
             print(f"Error parsing {file_path}: {e}")
             continue
 
-        paths[module_name] = set()
-        # module_to_port[module_name] = {'inputs' : [], 'outputs' : []}
-
+        mod_IO[module_name] = {'inputs':set(), 'outputs':set()}
+        module_list.append(module_name)
         # create Wire objects for every input bit
         for i in range(total_input_bits):
             port_name = f"{module_name}_input_{i}"
-            paths[module_name].add(port_counter) # port_counter = Wire ID
-            port_to_module[port_counter] = (module_name, 'input')
+            w = Wire(port_counter, "input", port_name, Wire.Wire_Type.ITM)
 
-            w = Wire(port_counter, "input", port_name, Wire.Wire_Type.ITM, module_name)
             bitwise_in_map[port_counter] = w
             module_in_map[port_counter] = module_name
+            mod_IO[module_name]['inputs'].add(port_counter)
+
             port_counter += 1
+
 
         # create Wire objects for every output bit
         for j in range(total_output_bits):
             wire_name = f"{module_name}_output_{j}"
-            paths[module_name].add(port_counter)
-            port_to_module[port_counter] = (module_name, 'output')
 
-            w = Wire(port_counter, module_name, "output", Wire.Wire_Type.MTO, module_name)
+            w = Wire(port_counter, module_name, "output", Wire.Wire_Type.MTO)
             bitwise_out_map[port_counter] = w
             module_out_map[port_counter] = module_name
+            mod_IO[module_name]['outputs'].add(port_counter)
+
             port_counter += 1
 
     io_map = {
@@ -110,6 +106,7 @@ def create_IO_map(library_path):
         'bit_output': bitwise_out_map,
         'mod_input':  module_in_map,
         'mod_output': module_out_map,
-        'mod_list':   module_list
+        'mod_list':   module_list,
+        'mod_IO':     mod_IO
     }
-    return paths, port_to_module, io_map
+    return io_map
