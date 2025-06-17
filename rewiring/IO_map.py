@@ -14,7 +14,6 @@ class Wire:
     class Wire_Type(Enum):
         MTM = 1
         ITM = 2
-        MTO = 3
 
     def __init__(self, wire_id, wire_in, wire_out, wire_type):
 
@@ -28,15 +27,15 @@ class Wire:
         """
         Return a human-readable description of the Wire.
         """
-        return (f"Wire(id={self.wire_id}, name='{self.wire_name}', "
-                f"in='{self.wire_in}', out={self.wire_out})")
+        return (f"Wire(id={self.id},"
+                f"in='{self.input}', out={self.output})")
 
     def __repr__(self):
         """
         Return an unambiguous string representation of the Wire.
         """
-        return (f"Wire(wire_id={self.wire_id}, wire_name='{self.wire_name}', "
-                f"wire_in='{self.wire_in}', wire_out={self.wire_out})")
+        return (f"Wire(id={self.id}, "
+                f"in='{self.input}', out={self.output})")
 
 def list_all_files_walk(root_dir):
     file_paths = []
@@ -92,9 +91,9 @@ def create_IO_map(library_path):
 
         # create Wire objects for every output bit
         for j in range(total_output_bits):
-            wire_name = f"{module_name}_output_{j}"
+            port_name = f"{module_name}_output_{j}"
 
-            w = Wire(port_counter, module_name, "output", Wire.Wire_Type.MTO)
+            w = Wire(port_counter, port_name, "output", Wire.Wire_Type.MTM)
             bitwise_out_map[port_counter] = w
             module_out_map[port_counter] = module_name
             mod_IO[module_name]['outputs'].add(port_counter)
