@@ -21,7 +21,7 @@ class Wire:
         self.input = wire_in       # module that the wire input is attached to
         self.output = [wire_out]   # list of modules this wire drives
         self.type = wire_type
-        self.loops = set()
+        self.reg = False
 
     def __str__(self):
         """
