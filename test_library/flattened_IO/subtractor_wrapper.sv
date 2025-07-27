@@ -1,4 +1,4 @@
-`include "adder.sv"
+`include "subtractor.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for adder

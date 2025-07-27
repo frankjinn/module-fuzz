@@ -14,6 +14,7 @@ class Wire:
     class Wire_Type(Enum):
         MTM = 1
         ITM = 2
+        MTO = 3
 
     def __init__(self, wire_id, wire_in, wire_out, wire_type):
 
@@ -28,14 +29,14 @@ class Wire:
         Return a human-readable description of the Wire.
         """
         return (f"Wire(id={self.id},"
-                f"in='{self.input}', out={self.output})")
+                f"in='{self.input}', out={self.output}, reg={self.reg})")
 
     def __repr__(self):
         """
         Return an unambiguous string representation of the Wire.
         """
         return (f"Wire(id={self.id}, "
-                f"in='{self.input}', out={self.output})")
+                f"in='{self.input}', out={self.output}, reg={self.reg})")
 
 def list_all_files_walk(root_dir):
     file_paths = []
@@ -93,7 +94,7 @@ def create_IO_map(library_path):
         for j in range(total_output_bits):
             port_name = f"{module_name}_output_{j}"
 
-            w = Wire(port_counter, port_name, "output", Wire.Wire_Type.MTM)
+            w = Wire(port_counter, port_name, "output", Wire.Wire_Type.MTO)
             bitwise_out_map[port_counter] = w
             module_out_map[port_counter] = module_name
             mod_IO[module_name]['outputs'].add(port_counter)
