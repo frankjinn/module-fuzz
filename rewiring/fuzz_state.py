@@ -1058,7 +1058,7 @@ class Fuzz_Run:
 
         random.seed(seed)
 
-        if not hasattr(self, "_original_file_path"):
+        if not hasattr(self, "flattened_lib_path"):
             raise RuntimeError(
                 "Fuzz_Run object has no `_original_file_path` attribute. "
                 "You must store the path to the original flattened module library "
@@ -1067,9 +1067,9 @@ class Fuzz_Run:
 
         # Re-initialize all state from the original file
         if verbose:
-            print(f"[Reset] Reloading state from {self._original_file_path} with seed={seed}")
+            print(f"[Reset] Reloading state from {self.flattened_lib_path} with seed={seed}")
 
-        self.__init__(self._original_file_path)
+        self.__init__(self.flattened_lib_path)
 
         # Restore seed so that __init__ doesn't overwrite it
         random.seed(seed)
@@ -1307,28 +1307,29 @@ class Fuzz_Run:
                                 end"""
 
         # Assemble TB
+        decls_str = '\n  '.join(decls)
         tb = f"""`timescale 1ns/1ps
-                    module {tb_name};
+                module {tb_name};
 
-                    // Declarations
-                    {("// " + top_name + " port mirrors"):s}
-                    {'\\n  '.join(decls)}
+                // Declarations
+                {("// " + top_name + " port mirrors"):s}
+                {decls_str}
 
-                    {clk_gen}
+                {clk_gen}
 
-                    {rst_seq}
+                {rst_seq}
 
-                    {wave_block}
+                {wave_block}
 
-                    // DUT instance
-                    {top_name} dut (
-                        {", ".join(conns)}
-                    );
+                // DUT instance
+                {top_name} dut (
+                    {", ".join(conns)}
+                );
 
-                    {main_loop}
+                {main_loop}
 
-                    endmodule
-                    """
+                endmodule
+                """
 
         tb_path = outdir / f"{tb_name}.sv"
         tb_path.write_text(tb)
