@@ -29,7 +29,7 @@ RUN ./configure
 RUN make -j `nproc`
 
 #Instrumentation flags
-ENV VER_ROOT="/verilator"
+ENV VERILATOR_ROOT="/verilator"
 
 WORKDIR /
 RUN pip install --no-cache-dir jupyter notebook numpy networkx matplotlib
