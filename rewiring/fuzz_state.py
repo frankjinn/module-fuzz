@@ -557,182 +557,6 @@ class Fuzz_Run:
         path.append(parent_mod)
         return path
 
-    def generate_top_module(self, top_name="top", output_path=""):
-        """
-        Generate a top-level Verilog module connecting all module_wrappers.
-        Explicitly separates MTM and MTO wires:
-        - MTM: drives modules and may also drive 'output'.
-        - MTO: only drives 'output'.
-        Handles reg=True (looped modules) and skips stale wires.
-        """
-
-        ext_inputs = self.external_inputs
-        ext_outputs = self.external_outputs
-        wire_map = self.all_wires
-        mod_IO = self.mod_IO
-
-        ext_in_pos = {wid: i for i, wid in enumerate(ext_inputs)}
-        ext_out_pos = {wid: j for j, wid in enumerate(ext_outputs)}
-
-        # Proper input/output ordering based on port names
-        mod_in_order = {}
-        for mod, io in mod_IO.items():
-            def port_index(wid):
-                ports = [p for p in self.all_wires[wid].output if p.startswith(mod)]
-                return int(ports[0].split("_input_")[1]) if ports else 9999
-            mod_in_order[mod] = sorted(io['inputs'], key=port_index)
-
-        mod_out_order = {}
-        for mod, io in mod_IO.items():
-            def port_index_out(wid):
-                return int(self.all_wires[wid].input.split("_output_")[1])
-            mod_out_order[mod] = sorted(io['outputs'], key=port_index_out)
-
-        mod_in_width = {mod: len(bits) for mod, bits in mod_in_order.items()}
-        mod_out_width = {mod: len(bits) for mod, bits in mod_out_order.items()}
-
-        lines = []
-        lines.append("// Auto-generated Top Module for flattened IO")
-
-        # Include wrapper files
-        for mod in sorted(self.all_modules):
-            lines.append(f"`include \"{mod}.sv\"")
-        lines.append("")
-
-        # Top module declaration
-        lines.append(f"module {top_name} (")
-        if ext_inputs:
-            lines.append("    input  wire clk,")
-            lines.append(f"    input  wire [{len(ext_inputs)-1}:0] in_flat,")
-        else:
-            lines.append("    input wire clk,  // no external inputs")
-        if ext_outputs:
-            lines.append(f"    output wire [{len(ext_outputs)-1}:0] out_flat")
-        else:
-            lines.append("    // no external outputs")
-        lines.append(");\n")
-
-        # Per-module I/O buses
-        lines.append("// Per-module I/O buses")
-        for mod in sorted(self.all_modules):
-            inW, outW = mod_in_width[mod], mod_out_width[mod]
-            if inW:
-                lines.append(f"wire [{inW-1}:0] {mod}_in_flat;")
-            else:
-                lines.append(f"// {mod} has no inputs")
-            if outW:
-                lines.append(f"wire [{outW-1}:0] {mod}_out_flat;")
-            else:
-                lines.append(f"// {mod} has no outputs")
-        lines.append("")
-
-        # Registered modules
-        regged_modules = {
-            w.input.split("_output_")[0]
-            for w in wire_map.values()
-            if w.type == IO_map.Wire.Wire_Type.MTM and w.reg
-        }
-
-        if regged_modules:
-            lines.append("// Registered output shadows for looped modules")
-            for mod in sorted(regged_modules):
-                outW = mod_out_width[mod]
-                lines.append(f"reg [{outW-1}:0] {mod}_out_reg;")
-                lines.append(f"always @(posedge clk) {mod}_out_reg <= {mod}_out_flat;")
-            lines.append("")
-            lines.append("// Initialize registered outputs to zero for simulation")
-            lines.append("initial begin")
-            for mod in sorted(regged_modules):
-                outW = mod_out_width[mod]
-                lines.append(f"    {mod}_out_reg = {outW}'b0;")
-            lines.append("end\n")
-
-        # External inputs
-        if ext_inputs:
-            lines.append("// External inputs to module inputs")
-            for wire_id in ext_inputs:
-                if wire_id not in wire_map:
-                    continue
-                wire = wire_map[wire_id]
-                if not wire.output or wire.type != IO_map.Wire.Wire_Type.ITM:
-                    continue
-                dst = wire.output[0]
-                mod = self._mod_from_port(dst)
-                bitidx = mod_in_order[mod].index(wire_id)
-                lines.append(f"assign {mod}_in_flat[{bitidx}] = in_flat[{ext_in_pos[wire_id]}];")
-            lines.append("")
-
-        # Internal MTM connections
-        lines.append("// Internal MTM connections (module-to-module)")
-        for wire in wire_map.values():
-            if wire.type != IO_map.Wire.Wire_Type.MTM:
-                continue
-
-            src_mod = wire.input.split("_output_")[0]
-            src_bit = mod_out_order[src_mod].index(wire.id)
-
-            for dst in wire.output:
-                if dst == "output":
-                    continue
-                dst_mod = self._mod_from_port(dst)
-                dst_bit = mod_in_order[dst_mod].index(
-                    next(wid for wid in mod_IO[dst_mod]['inputs'] if dst in wire_map[wid].output)
-                )
-                if src_mod in regged_modules:
-                    lines.append(f"assign {dst_mod}_in_flat[{dst_bit}] = {src_mod}_out_reg[{src_bit}];")
-                else:
-                    lines.append(f"assign {dst_mod}_in_flat[{dst_bit}] = {src_mod}_out_flat[{src_bit}];")
-        lines.append("")
-
-        # External outputs (both MTO-only and MTM wires)
-        if ext_outputs:
-            lines.append("// External outputs (MTO + MTM wires)")
-            for wire_id in ext_outputs:
-                if wire_id not in wire_map:
-                    continue
-                wire = wire_map[wire_id]
-                if wire.type not in (IO_map.Wire.Wire_Type.MTO, IO_map.Wire.Wire_Type.MTM):
-                    continue
-
-                mod = wire.input.split("_output_")[0]
-                bitidx = mod_out_order[mod].index(wire_id)
-
-                # MTM modules may be registered, MTO never is
-                if mod in regged_modules:
-                    lines.append(f"assign out_flat[{ext_out_pos[wire_id]}] = {mod}_out_reg[{bitidx}];")
-                else:
-                    lines.append(f"assign out_flat[{ext_out_pos[wire_id]}] = {mod}_out_flat[{bitidx}];")
-            lines.append("")
-        return (len(ext_inputs), len(ext_outputs))
-
-        # Instantiate modules
-        lines.append("// Instantiate all module wrappers")
-        for mod in sorted(self.all_modules):
-            inW, outW = mod_in_width[mod], mod_out_width[mod]
-            if not (inW or outW):
-                lines.append(f"// skip {mod}: no I/O")
-                continue
-            lines.append(f"{mod} u_{mod} (")
-            ports = []
-            if inW:
-                ports.append(f".in_flat({mod}_in_flat)")
-            if outW:
-                ports.append(f".out_flat({mod}_out_flat)")
-            for i, p in enumerate(ports):
-                comma = "," if i < len(ports)-1 else ""
-                lines.append(f"    {p}{comma}")
-            lines.append(");")
-        lines.append("endmodule")
-
-        # Write to file
-        final = "\n".join(lines)
-        with open(f"{output_path}{top_name}.sv", "w") as output_file:
-            output_file.write(final)
-
-        return final
-
-
-
     def verify_consistency(self, verbose=True):
         """
         Verify consistency between self.mod_IO and self.all_wires.
@@ -1076,272 +900,330 @@ class Fuzz_Run:
         random.seed(seed)
 
         return seed
+    
     def generate_sv_testbench(self,
-                          top_name: str = "top",
-                          output_path: str = ".",
-                          tb_name: str = None,
-                          sim_cycles: int = 200,
-                          clk_period: int = 2,
-                          hold_reset_cycles: int = 2,
-                          trace: bool = True,
-                          seed: int = None,
-                          verbose: bool = True) -> str:
+                            top_name: str = "top",
+                            output_path: str = ".",
+                            tb_name: str = None,
+                            sim_cycles: int = 200,
+                            clk_period: int = 2,
+                            hold_reset_cycles: int = 2,   # kept for API compat; unused (no rst in top)
+                            trace: bool = True,
+                            seed: int = None,
+                            verbose: bool = True) -> str:
         """
-        Emit a SystemVerilog testbench next to the generated top module.
+        Simple, robust SV testbench for the fixed-ABI top:
+        module top(
+            input  wire clk,
+            input  wire [N-1:0] in_flat,   // present iff N>0
+            output wire [M-1:0] out_flat   // present iff M>0
+        );
 
-        Args:
-        top_name:     Name of the already-generated top module (e.g., 'top').
-        output_path:  Directory where 'top.sv' lives and where the TB will be written.
-        tb_name:      Testbench module name. Defaults to 'tb_<top_name>'.
-        sim_cycles:   Number of cycles to run before $finish.
-        clk_period:   Clock period in TB time units (uses # delays). Must be >= 2.
-        hold_reset_cycles: Reset assertion length in cycles before deassert.
-        trace:        If True, emits $dumpfile/$dumpvars for VCD tracing.
-        seed:         If provided, uses a fixed $urandom seed in TB.
-        verbose:      Print where the TB was written.
-
-        Returns:
-        The path (string) to the emitted testbench file.
+        - N = len(self.external_inputs)
+        - M = len(self.external_outputs)
+        - Drives clk, randomizes in_flat each cycle if N>0
+        - Supports +cycles=<N> and +seed=<S> plusargs (override defaults)
+        - Emits VCD when trace=True
         """
-        import re
         from pathlib import Path
 
         tb_name = tb_name or f"tb_{top_name}"
         outdir = Path(output_path)
+        outdir.mkdir(parents=True, exist_ok=True)
+
+        # Sanity: top must already be written next to TB
         top_sv = outdir / f"{top_name}.sv"
         if not top_sv.exists():
             raise FileNotFoundError(f"Expected '{top_sv}' to exist. Generate the top first.")
 
-        # --- Parse ports from the top module (robust to multi-name decls) ---
-        text = top_sv.read_text(errors="ignore")
+        N = int(len(self.external_inputs))
+        M = int(len(self.external_outputs))
 
-        # Strip block comments to make parsing simpler
-        text_nc = re.sub(r"/\*.*?\*/", "", text, flags=re.DOTALL)
+        # --- Declarations ---
+        decl_clk = "logic clk;"
+        decl_in  = f"logic [{N-1}:0] in_flat;"  if N > 0 else ""
+        decl_out = f"wire  [{M-1}:0] out_flat;" if M > 0 else ""
 
-        # Collect full statements ending with ';'
-        stmts = []
-        buf = []
-        for line in text_nc.splitlines():
-            # Strip line comments
-            line = re.sub(r"//.*$", "", line)
-            if not line.strip():
-                continue
-            buf.append(line)
-            if ";" in line:
-                joined = " ".join(buf)
-                stmts.append(joined)
-                buf = []
-        if buf:
-            stmts.append(" ".join(buf))
-
-        # Regex to capture input/output declarations with an optional single range
-        decl_re = re.compile(
-            r"^\s*(input|output)\s+"
-            r"(?:wire|logic|reg|signed|unsigned|\s)*"
-            r"(?P<range>\[[^;\]]+\])?\s+(?P<names>[^;]+);",
-            flags=re.IGNORECASE
+        # --- Clock gen (period uses # delays; with --timing this is fine) ---
+        half = max(1, int(clk_period) // 2) or 1
+        clk_gen = (
+            "  // Clock generator\n"
+            "  initial clk = 1'b0;\n"
+            f"  always #{half} clk = ~clk;"
         )
-        range_re = re.compile(r"\[(\d+)\s*:\s*(\d+)\]")
 
-        def width_from_range(r):
-            if not r:
-                return 1
-            m = range_re.search(r)
-            if not m:
-                return 1
-            msb, lsb = int(m.group(1)), int(m.group(2))
-            return abs(msb - lsb) + 1
+        # --- Randomization of in_flat ---
+        # Build an expression that concatenates enough $urandom() chunks to cover N bits
+        if N > 0:
+            chunks = (N + 31) // 32
+            rand_chunks = ", ".join(["$urandom()"] * chunks) or "$urandom()"
+            rand_expr = f"{{ {rand_chunks} }}"   # will auto-truncate to N bits
+            stim_block = f"    in_flat <= {rand_expr};"
+        else:
+            stim_block = "    // No inputs to randomize"
 
-        inputs, outputs = [], []
-        for s in stmts:
-            m = decl_re.match(s.strip())
-            if not m:
-                continue
-            direction = m.group(1).lower()
-            rng = m.group("range")
-            w = width_from_range(rng)
-            # Split names list by commas, clean tokens
-            names_blob = m.group("names")
-            # Remove type words that might slip into the names blob
-            names_blob = re.sub(r"\b(wire|logic|reg|signed|unsigned)\b", " ", names_blob)
-            # Remove duplicate range tokens inside the names list
-            names_blob = re.sub(r"\[[^]]+\]", " ", names_blob)
-            names = [n.strip() for n in names_blob.split(",") if n.strip()]
-            for name in names:
-                # Drop any trailing commas or extraneous tokens
-                name = re.sub(r"[,\s]+$", "", name)
-                if not name:
-                    continue
-                entry = {"name": name, "width": w}
-                if direction == "input":
-                    inputs.append(entry)
-                else:
-                    outputs.append(entry)
+        # --- Seed & cycles with plusargs ---
+        # cycles default sim_cycles, override with +cycles=<int>
+        # seed default argument (or 0xC0FFEE) override with +seed=<int>
+        default_seed = int(seed) if (seed is not None) else 0xC0FFEE
+        prelude = (
+            "  int cycles;\n"
+            "  int seed;\n"
+            f"  initial begin\n"
+            f"    cycles = {int(sim_cycles)}; if ($value$plusargs(\"cycles=%d\", cycles)) ;\n"
+            f"    if (!$value$plusargs(\"seed=%d\", seed)) seed = {default_seed};\n"
+            f"    void'($urandom(seed));\n"
+            "  end"
+        )
 
-        # Guess clock/reset
-        def guess_clk_rst(inp_list):
-            clk_name = None
-            rst_name = None
-            rst_active_low = False
-            for p in inp_list:
-                n = p["name"].lower()
-                if clk_name is None and (n == "clk" or n == "clock" or n.endswith("_clk")):
-                    clk_name = p["name"]
-                if rst_name is None:
-                    if n in ("rst", "reset"):
-                        rst_name = p["name"]; rst_active_low = False
-                    elif n in ("rst_n", "resetn", "nreset"):
-                        rst_name = p["name"]; rst_active_low = True
-                if clk_name and rst_name:
-                    break
-            return clk_name, rst_name, rst_active_low
-
-        clk, rst, rst_active_low = guess_clk_rst(inputs)
-
-        # Build SV declarations and connections
-        def sv_decl(dirn, name, width):
-            base = "logic" if dirn == "input" else "wire"
-            if width <= 1:
-                return f"{base} {name};"
-            else:
-                return f"{base} [{width-1}:0] {name};"
-
-        input_names = [p["name"] for p in inputs]
-        output_names = [p["name"] for p in outputs]
-
-        decls = []
-        for p in inputs:
-            decls.append(sv_decl("input", p["name"], p["width"]))
-        for p in outputs:
-            decls.append(sv_decl("output", p["name"], p["width"]))
-
-        # Connections .port(signal)
-        conns = []
-        for n in input_names + output_names:
-            conns.append(f".{n}({n})")
-
-        # Stimulus for non-clock/reset inputs
-        stim_lines = []
-        stim_lines.append("    // Randomize non-clock/reset inputs each cycle")
-        for p in inputs:
-            n = p["name"]
-            if n == clk or n == rst:
-                continue
-            if p["width"] <= 32:
-                stim_lines.append(f"    {n} <= $urandom();")
-            else:
-                # Wider than 32 bits: concat two 32-bit urandoms (auto-truncates if >64b)
-                stim_lines.append(f"    {n} <= {{ $urandom(), $urandom() }};")
-
-        stim_block = "\n".join(stim_lines) if len(stim_lines) else "    // No randomizable inputs"
-
-        # Clock/reset logic
-        clk_decl = f"logic {clk};" if clk else ""
-        clk_gen = ""
-        if clk:
-            half = max(1, clk_period // 2)
-            if half < 1: half = 1
-            clk_gen = f"""  // Clock generator
-                            initial {clk} = 1'b0;
-                            always #{half} {clk} = ~{clk};"""
-
-        rst_seq = ""
-        if rst:
-            if rst_active_low:
-                rst_assert = f"{rst} = 1'b0;"
-                rst_deassert = f"{rst} = 1'b1;"
-            else:
-                rst_assert = f"{rst} = 1'b1;"
-                rst_deassert = f"{rst} = 1'b0;"
-            if clk:
-                rst_seq = f"""  // Reset sequence (synchronous to clk)
-                                initial begin
-                                    {rst_assert}
-                                    repeat({max(1, int(hold_reset_cycles))}) @(posedge {clk});
-                                    {rst_deassert}
-                                end"""
-            else:
-                # No clock: just delay deassertion
-                rst_seq = f"""  // Reset sequence (no clock detected)
-                                initial begin
-                                    {rst_assert}
-                                    #({max(1, int(clk_period))}) {rst_deassert}
-                                end"""
-
-        # Wave dump
+        # --- Trace (VCD) ---
         wave_block = ""
         if trace:
-            wave_block = f"""  // Waveform dump (enable with Verilator --trace)
-                                initial begin
-                                    $dumpfile("{tb_name}.vcd");
-                                    $dumpvars(0, {tb_name});
-                                end"""
+            wave_block = (
+                "  // Waveform dump (enable with Verilator --trace)\n"
+                f"  initial begin\n"
+                f"    $dumpfile(\"{tb_name}.vcd\");\n"
+                f"    $dumpvars(0, {tb_name});\n"
+                f"  end"
+            )
 
-        # Seed line (optional)
-        seed_line = f"$urandom({int(seed)});" if seed is not None else ""
+        # --- DUT instance port list (conditionally include in/out) ---
+        port_lines = ["    .clk(clk)"]
+        if N > 0:
+            port_lines.append("    .in_flat(in_flat)")
+        if M > 0:
+            port_lines.append("    .out_flat(out_flat)")
+        ports_str = ",\n".join(port_lines)
 
-        # Main stimulus loop
-        if clk:
-            main_loop = f"""  integer i;
-                                initial begin
-                                    {seed_line}
-                                    // Wait until reset is deasserted if present
-                                    {"@(posedge " + clk + ");" if not rst else ""}
-                                    for (i = 0; i < {int(sim_cycles)}; i = i + 1) begin
-                                    @(posedge {clk});
-                                {stim_block}
-                                    end
-                                    $display("TB_SIM_OK cycles=%0d", {int(sim_cycles)});
-                                    $finish;
-                                end"""
-        else:
-            # No clock: use delays
-            main_loop = f"""  integer i;
-                                initial begin
-                                    {seed_line}
-                                    for (i = 0; i < {int(sim_cycles)}; i = i + 1) begin
-                                    #1;
-                                {stim_block}
-                                    end
-                                    $display("TB_SIM_OK cycles=%0d", {int(sim_cycles)});
-                                    $finish;
-                                end"""
+        # --- Main stimulus loop ---
+        main_loop = (
+            "  integer i;\n"
+            "  initial begin\n"
+            "    @(negedge clk); // small settle before starting\n"
+            "    for (i = 0; i < cycles; i = i + 1) begin\n"
+            "      @(posedge clk);\n"
+            f"{stim_block}\n"
+            "    end\n"
+            "    $display(\"TB_SIM_OK cycles=%0d\", cycles);\n"
+            "    $finish;\n"
+            "  end"
+        )
 
-        # Assemble TB
-        decls_str = '\n  '.join(decls)
-        tb = f"""`timescale 1ns/1ps
-                module {tb_name};
+        # Assemble TB (no backslashes inside f-string expressions)
+        decls = "\n  ".join([d for d in (decl_clk, decl_in, decl_out) if d])
+        tb_text = (
+            "`default_nettype none\n"
+            "`timescale 1ns/1ps\n"
+            f"module {tb_name};\n\n"
+            f"  // Declarations\n"
+            f"  {decls}\n\n"
+            f"{clk_gen}\n\n"
+            f"{prelude}\n\n"
+            f"{wave_block}\n\n" if wave_block else
+            "`default_nettype none\n"
+            "`timescale 1ns/1ps\n"
+            f"module {tb_name};\n\n"
+            f"  // Declarations\n"
+            f"  {decls}\n\n"
+            f"{clk_gen}\n\n"
+            f"{prelude}\n\n"
+        )
 
-                // Declarations
-                {("// " + top_name + " port mirrors"):s}
-                {decls_str}
+        # If wave_block was set, it was already appended; if not, tb_text currently ends there.
+        if not trace:
+            # Ensure a blank line separation before instantiation
+            tb_text += ""
 
-                {clk_gen}
-
-                {rst_seq}
-
-                {wave_block}
-
-                // DUT instance
-                {top_name} dut (
-                    {", ".join(conns)}
-                );
-
-                {main_loop}
-
-                endmodule
-                """
+        tb_text += (
+            f"  // DUT instance\n"
+            f"  {top_name} dut (\n"
+            f"{ports_str}\n"
+            f"  );\n\n"
+            f"{main_loop}\n\n"
+            f"endmodule\n"
+        )
 
         tb_path = outdir / f"{tb_name}.sv"
-        tb_path.write_text(tb)
+        tb_path.write_text(tb_text)
         if verbose:
-            print(f"[TB] Wrote SystemVerilog testbench: {tb_path}")
-            if clk:
-                print(f"[TB] Detected clock: {clk}  period={clk_period}")
-            if rst:
-                pol = "active-low" if rst_active_low else "active-high"
-                print(f"[TB] Detected reset: {rst}  ({pol}), hold {hold_reset_cycles} cycles")
-            print(f"[TB] Inputs randomized: {', '.join([p['name'] for p in inputs if p['name'] not in (clk or '', rst or '')]) or '(none)'}")
+            print(f\"[TB] Wrote SystemVerilog testbench: {tb_path}\")
+            print(f\"[TB] N inputs={N}, M outputs={M}, clk_period={clk_period}, cycles(default)={sim_cycles}\")
+            if N == 0:
+                print(\"[TB] Inputs randomized: (none)\")
+            else:
+                print(\"[TB] Inputs randomized: in_flat (all bits)\")
 
         return str(tb_path)
 
+
+    def generate_top_module(self, top_name="top", output_path=""):
+        """
+        Generate a top-level Verilog module connecting all module_wrappers.
+        Explicitly separates MTM and MTO wires:
+        - MTM: drives modules and may also drive 'output'.
+        - MTO: only drives 'output'.
+        Handles reg=True (looped modules) and skips stale wires.
+        """
+
+        ext_inputs = self.external_inputs
+        ext_outputs = self.external_outputs
+        wire_map = self.all_wires
+        mod_IO = self.mod_IO
+
+        ext_in_pos = {wid: i for i, wid in enumerate(ext_inputs)}
+        ext_out_pos = {wid: j for j, wid in enumerate(ext_outputs)}
+
+        # Proper input/output ordering based on port names
+        mod_in_order = {}
+        for mod, io in mod_IO.items():
+            def port_index(wid):
+                ports = [p for p in self.all_wires[wid].output if p.startswith(mod)]
+                return int(ports[0].split("_input_")[1]) if ports else 9999
+            mod_in_order[mod] = sorted(io['inputs'], key=port_index)
+
+        mod_out_order = {}
+        for mod, io in mod_IO.items():
+            def port_index_out(wid):
+                return int(self.all_wires[wid].input.split("_output_")[1])
+            mod_out_order[mod] = sorted(io['outputs'], key=port_index_out)
+
+        mod_in_width = {mod: len(bits) for mod, bits in mod_in_order.items()}
+        mod_out_width = {mod: len(bits) for mod, bits in mod_out_order.items()}
+
+        lines = []
+        lines.append("// Auto-generated Top Module for flattened IO")
+
+        # Include wrapper files
+        for mod in sorted(self.all_modules):
+            lines.append(f"`include \"{mod}.sv\"")
+        lines.append("")
+
+        # Top module declaration
+        lines.append(f"module {top_name} (")
+        if ext_inputs:
+            lines.append("    input  wire clk,")
+            lines.append(f"    input  wire [{len(ext_inputs)-1}:0] in_flat,")
+        else:
+            lines.append("    input wire clk,  // no external inputs")
+        if ext_outputs:
+            lines.append(f"    output wire [{len(ext_outputs)-1}:0] out_flat")
+        else:
+            lines.append("    // no external outputs")
+        lines.append(");\n")
+
+        # Per-module I/O buses
+        lines.append("// Per-module I/O buses")
+        for mod in sorted(self.all_modules):
+            inW, outW = mod_in_width[mod], mod_out_width[mod]
+            if inW:
+                lines.append(f"wire [{inW-1}:0] {mod}_in_flat;")
+            else:
+                lines.append(f"// {mod} has no inputs")
+            if outW:
+                lines.append(f"wire [{outW-1}:0] {mod}_out_flat;")
+            else:
+                lines.append(f"// {mod} has no outputs")
+        lines.append("")
+
+        # Registered modules
+        regged_modules = {
+            w.input.split("_output_")[0]
+            for w in wire_map.values()
+            if w.type == IO_map.Wire.Wire_Type.MTM and w.reg
+        }
+
+        if regged_modules:
+            lines.append("// Registered output shadows for looped modules")
+            for mod in sorted(regged_modules):
+                outW = mod_out_width[mod]
+                lines.append(f"reg [{outW-1}:0] {mod}_out_reg;")
+                lines.append(f"always @(posedge clk) {mod}_out_reg <= {mod}_out_flat;")
+            lines.append("")
+            lines.append("// Initialize registered outputs to zero for simulation")
+            lines.append("initial begin")
+            for mod in sorted(regged_modules):
+                outW = mod_out_width[mod]
+                lines.append(f"    {mod}_out_reg = {outW}'b0;")
+            lines.append("end\n")
+
+        # External inputs
+        if ext_inputs:
+            lines.append("// External inputs to module inputs")
+            for wire_id in ext_inputs:
+                if wire_id not in wire_map:
+                    continue
+                wire = wire_map[wire_id]
+                if not wire.output or wire.type != IO_map.Wire.Wire_Type.ITM:
+                    continue
+                dst = wire.output[0]
+                mod = self._mod_from_port(dst)
+                bitidx = mod_in_order[mod].index(wire_id)
+                lines.append(f"assign {mod}_in_flat[{bitidx}] = in_flat[{ext_in_pos[wire_id]}];")
+            lines.append("")
+
+        # Internal MTM connections
+        lines.append("// Internal MTM connections (module-to-module)")
+        for wire in wire_map.values():
+            if wire.type != IO_map.Wire.Wire_Type.MTM:
+                continue
+
+            src_mod = wire.input.split("_output_")[0]
+            src_bit = mod_out_order[src_mod].index(wire.id)
+
+            for dst in wire.output:
+                if dst == "output":
+                    continue
+                dst_mod = self._mod_from_port(dst)
+                dst_bit = mod_in_order[dst_mod].index(
+                    next(wid for wid in mod_IO[dst_mod]['inputs'] if dst in wire_map[wid].output)
+                )
+                if src_mod in regged_modules:
+                    lines.append(f"assign {dst_mod}_in_flat[{dst_bit}] = {src_mod}_out_reg[{src_bit}];")
+                else:
+                    lines.append(f"assign {dst_mod}_in_flat[{dst_bit}] = {src_mod}_out_flat[{src_bit}];")
+        lines.append("")
+
+        # External outputs (both MTO-only and MTM wires)
+        if ext_outputs:
+            lines.append("// External outputs (MTO + MTM wires)")
+            for wire_id in ext_outputs:
+                if wire_id not in wire_map:
+                    continue
+                wire = wire_map[wire_id]
+                if wire.type not in (IO_map.Wire.Wire_Type.MTO, IO_map.Wire.Wire_Type.MTM):
+                    continue
+
+                mod = wire.input.split("_output_")[0]
+                bitidx = mod_out_order[mod].index(wire_id)
+
+                # MTM modules may be registered, MTO never is
+                if mod in regged_modules:
+                    lines.append(f"assign out_flat[{ext_out_pos[wire_id]}] = {mod}_out_reg[{bitidx}];")
+                else:
+                    lines.append(f"assign out_flat[{ext_out_pos[wire_id]}] = {mod}_out_flat[{bitidx}];")
+            lines.append("")
+        return (len(ext_inputs), len(ext_outputs))
+
+        # Instantiate modules
+        lines.append("// Instantiate all module wrappers")
+        for mod in sorted(self.all_modules):
+            inW, outW = mod_in_width[mod], mod_out_width[mod]
+            if not (inW or outW):
+                lines.append(f"// skip {mod}: no I/O")
+                continue
+            lines.append(f"{mod} u_{mod} (")
+            ports = []
+            if inW:
+                ports.append(f".in_flat({mod}_in_flat)")
+            if outW:
+                ports.append(f".out_flat({mod}_out_flat)")
+            for i, p in enumerate(ports):
+                comma = "," if i < len(ports)-1 else ""
+                lines.append(f"    {p}{comma}")
+            lines.append(");")
+        lines.append("endmodule")
+
+        # Write to file
+        final = "\n".join(lines)
+        with open(f"{output_path}{top_name}.sv", "w") as output_file:
+            output_file.write(final)
