@@ -5,18 +5,13 @@ Fuzz → (Top + SV Testbench) → Verilator --binary loop (TB-only, no C++ main)
 Per cycle:
   1) reset fuzzer to initial state with a fresh seed
   2) run random mutations (linear/cyclical) with periodic comprehensive checks
-  3) generate top module (top.sv)
+  3) generate top module (<top>.sv)    [kept with TB in the cycle dir]
   4) generate SystemVerilog testbench (tb_<top>.sv) via Fuzz_Run.generate_sv_testbench
   5) build & run with Verilator using --binary (no C++ main needed)
   6) write logs and summary.json
 
-Verilator resolution order:
-  --verilator (CLI) >
-  $VERILATOR (env, full path) >
-  $VERILATOR_ROOT/bin/verilator >
-  'verilator' from PATH
-
-Input 'flattened_lib' may be a single .sv/.v file or a directory containing .sv/.v sources.
+You can point --rtl-dir at a folder containing both your flattened and unflattened modules.
+Generated <top>.sv and tb_<top>.sv are written into the per-cycle output folder.
 """
 
 import argparse
@@ -39,6 +34,7 @@ import fuzz_state
 def resolve_verilator(custom_path: str | None) -> str:
     """
     Resolve the verilator binary path according to the user's environment.
+    Priority: --verilator > $VERILATOR > $VERILATOR_ROOT/bin/verilator > which verilator
     """
     candidates = []
     if custom_path:
@@ -74,13 +70,9 @@ def collect_rtl_sources(src: Path, recursive: bool = False) -> list[Path]:
     If 'src' is a directory, collect files (non-recursive by default).
     """
     if src.is_file():
-        if src.suffix.lower() in (".sv", ".v"):
-            return [src]
-        print(f"[Warn] '{src}' is not .sv/.v; ignoring.", file=sys.stderr)
-        return []
+        return [src] if src.suffix.lower() in (".sv", ".v") else []
 
     if not src.is_dir():
-        print(f"[Error] '{src}' does not exist.", file=sys.stderr)
         return []
 
     if recursive:
@@ -88,8 +80,6 @@ def collect_rtl_sources(src: Path, recursive: bool = False) -> list[Path]:
     else:
         files = [p for p in src.iterdir() if p.is_file() and p.suffix.lower() in (".sv", ".v")]
 
-    if not files:
-        print(f"[Warn] No .sv/.v files found under directory: {src}", file=sys.stderr)
     return sorted(files)
 
 
@@ -103,7 +93,7 @@ def run_verilator_binary(verilator_bin: str,
                          verilator_flags: list[str]) -> tuple[bool, bool, int, Path]:
     """
     Build & run using Verilator's single-binary flow:
-      verilator --binary -sv [extra_sv...] top.sv tb_<top>.sv --top-module tb_<top> [flags...]
+      verilator --binary -sv [extra_sv...] <top>.sv tb_<top>.sv --top-module tb_<top> [flags...]
 
     Returns (build_ok: bool, run_ok: bool, rc: int, exe_path: Path)
     """
@@ -113,7 +103,7 @@ def run_verilator_binary(verilator_bin: str,
     exe = obj_dir / f"V{tb_name}"
 
     cmd = [verilator_bin, "--binary", "-sv", "--top-module", tb_name]
-    # extra RTL first (from flattened dir or single file)
+    # user-supplied RTL first (from --rtl-dir or flattened_lib dir/file)
     cmd += [str(p) for p in extra_sv]
     # generated top + tb next
     cmd += [str(top_sv), str(tb_sv)]
@@ -182,8 +172,8 @@ def wrap_mutation_counters(fr):
 
 def main():
     ap = argparse.ArgumentParser(description="Fuzz → SV Testbench → Verilator --binary loop (TB-only, no C++).")
-    ap.add_argument("flattened_lib", help="Path to flattened module library (file or directory).")
-    ap.add_argument("-o", "--outdir", default="runs_tb", help="Base output directory.")
+    ap.add_argument("flattened_lib", help="Path to flattened module library (JSON or other input expected by Fuzz_Run).")
+    ap.add_argument("-o", "--outdir", default="runs_tb", help="Base output directory for generated top/tb & logs.")
     ap.add_argument("-t", "--top-name", default="top", help="Top module name to generate.")
     ap.add_argument("-m", "--mutations-per-cycle", type=int, default=40, help="Successful mutations per cycle before running Verilator.")
     ap.add_argument("-k", "--check-every", type=int, default=10, help="Run comprehensive check after this many successful mutations.")
@@ -191,11 +181,13 @@ def main():
     ap.add_argument("--seed", type=int, default=None, help="Base seed; each cycle derives a new seed if omitted.")
     ap.add_argument("--tb-cycles", type=int, default=200, help="Cycles the SV testbench should run before $finish.")
     ap.add_argument("--tb-clk-period", type=int, default=2, help="Clock period used by TB (time units).")
-    ap.add_argument("--tb-hold-reset", type=int, default=2, help="Reset assertion length (cycles) inside TB.")
+    ap.add_argument("--tb-hold-reset", type=int, default=2, help="Reset assertion length (cycles) inside TB (kept for API compat).")
     ap.add_argument("--verilator-flags", default="--trace", help="Extra flags to pass to Verilator (single string).")
     ap.add_argument("--verilator", default=None, help="Path to verilator binary (defaults to env/which resolution).")
-    ap.add_argument("--rtl-recursive", action="store_true", help="When flattened_lib is a directory, include files recursively.")
+    ap.add_argument("--rtl-dir", default=None, help="Directory containing your flattened + unflattened RTL (.sv/.v).")
+    ap.add_argument("--rtl-recursive", action="store_true", help="When collecting from --rtl-dir, include files recursively.")
     ap.add_argument("-q", "--quiet", action="store_true", help="Reduce logging.")
+    ap.add_argument("--incdir", action="append", default=[], help="Add Verilog include directory for `include (repeatable).")
     args = ap.parse_args()
 
     # Resolve verilator binary
@@ -211,14 +203,25 @@ def main():
         print(f"[Error] Failed to initialize Fuzz_Run: {e}", file=sys.stderr)
         return 2
 
-    # HOTFIX: ensure reset_state() has the original path available
-    if not hasattr(fr, "_original_file_path"):
-        fr._original_file_path = args.flattened_lib
+    # Ensure Fuzz_Run can reset using the original path
+    if not hasattr(fr, "flattened_lib_path"):
+        fr.flattened_lib_path = args.flattened_lib
 
     cycles_target = None if args.max_cycles == 0 else args.max_cycles
     cycle_idx = 0
     overall_ok = True
     rng = random.Random(args.seed)
+
+    # Pre-collect RTL sources (user-provided)
+    extra_sv: list[Path] = []
+    if args.rtl_dir:
+        rtl_dir = Path(args.rtl_dir)
+        extra_sv = collect_rtl_sources(rtl_dir, recursive=args.rtl_recursive)
+    else:
+        # Fallback: if flattened_lib itself is a directory of .sv/.v, use that
+        maybe_dir = Path(args.flattened_lib)
+        if maybe_dir.is_dir():
+            extra_sv = collect_rtl_sources(maybe_dir, recursive=args.rtl_recursive)
 
     if not args.quiet:
         print(f"[Loop] Verilator: {verilator_bin}")
@@ -226,6 +229,9 @@ def main():
         if cycles_target:
             print(f"[Loop] Will run {cycles_target} cycle(s).")
         print(f"[Loop] Mut/Cycle: {args.mutations_per_cycle} | Check every: {args.check_every} | TB cycles: {args.tb_cycles}")
+        if extra_sv:
+            print(f"[Loop] RTL sources: {len(extra_sv)} file(s) from "
+                  f"{args.rtl_dir if args.rtl_dir else args.flattened_lib}")
 
     try:
         while True:
@@ -253,26 +259,27 @@ def main():
             )
 
             # Generate RTL (top) and TB
-            fr.generate_top_module(top_name=args.top_name, output_path=str(cycle_dir.as_posix() + "/"))
-            tb_name = f"tb_{args.top_name}"
+            # NOTE: your signature is (output_path, top_name)
+            fr.generate_top_module(output_path=str(cycle_dir), top_name=args.top_name)
+
+            # Your TB generator’s signature does NOT take tb_name; it derives tb_<top>.
             fr.generate_sv_testbench(
                 top_name=args.top_name,
                 output_path=str(cycle_dir),
-                tb_name=tb_name,
                 sim_cycles=args.tb_cycles,
                 clk_period=args.tb_clk_period,
                 hold_reset_cycles=args.tb_hold_reset,
                 trace=True,
-                seed=seed,
+                seed=seed if args.seed is not None else 0,
                 verbose=not args.quiet,
             )
+            tb_name = f"tb_{args.top_name}"
 
-            # Collect user-supplied RTL sources (flattened dir/file)
-            src_path = Path(args.flattened_lib)
-            extra_sv = collect_rtl_sources(src_path, recursive=args.rtl_recursive)
+            incflags = [f"+incdir+{Path(p).as_posix()}" for p in args.incdir]
 
-            # Build & run with Verilator (--binary)
-            verilator_flags = shlex.split(args.verilator_flags) if args.verilator_flags else []
+            user_flags = shlex.split(args.verilator_flags) if args.verilator_flags else []
+            verilator_flags = incflags + user_flags
+
             build_ok, run_ok, rc, exe = run_verilator_binary(
                 verilator_bin, cycle_dir, args.top_name, tb_name, extra_sv, verilator_flags
             )

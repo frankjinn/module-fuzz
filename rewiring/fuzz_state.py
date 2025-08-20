@@ -904,12 +904,11 @@ class Fuzz_Run:
     def generate_sv_testbench(self,
                             top_name: str = "top",
                             output_path: str = ".",
-                            tb_name: str = None,
                             sim_cycles: int = 200,
                             clk_period: int = 2,
                             hold_reset_cycles: int = 2,   # kept for API compat; unused (no rst in top)
                             trace: bool = True,
-                            seed: int = None,
+                            seed: int = 0,
                             verbose: bool = True) -> str:
         """
         Simple, robust SV testbench for the fixed-ABI top:
@@ -924,10 +923,11 @@ class Fuzz_Run:
         - Drives clk, randomizes in_flat each cycle if N>0
         - Supports +cycles=<N> and +seed=<S> plusargs (override defaults)
         - Emits VCD when trace=True
+        - Prints outputs every cycle for capture.
         """
         from pathlib import Path
 
-        tb_name = tb_name or f"tb_{top_name}"
+        tb_name = f"tb_{top_name}"
         outdir = Path(output_path)
         outdir.mkdir(parents=True, exist_ok=True)
 
@@ -943,6 +943,7 @@ class Fuzz_Run:
         decl_clk = "logic clk;"
         decl_in  = f"logic [{N-1}:0] in_flat;"  if N > 0 else ""
         decl_out = f"wire  [{M-1}:0] out_flat;" if M > 0 else ""
+        decl_cyc = "integer cyc;"  # cycle counter
 
         # --- Clock gen (period uses # delays; with --timing this is fine) ---
         half = max(1, int(clk_period) // 2) or 1
@@ -969,10 +970,11 @@ class Fuzz_Run:
         prelude = (
             "  int cycles;\n"
             "  int seed;\n"
-            f"  initial begin\n"
+            "  initial begin\n"
             f"    cycles = {int(sim_cycles)}; if ($value$plusargs(\"cycles=%d\", cycles)) ;\n"
             f"    if (!$value$plusargs(\"seed=%d\", seed)) seed = {default_seed};\n"
             f"    void'($urandom(seed));\n"
+            f"    cyc = 0;\n"
             "  end"
         )
 
@@ -995,6 +997,24 @@ class Fuzz_Run:
             port_lines.append("    .out_flat(out_flat)")
         ports_str = ",\n".join(port_lines)
 
+        # --- Output monitor: print every posedge ---
+        if M > 0 and N > 0:
+            monitor = (
+                "  always @(posedge clk) begin\n"
+                "    cyc <= cyc + 1;\n"
+                "    $display(\"CYCLE=%0d IN=%0b OUT=%0b\", cyc, in_flat, out_flat);\n"
+                "  end"
+            )
+        elif M > 0:
+            monitor = (
+                "  always @(posedge clk) begin\n"
+                "    cyc <= cyc + 1;\n"
+                "    $display(\"CYCLE=%0d OUT=%0h\", cyc, out_flat);\n"
+                "  end"
+            )
+        else:
+            monitor = "  // No outputs to print"
+
         # --- Main stimulus loop ---
         main_loop = (
             "  integer i;\n"
@@ -1010,10 +1030,11 @@ class Fuzz_Run:
         )
 
         # Assemble TB (no backslashes inside f-string expressions)
-        decls = "\n  ".join([d for d in (decl_clk, decl_in, decl_out) if d])
+        decls = "\n  ".join([d for d in (decl_clk, decl_in, decl_out, decl_cyc) if d])
         tb_text = (
             "`default_nettype none\n"
             "`timescale 1ns/1ps\n"
+            "`include \"top.sv\"\n"
             f"module {tb_name};\n\n"
             f"  // Declarations\n"
             f"  {decls}\n\n"
@@ -1029,9 +1050,7 @@ class Fuzz_Run:
             f"{prelude}\n\n"
         )
 
-        # If wave_block was set, it was already appended; if not, tb_text currently ends there.
         if not trace:
-            # Ensure a blank line separation before instantiation
             tb_text += ""
 
         tb_text += (
@@ -1039,6 +1058,7 @@ class Fuzz_Run:
             f"  {top_name} dut (\n"
             f"{ports_str}\n"
             f"  );\n\n"
+            f"{monitor}\n\n"
             f"{main_loop}\n\n"
             f"endmodule\n"
         )
@@ -1046,17 +1066,20 @@ class Fuzz_Run:
         tb_path = outdir / f"{tb_name}.sv"
         tb_path.write_text(tb_text)
         if verbose:
-            print(f\"[TB] Wrote SystemVerilog testbench: {tb_path}\")
-            print(f\"[TB] N inputs={N}, M outputs={M}, clk_period={clk_period}, cycles(default)={sim_cycles}\")
+            print(f"[TB] Wrote SystemVerilog testbench: {tb_path}")
+            print(f"[TB] N inputs={N}, M outputs={M}, clk_period={clk_period}, cycles(default)={sim_cycles}")
             if N == 0:
-                print(\"[TB] Inputs randomized: (none)\")
+                print("[TB] Inputs randomized: (none)")
             else:
-                print(\"[TB] Inputs randomized: in_flat (all bits)\")
+                print("[TB] Inputs randomized: in_flat (all bits)")
+            if M == 0:
+                print("[TB] Output monitor: (none; no outputs)")
 
         return str(tb_path)
 
 
-    def generate_top_module(self, top_name="top", output_path=""):
+
+    def generate_top_module(self, output_path, top_name):
         """
         Generate a top-level Verilog module connecting all module_wrappers.
         Explicitly separates MTM and MTO wires:
@@ -1202,7 +1225,6 @@ class Fuzz_Run:
                 else:
                     lines.append(f"assign out_flat[{ext_out_pos[wire_id]}] = {mod}_out_flat[{bitidx}];")
             lines.append("")
-        return (len(ext_inputs), len(ext_outputs))
 
         # Instantiate modules
         lines.append("// Instantiate all module wrappers")
