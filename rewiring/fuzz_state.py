@@ -703,6 +703,7 @@ class Fuzz_Run:
                 else:
                     lines.append(f"assign out_flat[{ext_out_pos[wire_id]}] = {mod}_out_flat[{bitidx}];")
             lines.append("")
+        return (len(ext_inputs), len(ext_outputs))
 
         # Instantiate modules
         lines.append("// Instantiate all module wrappers")

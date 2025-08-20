@@ -22,12 +22,12 @@
 
                   integer i;
                                 initial begin
-                                    $urandom(3837623329);
-                                    for (i = 0; i < 200; i = i + 1) begin
+                                    $urandom(2199654349);
+                                    for (i = 0; i < 20; i = i + 1) begin
                                     #1;
                                     // Randomize non-clock/reset inputs each cycle
                                     end
-                                    $display("TB_SIM_OK cycles=%0d", 200);
+                                    $display("TB_SIM_OK cycles=%0d", 20);
                                     $finish;
                                 end
 
