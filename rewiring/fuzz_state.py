@@ -3,6 +3,7 @@ import random
 import networkx as nx
 import matplotlib.pyplot as plt
 from collections import defaultdict
+from pathlib import Path
 
 """
 Wire can be in many groups: A wire can be on many linear paths
@@ -910,28 +911,12 @@ class Fuzz_Run:
                             trace: bool = True,
                             seed: int = 0,
                             verbose: bool = True) -> str:
-        """
-        Simple, robust SV testbench for the fixed-ABI top:
-        module top(
-            input  wire clk,
-            input  wire [N-1:0] in_flat,   // present iff N>0
-            output wire [M-1:0] out_flat   // present iff M>0
-        );
-
-        - N = len(self.external_inputs)
-        - M = len(self.external_outputs)
-        - Drives clk, randomizes in_flat each cycle if N>0
-        - Supports +cycles=<N> and +seed=<S> plusargs (override defaults)
-        - Emits VCD when trace=True
-        - Prints outputs every cycle for capture.
-        """
-        from pathlib import Path
 
         tb_name = f"tb_{top_name}"
         outdir = Path(output_path)
         outdir.mkdir(parents=True, exist_ok=True)
 
-        # Sanity: top must already be written next to TB
+        # Require top next to TB (for include-based flow keep your own `include "top.sv"` in TB if desired)
         top_sv = outdir / f"{top_name}.sv"
         if not top_sv.exists():
             raise FileNotFoundError(f"Expected '{top_sv}' to exist. Generate the top first.")
@@ -943,9 +928,9 @@ class Fuzz_Run:
         decl_clk = "logic clk;"
         decl_in  = f"logic [{N-1}:0] in_flat;"  if N > 0 else ""
         decl_out = f"wire  [{M-1}:0] out_flat;" if M > 0 else ""
-        decl_cyc = "integer cyc;"  # cycle counter
+        decl_cyc = "integer cyc;"
 
-        # --- Clock gen (period uses # delays; with --timing this is fine) ---
+        # --- Clock gen ---
         half = max(1, int(clk_period) // 2) or 1
         clk_gen = (
             "  // Clock generator\n"
@@ -953,19 +938,25 @@ class Fuzz_Run:
             f"  always #{half} clk = ~clk;"
         )
 
-        # --- Randomization of in_flat ---
-        # Build an expression that concatenates enough $urandom() chunks to cover N bits
+        # --- Exact-width randomization for in_flat (no truncation) ---
         if N > 0:
-            chunks = (N + 31) // 32
-            rand_chunks = ", ".join(["$urandom()"] * chunks) or "$urandom()"
-            rand_expr = f"{{ {rand_chunks} }}"   # will auto-truncate to N bits
-            stim_block = f"    in_flat <= {rand_expr};"
+            if N <= 32:
+                stim_block = f"    in_flat = {{{N}'($urandom())}};"
+            else:
+                parts = []
+                remaining = N
+                # build from LSB chunks up, then reverse for {MSB,...,LSB}
+                while remaining > 0:
+                    width = remaining % 32 if (remaining % 32) != 0 else 32
+                    parts.append(f"logic [{width-1}:0]'($urandom())")
+                    remaining -= width
+                parts = parts[::-1]
+                stim_block = f"in_flat = {{{', '.join(parts)}}};"  # MSB..LSB
         else:
             stim_block = "    // No inputs to randomize"
 
+
         # --- Seed & cycles with plusargs ---
-        # cycles default sim_cycles, override with +cycles=<int>
-        # seed default argument (or 0xC0FFEE) override with +seed=<int>
         default_seed = int(seed) if (seed is not None) else 0xC0FFEE
         prelude = (
             "  int cycles;\n"
@@ -989,7 +980,7 @@ class Fuzz_Run:
                 f"  end"
             )
 
-        # --- DUT instance port list (conditionally include in/out) ---
+        # --- DUT port list ---
         port_lines = ["    .clk(clk)"]
         if N > 0:
             port_lines.append("    .in_flat(in_flat)")
@@ -997,23 +988,38 @@ class Fuzz_Run:
             port_lines.append("    .out_flat(out_flat)")
         ports_str = ",\n".join(port_lines)
 
-        # --- Output monitor: print every posedge ---
+        # --- Exact-width monitor without %* (print bit-by-bit with $write) ---
         if M > 0 and N > 0:
             monitor = (
                 "  always @(posedge clk) begin\n"
                 "    cyc <= cyc + 1;\n"
-                "    $display(\"CYCLE=%0d IN=%0b OUT=%0b\", cyc, in_flat, out_flat);\n"
+                '    $write("CYCLE=%0d IN=", cyc);\n'
+                f"    for (int i = {N}-1; i >= 0; i--) $write(\"%0d\", in_flat[i]);\n"
+                '    $write(" OUT=");\n'
+                f"    for (int j = {M}-1; j >= 0; j--) $write(\"%0d\", out_flat[j]);\n"
+                "    $write(\"\\n\");\n"
                 "  end"
             )
         elif M > 0:
             monitor = (
                 "  always @(posedge clk) begin\n"
                 "    cyc <= cyc + 1;\n"
-                "    $display(\"CYCLE=%0d OUT=%0h\", cyc, out_flat);\n"
+                '    $write("CYCLE=%0d OUT=", cyc);\n'
+                f"    for (int j = {M}-1; j >= 0; j--) $write(\"%0d\", out_flat[j]);\n"
+                "    $write(\"\\n\");\n"
+                "  end"
+            )
+        elif N > 0:
+            monitor = (
+                "  always @(posedge clk) begin\n"
+                "    cyc <= cyc + 1;\n"
+                '    $write("CYCLE=%0d IN=", cyc);\n'
+                f"    for (int i = {N}-1; i >= 0; i--) $write(\"%0d\", in_flat[i]);\n"
+                "    $write(\"\\n\");\n"
                 "  end"
             )
         else:
-            monitor = "  // No outputs to print"
+            monitor = "  // No IN/OUT to print"
 
         # --- Main stimulus loop ---
         main_loop = (
@@ -1029,12 +1035,11 @@ class Fuzz_Run:
             "  end"
         )
 
-        # Assemble TB (no backslashes inside f-string expressions)
+        # Assemble TB
         decls = "\n  ".join([d for d in (decl_clk, decl_in, decl_out, decl_cyc) if d])
         tb_text = (
             "`default_nettype none\n"
             "`timescale 1ns/1ps\n"
-            "`include \"top.sv\"\n"
             f"module {tb_name};\n\n"
             f"  // Declarations\n"
             f"  {decls}\n\n"
@@ -1049,9 +1054,6 @@ class Fuzz_Run:
             f"{clk_gen}\n\n"
             f"{prelude}\n\n"
         )
-
-        if not trace:
-            tb_text += ""
 
         tb_text += (
             f"  // DUT instance\n"
@@ -1071,12 +1073,11 @@ class Fuzz_Run:
             if N == 0:
                 print("[TB] Inputs randomized: (none)")
             else:
-                print("[TB] Inputs randomized: in_flat (all bits)")
+                print("[TB] Inputs randomized: in_flat (exact width; no truncation)")
             if M == 0:
                 print("[TB] Output monitor: (none; no outputs)")
 
         return str(tb_path)
-
 
 
     def generate_top_module(self, output_path, top_name):
@@ -1117,8 +1118,8 @@ class Fuzz_Run:
         lines.append("// Auto-generated Top Module for flattened IO")
 
         # Include wrapper files
-        for mod in sorted(self.all_modules):
-            lines.append(f"`include \"{mod}.sv\"")
+        # for mod in sorted(self.all_modules):
+            # lines.append(f"`include \"{mod}.sv\"")
         lines.append("")
 
         # Top module declaration

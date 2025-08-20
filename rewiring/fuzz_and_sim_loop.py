@@ -260,12 +260,15 @@ def main():
 
             # Generate RTL (top) and TB
             # NOTE: your signature is (output_path, top_name)
-            fr.generate_top_module(output_path=str(cycle_dir), top_name=args.top_name)
+            fr.generate_top_module(
+                output_path=str(cycle_dir) + "/",
+                top_name=args.top_name
+            )   
 
             # Your TB generator’s signature does NOT take tb_name; it derives tb_<top>.
             fr.generate_sv_testbench(
                 top_name=args.top_name,
-                output_path=str(cycle_dir),
+                output_path=str(cycle_dir) + "/",
                 sim_cycles=args.tb_cycles,
                 clk_period=args.tb_clk_period,
                 hold_reset_cycles=args.tb_hold_reset,
