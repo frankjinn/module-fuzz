@@ -948,7 +948,7 @@ class Fuzz_Run:
                 # build from LSB chunks up, then reverse for {MSB,...,LSB}
                 while remaining > 0:
                     width = remaining % 32 if (remaining % 32) != 0 else 32
-                    parts.append(f"logic [{width-1}:0]'($urandom())")
+                    parts.append(f"{width}'($urandom())")
                     remaining -= width
                 parts = parts[::-1]
                 stim_block = f"in_flat = {{{', '.join(parts)}}};"  # MSB..LSB
