@@ -41,7 +41,7 @@ VL_ATTR_COLD void Vtb_top___024root___eval_settle(Vtb_top___024root* vlSelf) {
 #ifdef VL_DEBUG
             Vtb_top___024root___dump_triggers__stl(vlSelf);
 #endif
-            VL_FATAL_MT("/module-fuzz/rewiring/runs_tb/cycle_0000/tb_top.sv", 3, "", "Settle region did not converge.");
+            VL_FATAL_MT("/opt/module-fuzz/rewiring/runs_tb/cycle_0000/tb_top.sv", 3, "", "Settle region did not converge.");
         }
         __VstlIterCount = ((IData)(1U) + __VstlIterCount);
         __VstlContinue = 0U;
@@ -166,10 +166,9 @@ VL_ATTR_COLD void Vtb_top___024root___ctor_var_reset(Vtb_top___024root* vlSelf) 
     vlSelf->tb_top__DOT__i = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 1997728582646804290ull);
     vlSelf->tb_top__DOT__unnamedblk1__DOT__i = 0;
     vlSelf->tb_top__DOT__unnamedblk2__DOT__j = 0;
-    vlSelf->tb_top__DOT__dut__DOT__const_nested_wrapper_in_flat = VL_SCOPED_RAND_RESET_I(27, __VscopeHash, 12059894774565708187ull);
-    vlSelf->tb_top__DOT__dut__DOT__u_const_compare_wrapper__DOT__le_c = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 8292521610473742572ull);
+    vlSelf->tb_top__DOT__dut__DOT__const_shift_wrapper_in_flat = VL_SCOPED_RAND_RESET_I(11, __VscopeHash, 6331654070474289026ull);
     vlSelf->tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond1_c = VL_SCOPED_RAND_RESET_I(8, __VscopeHash, 5422265824092619253ull);
-    vlSelf->tb_top__DOT__dut__DOT__u_const_reduce_wrapper__DOT__in_vec = VL_SCOPED_RAND_RESET_I(4, __VscopeHash, 17845092672741793170ull);
+    vlSelf->tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond2_c = VL_SCOPED_RAND_RESET_I(8, __VscopeHash, 2617419230331436146ull);
     vlSelf->__Vtrigprevexpr___TOP__tb_top__DOT__clk__0 = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 9069298637648042572ull);
     for (int __Vi0 = 0; __Vi0 < 5; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = 0;

@@ -27,18 +27,18 @@ VL_INLINE_OPT VlCoroutine Vtb_top___024root___eval_initial__TOP__Vtiming__0(Vtb_
     // Init
     VlWide<5>/*159:0*/ __Vtemp_2;
     // Body
-    co_await vlSelfRef.__VtrigSched_h159771e3__0.trigger(0U, 
+    co_await vlSelfRef.__VtrigSched_h1586d63e__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_top.clk)", 
-                                                         "/module-fuzz/rewiring/runs_tb/cycle_0001/tb_top.sv", 
+                                                         "/opt/module-fuzz/rewiring/runs_tb/cycle_0001/tb_top.sv", 
                                                          48);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_top__DOT__i = 0U;
     while (VL_LTS_III(32, vlSelfRef.tb_top__DOT__i, vlSelfRef.tb_top__DOT__cycles)) {
-        co_await vlSelfRef.__VtrigSched_h15977b22__0.trigger(0U, 
+        co_await vlSelfRef.__VtrigSched_h1586d57f__0.trigger(0U, 
                                                              nullptr, 
                                                              "@(posedge tb_top.clk)", 
-                                                             "/module-fuzz/rewiring/runs_tb/cycle_0001/tb_top.sv", 
+                                                             "/opt/module-fuzz/rewiring/runs_tb/cycle_0001/tb_top.sv", 
                                                              50);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
         VL_RANDOM_W(154, __Vtemp_2);
@@ -51,7 +51,7 @@ VL_INLINE_OPT VlCoroutine Vtb_top___024root___eval_initial__TOP__Vtiming__0(Vtb_
         vlSelfRef.tb_top__DOT__i = ((IData)(1U) + vlSelfRef.tb_top__DOT__i);
     }
     VL_WRITEF_NX("TB_SIM_OK cycles=%0d\n",0,32,vlSelfRef.tb_top__DOT__cycles);
-    VL_FINISH_MT("/module-fuzz/rewiring/runs_tb/cycle_0001/tb_top.sv", 54, "");
+    VL_FINISH_MT("/opt/module-fuzz/rewiring/runs_tb/cycle_0001/tb_top.sv", 54, "");
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
 }
 
@@ -73,25 +73,41 @@ VL_INLINE_OPT void Vtb_top___024root___act_comb__TOP__0(Vtb_top___024root* vlSel
     Vtb_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
-    vlSelfRef.tb_top__DOT__dut__DOT__const_arith_wrapper_in_flat 
-        = ((0xe000U & (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                       << 1U)) | ((0x1000U & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                              << 1U)) 
-                                  | (0xfffU & vlSelfRef.tb_top__DOT__in_flat[0U])));
+    vlSelfRef.tb_top__DOT__dut__DOT__u_const_arith_wrapper__DOT__rem_c 
+        = ((0U != (0xffU & vlSelfRef.tb_top__DOT__in_flat[0U]))
+            ? (0xffU & VL_MODDIV_III(8, (0xffU & (vlSelfRef.tb_top__DOT__in_flat[0U] 
+                                                  >> 8U)), 
+                                     (0xffU & vlSelfRef.tb_top__DOT__in_flat[0U])))
+            : 0U);
+    vlSelfRef.tb_top__DOT__dut__DOT__const_conditional_wrapper_in_flat 
+        = (((QData)((IData)((0x3fffU & (vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                        >> 2U)))) << 0x14U) 
+           | (QData)((IData)(((0x80000U & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                           << 7U)) 
+                              | (0x7ffffU & ((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                              << 0x11U) 
+                                             | (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                >> 0xfU)))))));
+    vlSelfRef.tb_top__DOT__dut__DOT__const_nested_wrapper_in_flat 
+        = ((0x7000000U & (vlSelfRef.tb_top__DOT__in_flat[1U] 
+                          << 6U)) | ((0x800000U & ((IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_arith_wrapper__DOT__rem_c) 
+                                                   << 0x14U)) 
+                                     | (0x7fffffU & 
+                                        ((vlSelfRef.tb_top__DOT__in_flat[1U] 
+                                          << 5U) | 
+                                         (vlSelfRef.tb_top__DOT__in_flat[0U] 
+                                          >> 0x1bU)))));
     vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond1_c 
-        = (0xffU & ((0x8000U & vlSelfRef.tb_top__DOT__in_flat[3U])
+        = (0xffU & ((0x10000U & vlSelfRef.tb_top__DOT__in_flat[3U])
                      ? ((vlSelfRef.tb_top__DOT__in_flat[4U] 
                          << 0x18U) | (vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                      >> 8U)) : vlSelfRef.tb_top__DOT__in_flat[4U]));
-    vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond2_c 
-        = (0xffU & ((0x4000U & vlSelfRef.tb_top__DOT__in_flat[3U])
-                     ? (IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond1_c)
-                     : ((vlSelfRef.tb_top__DOT__in_flat[3U] 
-                         << 8U) | (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                   >> 0x18U))));
+                                      >> 8U)) : (IData)(
+                                                        (vlSelfRef.tb_top__DOT__dut__DOT__const_conditional_wrapper_in_flat 
+                                                         >> 0x12U))));
 }
 
 void Vtb_top___024root___nba_sequent__TOP__0(Vtb_top___024root* vlSelf);
+void Vtb_top___024root___nba_comb__TOP__0(Vtb_top___024root* vlSelf);
 
 void Vtb_top___024root___eval_nba(Vtb_top___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_top___024root___eval_nba\n"); );
@@ -102,7 +118,7 @@ void Vtb_top___024root___eval_nba(Vtb_top___024root* vlSelf) {
         Vtb_top___024root___nba_sequent__TOP__0(vlSelf);
     }
     if ((3ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
-        Vtb_top___024root___act_comb__TOP__0(vlSelf);
+        Vtb_top___024root___nba_comb__TOP__0(vlSelf);
         vlSelfRef.__Vm_traceActivity[4U] = 1U;
     }
 }
@@ -136,255 +152,253 @@ VL_INLINE_OPT void Vtb_top___024root___nba_sequent__TOP__0(Vtb_top___024root* vl
     vlSelfRef.tb_top__DOT__unnamedblk2__DOT__j = 0x9eU;
     while (VL_LTES_III(32, 0U, vlSelfRef.tb_top__DOT__unnamedblk2__DOT__j)) {
         __Vtemp_1[0U] = (IData)((((QData)((IData)((
-                                                   ((0xe00000U 
-                                                     & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                        << 0xeU)) 
-                                                    | (0x1fe000U 
-                                                       & ((0x1e0000U 
+                                                   (0x3fc0000U 
+                                                    & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                       << 0xbU)) 
+                                                   | ((0x3fc00U 
+                                                       & ((0x3c000U 
                                                            & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                              << 7U)) 
-                                                          | (0x1e000U 
+                                                              << 3U)) 
+                                                          | (0x3c00U 
                                                              & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                << 3U))))) 
-                                                   | (((0x1f80U 
-                                                        & ((0x1800U 
-                                                            & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                               << 6U)) 
-                                                           | ((0x600U 
-                                                               & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                  << 4U)) 
-                                                              | (0x180U 
+                                                                >> 1U)))) 
+                                                      | ((0x3f0U 
+                                                          & ((0x300U 
+                                                              & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                 << 3U)) 
+                                                             | ((0xc0U 
                                                                  & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                    << 2U))))) 
-                                                       | ((0xfU 
-                                                           == 
-                                                           (0xfU 
-                                                            & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                               >> 1U))) 
-                                                          << 6U)) 
-                                                      | ((((0U 
-                                                            != 
-                                                            (0xfU 
-                                                             & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                >> 1U))) 
-                                                           << 5U) 
-                                                          | ((0x10U 
-                                                              & (VL_REDXOR_32(
-                                                                              (0xfU 
-                                                                               & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                                >> 1U))) 
-                                                                 << 4U)) 
-                                                             | (8U 
-                                                                & ((~ 
-                                                                    (0xfU 
-                                                                     == 
-                                                                     (0xfU 
-                                                                      & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                         >> 1U)))) 
-                                                                   << 3U)))) 
-                                                         | ((4U 
-                                                             & ((~ 
-                                                                 (0U 
-                                                                  != 
-                                                                  (0xfU 
+                                                                    << 1U)) 
+                                                                | (0x30U 
                                                                    & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                      >> 1U)))) 
+                                                                      >> 1U))))) 
+                                                         | ((((0xfU 
+                                                               == 
+                                                               (0xfU 
+                                                                & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                   >> 1U))) 
+                                                              << 3U) 
+                                                             | ((0U 
+                                                                 != 
+                                                                 (0xfU 
+                                                                  & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                     >> 1U))) 
                                                                 << 2U)) 
                                                             | ((2U 
-                                                                & ((~ 
-                                                                    VL_REDXOR_32(
+                                                                & (VL_REDXOR_32(
+                                                                                (0xfU 
+                                                                                & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                                >> 1U))) 
+                                                                   << 1U)) 
+                                                               | (1U 
+                                                                  & (~ 
+                                                                     (0xfU 
+                                                                      == 
+                                                                      (0xfU 
+                                                                       & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                          >> 1U)))))))))))) 
+                                  << 0x1aU) | (QData)((IData)(
+                                                              (((((0x2000000U 
+                                                                   & ((~ 
+                                                                       (0U 
+                                                                        != 
+                                                                        (0xfU 
+                                                                         & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                            >> 1U)))) 
+                                                                      << 0x19U)) 
+                                                                  | ((0x1000000U 
+                                                                      & ((~ 
+                                                                          VL_REDXOR_32(
                                                                                 (0xfU 
                                                                                 & (vlSelfRef.tb_top__DOT__in_flat[3U] 
                                                                                 >> 1U)))) 
-                                                                   << 1U)) 
-                                                               | ((0xffU 
-                                                                   & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                       << 7U) 
-                                                                      | (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                         >> 0x19U))) 
-                                                                  == 
-                                                                  (0xffU 
-                                                                   & (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                      >> 0x11U)))))))))) 
-                                  << 0x17U) | (QData)((IData)(
-                                                              (((((((0xffU 
-                                                                     & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                         << 7U) 
-                                                                        | (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                           >> 0x19U))) 
-                                                                    != 
-                                                                    (0xffU 
-                                                                     & (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                        >> 0x11U))) 
-                                                                   << 0x16U) 
-                                                                  | ((((0xffU 
-                                                                        & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                            << 7U) 
-                                                                           | (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                              >> 0x19U))) 
-                                                                       < 
-                                                                       (0xffU 
-                                                                        & (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                           >> 0x11U))) 
-                                                                      << 0x15U) 
+                                                                         << 0x18U)) 
                                                                      | (((0xffU 
                                                                           & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
                                                                               << 7U) 
                                                                              | (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                                 >> 0x19U))) 
-                                                                         <= 
+                                                                         == 
                                                                          (0xffU 
                                                                           & (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                              >> 0x11U))) 
-                                                                        << 0x14U))) 
+                                                                        << 0x17U))) 
                                                                  | ((((0xffU 
                                                                        & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
                                                                            << 7U) 
                                                                           | (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                              >> 0x19U))) 
-                                                                      > 
+                                                                      != 
                                                                       (0xffU 
                                                                        & (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                           >> 0x11U))) 
-                                                                     << 0x13U) 
+                                                                     << 0x16U) 
+                                                                    | (((0xffU 
+                                                                         & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                             << 7U) 
+                                                                            | (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                               >> 0x19U))) 
+                                                                        < 
+                                                                        (0xffU 
+                                                                         & (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                            >> 0x11U))) 
+                                                                       << 0x15U))) 
+                                                                | (((((0xffU 
+                                                                       & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                           << 7U) 
+                                                                          | (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                             >> 0x19U))) 
+                                                                      <= 
+                                                                      (0xffU 
+                                                                       & (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                          >> 0x11U))) 
+                                                                     << 0x14U) 
                                                                     | ((((0xffU 
                                                                           & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
                                                                               << 7U) 
                                                                              | (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                                 >> 0x19U))) 
-                                                                         >= 
+                                                                         > 
                                                                          (0xffU 
                                                                           & (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                              >> 0x11U))) 
-                                                                        << 0x12U) 
-                                                                       | (((0xfU 
+                                                                        << 0x13U) 
+                                                                       | (((0xffU 
+                                                                            & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                                << 7U) 
+                                                                               | (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                                >> 0x19U))) 
+                                                                           >= 
+                                                                           (0xffU 
                                                                             & (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                               >> 0xdU)) 
-                                                                           == 
-                                                                           (0xfU 
-                                                                            & (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                               >> 9U))) 
-                                                                          << 0x11U)))) 
-                                                                | ((((0xfU 
-                                                                      & (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                         >> 0xdU)) 
-                                                                     != 
-                                                                     (0xfU 
-                                                                      & (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                         >> 9U))) 
-                                                                    << 0x10U) 
-                                                                   | (0xf000U 
-                                                                      & (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                         << 7U)))) 
-                                                               | ((((0xcU 
-                                                                     >= 
-                                                                     (0xfU 
-                                                                      & (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                         >> 0x15U)))
-                                                                     ? 
-                                                                    (7U 
-                                                                     & (((0U 
-                                                                          == 
-                                                                          (0x1fU 
-                                                                           & ((IData)(0x39U) 
-                                                                              + 
-                                                                              (7U 
-                                                                               & (vlSelfRef.tb_top__DOT__in_flat[1U] 
+                                                                               >> 0x11U))) 
+                                                                          << 0x12U))) 
+                                                                   | ((((0xfU 
+                                                                         & (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                            >> 0xdU)) 
+                                                                        == 
+                                                                        (0xfU 
+                                                                         & (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                            >> 9U))) 
+                                                                       << 0x11U) 
+                                                                      | (((0xfU 
+                                                                           & (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                              >> 0xdU)) 
+                                                                          != 
+                                                                          (0xfU 
+                                                                           & (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                              >> 9U))) 
+                                                                         << 0x10U)))) 
+                                                               | ((0xf000U 
+                                                                   & (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                      << 7U)) 
+                                                                  | ((((0xcU 
+                                                                        >= 
+                                                                        (0xfU 
+                                                                         & (vlSelfRef.tb_top__DOT__in_flat[1U] 
+                                                                            >> 0x15U)))
+                                                                        ? 
+                                                                       (7U 
+                                                                        & (((0U 
+                                                                             == 
+                                                                             (0x1fU 
+                                                                              & ((IData)(0x39U) 
+                                                                                + 
+                                                                                (7U 
+                                                                                & (vlSelfRef.tb_top__DOT__in_flat[1U] 
                                                                                 >> 0x15U)))))
-                                                                          ? 0U
-                                                                          : 
-                                                                         (vlSelfRef.tb_top__DOT__in_flat[
-                                                                          (((IData)(0x3bU) 
-                                                                            + 
-                                                                            (7U 
-                                                                             & (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                >> 0x15U))) 
-                                                                           >> 5U)] 
-                                                                          << 
-                                                                          ((IData)(0x20U) 
-                                                                           - 
-                                                                           (0x1fU 
-                                                                            & ((IData)(0x39U) 
+                                                                             ? 0U
+                                                                             : 
+                                                                            (vlSelfRef.tb_top__DOT__in_flat[
+                                                                             (((IData)(0x3bU) 
                                                                                + 
                                                                                (7U 
+                                                                                & (vlSelfRef.tb_top__DOT__in_flat[1U] 
+                                                                                >> 0x15U))) 
+                                                                              >> 5U)] 
+                                                                             << 
+                                                                             ((IData)(0x20U) 
+                                                                              - 
+                                                                              (0x1fU 
+                                                                               & ((IData)(0x39U) 
+                                                                                + 
+                                                                                (7U 
                                                                                 & (vlSelfRef.tb_top__DOT__in_flat[1U] 
                                                                                 >> 0x15U))))))) 
-                                                                        | (vlSelfRef.tb_top__DOT__in_flat[
-                                                                           (((IData)(0x39U) 
-                                                                             + 
-                                                                             (7U 
-                                                                              & (vlSelfRef.tb_top__DOT__in_flat[1U] 
+                                                                           | (vlSelfRef.tb_top__DOT__in_flat[
+                                                                              (((IData)(0x39U) 
+                                                                                + 
+                                                                                (7U 
+                                                                                & (vlSelfRef.tb_top__DOT__in_flat[1U] 
                                                                                 >> 0x15U))) 
-                                                                            >> 5U)] 
-                                                                           >> 
-                                                                           (0x1fU 
-                                                                            & ((IData)(0x39U) 
-                                                                               + 
-                                                                               (7U 
+                                                                               >> 5U)] 
+                                                                              >> 
+                                                                              (0x1fU 
+                                                                               & ((IData)(0x39U) 
+                                                                                + 
+                                                                                (7U 
                                                                                 & (vlSelfRef.tb_top__DOT__in_flat[1U] 
                                                                                 >> 0x15U)))))))
-                                                                     : 0U) 
-                                                                   << 9U) 
-                                                                  | (((0xcU 
-                                                                       < 
-                                                                       (0xfU 
-                                                                        & (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                           >> 0x15U))) 
-                                                                      << 8U) 
-                                                                     | (0xffU 
-                                                                        & ((((0xffU 
-                                                                              & (((vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                << 0x13U) 
-                                                                                | (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                >> 0xdU)) 
+                                                                        : 0U) 
+                                                                      << 9U) 
+                                                                     | (((0xcU 
+                                                                          < 
+                                                                          (0xfU 
+                                                                           & (vlSelfRef.tb_top__DOT__in_flat[1U] 
+                                                                              >> 0x15U))) 
+                                                                         << 8U) 
+                                                                        | (0xffU 
+                                                                           & ((((0xffU 
+                                                                                & ((vlSelfRef.tb_top__DOT__dut__DOT__const_nested_wrapper_in_flat 
+                                                                                >> 0x13U) 
                                                                                 + 
                                                                                 ((vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                << 0x1bU) 
+                                                                                << 0x1aU) 
                                                                                 | (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                >> 5U)))) 
-                                                                             * 
-                                                                             (0xffU 
-                                                                              & (((vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                << 3U) 
+                                                                                >> 6U)))) 
+                                                                                * 
+                                                                                (0xffU 
+                                                                                & (((vlSelfRef.tb_top__DOT__in_flat[1U] 
+                                                                                << 2U) 
                                                                                 | (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                                                >> 0x1dU)) 
+                                                                                >> 0x1eU)) 
                                                                                 << 
                                                                                 (7U 
                                                                                 & (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                                                >> 0x1aU))))) 
-                                                                            & (((vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                << 0x1bU) 
+                                                                                >> 0x1bU))))) 
+                                                                               & (((vlSelfRef.tb_top__DOT__in_flat[1U] 
+                                                                                << 0x1aU) 
                                                                                 | (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                >> 5U)) 
-                                                                               ^ 
-                                                                               ((vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                << 3U) 
+                                                                                >> 6U)) 
+                                                                                ^ 
+                                                                                ((vlSelfRef.tb_top__DOT__in_flat[1U] 
+                                                                                << 2U) 
                                                                                 | (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                                                >> 0x1dU)))) 
-                                                                           | VL_MODDIV_III(8, 
+                                                                                >> 0x1eU)))) 
+                                                                              | VL_MODDIV_III(8, 
                                                                                 ((0U 
                                                                                 == 
                                                                                 (0xffU 
                                                                                 & ((IData)(1U) 
                                                                                 + 
                                                                                 ((vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                << 0x1bU) 
+                                                                                << 0x1aU) 
                                                                                 | (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                >> 5U)))))
+                                                                                >> 6U)))))
                                                                                  ? 0U
                                                                                  : 
                                                                                 (0xffU 
                                                                                 & VL_DIV_III(8, 
                                                                                 (0xffU 
-                                                                                & (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                >> 0xdU)), 
+                                                                                & (vlSelfRef.tb_top__DOT__dut__DOT__const_nested_wrapper_in_flat 
+                                                                                >> 0x13U)), 
                                                                                 (0xffU 
                                                                                 & ((IData)(1U) 
                                                                                 + 
                                                                                 ((vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                << 0x1bU) 
+                                                                                << 0x1aU) 
                                                                                 | (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                >> 5U))))))), (IData)(3U)))))))))));
+                                                                                >> 6U))))))), (IData)(3U))))))))))));
         __Vtemp_1[1U] = (((IData)((((QData)((IData)(
                                                     (((0x78000U 
                                                        & (((vlSelfRef.tb_top__DOT__in_flat[4U] 
@@ -443,284 +457,287 @@ VL_INLINE_OPT void Vtb_top___024root___nba_sequent__TOP__0(Vtb_top___024root* vl
                                                                     & (~ 
                                                                        (vlSelfRef.tb_top__DOT__in_flat[4U] 
                                                                         >> 0x11U)))))))))) 
-                                    << 0x1dU) | (QData)((IData)(
+                                    << 0x18U) | (QData)((IData)(
                                                                 (((IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond1_c) 
-                                                                  << 0x15U) 
-                                                                 | (((IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond2_c) 
-                                                                     << 0xdU) 
-                                                                    | ((0x1fe0U 
-                                                                        & ((VL_LTS_III(8, 
-                                                                                (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                                >> 0x18U), 
+                                                                  << 0x10U) 
+                                                                 | ((0xff00U 
+                                                                     & (((0x8000U 
+                                                                          & vlSelfRef.tb_top__DOT__in_flat[3U])
+                                                                          ? (IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond1_c)
+                                                                          : 
+                                                                         ((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                           << 7U) 
+                                                                          | (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                             >> 0x19U))) 
+                                                                        << 8U)) 
+                                                                    | (0xffU 
+                                                                       & (VL_LTS_III(8, 
+                                                                                (0xffU 
+                                                                                & ((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                                << 7U) 
+                                                                                | (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                                >> 0x19U))), 
                                                                                 (0xffU 
                                                                                 & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                                >> 0x10U)))
-                                                                             ? 
-                                                                            ((vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                              << 0x18U) 
-                                                                             | (vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                                >> 8U))
-                                                                             : 
-                                                                            vlSelfRef.tb_top__DOT__in_flat[4U]) 
-                                                                           << 5U)) 
-                                                                       | ((0x1eU 
-                                                                           & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                              >> 9U)) 
-                                                                          | (1U 
-                                                                             & ((IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond2_c) 
-                                                                                >> 2U)))))))))) 
-                          << 0xfU) | (IData)(((((QData)((IData)(
-                                                                (((0xe00000U 
+                                                                                >> 0x11U)))
+                                                                           ? 
+                                                                          ((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                            << 0x18U) 
+                                                                           | (vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                              >> 8U))
+                                                                           : (IData)(
+                                                                                (vlSelfRef.tb_top__DOT__dut__DOT__const_conditional_wrapper_in_flat 
+                                                                                >> 0x12U)))))))))) 
+                          << 0x14U) | (IData)(((((QData)((IData)(
+                                                                 ((0x3fc0000U 
                                                                    & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                      << 0xeU)) 
-                                                                  | (0x1fe000U 
-                                                                     & ((0x1e0000U 
-                                                                         & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                            << 7U)) 
-                                                                        | (0x1e000U 
-                                                                           & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                              << 3U))))) 
-                                                                 | (((0x1f80U 
-                                                                      & ((0x1800U 
+                                                                      << 0xbU)) 
+                                                                  | ((0x3fc00U 
+                                                                      & ((0x3c000U 
                                                                           & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                             << 6U)) 
-                                                                         | ((0x600U 
+                                                                             << 3U)) 
+                                                                         | (0x3c00U 
+                                                                            & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                               >> 1U)))) 
+                                                                     | ((0x3f0U 
+                                                                         & ((0x300U 
                                                                              & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                                << 4U)) 
-                                                                            | (0x180U 
+                                                                                << 3U)) 
+                                                                            | ((0xc0U 
+                                                                                & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                                << 1U)) 
+                                                                               | (0x30U 
+                                                                                & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                                >> 1U))))) 
+                                                                        | ((((0xfU 
+                                                                              == 
+                                                                              (0xfU 
                                                                                & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                                << 2U))))) 
-                                                                     | ((0xfU 
-                                                                         == 
-                                                                         (0xfU 
-                                                                          & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                             >> 1U))) 
-                                                                        << 6U)) 
-                                                                    | ((((0U 
-                                                                          != 
-                                                                          (0xfU 
-                                                                           & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                              >> 1U))) 
-                                                                         << 5U) 
-                                                                        | ((0x10U 
-                                                                            & (VL_REDXOR_32(
-                                                                                (0xfU 
-                                                                                & (vlSelfRef.tb_top__DOT__in_flat[3U] 
                                                                                 >> 1U))) 
-                                                                               << 4U)) 
-                                                                           | (8U 
-                                                                              & ((~ 
-                                                                                (0xfU 
-                                                                                == 
-                                                                                (0xfU 
-                                                                                & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                                >> 1U)))) 
-                                                                                << 3U)))) 
-                                                                       | ((4U 
-                                                                           & ((~ 
-                                                                               (0U 
+                                                                             << 3U) 
+                                                                            | ((0U 
                                                                                 != 
                                                                                 (0xfU 
                                                                                 & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                                >> 1U))) 
+                                                                               << 2U)) 
+                                                                           | ((2U 
+                                                                               & (VL_REDXOR_32(
+                                                                                (0xfU 
+                                                                                & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                                >> 1U))) 
+                                                                                << 1U)) 
+                                                                              | (1U 
+                                                                                & (~ 
+                                                                                (0xfU 
+                                                                                == 
+                                                                                (0xfU 
+                                                                                & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                                >> 1U)))))))))))) 
+                                                 << 0x1aU) 
+                                                | (QData)((IData)(
+                                                                  (((((0x2000000U 
+                                                                       & ((~ 
+                                                                           (0U 
+                                                                            != 
+                                                                            (0xfU 
+                                                                             & (vlSelfRef.tb_top__DOT__in_flat[3U] 
                                                                                 >> 1U)))) 
-                                                                              << 2U)) 
-                                                                          | ((2U 
-                                                                              & ((~ 
-                                                                                VL_REDXOR_32(
+                                                                          << 0x19U)) 
+                                                                      | ((0x1000000U 
+                                                                          & ((~ 
+                                                                              VL_REDXOR_32(
                                                                                 (0xfU 
                                                                                 & (vlSelfRef.tb_top__DOT__in_flat[3U] 
                                                                                 >> 1U)))) 
-                                                                                << 1U)) 
-                                                                             | ((0xffU 
-                                                                                & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                             << 0x18U)) 
+                                                                         | (((0xffU 
+                                                                              & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
                                                                                 << 7U) 
                                                                                 | (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                                 >> 0x19U))) 
-                                                                                == 
-                                                                                (0xffU 
-                                                                                & (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                                >> 0x11U)))))))))) 
-                                                << 0x17U) 
-                                               | (QData)((IData)(
-                                                                 (((((((0xffU 
-                                                                        & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                            << 7U) 
-                                                                           | (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                              >> 0x19U))) 
-                                                                       != 
-                                                                       (0xffU 
-                                                                        & (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                           >> 0x11U))) 
-                                                                      << 0x16U) 
+                                                                             == 
+                                                                             (0xffU 
+                                                                              & (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                                >> 0x11U))) 
+                                                                            << 0x17U))) 
                                                                      | ((((0xffU 
                                                                            & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
                                                                                << 7U) 
                                                                               | (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                                 >> 0x19U))) 
-                                                                          < 
+                                                                          != 
                                                                           (0xffU 
                                                                            & (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                               >> 0x11U))) 
-                                                                         << 0x15U) 
+                                                                         << 0x16U) 
                                                                         | (((0xffU 
                                                                              & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
                                                                                 << 7U) 
                                                                                 | (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                                 >> 0x19U))) 
-                                                                            <= 
+                                                                            < 
                                                                             (0xffU 
                                                                              & (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                                 >> 0x11U))) 
-                                                                           << 0x14U))) 
-                                                                    | ((((0xffU 
-                                                                          & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                              << 7U) 
-                                                                             | (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                           << 0x15U))) 
+                                                                    | (((((0xffU 
+                                                                           & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                               << 7U) 
+                                                                              | (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                                 >> 0x19U))) 
-                                                                         > 
-                                                                         (0xffU 
-                                                                          & (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                             >> 0x11U))) 
-                                                                        << 0x13U) 
-                                                                       | ((((0xffU 
-                                                                             & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                          <= 
+                                                                          (0xffU 
+                                                                           & (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                              >> 0x11U))) 
+                                                                         << 0x14U) 
+                                                                        | ((((0xffU 
+                                                                              & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
                                                                                 << 7U) 
                                                                                 | (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                                 >> 0x19U))) 
-                                                                            >= 
-                                                                            (0xffU 
-                                                                             & (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                             > 
+                                                                             (0xffU 
+                                                                              & (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                                 >> 0x11U))) 
-                                                                           << 0x12U) 
+                                                                            << 0x13U) 
+                                                                           | (((0xffU 
+                                                                                & ((vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                                << 7U) 
+                                                                                | (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                                >> 0x19U))) 
+                                                                               >= 
+                                                                               (0xffU 
+                                                                                & (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                                >> 0x11U))) 
+                                                                              << 0x12U))) 
+                                                                       | ((((0xfU 
+                                                                             & (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                                >> 0xdU)) 
+                                                                            == 
+                                                                            (0xfU 
+                                                                             & (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                                >> 9U))) 
+                                                                           << 0x11U) 
                                                                           | (((0xfU 
                                                                                & (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                                 >> 0xdU)) 
-                                                                              == 
+                                                                              != 
                                                                               (0xfU 
                                                                                & (vlSelfRef.tb_top__DOT__in_flat[2U] 
                                                                                 >> 9U))) 
-                                                                             << 0x11U)))) 
-                                                                   | ((((0xfU 
-                                                                         & (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                            >> 0xdU)) 
-                                                                        != 
-                                                                        (0xfU 
-                                                                         & (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                            >> 9U))) 
-                                                                       << 0x10U) 
-                                                                      | (0xf000U 
-                                                                         & (vlSelfRef.tb_top__DOT__in_flat[2U] 
-                                                                            << 7U)))) 
-                                                                  | ((((0xcU 
-                                                                        >= 
-                                                                        (0xfU 
-                                                                         & (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                            >> 0x15U)))
-                                                                        ? 
-                                                                       (7U 
-                                                                        & (((0U 
-                                                                             == 
-                                                                             (0x1fU 
-                                                                              & ((IData)(0x39U) 
+                                                                             << 0x10U)))) 
+                                                                   | ((0xf000U 
+                                                                       & (vlSelfRef.tb_top__DOT__in_flat[2U] 
+                                                                          << 7U)) 
+                                                                      | ((((0xcU 
+                                                                            >= 
+                                                                            (0xfU 
+                                                                             & (vlSelfRef.tb_top__DOT__in_flat[1U] 
+                                                                                >> 0x15U)))
+                                                                            ? 
+                                                                           (7U 
+                                                                            & (((0U 
+                                                                                == 
+                                                                                (0x1fU 
+                                                                                & ((IData)(0x39U) 
                                                                                 + 
                                                                                 (7U 
                                                                                 & (vlSelfRef.tb_top__DOT__in_flat[1U] 
                                                                                 >> 0x15U)))))
-                                                                             ? 0U
-                                                                             : 
-                                                                            (vlSelfRef.tb_top__DOT__in_flat[
-                                                                             (((IData)(0x3bU) 
-                                                                               + 
-                                                                               (7U 
+                                                                                 ? 0U
+                                                                                 : 
+                                                                                (vlSelfRef.tb_top__DOT__in_flat[
+                                                                                (((IData)(0x3bU) 
+                                                                                + 
+                                                                                (7U 
                                                                                 & (vlSelfRef.tb_top__DOT__in_flat[1U] 
                                                                                 >> 0x15U))) 
-                                                                              >> 5U)] 
-                                                                             << 
-                                                                             ((IData)(0x20U) 
-                                                                              - 
-                                                                              (0x1fU 
-                                                                               & ((IData)(0x39U) 
+                                                                                >> 5U)] 
+                                                                                << 
+                                                                                ((IData)(0x20U) 
+                                                                                - 
+                                                                                (0x1fU 
+                                                                                & ((IData)(0x39U) 
                                                                                 + 
                                                                                 (7U 
                                                                                 & (vlSelfRef.tb_top__DOT__in_flat[1U] 
                                                                                 >> 0x15U))))))) 
-                                                                           | (vlSelfRef.tb_top__DOT__in_flat[
-                                                                              (((IData)(0x39U) 
+                                                                               | (vlSelfRef.tb_top__DOT__in_flat[
+                                                                                (((IData)(0x39U) 
                                                                                 + 
                                                                                 (7U 
                                                                                 & (vlSelfRef.tb_top__DOT__in_flat[1U] 
                                                                                 >> 0x15U))) 
-                                                                               >> 5U)] 
-                                                                              >> 
-                                                                              (0x1fU 
-                                                                               & ((IData)(0x39U) 
+                                                                                >> 5U)] 
+                                                                                >> 
+                                                                                (0x1fU 
+                                                                                & ((IData)(0x39U) 
                                                                                 + 
                                                                                 (7U 
                                                                                 & (vlSelfRef.tb_top__DOT__in_flat[1U] 
                                                                                 >> 0x15U)))))))
-                                                                        : 0U) 
-                                                                      << 9U) 
-                                                                     | (((0xcU 
-                                                                          < 
-                                                                          (0xfU 
-                                                                           & (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                              >> 0x15U))) 
-                                                                         << 8U) 
-                                                                        | (0xffU 
-                                                                           & ((((0xffU 
-                                                                                & (((vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                << 0x13U) 
-                                                                                | (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                >> 0xdU)) 
+                                                                            : 0U) 
+                                                                          << 9U) 
+                                                                         | (((0xcU 
+                                                                              < 
+                                                                              (0xfU 
+                                                                               & (vlSelfRef.tb_top__DOT__in_flat[1U] 
+                                                                                >> 0x15U))) 
+                                                                             << 8U) 
+                                                                            | (0xffU 
+                                                                               & ((((0xffU 
+                                                                                & ((vlSelfRef.tb_top__DOT__dut__DOT__const_nested_wrapper_in_flat 
+                                                                                >> 0x13U) 
                                                                                 + 
                                                                                 ((vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                << 0x1bU) 
+                                                                                << 0x1aU) 
                                                                                 | (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                >> 5U)))) 
+                                                                                >> 6U)))) 
                                                                                 * 
                                                                                 (0xffU 
                                                                                 & (((vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                << 3U) 
+                                                                                << 2U) 
                                                                                 | (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                                                >> 0x1dU)) 
+                                                                                >> 0x1eU)) 
                                                                                 << 
                                                                                 (7U 
                                                                                 & (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                                                >> 0x1aU))))) 
-                                                                               & (((vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                << 0x1bU) 
+                                                                                >> 0x1bU))))) 
+                                                                                & (((vlSelfRef.tb_top__DOT__in_flat[1U] 
+                                                                                << 0x1aU) 
                                                                                 | (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                >> 5U)) 
+                                                                                >> 6U)) 
                                                                                 ^ 
                                                                                 ((vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                << 3U) 
+                                                                                << 2U) 
                                                                                 | (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                                                >> 0x1dU)))) 
-                                                                              | VL_MODDIV_III(8, 
+                                                                                >> 0x1eU)))) 
+                                                                                | VL_MODDIV_III(8, 
                                                                                 ((0U 
                                                                                 == 
                                                                                 (0xffU 
                                                                                 & ((IData)(1U) 
                                                                                 + 
                                                                                 ((vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                << 0x1bU) 
+                                                                                << 0x1aU) 
                                                                                 | (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                >> 5U)))))
+                                                                                >> 6U)))))
                                                                                  ? 0U
                                                                                  : 
                                                                                 (0xffU 
                                                                                 & VL_DIV_III(8, 
                                                                                 (0xffU 
-                                                                                & (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                >> 0xdU)), 
+                                                                                & (vlSelfRef.tb_top__DOT__dut__DOT__const_nested_wrapper_in_flat 
+                                                                                >> 0x13U)), 
                                                                                 (0xffU 
                                                                                 & ((IData)(1U) 
                                                                                 + 
                                                                                 ((vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                << 0x1bU) 
+                                                                                << 0x1aU) 
                                                                                 | (vlSelfRef.tb_top__DOT__in_flat[1U] 
-                                                                                >> 5U))))))), (IData)(3U)))))))))) 
-                                              >> 0x20U)));
+                                                                                >> 6U))))))), (IData)(3U))))))))))) 
+                                               >> 0x20U)));
         __Vtemp_1[2U] = (((IData)((((QData)((IData)(
                                                     (((0x78000U 
                                                        & (((vlSelfRef.tb_top__DOT__in_flat[4U] 
@@ -779,161 +796,175 @@ VL_INLINE_OPT void Vtb_top___024root___nba_sequent__TOP__0(Vtb_top___024root* vl
                                                                     & (~ 
                                                                        (vlSelfRef.tb_top__DOT__in_flat[4U] 
                                                                         >> 0x11U)))))))))) 
-                                    << 0x1dU) | (QData)((IData)(
+                                    << 0x18U) | (QData)((IData)(
                                                                 (((IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond1_c) 
-                                                                  << 0x15U) 
-                                                                 | (((IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond2_c) 
-                                                                     << 0xdU) 
-                                                                    | ((0x1fe0U 
-                                                                        & ((VL_LTS_III(8, 
-                                                                                (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                                >> 0x18U), 
+                                                                  << 0x10U) 
+                                                                 | ((0xff00U 
+                                                                     & (((0x8000U 
+                                                                          & vlSelfRef.tb_top__DOT__in_flat[3U])
+                                                                          ? (IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond1_c)
+                                                                          : 
+                                                                         ((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                           << 7U) 
+                                                                          | (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                             >> 0x19U))) 
+                                                                        << 8U)) 
+                                                                    | (0xffU 
+                                                                       & (VL_LTS_III(8, 
+                                                                                (0xffU 
+                                                                                & ((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                                << 7U) 
+                                                                                | (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                                >> 0x19U))), 
                                                                                 (0xffU 
                                                                                 & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                                >> 0x10U)))
+                                                                                >> 0x11U)))
+                                                                           ? 
+                                                                          ((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                            << 0x18U) 
+                                                                           | (vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                              >> 8U))
+                                                                           : (IData)(
+                                                                                (vlSelfRef.tb_top__DOT__dut__DOT__const_conditional_wrapper_in_flat 
+                                                                                >> 0x12U)))))))))) 
+                          >> 0xcU) | ((IData)(((((QData)((IData)(
+                                                                 (((0x78000U 
+                                                                    & (((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                         << 0x19U) 
+                                                                        | (0x1ff8000U 
+                                                                           & (vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                              >> 7U))) 
+                                                                       & ((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                           << 0x1dU) 
+                                                                          | (0x1fff8000U 
+                                                                             & (vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                                >> 3U))))) 
+                                                                   | (0x7800U 
+                                                                      & (((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                           << 0x15U) 
+                                                                          | (0x1ff800U 
+                                                                             & (vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                                >> 0xbU))) 
+                                                                         | ((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                             << 0x19U) 
+                                                                            | (0x1fff800U 
+                                                                               & (vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                                >> 7U)))))) 
+                                                                  | ((0x780U 
+                                                                      & (((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                           << 0x11U) 
+                                                                          | (0x1ff80U 
+                                                                             & (vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                                >> 0xfU))) 
+                                                                         ^ 
+                                                                         ((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                           << 0x15U) 
+                                                                          | (0x1fff80U 
+                                                                             & (vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                                >> 0xbU))))) 
+                                                                     | ((0x78U 
+                                                                         & ((~ 
+                                                                             ((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                               << 0xaU) 
+                                                                              | (vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                                >> 0x16U))) 
+                                                                            << 3U)) 
+                                                                        | (((IData)(
+                                                                                (0x30000U 
+                                                                                == 
+                                                                                (0x30000U 
+                                                                                & vlSelfRef.tb_top__DOT__in_flat[4U]))) 
+                                                                            << 2U) 
+                                                                           | (((IData)(
+                                                                                (0U 
+                                                                                != 
+                                                                                (0x30000U 
+                                                                                & vlSelfRef.tb_top__DOT__in_flat[4U]))) 
+                                                                               << 1U) 
+                                                                              | (1U 
+                                                                                & (~ 
+                                                                                (vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                                >> 0x11U)))))))))) 
+                                                 << 0x18U) 
+                                                | (QData)((IData)(
+                                                                  (((IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond1_c) 
+                                                                    << 0x10U) 
+                                                                   | ((0xff00U 
+                                                                       & (((0x8000U 
+                                                                            & vlSelfRef.tb_top__DOT__in_flat[3U])
+                                                                            ? (IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond1_c)
+                                                                            : 
+                                                                           ((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                             << 7U) 
+                                                                            | (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                               >> 0x19U))) 
+                                                                          << 8U)) 
+                                                                      | (0xffU 
+                                                                         & (VL_LTS_III(8, 
+                                                                                (0xffU 
+                                                                                & ((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                                                                << 7U) 
+                                                                                | (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                                >> 0x19U))), 
+                                                                                (0xffU 
+                                                                                & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                                                >> 0x11U)))
                                                                              ? 
                                                                             ((vlSelfRef.tb_top__DOT__in_flat[4U] 
                                                                               << 0x18U) 
                                                                              | (vlSelfRef.tb_top__DOT__in_flat[4U] 
                                                                                 >> 8U))
-                                                                             : 
-                                                                            vlSelfRef.tb_top__DOT__in_flat[4U]) 
-                                                                           << 5U)) 
-                                                                       | ((0x1eU 
-                                                                           & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                              >> 9U)) 
-                                                                          | (1U 
-                                                                             & ((IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond2_c) 
-                                                                                >> 2U)))))))))) 
-                          >> 0x11U) | ((IData)(((((QData)((IData)(
-                                                                  (((0x78000U 
-                                                                     & (((vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                          << 0x19U) 
-                                                                         | (0x1ff8000U 
-                                                                            & (vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                               >> 7U))) 
-                                                                        & ((vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                            << 0x1dU) 
-                                                                           | (0x1fff8000U 
-                                                                              & (vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                                >> 3U))))) 
-                                                                    | (0x7800U 
-                                                                       & (((vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                            << 0x15U) 
-                                                                           | (0x1ff800U 
-                                                                              & (vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                                >> 0xbU))) 
-                                                                          | ((vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                              << 0x19U) 
-                                                                             | (0x1fff800U 
-                                                                                & (vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                                >> 7U)))))) 
-                                                                   | ((0x780U 
-                                                                       & (((vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                            << 0x11U) 
-                                                                           | (0x1ff80U 
-                                                                              & (vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                                >> 0xfU))) 
-                                                                          ^ 
-                                                                          ((vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                            << 0x15U) 
-                                                                           | (0x1fff80U 
-                                                                              & (vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                                >> 0xbU))))) 
-                                                                      | ((0x78U 
-                                                                          & ((~ 
-                                                                              ((vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                                << 0xaU) 
-                                                                               | (vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                                >> 0x16U))) 
-                                                                             << 3U)) 
-                                                                         | (((IData)(
-                                                                                (0x30000U 
-                                                                                == 
-                                                                                (0x30000U 
-                                                                                & vlSelfRef.tb_top__DOT__in_flat[4U]))) 
-                                                                             << 2U) 
-                                                                            | (((IData)(
-                                                                                (0U 
-                                                                                != 
-                                                                                (0x30000U 
-                                                                                & vlSelfRef.tb_top__DOT__in_flat[4U]))) 
-                                                                                << 1U) 
-                                                                               | (1U 
-                                                                                & (~ 
-                                                                                (vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                                >> 0x11U)))))))))) 
-                                                  << 0x1dU) 
-                                                 | (QData)((IData)(
-                                                                   (((IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond1_c) 
-                                                                     << 0x15U) 
-                                                                    | (((IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond2_c) 
-                                                                        << 0xdU) 
-                                                                       | ((0x1fe0U 
-                                                                           & ((VL_LTS_III(8, 
-                                                                                (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                                >> 0x18U), 
-                                                                                (0xffU 
-                                                                                & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                                >> 0x10U)))
-                                                                                ? 
-                                                                               ((vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                                << 0x18U) 
-                                                                                | (vlSelfRef.tb_top__DOT__in_flat[4U] 
-                                                                                >> 8U))
-                                                                                : 
-                                                                               vlSelfRef.tb_top__DOT__in_flat[4U]) 
-                                                                              << 5U)) 
-                                                                          | ((0x1eU 
-                                                                              & (vlSelfRef.tb_top__DOT__in_flat[3U] 
-                                                                                >> 9U)) 
-                                                                             | (1U 
-                                                                                & ((IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond2_c) 
-                                                                                >> 2U))))))))) 
-                                                >> 0x20U)) 
-                                       << 0xfU));
+                                                                             : (IData)(
+                                                                                (vlSelfRef.tb_top__DOT__dut__DOT__const_conditional_wrapper_in_flat 
+                                                                                >> 0x12U))))))))) 
+                                               >> 0x20U)) 
+                                      << 0x14U));
         __Vtemp_2[0U] = (IData)((((QData)((IData)((
                                                    (((((vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                        << 0xeU) 
+                                                        << 0xdU) 
                                                        | (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                          >> 0x12U)) 
+                                                          >> 0x13U)) 
                                                       << 
                                                       (7U 
                                                        & (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                          >> 0xfU))) 
+                                                          >> 0x10U))) 
                                                      << 0x18U) 
                                                     | (0xff0000U 
                                                        & (((0xffU 
                                                             & (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                               >> 0x12U)) 
+                                                               >> 0x13U)) 
                                                            >> 
                                                            (7U 
                                                             & (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                               >> 0xfU))) 
+                                                               >> 0x10U))) 
                                                           << 0x10U))) 
                                                    | ((0xff00U 
                                                        & (VL_SHIFTRS_III(8,8,3, 
                                                                          (0xffU 
                                                                           & (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                                             >> 0x12U)), 
+                                                                             >> 0x13U)), 
                                                                          (7U 
                                                                           & (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                                             >> 0xfU))) 
+                                                                             >> 0x10U))) 
                                                           << 8U)) 
                                                       | (0xffU 
-                                                         & (((IData)(vlSelfRef.tb_top__DOT__dut__DOT__const_arith_wrapper_in_flat) 
-                                                             >> 8U) 
+                                                         & (((vlSelfRef.tb_top__DOT__in_flat[0U] 
+                                                              << 0x18U) 
+                                                             | (vlSelfRef.tb_top__DOT__in_flat[0U] 
+                                                                >> 8U)) 
                                                             + 
                                                             vlSelfRef.tb_top__DOT__in_flat[0U])))))) 
                                   << 0x20U) | (QData)((IData)(
-                                                              ((((((IData)(vlSelfRef.tb_top__DOT__dut__DOT__const_arith_wrapper_in_flat) 
-                                                                   >> 8U) 
+                                                              ((((((vlSelfRef.tb_top__DOT__in_flat[0U] 
+                                                                    << 0x18U) 
+                                                                   | (vlSelfRef.tb_top__DOT__in_flat[0U] 
+                                                                      >> 8U)) 
                                                                   - 
                                                                   vlSelfRef.tb_top__DOT__in_flat[0U]) 
                                                                  << 0x18U) 
                                                                 | (0xff0000U 
                                                                    & (((0xffU 
-                                                                        & ((IData)(vlSelfRef.tb_top__DOT__dut__DOT__const_arith_wrapper_in_flat) 
+                                                                        & (vlSelfRef.tb_top__DOT__in_flat[0U] 
                                                                            >> 8U)) 
                                                                        * 
                                                                        (0xffU 
@@ -947,67 +978,59 @@ VL_INLINE_OPT void Vtb_top___024root___nba_sequent__TOP__0(Vtb_top___024root* vl
                                                                     (0xffU 
                                                                      & VL_DIV_III(8, 
                                                                                 (0xffU 
-                                                                                & ((IData)(vlSelfRef.tb_top__DOT__dut__DOT__const_arith_wrapper_in_flat) 
+                                                                                & (vlSelfRef.tb_top__DOT__in_flat[0U] 
                                                                                 >> 8U)), 
                                                                                 (0xffU 
                                                                                 & vlSelfRef.tb_top__DOT__in_flat[0U])))
                                                                      : 0U) 
                                                                    << 8U) 
-                                                                  | ((0U 
-                                                                      != 
-                                                                      (0xffU 
-                                                                       & vlSelfRef.tb_top__DOT__in_flat[0U]))
-                                                                      ? 
-                                                                     (0xffU 
-                                                                      & VL_MODDIV_III(8, 
-                                                                                (0xffU 
-                                                                                & ((IData)(vlSelfRef.tb_top__DOT__dut__DOT__const_arith_wrapper_in_flat) 
-                                                                                >> 8U)), 
-                                                                                (0xffU 
-                                                                                & vlSelfRef.tb_top__DOT__in_flat[0U])))
-                                                                      : 0U)))))));
+                                                                  | (IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_arith_wrapper__DOT__rem_c)))))));
         __Vtemp_2[1U] = (IData)(((((QData)((IData)(
                                                    ((((((vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                         << 0xeU) 
+                                                         << 0xdU) 
                                                         | (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                           >> 0x12U)) 
+                                                           >> 0x13U)) 
                                                        << 
                                                        (7U 
                                                         & (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                           >> 0xfU))) 
+                                                           >> 0x10U))) 
                                                       << 0x18U) 
                                                      | (0xff0000U 
                                                         & (((0xffU 
                                                              & (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                                >> 0x12U)) 
+                                                                >> 0x13U)) 
                                                             >> 
                                                             (7U 
                                                              & (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                                >> 0xfU))) 
+                                                                >> 0x10U))) 
                                                            << 0x10U))) 
                                                     | ((0xff00U 
                                                         & (VL_SHIFTRS_III(8,8,3, 
                                                                           (0xffU 
                                                                            & (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                                              >> 0x12U)), 
+                                                                              >> 0x13U)), 
                                                                           (7U 
                                                                            & (vlSelfRef.tb_top__DOT__in_flat[0U] 
-                                                                              >> 0xfU))) 
+                                                                              >> 0x10U))) 
                                                            << 8U)) 
                                                        | (0xffU 
-                                                          & (((IData)(vlSelfRef.tb_top__DOT__dut__DOT__const_arith_wrapper_in_flat) 
-                                                              >> 8U) 
+                                                          & (((vlSelfRef.tb_top__DOT__in_flat[0U] 
+                                                               << 0x18U) 
+                                                              | (vlSelfRef.tb_top__DOT__in_flat[0U] 
+                                                                 >> 8U)) 
                                                              + 
                                                              vlSelfRef.tb_top__DOT__in_flat[0U])))))) 
                                    << 0x20U) | (QData)((IData)(
-                                                               ((((((IData)(vlSelfRef.tb_top__DOT__dut__DOT__const_arith_wrapper_in_flat) 
-                                                                    >> 8U) 
+                                                               ((((((vlSelfRef.tb_top__DOT__in_flat[0U] 
+                                                                     << 0x18U) 
+                                                                    | (vlSelfRef.tb_top__DOT__in_flat[0U] 
+                                                                       >> 8U)) 
                                                                    - 
                                                                    vlSelfRef.tb_top__DOT__in_flat[0U]) 
                                                                   << 0x18U) 
                                                                  | (0xff0000U 
                                                                     & (((0xffU 
-                                                                         & ((IData)(vlSelfRef.tb_top__DOT__dut__DOT__const_arith_wrapper_in_flat) 
+                                                                         & (vlSelfRef.tb_top__DOT__in_flat[0U] 
                                                                             >> 8U)) 
                                                                         * 
                                                                         (0xffU 
@@ -1021,25 +1044,13 @@ VL_INLINE_OPT void Vtb_top___024root___nba_sequent__TOP__0(Vtb_top___024root* vl
                                                                      (0xffU 
                                                                       & VL_DIV_III(8, 
                                                                                 (0xffU 
-                                                                                & ((IData)(vlSelfRef.tb_top__DOT__dut__DOT__const_arith_wrapper_in_flat) 
+                                                                                & (vlSelfRef.tb_top__DOT__in_flat[0U] 
                                                                                 >> 8U)), 
                                                                                 (0xffU 
                                                                                 & vlSelfRef.tb_top__DOT__in_flat[0U])))
                                                                       : 0U) 
                                                                     << 8U) 
-                                                                   | ((0U 
-                                                                       != 
-                                                                       (0xffU 
-                                                                        & vlSelfRef.tb_top__DOT__in_flat[0U]))
-                                                                       ? 
-                                                                      (0xffU 
-                                                                       & VL_MODDIV_III(8, 
-                                                                                (0xffU 
-                                                                                & ((IData)(vlSelfRef.tb_top__DOT__dut__DOT__const_arith_wrapper_in_flat) 
-                                                                                >> 8U)), 
-                                                                                (0xffU 
-                                                                                & vlSelfRef.tb_top__DOT__in_flat[0U])))
-                                                                       : 0U)))))) 
+                                                                   | (IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_arith_wrapper__DOT__rem_c)))))) 
                                  >> 0x20U));
         __Vtemp_2[2U] = __Vtemp_1[0U];
         __Vtemp_2[3U] = __Vtemp_1[1U];
@@ -1058,17 +1069,55 @@ VL_INLINE_OPT void Vtb_top___024root___nba_sequent__TOP__0(Vtb_top___024root* vl
     vlSelfRef.tb_top__DOT__cyc = __Vdly__tb_top__DOT__cyc;
 }
 
+VL_INLINE_OPT void Vtb_top___024root___nba_comb__TOP__0(Vtb_top___024root* vlSelf) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_top___024root___nba_comb__TOP__0\n"); );
+    Vtb_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    auto& vlSelfRef = std::ref(*vlSelf).get();
+    // Body
+    vlSelfRef.tb_top__DOT__dut__DOT__const_conditional_wrapper_in_flat 
+        = (((QData)((IData)((0x3fffU & (vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                        >> 2U)))) << 0x14U) 
+           | (QData)((IData)(((0x80000U & (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                           << 7U)) 
+                              | (0x7ffffU & ((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                              << 0x11U) 
+                                             | (vlSelfRef.tb_top__DOT__in_flat[3U] 
+                                                >> 0xfU)))))));
+    vlSelfRef.tb_top__DOT__dut__DOT__u_const_arith_wrapper__DOT__rem_c 
+        = ((0U != (0xffU & vlSelfRef.tb_top__DOT__in_flat[0U]))
+            ? (0xffU & VL_MODDIV_III(8, (0xffU & (vlSelfRef.tb_top__DOT__in_flat[0U] 
+                                                  >> 8U)), 
+                                     (0xffU & vlSelfRef.tb_top__DOT__in_flat[0U])))
+            : 0U);
+    vlSelfRef.tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond1_c 
+        = (0xffU & ((0x10000U & vlSelfRef.tb_top__DOT__in_flat[3U])
+                     ? ((vlSelfRef.tb_top__DOT__in_flat[4U] 
+                         << 0x18U) | (vlSelfRef.tb_top__DOT__in_flat[4U] 
+                                      >> 8U)) : (IData)(
+                                                        (vlSelfRef.tb_top__DOT__dut__DOT__const_conditional_wrapper_in_flat 
+                                                         >> 0x12U))));
+    vlSelfRef.tb_top__DOT__dut__DOT__const_nested_wrapper_in_flat 
+        = ((0x7000000U & (vlSelfRef.tb_top__DOT__in_flat[1U] 
+                          << 6U)) | ((0x800000U & ((IData)(vlSelfRef.tb_top__DOT__dut__DOT__u_const_arith_wrapper__DOT__rem_c) 
+                                                   << 0x14U)) 
+                                     | (0x7fffffU & 
+                                        ((vlSelfRef.tb_top__DOT__in_flat[1U] 
+                                          << 5U) | 
+                                         (vlSelfRef.tb_top__DOT__in_flat[0U] 
+                                          >> 0x1bU)))));
+}
+
 void Vtb_top___024root___timing_commit(Vtb_top___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_top___024root___timing_commit\n"); );
     Vtb_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
     if ((! (2ULL & vlSelfRef.__VactTriggered.word(0U)))) {
-        vlSelfRef.__VtrigSched_h159771e3__0.commit(
+        vlSelfRef.__VtrigSched_h1586d63e__0.commit(
                                                    "@(negedge tb_top.clk)");
     }
     if ((! (1ULL & vlSelfRef.__VactTriggered.word(0U)))) {
-        vlSelfRef.__VtrigSched_h15977b22__0.commit(
+        vlSelfRef.__VtrigSched_h1586d57f__0.commit(
                                                    "@(posedge tb_top.clk)");
     }
 }
@@ -1079,11 +1128,11 @@ void Vtb_top___024root___timing_resume(Vtb_top___024root* vlSelf) {
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
     if ((2ULL & vlSelfRef.__VactTriggered.word(0U))) {
-        vlSelfRef.__VtrigSched_h159771e3__0.resume(
+        vlSelfRef.__VtrigSched_h1586d63e__0.resume(
                                                    "@(negedge tb_top.clk)");
     }
     if ((1ULL & vlSelfRef.__VactTriggered.word(0U))) {
-        vlSelfRef.__VtrigSched_h15977b22__0.resume(
+        vlSelfRef.__VtrigSched_h1586d57f__0.resume(
                                                    "@(posedge tb_top.clk)");
     }
     if ((4ULL & vlSelfRef.__VactTriggered.word(0U))) {
@@ -1150,7 +1199,7 @@ void Vtb_top___024root___eval(Vtb_top___024root* vlSelf) {
 #ifdef VL_DEBUG
             Vtb_top___024root___dump_triggers__nba(vlSelf);
 #endif
-            VL_FATAL_MT("/module-fuzz/rewiring/runs_tb/cycle_0001/tb_top.sv", 3, "", "NBA region did not converge.");
+            VL_FATAL_MT("/opt/module-fuzz/rewiring/runs_tb/cycle_0001/tb_top.sv", 3, "", "NBA region did not converge.");
         }
         __VnbaIterCount = ((IData)(1U) + __VnbaIterCount);
         __VnbaContinue = 0U;
@@ -1161,7 +1210,7 @@ void Vtb_top___024root___eval(Vtb_top___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtb_top___024root___dump_triggers__act(vlSelf);
 #endif
-                VL_FATAL_MT("/module-fuzz/rewiring/runs_tb/cycle_0001/tb_top.sv", 3, "", "Active region did not converge.");
+                VL_FATAL_MT("/opt/module-fuzz/rewiring/runs_tb/cycle_0001/tb_top.sv", 3, "", "Active region did not converge.");
             }
             vlSelfRef.__VactIterCount = ((IData)(1U) 
                                          + vlSelfRef.__VactIterCount);

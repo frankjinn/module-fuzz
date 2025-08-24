@@ -1,10 +1,10 @@
-verilated_vcd_c.o: /verilator/include/verilated_vcd_c.cpp \
- /verilator/include/verilatedos.h /verilator/include/verilated.h \
- /verilator/include/verilated_config.h \
- /verilator/include/verilated_types.h \
- /verilator/include/verilated_funcs.h \
- /verilator/include/verilated_vcd_c.h \
- /verilator/include/verilated_trace.h \
- /verilator/include/verilated_trace_imp.h \
- /verilator/include/verilated_intrinsics.h \
- /verilator/include/verilated_threads.h
+verilated_vcd_c.o: /opt/verilator/include/verilated_vcd_c.cpp \
+ /opt/verilator/include/verilatedos.h /opt/verilator/include/verilated.h \
+ /opt/verilator/include/verilated_config.h \
+ /opt/verilator/include/verilated_types.h \
+ /opt/verilator/include/verilated_funcs.h \
+ /opt/verilator/include/verilated_vcd_c.h \
+ /opt/verilator/include/verilated_trace.h \
+ /opt/verilator/include/verilated_trace_imp.h \
+ /opt/verilator/include/verilated_intrinsics.h \
+ /opt/verilator/include/verilated_threads.h

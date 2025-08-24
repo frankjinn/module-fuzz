@@ -14,7 +14,7 @@ VL_INLINE_OPT VlCoroutine Vtb_top___024root___eval_initial__TOP__Vtiming__1(Vtb_
     while (VL_LIKELY(!vlSymsp->_vm_contextp__->gotFinish())) {
         co_await vlSelfRef.__VdlySched.delay(0x3e8ULL, 
                                              nullptr, 
-                                             "/module-fuzz/rewiring/runs_tb/cycle_0001/tb_top.sv", 
+                                             "/opt/module-fuzz/rewiring/runs_tb/cycle_0001/tb_top.sv", 
                                              13);
         vlSelfRef.tb_top__DOT__clk = (1U & (~ (IData)(vlSelfRef.tb_top__DOT__clk)));
     }

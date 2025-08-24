@@ -1,5 +1,7 @@
-verilated_threads.o: /verilator/include/verilated_threads.cpp \
- /verilator/include/verilatedos.h /verilator/include/verilated_threads.h \
- /verilator/include/verilated.h /verilator/include/verilated_config.h \
- /verilator/include/verilated_types.h \
- /verilator/include/verilated_funcs.h
+verilated_threads.o: /opt/verilator/include/verilated_threads.cpp \
+ /opt/verilator/include/verilatedos.h \
+ /opt/verilator/include/verilated_threads.h \
+ /opt/verilator/include/verilated.h \
+ /opt/verilator/include/verilated_config.h \
+ /opt/verilator/include/verilated_types.h \
+ /opt/verilator/include/verilated_funcs.h
