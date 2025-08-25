@@ -12,33 +12,29 @@ from enum import Enum
 class Wire:
     # M = module, I = input, O = output
     class Wire_Type(Enum):
-        MTM = 1
-        ITM = 2
-        MTO = 3
+        MTM = 1  # Module-to-Module
+        ITM = 2  # Input-to-Module
+        MTO = 3  # Module-to-Output
 
     def __init__(self, wire_id, wire_in, wire_out, wire_type):
-
         self.id = wire_id       # unique integer ID for this wire
-        self.input = wire_in       # module that the wire input is attached to
-        self.output = [wire_out]   # list of modules this wire drives
+        self.input = wire_in    # module that the wire input is attached to
+        self.output = [wire_out] # list of modules this wire drives
         self.type = wire_type
         self.reg = False
 
     def __str__(self):
-        """
-        Return a human-readable description of the Wire.
-        """
+        """Return a human-readable description of the Wire."""
         return (f"Wire(id={self.id},"
                 f"in='{self.input}', out={self.output}, reg={self.reg})")
 
     def __repr__(self):
-        """
-        Return an unambiguous string representation of the Wire.
-        """
+        """Return an unambiguous string representation of the Wire."""
         return (f"Wire(id={self.id}, "
                 f"in='{self.input}', out={self.output}, reg={self.reg})")
 
 def list_all_files_walk(root_dir):
+    """Walk directory tree and return all file paths."""
     file_paths = []
     for dirpath, dirnames, filenames in os.walk(root_dir):
         for fname in filenames:
@@ -78,7 +74,8 @@ def create_IO_map(library_path):
 
         mod_IO[module_name] = {'inputs':set(), 'outputs':set()}
         module_list.append(module_name)
-        # create Wire objects for every input bit
+        
+        # Create Wire objects for every input bit
         for i in range(total_input_bits):
             port_name = f"{module_name}_input_{i}"
             w = Wire(port_counter, "input", port_name, Wire.Wire_Type.ITM)
@@ -89,8 +86,7 @@ def create_IO_map(library_path):
 
             port_counter += 1
 
-
-        # create Wire objects for every output bit
+        # Create Wire objects for every output bit
         for j in range(total_output_bits):
             port_name = f"{module_name}_output_{j}"
 

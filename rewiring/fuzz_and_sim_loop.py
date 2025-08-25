@@ -25,8 +25,69 @@ import sys
 import time
 from pathlib import Path
 import types
+import traceback
+from datetime import datetime
 
 import fuzz_state
+
+
+# ------------------------- Output folder management -------------------------
+
+def ensure_clean_output_folder(output_path: Path) -> Path:
+    """
+    Ensure the output folder is clean for a new run.
+    If the folder exists and contains data, archive it with timestamp.
+    
+    Returns the clean output path (may be different from input if archived).
+    """
+    if not output_path.exists():
+        # Folder doesn't exist, create it
+        output_path.mkdir(parents=True, exist_ok=True)
+        return output_path
+    
+    # Check if folder has content (not just empty)
+    has_content = False
+    try:
+        # Look for any files or subdirectories
+        for item in output_path.iterdir():
+            if item.is_file() or item.is_dir():
+                has_content = True
+                break
+    except (PermissionError, OSError):
+        # If we can't read the directory, assume it has content
+        has_content = True
+    
+    if not has_content:
+        # Empty folder, safe to use
+        return output_path
+    
+    # Folder has content - archive it
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    archive_name = f"{output_path.name}_archive_{timestamp}"
+    archive_path = output_path.parent / archive_name
+    
+    try:
+        # Try to rename the existing folder
+        output_path.rename(archive_path)
+        print(f"[Archive] Existing output folder archived to: {archive_path}")
+    except (PermissionError, OSError) as e:
+        # If rename fails, try to copy and then remove
+        try:
+            shutil.copytree(output_path, archive_path)
+            shutil.rmtree(output_path)
+            print(f"[Archive] Existing output folder copied to: {archive_path} and removed")
+        except Exception as copy_error:
+            # If all else fails, create a new folder with different name
+            new_output_path = output_path.parent / f"{output_path.name}_new_{timestamp}"
+            new_output_path.mkdir(parents=True, exist_ok=True)
+            print(f"[Archive] Could not archive existing folder. Created new folder: {new_output_path}")
+            print(f"[Archive] Original folder remains at: {output_path}")
+            print(f"[Archive] Archive error: {e}, Copy error: {copy_error}")
+            return new_output_path
+    
+    # Create fresh output folder
+    output_path.mkdir(parents=True, exist_ok=True)
+    return output_path
 
 
 # ------------------------- Verilator path resolution -------------------------
@@ -103,12 +164,20 @@ def run_verilator_binary(verilator_bin: str,
     exe = obj_dir / f"V{tb_name}"
 
     cmd = [verilator_bin, "--binary", "-sv", "--top-module", tb_name]
-    # user-supplied RTL first (from --rtl-dir or flattened_lib dir/file)
-    cmd += [str(p) for p in extra_sv]
-    # generated top + tb next
-    cmd += [str(top_sv), str(tb_sv)]
-    # user flags last
-    cmd += verilator_flags
+    
+    # Add include directories for the RTL sources
+    rtl_dirs = set()
+    for sv_file in extra_sv:
+        rtl_dirs.add(str(sv_file.parent))
+    
+    # Add include directories first
+    for rtl_dir in sorted(rtl_dirs):
+        cmd.extend(["+incdir+" + rtl_dir])
+    
+    # Add RTL sources and generated files
+    cmd.extend([str(p) for p in extra_sv])
+    cmd.extend([str(top_sv), str(tb_sv)])
+    cmd.extend(verilator_flags)
 
     build_log = cycle_dir / "build.log"
     build_err = cycle_dir / "build.err"
@@ -141,6 +210,7 @@ def run_verilator_binary(verilator_bin: str,
 def wrap_mutation_counters(fr):
     """
     Monkey-patch linear_rewire and cyclical_rewire to count successes.
+    Returns (counts_dict, unpatch_function).
     """
     counts = {"linear": 0, "cyclical": 0}
     orig_linear = fr.linear_rewire
@@ -187,48 +257,65 @@ def main():
     ap.add_argument("--rtl-dir", default=None, help="Directory containing your flattened + unflattened RTL (.sv/.v).")
     ap.add_argument("--rtl-recursive", action="store_true", help="When collecting from --rtl-dir, include files recursively.")
     ap.add_argument("-q", "--quiet", action="store_true", help="Reduce logging.")
-    ap.add_argument("--incdir", action="append", default=[], help="Add Verilog include directory for `include (repeatable).")
+    ap.add_argument("--incdir", action="append", default=[], help="Include directories for Verilator")
+    
     args = ap.parse_args()
-
-    # Resolve verilator binary
-    verilator_bin = resolve_verilator(args.verilator)
-
+    
+    # Resolve verilator binary path
+    verilator_bin = args.verilator or shutil.which("verilator")
+    if not verilator_bin:
+        print("[Error] Verilator not found. Please install or specify --verilator path.")
+        return 1
+    
+    print(f"[Loop] Verilator: {verilator_bin}")
+    
+    # Setup output directory
     base_out = Path(args.outdir)
-    base_out.mkdir(parents=True, exist_ok=True)
-
-    # Initialize fuzzer once; we will call reset_state() each cycle
+    base_out = ensure_clean_output_folder(base_out)
+    print(f"[Loop] Output: {base_out}  (Ctrl+C to stop)")
+    
+    # Initialize fuzzer
     try:
         fr = fuzz_state.Fuzz_Run(args.flattened_lib)
     except Exception as e:
         print(f"[Error] Failed to initialize Fuzz_Run: {e}", file=sys.stderr)
         return 2
-
-    # Ensure Fuzz_Run can reset using the original path
-    if not hasattr(fr, "flattened_lib_path"):
-        fr.flattened_lib_path = args.flattened_lib
-
-    cycles_target = None if args.max_cycles == 0 else args.max_cycles
-    cycle_idx = 0
-    overall_ok = True
-    rng = random.Random(args.seed)
-
-    # Pre-collect RTL sources (user-provided)
-    extra_sv: list[Path] = []
+    
+    # Collect RTL sources
+    extra_sv = []
     if args.rtl_dir:
         rtl_dir = Path(args.rtl_dir)
-        extra_sv = collect_rtl_sources(rtl_dir, recursive=args.rtl_recursive)
-    else:
-        # Fallback: if flattened_lib itself is a directory of .sv/.v, use that
-        maybe_dir = Path(args.flattened_lib)
-        if maybe_dir.is_dir():
-            extra_sv = collect_rtl_sources(maybe_dir, recursive=args.rtl_recursive)
-
+        if args.rtl_recursive:
+            extra_sv = list(rtl_dir.rglob("*.sv")) + list(rtl_dir.rglob("*.v"))
+        else:
+            extra_sv = list(rtl_dir.glob("*.sv")) + list(rtl_dir.glob("*.v"))
+    
+    # Add include directories
+    if args.incdir:
+        for incdir in args.incdir:
+            incdir_path = Path(incdir)
+            if incdir_path.exists():
+                extra_sv.extend(incdir_path.glob("*.sv"))
+                extra_sv.extend(incdir_path.glob("*.v"))
+    
+    # Remove duplicates and sort
+    extra_sv = sorted(set(extra_sv))
+    
+    # Setup cycle loop
+    cycle_idx = 0
+    cycles_target = args.max_cycles if args.max_cycles > 0 else None
+    overall_ok = True
+    consecutive_failures = 0
+    max_consecutive_failures = 10  # Continue running even with many consecutive failures
+    
+    # Initialize random number generator
+    rng = random.Random(args.seed)
+    
     if not args.quiet:
-        print(f"[Loop] Verilator: {verilator_bin}")
-        print(f"[Loop] Output: {base_out.resolve()}  (Ctrl+C to stop)")
         if cycles_target:
             print(f"[Loop] Will run {cycles_target} cycle(s).")
         print(f"[Loop] Mut/Cycle: {args.mutations_per_cycle} | Check every: {args.check_every} | TB cycles: {args.tb_cycles}")
+        print(f"[Loop] Resilience: Will continue running even with up to {max_consecutive_failures} consecutive failures")
         if extra_sv:
             print(f"[Loop] RTL sources: {len(extra_sv)} file(s) from "
                   f"{args.rtl_dir if args.rtl_dir else args.flattened_lib}")
@@ -243,84 +330,357 @@ def main():
                 shutil.rmtree(cycle_dir)
             cycle_dir.mkdir(parents=True, exist_ok=True)
 
-            # Fresh seed + reset to initial state
-            seed = rng.randrange(0, 2**32)
-            fr.reset_state(seed=seed, verbose=not args.quiet)
+            cycle_start_time = time.time()
+            cycle_success = False
+            cycle_error = None
+            cycle_error_type = None
 
-            # Wrap counters
-            counts, unpatch = wrap_mutation_counters(fr)
+            try:
+                # Fresh seed + reset to initial state
+                seed = rng.randrange(0, 2**32)
+                fr.reset_state(seed=seed, verbose=not args.quiet)
 
-            # Mutate
-            total_done = fr.run_random_mutations(
-                max_mutations=args.mutations_per_cycle,
-                check_every=args.check_every,
-                seed=seed,
-                verbose=not args.quiet,
-            )
+                # Wrap counters
+                counts, unpatch = wrap_mutation_counters(fr)
 
-            # Generate RTL (top) and TB
-            # NOTE: your signature is (output_path, top_name)
-            fr.generate_top_module(
-                output_path=str(cycle_dir) + "/",
-                top_name=args.top_name
-            )   
+                # Mutate
+                try:
+                    total_done = fr.run_random_mutations(
+                        max_mutations=args.mutations_per_cycle,
+                        check_every=args.check_every,
+                        seed=seed,
+                        verbose=not args.quiet,
+                    )
+                except Exception as e:
+                    # Mutation process failed
+                    cycle_success = False
+                    cycle_error = f"Mutation process failed: {str(e)}"
+                    cycle_error_type = "MutationError"
+                    consecutive_failures += 1
+                    
+                    # Log error details
+                    error_log = {
+                        "cycle": cycle_idx,
+                        "seed": seed,
+                        "error": cycle_error,
+                        "error_type": cycle_error_type,
+                        "traceback": traceback.format_exc(),
+                        "consecutive_failures": consecutive_failures,
+                        "time": int(time.time()),
+                        "cycle_duration": round(time.time() - cycle_start_time, 2)
+                    }
+                    
+                    # Save error log
+                    (cycle_dir / "error_log.json").write_text(json.dumps(error_log, indent=2))
+                    
+                    # Console error summary
+                    if not args.quiet:
+                        print(f"[Cycle {cycle_idx}] ERROR | {cycle_error_type}: {cycle_error}")
+                        print(f"[Cycle {cycle_idx}] Consecutive failures: {consecutive_failures}")
+                        print(f"[Cycle {cycle_idx}] Error logged to: {cycle_dir}/error_log.json")
+                        
+                        # Warn if too many consecutive failures
+                        if consecutive_failures >= max_consecutive_failures:
+                            print(f"[Cycle {cycle_idx}] WARNING: {consecutive_failures} consecutive failures - consider investigating")
+                        
+                        print("------------------------------------------------------------")
+                    
+                    # Update overall status
+                    overall_ok = False
+                    
+                    # Log to main error summary
+                    if not hasattr(main, 'error_summary'):
+                        main.error_summary = []
+                    
+                    main.error_summary.append({
+                        "cycle": cycle_idx,
+                        "error_type": cycle_error_type,
+                        "error": cycle_error,
+                        "consecutive_failures": consecutive_failures,
+                        "time": int(time.time())
+                    })
+                    
+                    # Continue to next cycle
+                    continue
 
-            # Your TB generator’s signature does NOT take tb_name; it derives tb_<top>.
-            fr.generate_sv_testbench(
-                top_name=args.top_name,
-                output_path=str(cycle_dir) + "/",
-                sim_cycles=args.tb_cycles,
-                clk_period=args.tb_clk_period,
-                hold_reset_cycles=args.tb_hold_reset,
-                trace=True,
-                seed=seed if args.seed is not None else 0,
-                verbose=not args.quiet,
-            )
-            tb_name = f"tb_{args.top_name}"
+                # Generate RTL (top) and TB
+                try:
+                    fr.generate_top_module(
+                        output_path=str(cycle_dir) + "/",
+                        top_name=args.top_name
+                    )   
 
-            incflags = [f"+incdir+{Path(p).as_posix()}" for p in args.incdir]
+                    # Generate testbench
+                    fr.generate_sv_testbench(
+                        top_name=args.top_name,
+                        output_path=str(cycle_dir) + "/",
+                        sim_cycles=args.tb_cycles,
+                        clk_period=args.tb_clk_period,
+                        hold_reset_cycles=args.tb_hold_reset,
+                        trace=True,
+                        seed=seed if args.seed is not None else 0,
+                        verbose=not args.quiet,
+                    )
+                    tb_name = f"tb_{args.top_name}"
+                except Exception as e:
+                    # RTL generation failed
+                    cycle_success = False
+                    cycle_error = f"RTL generation failed: {str(e)}"
+                    cycle_error_type = "RTLGenerationError"
+                    consecutive_failures += 1
+                    
+                    # Log error details
+                    error_log = {
+                        "cycle": cycle_idx,
+                        "seed": seed,
+                        "error": cycle_error,
+                        "error_type": cycle_error_type,
+                        "traceback": traceback.format_exc(),
+                        "consecutive_failures": consecutive_failures,
+                        "time": int(time.time()),
+                        "cycle_duration": round(time.time() - cycle_start_time, 2)
+                    }
+                    
+                    # Save error log
+                    (cycle_dir / "error_log.json").write_text(json.dumps(error_log, indent=2))
+                    
+                    # Console error summary
+                    if not args.quiet:
+                        print(f"[Cycle {cycle_idx}] ERROR | {cycle_error_type}: {cycle_error}")
+                        print(f"[Cycle {cycle_idx}] Consecutive failures: {consecutive_failures}")
+                        print(f"[Cycle {cycle_idx}] Error logged to: {cycle_dir}/error_log.json")
+                        
+                        # Warn if too many consecutive failures
+                        if consecutive_failures >= max_consecutive_failures:
+                            print(f"[Cycle {cycle_idx}] WARNING: {consecutive_failures} consecutive failures - consider investigating")
+                        
+                        print("------------------------------------------------------------")
+                    
+                    # Update overall status
+                    overall_ok = False
+                    
+                    # Log to main error summary
+                    if not hasattr(main, 'error_summary'):
+                        main.error_summary = []
+                    
+                    main.error_summary.append({
+                        "cycle": cycle_idx,
+                        "error_type": cycle_error_type,
+                        "error": cycle_error,
+                        "consecutive_failures": consecutive_failures,
+                        "time": int(time.time())
+                    })
+                    
+                    # Continue to next cycle
+                    continue
 
-            user_flags = shlex.split(args.verilator_flags) if args.verilator_flags else []
-            verilator_flags = incflags + user_flags
+                # Build include flags
+                incflags = [f"+incdir+{Path(p).as_posix()}" for p in args.incdir]
 
-            build_ok, run_ok, rc, exe = run_verilator_binary(
-                verilator_bin, cycle_dir, args.top_name, tb_name, extra_sv, verilator_flags
-            )
+                # Parse user flags and combine with include flags
+                user_flags = shlex.split(args.verilator_flags) if args.verilator_flags else []
+                verilator_flags = incflags + user_flags
 
-            # Persist stats
-            summary = {
-                "cycle": cycle_idx,
-                "seed": seed,
-                "mutations_requested": args.mutations_per_cycle,
-                "mutations_done": int(total_done),
-                "linear_successes": int(counts["linear"]),
-                "cyclical_successes": int(counts["cyclical"]),
-                "build_ok": bool(build_ok),
-                "run_ok": bool(run_ok),
-                "verilator_rc": int(rc),
-                "binary": str(exe.as_posix()),
-                "top_sv": str((cycle_dir / f"{args.top_name}.sv").as_posix()),
-                "testbench_sv": str((cycle_dir / f"{tb_name}.sv").as_posix()),
-                "time": int(time.time()),
-                "verilator": verilator_bin,
-                "extra_sv": [p.as_posix() for p in extra_sv],
-            }
-            (cycle_dir / "summary.json").write_text(json.dumps(summary, indent=2))
+                # Run Verilator build and simulation
+                build_ok, run_ok, rc, exe = run_verilator_binary(
+                    verilator_bin, cycle_dir, args.top_name, tb_name, extra_sv, verilator_flags
+                )
 
-            # Unpatch
-            unpatch()
+                # Check if Verilator build/simulation failed
+                if not build_ok or not run_ok:
+                    # Verilator failure - treat as error but don't crash
+                    cycle_success = False
+                    cycle_error = f"Verilator {'build' if not build_ok else 'simulation'} failed with return code {rc}"
+                    cycle_error_type = "VerilatorError"
+                    consecutive_failures += 1
+                    
+                    # Log error details
+                    error_log = {
+                        "cycle": cycle_idx,
+                        "seed": seed,
+                        "error": cycle_error,
+                        "error_type": cycle_error_type,
+                        "build_ok": build_ok,
+                        "run_ok": run_ok,
+                        "verilator_rc": rc,
+                        "consecutive_failures": consecutive_failures,
+                        "time": int(time.time()),
+                        "cycle_duration": round(time.time() - cycle_start_time, 2)
+                    }
+                    
+                    # Save error log
+                    (cycle_dir / "error_log.json").write_text(json.dumps(error_log, indent=2))
+                    
+                    # Console error summary
+                    if not args.quiet:
+                        print(f"[Cycle {cycle_idx}] ERROR | {cycle_error_type}: {cycle_error}")
+                        print(f"[Cycle {cycle_idx}] Consecutive failures: {consecutive_failures}")
+                        print(f"[Cycle {cycle_idx}] Error logged to: {cycle_dir}/error_log.json")
+                        
+                        # Warn if too many consecutive failures
+                        if consecutive_failures >= max_consecutive_failures:
+                            print(f"[Cycle {cycle_idx}] WARNING: {consecutive_failures} consecutive failures - consider investigating")
+                        
+                        print("------------------------------------------------------------")
+                    
+                    # Update overall status
+                    overall_ok = False
+                    
+                    # Log to main error summary
+                    if not hasattr(main, 'error_summary'):
+                        main.error_summary = []
+                    
+                    main.error_summary.append({
+                        "cycle": cycle_idx,
+                        "error_type": cycle_error_type,
+                        "error": cycle_error,
+                        "consecutive_failures": consecutive_failures,
+                        "time": int(time.time())
+                    })
+                    
+                    # Continue to next cycle
+                    continue
 
-            # Console summary
-            if not args.quiet:
-                status = "OK" if (build_ok and run_ok) else ("BUILD_FAIL" if not build_ok else "SIM_FAIL")
-                print(f"[Cycle {cycle_idx}] {status} | mu={total_done} (lin={counts['linear']}, cyc={counts['cyclical']}) | rc={rc}")
-                print("------------------------------------------------------------")
-            cycle_idx += 1
+                # Cycle completed successfully
+                cycle_success = True
+                overall_ok = overall_ok and (build_ok and run_ok)
+                consecutive_failures = 0  # Reset consecutive failure counter
+                
+                # Persist stats
+                summary = {
+                    "cycle": cycle_idx,
+                    "seed": seed,
+                    "mutations_requested": args.mutations_per_cycle,
+                    "mutations_done": int(total_done),
+                    "linear_successes": int(counts["linear"]),
+                    "cyclical_successes": int(counts["cyclical"]),
+                    "build_ok": bool(build_ok),
+                    "run_ok": bool(run_ok),
+                    "verilator_rc": int(rc),
+                    "binary": str(exe.as_posix()),
+                    "top_sv": str((cycle_dir / f"{args.top_name}.sv").as_posix()),
+                    "testbench_sv": str((cycle_dir / f"{tb_name}.sv").as_posix()),
+                    "time": int(time.time()),
+                    "verilator": verilator_bin,
+                    "extra_sv": [p.as_posix() for p in extra_sv],
+                    "cycle_success": True,
+                    "error": None,
+                    "error_type": None,
+                    "cycle_duration": round(time.time() - cycle_start_time, 2)
+                }
+                (cycle_dir / "summary.json").write_text(json.dumps(summary, indent=2))
+
+                # Console summary
+                if not args.quiet:
+                    status = "OK" if (build_ok and run_ok) else ("BUILD_FAIL" if not build_ok else "SIM_FAIL")
+                    print(f"[Cycle {cycle_idx}] {status} | mu={total_done} (lin={counts['linear']}, cyc={counts['cyclical']}) | rc={rc}")
+                    print("------------------------------------------------------------")
+
+            except Exception as e:
+                # Cycle failed - log error and continue
+                cycle_success = False
+                cycle_error = str(e)
+                cycle_error_type = type(e).__name__
+                consecutive_failures += 1
+                
+                # Log error details
+                error_log = {
+                    "cycle": cycle_idx,
+                    "seed": seed if 'seed' in locals() else None,
+                    "error": cycle_error,
+                    "error_type": cycle_error_type,
+                    "traceback": traceback.format_exc(),
+                    "consecutive_failures": consecutive_failures,
+                    "time": int(time.time()),
+                    "cycle_duration": round(time.time() - cycle_start_time, 2)
+                }
+                
+                # Save error log
+                (cycle_dir / "error_log.json").write_text(json.dumps(error_log, indent=2))
+                
+                # Console error summary
+                if not args.quiet:
+                    print(f"[Cycle {cycle_idx}] ERROR | {cycle_error_type}: {cycle_error}")
+                    print(f"[Cycle {cycle_idx}] Consecutive failures: {consecutive_failures}")
+                    print(f"[Cycle {cycle_idx}] Error logged to: {cycle_dir}/error_log.json")
+                    
+                    # Warn if too many consecutive failures
+                    if consecutive_failures >= max_consecutive_failures:
+                        print(f"[Cycle {cycle_idx}] WARNING: {consecutive_failures} consecutive failures - consider investigating")
+                    
+                    print("------------------------------------------------------------")
+                
+                # Update overall status
+                overall_ok = False
+                
+                # Log to main error summary
+                if not hasattr(main, 'error_summary'):
+                    main.error_summary = []
+                
+                main.error_summary.append({
+                    "cycle": cycle_idx,
+                    "error_type": cycle_error_type,
+                    "error": cycle_error,
+                    "consecutive_failures": consecutive_failures,
+                    "time": int(time.time())
+                })
+                
+            finally:
+                # Always cleanup and unpatch if counters were wrapped
+                if 'unpatch' in locals():
+                    unpatch()
+                
+                # Save cycle summary regardless of success/failure
+                if not cycle_success:
+                    summary = {
+                        "cycle": cycle_idx,
+                        "seed": seed if 'seed' in locals() else None,
+                        "mutations_requested": args.mutations_per_cycle,
+                        "mutations_done": 0,
+                        "linear_successes": 0,
+                        "cyclical_successes": 0,
+                        "build_ok": False,
+                        "run_ok": False,
+                        "verilator_rc": -1,
+                        "binary": None,
+                        "top_sv": None,
+                        "testbench_sv": None,
+                        "time": int(time.time()),
+                        "verilator": verilator_bin,
+                        "extra_sv": [p.as_posix() for p in extra_sv],
+                        "cycle_success": False,
+                        "error": cycle_error,
+                        "error_type": cycle_error_type,
+                        "cycle_duration": round(time.time() - cycle_start_time, 2)
+                    }
+                    (cycle_dir / "summary.json").write_text(json.dumps(summary, indent=2))
+                
+                cycle_idx += 1
 
     except KeyboardInterrupt:
         if not args.quiet:
             print("\n[Loop] Interrupted by user.")
-
+    
+    # Final error summary
+    if hasattr(main, 'error_summary') and main.error_summary:
+        error_summary_path = base_out / "error_summary.json"
+        error_summary = {
+            "total_cycles": cycle_idx,
+            "successful_cycles": cycle_idx - len(main.error_summary),
+            "failed_cycles": len(main.error_summary),
+            "success_rate": round((cycle_idx - len(main.error_summary) / cycle_idx) * 100, 2) if cycle_idx > 0 else 0,
+            "errors": main.error_summary,
+            "final_time": int(time.time())
+        }
+        error_summary_path.write_text(json.dumps(error_summary, indent=2))
+        
+        if not args.quiet:
+            print(f"\n[Summary] Total cycles: {cycle_idx}")
+            print(f"[Summary] Successful: {error_summary['successful_cycles']}")
+            print(f"[Summary] Failed: {error_summary['failed_cycles']}")
+            print(f"[Summary] Success rate: {error_summary['success_rate']}%")
+            print(f"[Summary] Error details saved to: {error_summary_path}")
+    
     return 0 if overall_ok else 2
 
 
