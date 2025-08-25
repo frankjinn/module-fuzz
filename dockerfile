@@ -1,37 +1,32 @@
-#Note to self, everything is automatically run under sudo
 FROM ubuntu:22.04
 
-RUN apt-get update
-RUN apt-get -y install curl 
+# Use noninteractive only during apt to avoid prompts
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    ca-certificates curl git make autoconf gcc g++ flex bison help2man \
+    perl perl-doc libfl2 libfl-dev ccache numactl libgoogle-perftools-dev \
+    pkg-config python3 python3-pip python-is-python3 \
+    && rm -rf /var/lib/apt/lists/*
 
-#Prereqs
-RUN apt-get -y install \
-                git help2man perl python3 make autoconf gcc g++ flex bison ccache \ 
-                libgoogle-perftools-dev numactl perl-doc \
-                libfl2 \
-                libfl-dev \
-                pip
+# Workspace under /opt
+WORKDIR /opt
 
-#Building proscess
-RUN git clone https://github.com/frankjinn/module-fuzz
-RUN git clone https://github.com/verilator/verilator
-WORKDIR /
-WORKDIR /verilator
+# Shallow clones to save time/space
+RUN git clone --depth 1 https://github.com/frankjinn/module-fuzz /opt/module-fuzz && \
+    git clone --depth 1 https://github.com/verilator/verilator /opt/verilator
 
-RUN unset VERILATOR_ROOT
-RUN git pull
-
-#After changing src of verilator, rebuild from here
+# Build Verilator IN-PLACE (no make install)
+WORKDIR /opt/verilator
 ARG rebuildVerilator=unknown
+RUN autoconf && ./configure && make -j"$(nproc)"
 
-RUN autoconf
-RUN ./configure
-RUN make -j `nproc`
+# Expose local (uninstalled) Verilator
+ENV VERILATOR_ROOT=/opt/verilator
+ENV PATH="/opt/verilator/bin:${PATH}"
 
-#Instrumentation flags
-ENV VERILATOR_ROOT="/verilator"
+# Python pkgs (fixes ENOENT via python-is-python3)
+RUN python -m pip install --no-cache-dir \
+    jupyter notebook numpy networkx matplotlib
 
-WORKDIR /
-RUN pip install --no-cache-dir jupyter notebook numpy networkx matplotlib
 EXPOSE 8888
-CMD ["jupyter", "notebook", "--ip", "0.0.0.0", "--no-browser", "--allow-root", "--NotebookApp.token=''"]
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root", "--NotebookApp.token="]
