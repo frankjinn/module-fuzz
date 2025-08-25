@@ -471,10 +471,6 @@ def generate_custom_testbench(self, **kwargs):
 4. **Test** thoroughly with various module types
 5. **Submit** a pull request with detailed description
 
-## 📄 License
-
-[Add your license information here]
-
 ## 🆘 Support
 
 For issues and questions:
