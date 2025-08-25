@@ -4,7 +4,7 @@ module tb_top;
 
   // Declarations
   logic clk;
-  logic [153:0] in_flat;
+  logic [154:0] in_flat;
   wire  [158:0] out_flat;
   integer cyc;
 
@@ -37,7 +37,7 @@ module tb_top;
   always @(posedge clk) begin
     cyc <= cyc + 1;
     $write("CYCLE=%0d IN=", cyc);
-    for (int i = 154-1; i >= 0; i--) $write("%0d", in_flat[i]);
+    for (int i = 155-1; i >= 0; i--) $write("%0d", in_flat[i]);
     $write(" OUT=");
     for (int j = 159-1; j >= 0; j--) $write("%0d", out_flat[j]);
     $write("\n");
@@ -48,7 +48,7 @@ module tb_top;
     @(negedge clk); // small settle before starting
     for (i = 0; i < cycles; i = i + 1) begin
       @(posedge clk);
-in_flat = {32'($urandom()), 32'($urandom()), 32'($urandom()), 32'($urandom()), 26'($urandom())};
+in_flat = {32'($urandom()), 32'($urandom()), 32'($urandom()), 32'($urandom()), 27'($urandom())};
     end
     $display("TB_SIM_OK cycles=%0d", cycles);
     $finish;

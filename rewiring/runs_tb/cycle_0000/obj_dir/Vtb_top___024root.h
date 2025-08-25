@@ -16,13 +16,16 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_top___024root final : public VerilatedMod
 
     // DESIGN SPECIFIC STATE
     CData/*0:0*/ tb_top__DOT__clk;
+    CData/*7:0*/ tb_top__DOT__dut__DOT__u_const_arith_wrapper__DOT__sum_c;
     CData/*7:0*/ tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond1_c;
-    CData/*7:0*/ tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond2_c;
+    CData/*3:0*/ tb_top__DOT__dut__DOT__u_const_reduce_wrapper__DOT__in_vec;
+    CData/*7:0*/ tb_top__DOT__dut__DOT__u_const_shift_wrapper__DOT__ashr_c;
     CData/*0:0*/ __VstlFirstIteration;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_top__DOT__clk__0;
     CData/*0:0*/ __VactContinue;
-    SData/*10:0*/ tb_top__DOT__dut__DOT__const_shift_wrapper_in_flat;
-    VlWide<5>/*153:0*/ tb_top__DOT__in_flat;
+    SData/*15:0*/ tb_top__DOT__dut__DOT__const_arith_wrapper_in_flat;
+    SData/*9:0*/ tb_top__DOT__dut__DOT__const_logic_wrapper_in_flat;
+    VlWide<5>/*150:0*/ tb_top__DOT__in_flat;
     IData/*31:0*/ tb_top__DOT__cyc;
     IData/*31:0*/ tb_top__DOT__cycles;
     IData/*31:0*/ tb_top__DOT__seed;

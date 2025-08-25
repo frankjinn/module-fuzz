@@ -314,7 +314,7 @@ def main():
             if not args.quiet:
                 status = "OK" if (build_ok and run_ok) else ("BUILD_FAIL" if not build_ok else "SIM_FAIL")
                 print(f"[Cycle {cycle_idx}] {status} | mu={total_done} (lin={counts['linear']}, cyc={counts['cyclical']}) | rc={rc}")
-
+                print("------------------------------------------------------------")
             cycle_idx += 1
 
     except KeyboardInterrupt:

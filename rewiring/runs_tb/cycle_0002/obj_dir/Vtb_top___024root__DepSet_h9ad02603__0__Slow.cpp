@@ -159,17 +159,16 @@ VL_ATTR_COLD void Vtb_top___024root___ctor_var_reset(Vtb_top___024root* vlSelf) 
     // Body
     const uint64_t __VscopeHash = VL_MURMUR64_HASH(vlSelf->name());
     vlSelf->tb_top__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 16256328344204653681ull);
-    VL_SCOPED_RAND_RESET_W(154, vlSelf->tb_top__DOT__in_flat, __VscopeHash, 1463764839160097536ull);
+    VL_SCOPED_RAND_RESET_W(155, vlSelf->tb_top__DOT__in_flat, __VscopeHash, 1463764839160097536ull);
     vlSelf->tb_top__DOT__cyc = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 10178431175175541574ull);
     vlSelf->tb_top__DOT__cycles = 0;
     vlSelf->tb_top__DOT__seed = 0;
     vlSelf->tb_top__DOT__i = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 1997728582646804290ull);
     vlSelf->tb_top__DOT__unnamedblk1__DOT__i = 0;
     vlSelf->tb_top__DOT__unnamedblk2__DOT__j = 0;
-    vlSelf->tb_top__DOT__dut__DOT__const_arith_wrapper_in_flat = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 238546645794579553ull);
+    vlSelf->tb_top__DOT__dut__DOT__const_compare_wrapper_in_flat = VL_SCOPED_RAND_RESET_I(24, __VscopeHash, 11565981312825341911ull);
     vlSelf->tb_top__DOT__dut__DOT__u_const_arith_wrapper__DOT__sum_c = VL_SCOPED_RAND_RESET_I(8, __VscopeHash, 8865384566538864013ull);
     vlSelf->tb_top__DOT__dut__DOT__u_const_conditional_wrapper__DOT__cond1_c = VL_SCOPED_RAND_RESET_I(8, __VscopeHash, 5422265824092619253ull);
-    vlSelf->tb_top__DOT__dut__DOT__u_const_logic_wrapper__DOT__and_c = VL_SCOPED_RAND_RESET_I(4, __VscopeHash, 956469564561949733ull);
     vlSelf->__Vtrigprevexpr___TOP__tb_top__DOT__clk__0 = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 9069298637648042572ull);
     for (int __Vi0 = 0; __Vi0 < 5; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = 0;
