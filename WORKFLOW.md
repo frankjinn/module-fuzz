@@ -21,7 +21,7 @@ graph TD
     K --> L[Mutation Strategies]
     L --> M[Linear Rewiring]
     L --> N[Cyclical Rewiring]
-    L --> O[Depth Shifting]
+    L --> O[Tree Merging & Depth Changes]
     
     K --> P[Generated Top Module]
     K --> Q[Generated Testbench]
@@ -60,7 +60,7 @@ test_library_structured/ → fuzz_state.py → Build → Logs
 
 ### **Input Processing**
 - **`llm_to_sv.py`**: Splits multi-module files into individual files
-- **`generate_wrappers.py`**: Creates flattened wrapper modules with standardized I/O
+- **`generate_wrappers.py`**: **ESSENTIAL** - Creates flattened wrapper modules with standardized I/O
 
 ### **Fuzzing Engine**
 - **`fuzz_state.py`**: Core mutation logic and state management
@@ -83,19 +83,19 @@ test_library_structured/ → fuzz_state.py → Build → Logs
 ```bash
 # Step 1: Process LLM files
 cd llm_preprocess
-python3 llm_to_sv.py your_file.sv -o module_library -t prefix
+python3 llm_to_sv.py your_file.sv -o modules -t prefix
 
-# Step 2: Generate wrappers
-python3 generate_wrappers.py module_library/ ../coverage_library_IO_flattened/
+# Step 2: Generate wrappers (ESSENTIAL for fuzzing to work)
+python3 llm_preprocess/generate_wrappers.py modules/ wrappers/
 
 # Step 3: Organize library
 mkdir -p ../test_library_structured/{flattened,unflattened}
-cp ../coverage_library_IO_flattened/*.sv ../test_library_structured/flattened/
-cp module_library/*.sv ../test_library_structured/unflattened/
+cp wrappers/*.sv ../test_library_structured/flattened/
+cp modules/*.sv ../test_library_structured/unflattened/
 
 # Step 4: Run fuzzing
 cd ../rewiring
-python3 fuzz_and_sim_loop.py ../test_library_structured/flattened -o results/ -t top -m 10 -c 5
+python3 fuzz_and_sim_loop.py /opt/module-fuzz/rewiring/test_library_structured/flattened -o /opt/module-fuzz/rewiring/results/ -t top -m 10 -c 5 --incdir /opt/module-fuzz/rewiring/test_library_structured/unflattened/ --incdir /opt/module-fuzz/rewiring/test_library_structured/flattened/
 ```
 
 ## 📊 Data Flow
@@ -152,6 +152,25 @@ Multi-mod → Individual → Standard → Test Lib → Simulate → Archive
 - **Problem**: Cannot create or access directories
 - **Solution**: Check file permissions and ensure write access to output directories
 
+### **Missing Wrapper Generation**
+- **Problem**: Fuzzing fails because modules aren't properly flattened
+- **Solution**: **ALWAYS run `generate_wrappers.py`** after splitting modules - this is essential for the fuzzer to work
+
+## 🔑 Critical Requirements
+
+### **Wrapper Generation is MANDATORY**
+The fuzzing system **cannot work** without properly generated wrapper modules. The `generate_wrappers.py` script:
+- Creates standardized I/O interfaces (`in_flat`, `out_flat`)
+- Enables the fuzzer to manipulate module connections
+- Provides consistent port mapping across all modules
+- **Must be run** after `llm_to_sv.py` and before fuzzing
+
+### **Mutation Strategies Explained**
+- **Linear Rewiring**: Sequential module connections and mutations
+- **Cyclical Rewiring**: Creates and resolves combinational loops
+- **Tree Merging**: Combines module trees for complex topologies
+- **Depth Changes**: **Result from mutations**, not a separate strategy
+
 ---
 
-**This workflow ensures a systematic approach from raw LLM-generated files to comprehensive fuzzing tests with proper error handling and result preservation.**
+**This workflow ensures a systematic approach from raw LLM-generated files to comprehensive fuzzing tests with proper error handling and result preservation. Remember: wrapper generation is essential for the system to function!**

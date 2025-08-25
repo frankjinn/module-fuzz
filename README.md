@@ -30,6 +30,7 @@ module-fuzz/
 │   ├── fuzz_state.py         # Core fuzzing logic and state management
 │   ├── fuzz_and_sim_loop.py  # Main fuzzing and simulation loop
 │   ├── IO_map.py             # I/O port mapping utilities
+│   ├── output/               # Dedicated test results folder (gitignored)
 │   └── test_library_structured/  # Test library for fuzzing
 └── Archive/                  # Archived test results
 ```
@@ -118,6 +119,9 @@ module const_arith_wrapper (
 endmodule
 ```
 
+**⚠️ CRITICAL: Wrapper generation is ESSENTIAL for the fuzzing system to work!**
+The `generate_wrappers.py` script creates the standardized I/O interfaces that enable the fuzzer to manipulate module connections. **Never skip this step.**
+
 **Step 4: Organize Test Library Structure**
 
 Create the final test library structure:
@@ -171,7 +175,7 @@ cd rewiring
 # Working configuration (use absolute paths)
 python3 fuzz_and_sim_loop.py \
     /opt/module-fuzz/rewiring/test_library_structured/flattened \
-    -o /opt/module-fuzz/rewiring/runs_tb/ \
+    -o /opt/module-fuzz/rewiring/output/runs_tb \
     -t top \
     -m 10 \
     -k 5 \
@@ -187,13 +191,13 @@ python3 fuzz_and_sim_loop.py \
 **❌ Common Mistake (Relative Paths):**
 ```bash
 # This will NOT work from rewiring folder
-python3 fuzz_and_sim_loop.py test_library_structured/flattened -o runs_tb/ ...
+python3 fuzz_and_sim_loop.py test_library_structured/flattened -o output/runs_tb ...
 ```
 
 **✅ Correct Approach (Absolute Paths):**
 ```bash
 # This WILL work from rewiring folder
-python3 fuzz_and_sim_loop.py /opt/module-fuzz/rewiring/test_library_structured/flattened -o /opt/module-fuzz/rewiring/runs_tb/ ...
+python3 fuzz_and_sim_loop.py /opt/module-fuzz/rewiring/test_library_structured/flattened -o /opt/module-fuzz/rewiring/output/runs_tb ...
 ```
 
 ## 🎯 Fuzzing Engine Features
@@ -206,10 +210,10 @@ python3 fuzz_and_sim_loop.py /opt/module-fuzz/rewiring/test_library_structured/f
 - **Error Tolerance**: Continues running despite individual cycle failures
 
 ### **Mutation Strategies**
-- **Depth Shifting**: Changes module hierarchy relationships
-- **Port Rewiring**: Connects different input/output combinations
+- **Linear Rewiring**: Sequential module connections and mutations
+- **Cyclical Rewiring**: Creates and resolves combinational loops
 - **Tree Merging**: Combines module trees for complex topologies
-- **Combinational Loop Creation**: Generates and resolves hardware loops
+- **Depth Changes**: **Result from mutations**, not a separate strategy - occurs when mutations alter module hierarchy relationships
 
 ### **Simulation & Verification**
 - **Verilator Integration**: Automatic SystemVerilog compilation and simulation
@@ -284,7 +288,7 @@ cp -r test_libraries/const_tests test_library_structured/
 cd rewiring
 python3 fuzz_and_sim_loop.py \
     /opt/module-fuzz/rewiring/test_library_structured/flattened \
-    -o /opt/module-fuzz/rewiring/quick_test/ \
+    -o /opt/module-fuzz/rewiring/output/quick_test \
     -t top \
     -m 5 \
     -c 2 \
@@ -299,7 +303,7 @@ python3 fuzz_and_sim_loop.py \
 # Test with 5 cycles, 10 mutations each
 python3 fuzz_and_sim_loop.py \
     /opt/module-fuzz/rewiring/test_library_structured/flattened \
-    -o /opt/module-fuzz/rewiring/test_run/ \
+    -o /opt/module-fuzz/rewiring/output/test_run \
     -t top \
     -m 10 \
     -c 5 \
@@ -313,7 +317,7 @@ python3 fuzz_and_sim_loop.py \
 # Large-scale test: 50 cycles, 100 mutations each
 python3 fuzz_and_sim_loop.py \
     /opt/module-fuzz/rewiring/test_library_structured/flattened \
-    -o /opt/module-fuzz/rewiring/comprehensive_test/ \
+    -o /opt/module-fuzz/rewiring/output/comprehensive_test \
     -t top \
     -m 100 \
     -c 50 \
@@ -328,7 +332,7 @@ python3 fuzz_and_sim_loop.py \
 # Single cycle with detailed output
 python3 fuzz_and_sim_loop.py \
     /opt/module-fuzz/rewiring/test_library_structured/flattened \
-    -o /opt/module-fuzz/rewiring/debug_run/ \
+    -o /opt/module-fuzz/rewiring/output/debug_run \
     -t top \
     -m 5 \
     -c 1 \
@@ -339,23 +343,37 @@ python3 fuzz_and_sim_loop.py \
 
 ## 📋 Output Structure
 
+### **Dedicated Output Folder**
+All test results are automatically saved to the dedicated `rewiring/output/` folder, which is gitignored to prevent accidental commits of test data.
+
 ### **Per-Cycle Results**
 ```
-runs_tb/
-├── cycle_0000/
-│   ├── top.sv              # Generated top module
-│   ├── tb_top.sv           # Generated testbench
-│   ├── summary.json        # Cycle results summary
-│   └── error_log.json      # Error details (if any)
-├── cycle_0001/
+rewiring/output/
+├── quick_test/              # Quick validation test results
+│   └── cycle_0000/
+│       ├── top.sv              # Generated top module
+│       ├── tb_top.sv           # Generated testbench
+│       ├── summary.json        # Cycle results summary
+│       └── error_log.json      # Error details (if any)
+├── comprehensive_test/       # Large-scale test results
+│   ├── cycle_0000/
+│   ├── cycle_0001/
 │   └── ...
-└── error_summary.json       # Overall run summary
+├── debug_run/               # Debug/development test results
+│   └── cycle_0000/
+└── error_summary.json       # Overall run summary (if errors occur)
 ```
 
 ### **Summary Files**
 - **`summary.json`**: Per-cycle mutation counts, build status, simulation results
 - **`error_log.json`**: Detailed error information for failed cycles
 - **`error_summary.json`**: Overall success/failure statistics
+
+### **Output Folder Management**
+- **Automatic Archiving**: Existing output folders are automatically archived with timestamps before new tests
+- **Clean Organization**: All test results are organized in the dedicated `rewiring/output/` folder
+- **Git Safety**: The output folder is gitignored to prevent accidental commits of test data
+- **Easy Cleanup**: Remove all test results with: `rm -rf rewiring/output/*`
 
 ## 🚨 Troubleshooting
 
@@ -394,7 +412,7 @@ python3 fuzz_and_sim_loop.py /opt/module-fuzz/rewiring/test_library_structured/f
 ```bash
 # Check file permissions
 chmod -R 755 test_library_structured/
-chmod -R 755 runs_tb/
+chmod -R 755 output/
 ```
 
 ### **Debug Mode**
@@ -425,7 +443,7 @@ python3 llm_preprocess/generate_wrappers.py modules_out/ coverage_library_IO_fla
 cd rewiring
 python3 fuzz_and_sim_loop.py \
     /opt/module-fuzz/rewiring/test_library_structured/flattened \
-    -o /opt/module-fuzz/rewiring/automated_test_run/ \
+    -o /opt/module-fuzz/rewiring/output/automated_test_run \
     -t top \
     -m 50 \
     -c 10 \
@@ -437,7 +455,7 @@ python3 fuzz_and_sim_loop.py \
 ### **Scheduled Testing**
 ```bash
 # Add to crontab for daily testing
-0 2 * * * cd /opt/module-fuzz/rewiring && python3 fuzz_and_sim_loop.py /opt/module-fuzz/rewiring/test_library_structured/flattened -o /opt/module-fuzz/rewiring/daily_test/ -t top -m 20 -c 5 --tb-cycles 10 --incdir /opt/module-fuzz/rewiring/test_library_structured/unflattened/ --incdir /opt/module-fuzz/rewiring/test_library_structured/flattened/ --verilator-flags="--timescale 1ns/1ps --Wno-WIDTHTRUNC --Wno-MODDUP"
+0 2 * * * cd /opt/module-fuzz/rewiring && python3 fuzz_and_sim_loop.py /opt/module-fuzz/rewiring/test_library_structured/flattened -o /opt/module-fuzz/rewiring/output/daily_test -t top -m 20 -c 5 --tb-cycles 10 --incdir /opt/module-fuzz/rewiring/test_library_structured/unflattened/ --incdir /opt/module-fuzz/rewiring/test_library_structured/flattened/ --verilator-flags="--timescale 1ns/1ps --Wno-WIDTHTRUNC --Wno-MODDUP"
 ```
 
 ## 📚 Advanced Usage

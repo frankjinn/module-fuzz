@@ -197,6 +197,7 @@ step1_process_llm() {
 # Step 2: Generate wrapper modules
 step2_generate_wrappers() {
     print_status "Step 2: Generating flattened wrapper modules..."
+    print_warning "⚠️  This step is CRITICAL - the fuzzing system cannot work without wrapper modules!"
     
     cd llm_preprocess
     
@@ -209,9 +210,11 @@ step2_generate_wrappers() {
     
     if [ $? -eq 0 ]; then
         print_success "Wrapper modules generated successfully"
+        print_success "✅ The fuzzing system can now manipulate module connections!"
         ls -la ../coverage_library_IO_flattened/
     else
         print_error "Failed to generate wrapper modules"
+        print_error "❌ The fuzzing system will NOT work without wrapper modules!"
         exit 1
     fi
     
@@ -292,7 +295,7 @@ step4_run_fuzzing() {
     print_status "Running quick validation test (1 cycle, 3 mutations)..."
     python3 fuzz_and_sim_loop.py \
         /opt/module-fuzz/rewiring/test_library_structured/flattened \
-        -o /opt/module-fuzz/rewiring/quick_test_run/ \
+        -o /opt/module-fuzz/rewiring/output/quick_test_run \
         -t top \
         -m 3 \
         -c 1 \
@@ -305,11 +308,11 @@ step4_run_fuzzing() {
     
     if [ $? -eq 0 ]; then
         print_success "Quick test completed successfully!"
-        print_status "Results saved to: /opt/module-fuzz/rewiring/quick_test_run/"
+        print_status "Results saved to: /opt/module-fuzz/rewiring/output/quick_test_run"
     else
         print_error "Quick test failed. Check the output above for errors."
         print_status "This is normal for the first run - the system is testing error handling."
-        print_status "Check the error logs for details: /opt/module-fuzz/rewiring/quick_test_run/cycle_0000/error_log.json"
+        print_status "Check the error logs for details: /opt/module-fuzz/rewiring/output/quick_test_run/cycle_0000/error_log.json"
     fi
     
     cd ..
@@ -357,7 +360,7 @@ main() {
     if [ "$USE_PREBUILT" = true ]; then
         echo "What was created:"
         echo "  • Pre-built test library: test_library_structured/"
-        echo "  • Test results: /opt/module-fuzz/rewiring/quick_test_run/"
+        echo "  • Test results: /opt/module-fuzz/rewiring/output/quick_test_run"
         echo ""
         echo "Next steps:"
         echo "  1. Explore the generated test results"
@@ -370,13 +373,15 @@ main() {
         echo "  • Individual modules: llm_preprocess/module_library/"
         echo "  • Wrapper modules: coverage_library_IO_flattened/"
         echo "  • Test library: test_library_structured/"
-        echo "  • Test results: /opt/module-fuzz/rewiring/quick_test_run/"
+        echo "  • Test results: /opt/module-fuzz/rewiring/output/quick_test_run"
         echo ""
         echo "Next steps:"
         echo "  1. Replace sample_llm_modules.sv with your actual LLM-generated files"
         echo "  2. Re-run this script or execute steps manually"
         echo "  3. Run larger tests with: python3 rewiring/fuzz_and_sim_loop.py ..."
         echo "  4. Or use pre-built libraries: $0 --use-prebuilt"
+        echo ""
+        echo "⚠️  Remember: Wrapper generation (Step 2) is ESSENTIAL for fuzzing to work!"
     fi
     
     echo ""
