@@ -21,7 +21,6 @@ graph TD
     K --> L[Mutation Strategies]
     L --> M[Linear Rewiring]
     L --> N[Cyclical Rewiring]
-    L --> O[Tree Merging & Depth Changes]
     
     K --> P[Generated Top Module]
     K --> Q[Generated Testbench]
@@ -71,6 +70,7 @@ test_library_structured/ → fuzz_state.py → Build → Logs
 - **Per-cycle results**: Generated modules, testbenches, and simulation logs
 - **Error handling**: Comprehensive error logging and recovery
 - **Archive system**: Automatic preservation of previous test runs
+- **Dedicated output folder**: All results saved to `rewiring/output/` (gitignored)
 
 ## 🚀 Quick Start Commands
 
@@ -95,7 +95,7 @@ cp modules/*.sv ../test_library_structured/unflattened/
 
 # Step 4: Run fuzzing
 cd ../rewiring
-python3 fuzz_and_sim_loop.py /opt/module-fuzz/rewiring/test_library_structured/flattened -o /opt/module-fuzz/rewiring/results/ -t top -m 10 -c 5 --incdir /opt/module-fuzz/rewiring/test_library_structured/unflattened/ --incdir /opt/module-fuzz/rewiring/test_library_structured/flattened/
+python3 fuzz_and_sim_loop.py /opt/module-fuzz/rewiring/test_library_structured/flattened -o /opt/module-fuzz/rewiring/output/results -t top -m 10 -c 5 --incdir /opt/module-fuzz/rewiring/test_library_structured/unflattened/ --incdir /opt/module-fuzz/rewiring/test_library_structured/flattened/
 ```
 
 ## 📊 Data Flow
@@ -115,7 +115,7 @@ Multi-mod → Individual → Standard → Test Lib → Simulate → Archive
 - **Processed Modules**: `llm_preprocess/module_library/`
 - **Generated Wrappers**: `coverage_library_IO_flattened/`
 - **Final Library**: `test_library_structured/`
-- **Test Results**: `rewiring/runs_tb/`
+- **Test Results**: `rewiring/output/` (dedicated folder, gitignored)
 
 ### **Key Parameters**
 - **Mutations per cycle**: `-m` flag in fuzzing command
@@ -168,8 +168,7 @@ The fuzzing system **cannot work** without properly generated wrapper modules. T
 ### **Mutation Strategies Explained**
 - **Linear Rewiring**: Sequential module connections and mutations
 - **Cyclical Rewiring**: Creates and resolves combinational loops
-- **Tree Merging**: Combines module trees for complex topologies
-- **Depth Changes**: **Result from mutations**, not a separate strategy
+- **Depth Changes**: **Result from mutations**, not a separate strategy - occurs when mutations alter module hierarchy relationships
 
 ---
 
