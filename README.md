@@ -35,6 +35,26 @@ module-fuzz/
 └── Archive/                  # Archived test results
 ```
 
+## 🐳 Docker (Recommended)
+
+To ensure consistent toolchains and paths, run the project inside the provided Docker container. All examples below use absolute paths under `/opt/module-fuzz`, which exist inside the container.
+
+```bash
+# From the repo root, build the image (note the lowercase dockerfile name)
+docker build -t module-fuzz:latest -f dockerfile .
+
+# Option A: Use the repo cloned in the image
+docker run --rm -it -p 8888:8888 module-fuzz:latest bash
+
+# Option B (recommended for local edits): bind-mount your local repo
+docker run --rm -it -p 8888:8888 -v "$PWD":/opt/module-fuzz module-fuzz:latest bash
+
+# Inside the container, run all commands from the rewiring folder
+cd /opt/module-fuzz/rewiring
+```
+
+Note: The container starts Jupyter by default. If you prefer Jupyter, simply run the container without overriding the command and open `http://localhost:8888`.
+
 ## 🔄 Complete Workflow
 
 ### **Option 1: Full LLM Processing Workflow**
@@ -166,6 +186,8 @@ cp -r test_libraries/basic_tests test_library_structured/
 - **`const_tests/`**: Comprehensive constant operations (logic, arithmetic, comparison, etc.)
 
 ### **Step 5: Run Fuzzing Tests**
+
+Run the following commands inside the Docker container (see the Docker section above).
 
 **⚠️ IMPORTANT: Use absolute paths when running from the rewiring folder**
 
