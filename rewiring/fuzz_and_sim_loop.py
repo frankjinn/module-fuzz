@@ -9,6 +9,18 @@ Per cycle:
   4) generate SystemVerilog testbench (tb_<top>.sv) via Fuzz_Run.generate_sv_testbench
   5) build & run with Verilator using --binary (no C++ main needed)
   6) write logs and summary.json
+  7) [OPTIONAL] collect Verilator coverage data and generate HTML reports
+
+COVERAGE INSTRUMENTATION:
+Use --enable-coverage to capture coverage of Verilator itself (not the Verilog files).
+This measures how well the fuzzing exercises Verilator's internal code paths.
+- JSON coverage data is collected after each successful cycle
+- HTML reports are generated every N cycles (configurable with --coverage-report-every)
+- Reports aggregate coverage from all prior cycles
+- Requires gcovr and VERILATOR_ROOT environment variable
+
+Example with coverage:
+  python fuzz_and_sim_loop.py --enable-coverage --coverage-report-every 5 flattened_lib.json
 
 You can point --rtl-dir at a folder containing both your flattened and unflattened modules.
 Generated <top>.sv and tb_<top>.sv are written into the per-cycle output folder.
@@ -29,6 +41,7 @@ import traceback
 from datetime import datetime
 
 import fuzz_state
+import verilator_coverage
 
 
 # ------------------------- Output folder management -------------------------
@@ -259,6 +272,11 @@ def main():
     ap.add_argument("-q", "--quiet", action="store_true", help="Reduce logging.")
     ap.add_argument("--incdir", action="append", default=[], help="Include directories for Verilator")
     
+    # Coverage instrumentation options
+    ap.add_argument("--enable-coverage", action="store_true", help="Enable Verilator coverage instrumentation")
+    ap.add_argument("--coverage-report-every", type=int, default=10, help="Generate HTML coverage report every N cycles (default: 10)")
+    ap.add_argument("--coverage-dir", default=None, help="Directory for coverage data (default: <outdir>/coverage)")
+    
     args = ap.parse_args()
     
     # Resolve verilator binary path
@@ -273,6 +291,29 @@ def main():
     base_out = Path(args.outdir)
     base_out = ensure_clean_output_folder(base_out)
     print(f"[Loop] Output: {base_out}  (Ctrl+C to stop)")
+    
+    # Initialize coverage collector if enabled
+    coverage_collector = None
+    if args.enable_coverage:
+        verilator_root = os.environ.get("VERILATOR_ROOT")
+        if not verilator_root:
+            print("[Error] VERILATOR_ROOT environment variable not set. Required for coverage collection.")
+            return 3
+        
+        coverage_dir = Path(args.coverage_dir) if args.coverage_dir else base_out / "coverage"
+        coverage_collector = verilator_coverage.create_coverage_collector(
+            verilator_root=verilator_root,
+            coverage_dir=coverage_dir,
+            verbose=not args.quiet
+        )
+        
+        if not coverage_collector:
+            print("[Error] Failed to initialize coverage collector.")
+            return 3
+        
+        if not args.quiet:
+            print(f"[Loop] Coverage enabled: Reports every {args.coverage_report_every} cycles")
+            print(f"[Loop] Coverage data: {coverage_dir}")
     
     # Initialize fuzzer
     try:
@@ -546,6 +587,26 @@ def main():
                 overall_ok = overall_ok and (build_ok and run_ok)
                 consecutive_failures = 0  # Reset consecutive failure counter
                 
+                # Collect coverage data if enabled
+                coverage_collected = False
+                coverage_report_generated = None
+                if coverage_collector and (build_ok and run_ok):
+                    coverage_collected = coverage_collector.collect_cycle_coverage(cycle_idx)
+                    
+                    # Generate HTML report at specified intervals
+                    if coverage_collected and (cycle_idx + 1) % args.coverage_report_every == 0:
+                        coverage_report_generated = coverage_collector.generate_merged_report(cycle_idx)
+                        
+                        # Cleanup old data periodically to save disk space
+                        if (cycle_idx + 1) % (args.coverage_report_every * 5) == 0:
+                            coverage_collector.cleanup_old_data()
+                    
+                    if not args.quiet and coverage_collected:
+                        coverage_msg = f"[Cycle {cycle_idx}] Coverage collected"
+                        if coverage_report_generated:
+                            coverage_msg += f" | HTML report: {coverage_report_generated}"
+                        print(coverage_msg)
+                
                 # Persist stats
                 summary = {
                     "cycle": cycle_idx,
@@ -566,7 +627,10 @@ def main():
                     "cycle_success": True,
                     "error": None,
                     "error_type": None,
-                    "cycle_duration": round(time.time() - cycle_start_time, 2)
+                    "cycle_duration": round(time.time() - cycle_start_time, 2),
+                    "coverage_enabled": coverage_collector is not None,
+                    "coverage_collected": coverage_collected if coverage_collector else False,
+                    "coverage_report_generated": str(coverage_report_generated) if coverage_report_generated else None
                 }
                 (cycle_dir / "summary.json").write_text(json.dumps(summary, indent=2))
 
@@ -660,6 +724,19 @@ def main():
     except KeyboardInterrupt:
         if not args.quiet:
             print("\n[Loop] Interrupted by user.")
+    
+    # Final coverage summary and report generation
+    if coverage_collector and not args.quiet:
+        coverage_summary = coverage_collector.get_coverage_summary()
+        print(f"\n[Coverage Summary] Total cycles with coverage: {coverage_summary['total_cycles']}")
+        if coverage_summary['latest_html_report']:
+            print(f"[Coverage Summary] Latest HTML report: {coverage_summary['latest_html_report']}")
+        
+        # Generate final coverage report if we have data
+        if coverage_summary['total_cycles'] > 0:
+            final_report = coverage_collector.generate_merged_report(cycle_idx - 1)
+            if final_report:
+                print(f"[Coverage Summary] Final aggregated report: {final_report}")
     
     # Final error summary
     if hasattr(main, 'error_summary') and main.error_summary:
