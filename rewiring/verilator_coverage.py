@@ -135,7 +135,7 @@ class VerilatorCoverageCollector:
             "--json-pretty",
             "-o", str(json_file),
             "-e", r".*\.h$",  # Exclude header files
-            "--gcov-exclude-directories", "obj_dbg",
+            "--exclude-directories", "obj_dbg",
             "--root", str(self.verilator_src)
         ]
         
