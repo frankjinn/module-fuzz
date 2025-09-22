@@ -1,5 +1,3 @@
-`include "const_nested.sv"
-
 //------------------------------------------------------------------------------
 // Wrapper for const_nested
 // Flattens 4 inputs (27 bits) into `in_flat`,

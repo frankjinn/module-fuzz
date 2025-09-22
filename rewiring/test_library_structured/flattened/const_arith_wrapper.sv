@@ -1,5 +1,3 @@
-`include "const_arith.sv"
-
 //------------------------------------------------------------------------------
 // Wrapper for const_arith
 // Flattens 2 inputs (16 bits) into `in_flat`,

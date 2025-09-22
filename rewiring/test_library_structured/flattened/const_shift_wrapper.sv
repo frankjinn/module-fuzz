@@ -1,4 +1,3 @@
-`include "const_shift.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for const_shift
@@ -15,7 +14,7 @@ module const_shift_wrapper (
   wire [2:0] shift_amt = in_flat[2:0];
 
   // Wires to capture original module outputs
-  wire [7:0] shl_c;
+  wire [7:0] shl_c;.
   wire [7:0] shr_c;
   wire [7:0] ashr_c;
 

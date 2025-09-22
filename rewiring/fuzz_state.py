@@ -1194,45 +1194,69 @@ class Fuzz_Run:
 
         # --- Declarations ---
         decl_clk = "logic clk;"
+        decl_rst = "logic rst_n;"
         decl_in  = f"logic [{N-1}:0] in_flat;"  if N > 0 else ""
         decl_out = f"wire  [{M-1}:0] out_flat;" if M > 0 else ""
         decl_cyc = "integer cyc;"
+        decl_rng = "reg [31:0] rng_state;" if N > 0 else ""
 
-        # --- Clock gen ---
+        # --- Clock and reset gen ---
         half = max(1, int(clk_period) // 2) or 1
         clk_gen = (
             "  // Clock generator\n"
             "  initial clk = 1'b0;\n"
-            f"  always #{half} clk = ~clk;"
+            f"  always #{half} clk = ~clk;\n\n"
+            "  // Reset generator\n"
+            "  initial begin\n"
+            "    rst_n = 1'b0;\n"
+            f"    #{half * 4} rst_n = 1'b1; // Release reset after 2 clock cycles\n"
+            "  end"
         )
 
-        # --- Exact-width randomization for in_flat (no truncation) ---
+        # --- Deterministic pseudo-random generation for cross-simulator consistency ---
         if N > 0:
             if N <= 32:
-                stim_block = f"    in_flat = {{{N}'($urandom())}};"
+                stim_block = f"""    // Linear congruential generator for deterministic cross-simulator randomization
+    rng_state = (rng_state * 32'h41C64E6D + 32'h3039) & 32'hFFFFFFFF;
+    in_flat = rng_state[{N-1}:0];"""
             else:
-                parts = []
-                remaining = N
-                # build from LSB chunks up, then reverse for {MSB,...,LSB}
-                while remaining > 0:
-                    width = remaining % 32 if (remaining % 32) != 0 else 32
-                    parts.append(f"{width}'($urandom())")
-                    remaining -= width
-                parts = parts[::-1]
-                stim_block = f"in_flat = {{{', '.join(parts)}}};"  # MSB..LSB
+                # For wide inputs, concatenate multiple RNG outputs
+                num_chunks = (N + 31) // 32  # Round up to get number of 32-bit chunks needed
+                chunks = []
+                for i in range(num_chunks):
+                    chunks.append("rng_state")
+                    if i < num_chunks - 1:  # Don't advance RNG after last chunk
+                        chunks.append("rng_state = (rng_state * 32'h41C64E6D + 32'h3039) & 32'hFFFFFFFF")
+                
+                # Build the assignment
+                rng_updates = []
+                for i in range(num_chunks):
+                    rng_updates.append("    rng_state = (rng_state * 32'h41C64E6D + 32'h3039) & 32'hFFFFFFFF;")
+                    if i == num_chunks - 1:
+                        # Last chunk might be partial
+                        remaining_bits = N - (i * 32)
+                        if remaining_bits == 32:
+                            rng_updates.append(f"    in_flat[{N-1}:{i*32}] = rng_state;")
+                        else:
+                            rng_updates.append(f"    in_flat[{N-1}:{i*32}] = rng_state[{remaining_bits-1}:0];")
+                    else:
+                        rng_updates.append(f"    in_flat[{(i+1)*32-1}:{i*32}] = rng_state;")
+                
+                stim_block = "    // Linear congruential generator for deterministic cross-simulator randomization\n" + "\n".join(rng_updates)
         else:
             stim_block = "    // No inputs to randomize"
 
 
         # --- Seed & cycles with plusargs ---
         default_seed = int(seed) if (seed is not None) else 0xC0FFEE
+        rng_init = f"    rng_state = seed;" if N > 0 else ""
         prelude = (
             "  int cycles;\n"
             "  int seed;\n"
             "  initial begin\n"
             f"    cycles = {int(sim_cycles)}; if ($value$plusargs(\"cycles=%d\", cycles)) ;\n"
             f"    if (!$value$plusargs(\"seed=%d\", seed)) seed = {default_seed};\n"
-            f"    void'($urandom(seed));\n"
+            f"{rng_init}\n"
             f"    cyc = 0;\n"
             "  end"
         )
@@ -1249,41 +1273,33 @@ class Fuzz_Run:
             )
 
         # --- DUT port list ---
-        port_lines = ["    .clk(clk)"]
+        port_lines = ["    .clk(clk)", "    .rst_n(rst_n)"]
         if N > 0:
             port_lines.append("    .in_flat(in_flat)")
         if M > 0:
             port_lines.append("    .out_flat(out_flat)")
         ports_str = ",\n".join(port_lines)
 
-        # --- Exact-width monitor without %* (print bit-by-bit with $write) ---
+        # --- Hex monitor for compact logging ---
         if M > 0 and N > 0:
             monitor = (
                 "  always @(posedge clk) begin\n"
                 "    cyc <= cyc + 1;\n"
-                '    $write("CYCLE=%0d IN=", cyc);\n'
-                f"    for (int i = {N}-1; i >= 0; i--) $write(\"%0d\", in_flat[i]);\n"
-                '    $write(" OUT=");\n'
-                f"    for (int j = {M}-1; j >= 0; j--) $write(\"%0d\", out_flat[j]);\n"
-                "    $write(\"\\n\");\n"
+                f'    $write("CYCLE=%0d IN=%0h OUT=%0h\\n", cyc, in_flat, out_flat);\n'
                 "  end"
             )
         elif M > 0:
             monitor = (
                 "  always @(posedge clk) begin\n"
                 "    cyc <= cyc + 1;\n"
-                '    $write("CYCLE=%0d OUT=", cyc);\n'
-                f"    for (int j = {M}-1; j >= 0; j--) $write(\"%0d\", out_flat[j]);\n"
-                "    $write(\"\\n\");\n"
+                f'    $write("CYCLE=%0d OUT=%0h\\n", cyc, out_flat);\n'
                 "  end"
             )
         elif N > 0:
             monitor = (
                 "  always @(posedge clk) begin\n"
                 "    cyc <= cyc + 1;\n"
-                '    $write("CYCLE=%0d IN=", cyc);\n'
-                f"    for (int i = {N}-1; i >= 0; i--) $write(\"%0d\", in_flat[i]);\n"
-                "    $write(\"\\n\");\n"
+                f'    $write("CYCLE=%0d IN=%0h\\n", cyc, in_flat);\n'
                 "  end"
             )
         else:
@@ -1293,18 +1309,21 @@ class Fuzz_Run:
         main_loop = (
             "  integer i;\n"
             "  initial begin\n"
+            "    // Initialize inputs before starting\n"
+            f"{stim_block}\n"
             "    @(negedge clk); // small settle before starting\n"
             "    for (i = 0; i < cycles; i = i + 1) begin\n"
-            "      @(posedge clk);\n"
+            "      @(negedge clk); // update inputs on negative edge\n"
             f"{stim_block}\n"
             "    end\n"
+            "    @(posedge clk); // final clock edge\n"
             "    $display(\"TB_SIM_OK cycles=%0d\", cycles);\n"
             "    $finish;\n"
             "  end"
         )
 
         # Assemble TB
-        decls = "\n  ".join([d for d in (decl_clk, decl_in, decl_out, decl_cyc) if d])
+        decls = "\n  ".join([d for d in (decl_clk, decl_rst, decl_in, decl_out, decl_cyc, decl_rng) if d])
         tb_text = (
             "`default_nettype none\n"
             "`timescale 1ns/1ps\n"
@@ -1392,11 +1411,10 @@ class Fuzz_Run:
 
         # Top module declaration
         lines.append(f"module {top_name} (")
+        lines.append("    input  wire clk,")
+        lines.append("    input  wire rst_n,")
         if ext_inputs:
-            lines.append("    input  wire clk,")
             lines.append(f"    input  wire [{len(ext_inputs)-1}:0] in_flat,")
-        else:
-            lines.append("    input wire clk,  // no external inputs")
         if ext_outputs:
             lines.append(f"    output wire [{len(ext_outputs)-1}:0] out_flat")
         else:
@@ -1429,14 +1447,13 @@ class Fuzz_Run:
             for mod in sorted(regged_modules):
                 outW = mod_out_width[mod]
                 lines.append(f"reg [{outW-1}:0] {mod}_out_reg;")
-                lines.append(f"always @(posedge clk) {mod}_out_reg <= {mod}_out_flat;")
+                lines.append(f"always @(posedge clk or negedge rst_n) begin")
+                lines.append(f"  if (!rst_n)")
+                lines.append(f"    {mod}_out_reg <= {outW}'b0;")
+                lines.append(f"  else")
+                lines.append(f"    {mod}_out_reg <= {mod}_out_flat;")
+                lines.append("end")
             lines.append("")
-            lines.append("// Initialize registered outputs to zero for simulation")
-            lines.append("initial begin")
-            for mod in sorted(regged_modules):
-                outW = mod_out_width[mod]
-                lines.append(f"    {mod}_out_reg = {outW}'b0;")
-            lines.append("end\n")
 
         # External inputs
         if ext_inputs:

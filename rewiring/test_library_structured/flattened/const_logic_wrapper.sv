@@ -1,5 +1,3 @@
-`include "const_logic.sv"
-
 //------------------------------------------------------------------------------
 // Wrapper for const_logic
 // Flattens 4 inputs (10 bits) into `in_flat`,

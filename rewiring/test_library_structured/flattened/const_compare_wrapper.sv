@@ -1,5 +1,3 @@
-`include "const_compare.sv"
-
 //------------------------------------------------------------------------------
 // Wrapper for const_compare
 // Flattens 4 inputs (24 bits) into `in_flat`,

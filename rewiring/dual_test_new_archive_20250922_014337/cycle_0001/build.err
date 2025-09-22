@@ -1,0 +1,49 @@
+%Warning-TIMESCALEMOD: /opt/module-fuzz/rewiring/dual_test_new/cycle_0001/top.sv:3:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+    3 | module top (
+      |        ^~~
+                       /opt/module-fuzz/rewiring/dual_test_new/cycle_0001/tb_top.sv:3:8: ... Location of module with timescale
+    3 | module tb_top;
+      |        ^~~~~~
+                       ... For warning description see https://verilator.org/warn/TIMESCALEMOD?v=5.033
+                       ... Use "/* verilator lint_off TIMESCALEMOD */" and lint_on around source to disable this message.
+%Error: /opt/module-fuzz/rewiring/dual_test_new/cycle_0001/top.sv:352:1: Cannot find file containing module: 'const_arith_wrapper'
+  352 | const_arith_wrapper u_const_arith_wrapper (
+      | ^~~~~~~~~~~~~~~~~~~
+        ... Looked in:
+             /opt/module-fuzz/rewiring/dual_test_new/cycle_0001/const_arith_wrapper
+             /opt/module-fuzz/rewiring/dual_test_new/cycle_0001/const_arith_wrapper.v
+             /opt/module-fuzz/rewiring/dual_test_new/cycle_0001/const_arith_wrapper.sv
+             /opt/module-fuzz/rewiring/const_arith_wrapper
+             /opt/module-fuzz/rewiring/const_arith_wrapper.v
+             /opt/module-fuzz/rewiring/const_arith_wrapper.sv
+             const_arith_wrapper
+             const_arith_wrapper.v
+             const_arith_wrapper.sv
+             obj_dir/const_arith_wrapper
+             obj_dir/const_arith_wrapper.v
+             obj_dir/const_arith_wrapper.sv
+%Error: /opt/module-fuzz/rewiring/dual_test_new/cycle_0001/top.sv:356:1: Cannot find file containing module: 'const_compare_wrapper'
+  356 | const_compare_wrapper u_const_compare_wrapper (
+      | ^~~~~~~~~~~~~~~~~~~~~
+%Error: /opt/module-fuzz/rewiring/dual_test_new/cycle_0001/top.sv:360:1: Cannot find file containing module: 'const_concat_repl_wrapper'
+  360 | const_concat_repl_wrapper u_const_concat_repl_wrapper (
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: /opt/module-fuzz/rewiring/dual_test_new/cycle_0001/top.sv:364:1: Cannot find file containing module: 'const_conditional_wrapper'
+  364 | const_conditional_wrapper u_const_conditional_wrapper (
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: /opt/module-fuzz/rewiring/dual_test_new/cycle_0001/top.sv:368:1: Cannot find file containing module: 'const_logic_wrapper'
+  368 | const_logic_wrapper u_const_logic_wrapper (
+      | ^~~~~~~~~~~~~~~~~~~
+%Error: /opt/module-fuzz/rewiring/dual_test_new/cycle_0001/top.sv:372:1: Cannot find file containing module: 'const_nested_wrapper'
+  372 | const_nested_wrapper u_const_nested_wrapper (
+      | ^~~~~~~~~~~~~~~~~~~~
+%Error: /opt/module-fuzz/rewiring/dual_test_new/cycle_0001/top.sv:376:1: Cannot find file containing module: 'const_partselect_wrapper'
+  376 | const_partselect_wrapper u_const_partselect_wrapper (
+      | ^~~~~~~~~~~~~~~~~~~~~~~~
+%Error: /opt/module-fuzz/rewiring/dual_test_new/cycle_0001/top.sv:380:1: Cannot find file containing module: 'const_reduce_wrapper'
+  380 | const_reduce_wrapper u_const_reduce_wrapper (
+      | ^~~~~~~~~~~~~~~~~~~~
+%Error: /opt/module-fuzz/rewiring/dual_test_new/cycle_0001/top.sv:384:1: Cannot find file containing module: 'const_shift_wrapper'
+  384 | const_shift_wrapper u_const_shift_wrapper (
+      | ^~~~~~~~~~~~~~~~~~~
+%Error: Exiting due to 9 error(s), 1 warning(s)

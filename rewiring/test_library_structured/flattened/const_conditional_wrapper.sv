@@ -1,5 +1,3 @@
-`include "const_conditional.sv"
-
 //------------------------------------------------------------------------------
 // Wrapper for const_conditional
 // Flattens 6 inputs (34 bits) into `in_flat`,

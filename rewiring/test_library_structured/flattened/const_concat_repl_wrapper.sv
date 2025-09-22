@@ -1,5 +1,3 @@
-`include "const_concat_repl.sv"
-
 //------------------------------------------------------------------------------
 // Wrapper for const_concat_repl
 // Flattens 3 inputs (10 bits) into `in_flat`,

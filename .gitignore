@@ -6,6 +6,38 @@ __pycache__/
 # C extensions
 *.so
 
+# Verilator build artifacts
+obj_dir/
+*.gcno
+*.gcda
+*.d
+*.o
+*.a
+*.cpp
+*.h
+*.mk
+Vtb_*
+verilated*
+
+# Icarus Verilog build artifacts  
+*.vvp
+
+# But keep important simulation records
+!*.sv
+!*.v
+!*.log
+!*.err
+!*.json
+!*.vcd
+!summary.json
+!bug_report.json
+
+# Keep specific important files even if they match ignore patterns
+!*/bugs/*/bug_report.json
+!*/summary.json
+!*/top.sv
+!*/tb_*.sv
+
 # Distribution / packaging
 .Python
 build/

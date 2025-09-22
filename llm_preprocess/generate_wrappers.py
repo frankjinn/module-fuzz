@@ -12,10 +12,8 @@ module such that:
     the underlying module. Likewise, it collects all outputs from the underlying
     module and packs them into `out_flat`.
 
-Additionally, each generated wrapper file now automatically includes the original
-module’s file at the top, based on the source filename, and outputs wrapper files
-named `<source_filename_without_ext>_wrapper.sv` to avoid mismatches when module
-names differ from filenames.
+Outputs wrapper files named `<source_filename_without_ext>_wrapper.sv` to avoid 
+mismatches when module names differ from filenames.
 
 Usage:
     python3 generate_wrappers.py <input_directory> <output_directory>
@@ -24,10 +22,9 @@ Example:
     python3 generate_wrappers.py sv_sources wrappers_out
 
 Result:
-    For each file `foo.sv` containing `module bar (...)`, you’ll get a file
+    For each file `foo.sv` containing `module bar (...)`, you'll get a file
     `foo_wrapper.sv` in `wrappers_out/` that contains:
 
-      `include "foo.sv"
       module bar_wrapper (...)
         ...
       endmodule
@@ -133,13 +130,13 @@ def generate_wrapper_sv(module_name: str,
                         output_ports: list,
                         source_filename: str) -> str:
     """
-    Generates a flattened wrapper for `module_name` and includes the original file.
+    Generates a flattened wrapper for `module_name`.
 
     Args:
       module_name: name of the original module (e.g. "foo")
       input_ports: list of (port_name, width) for inputs
       output_ports: list of (port_name, width) for outputs
-      source_filename: the .sv filename (including extension) to `include` at top
+      source_filename: the .sv filename (included for naming purposes)
     """
     wrapper_name = f"{module_name}_wrapper"
 
@@ -147,9 +144,6 @@ def generate_wrapper_sv(module_name: str,
     total_out_bits = sum(w for (_, w) in output_ports)
 
     sv_lines = []
-    # Include original file by filename
-    sv_lines.append(f"`include \"{source_filename}\"")
-    sv_lines.append("")
     sv_lines.append(f"//------------------------------------------------------------------------------")
     sv_lines.append(f"// Wrapper for {module_name}")
     sv_lines.append(f"// Flattens {len(input_ports)} inputs ({total_in_bits} bits) into `in_flat`,")
