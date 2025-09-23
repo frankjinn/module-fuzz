@@ -291,28 +291,25 @@ step4_run_fuzzing() {
         exit 1
     fi
     
-    # Run a quick test using absolute paths (working configuration)
-    print_status "Running quick validation test (1 cycle, 3 mutations)..."
-    python3 fuzz_and_sim_loop.py \
-        /opt/module-fuzz/rewiring/test_library_structured/flattened \
-        -o /opt/module-fuzz/rewiring/output/quick_test_run \
-        -t top \
-        -m 3 \
+    # Run a quick dual simulation test (optimized configuration)
+    print_status "Running quick dual simulation test (1 cycle, 5 mutations)..."
+    cd /opt/module-fuzz/rewiring/scripts
+    python3 dual_fuzz_and_sim_loop.py ../modules/test_library_structured/flattened/ \
+        -o quick_dual_test \
         -c 1 \
-        --tb-cycles 5 \
-        --tb-clk-period 2 \
-        --tb-hold-reset 2 \
-        --incdir /opt/module-fuzz/rewiring/test_library_structured/unflattened/ \
-        --incdir /opt/module-fuzz/rewiring/test_library_structured/flattened/ \
-        --verilator-flags="--timescale 1ns/1ps --Wno-WIDTHTRUNC --Wno-MODDUP"
+        --tb-cycles 10 \
+        --mutations-per-cycle 5 \
+        --rtl-dir ../modules/test_library_structured/flattened/ \
+        --incdir ../modules/test_library_structured/unflattened/
     
     if [ $? -eq 0 ]; then
-        print_success "Quick test completed successfully!"
-        print_status "Results saved to: /opt/module-fuzz/rewiring/output/quick_test_run"
+        print_success "Quick dual simulation test completed successfully!"
+        print_status "Results saved to: /opt/module-fuzz/rewiring/scripts/quick_dual_test"
+        print_status "Check for bug reports in: quick_dual_test/bugs/"
     else
         print_error "Quick test failed. Check the output above for errors."
-        print_status "This is normal for the first run - the system is testing error handling."
-        print_status "Check the error logs for details: /opt/module-fuzz/rewiring/output/quick_test_run/cycle_0000/error_log.json"
+        print_status "This may indicate simulator installation issues or module dependencies."
+        print_status "Check the error logs for details: quick_dual_test/cycle_0000/error_log.json"
     fi
     
     cd ..

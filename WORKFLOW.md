@@ -15,19 +15,30 @@ graph TD
     G --> H[flattened/ - Wrapper Modules]
     G --> I[unflattened/ - Base Modules]
     
-    H --> J[fuzz_and_sim_loop.py]
+    H --> J[Fuzzing Scripts]
     I --> J
-    J --> K[Fuzzing Engine]
-    K --> L[Mutation Strategies]
-    L --> M[Linear Rewiring]
-    L --> N[Cyclical Rewiring]
+    J --> K[Single Simulation: fuzz_and_sim_loop.py]
+    J --> L[Dual Simulation: dual_fuzz_and_sim_loop.py]
     
-    K --> P[Generated Top Module]
-    K --> Q[Generated Testbench]
-    P --> R[Verilator Build]
-    Q --> R
-    R --> S[Simulation & Results]
-    S --> T[Test Results & Logs]
+    K --> M[Fuzzing Engine]
+    L --> M
+    M --> N[Mutation Strategies]
+    N --> O[Linear Rewiring]
+    N --> P[Cyclical Rewiring]
+    
+    M --> Q[Generated Top Module]
+    M --> R[Generated Testbench]
+    
+    K --> S[Verilator Only]
+    L --> T[Verilator + Icarus Verilog]
+    
+    Q --> S
+    R --> S
+    Q --> T
+    R --> T
+    
+    S --> U[Single Sim Results]
+    T --> V[Dual Sim Results + Bug Reports]
 ```
 
 ## 📋 Step-by-Step Process
@@ -135,8 +146,10 @@ Multi-mod → Individual → Standard → Test Lib → Simulate → Archive
 
 ### **Phase 3 Success**
 - Fuzzing engine runs without errors
-- Verilator builds and simulations complete successfully
+- Single simulation: Verilator builds and simulations complete successfully
+- Dual simulation: Both Verilator and Icarus Verilog run and compare results
 - Results are saved in output directory with proper logging
+- Bug reports generated if simulator discrepancies found
 
 ## 🚨 Common Issues & Solutions
 
@@ -156,6 +169,12 @@ Multi-mod → Individual → Standard → Test Lib → Simulate → Archive
 - **Problem**: Fuzzing fails because modules aren't properly flattened
 - **Solution**: **ALWAYS run `generate_wrappers.py`** after splitting modules - this is essential for the fuzzer to work
 
+### **Dual Simulation Issues**
+- **Problem**: "Cannot find iverilog binary"
+- **Solution**: Install Icarus Verilog or use single simulation mode
+- **Problem**: Simulators produce different results
+- **Solution**: This is expected! Check `bugs/` directory for detailed analysis
+
 ## 🔑 Critical Requirements
 
 ### **Wrapper Generation is MANDATORY**
@@ -170,6 +189,31 @@ The fuzzing system **cannot work** without properly generated wrapper modules. T
 - **Cyclical Rewiring**: Creates and resolves combinational loops
 - **Depth Changes**: **Result from mutations**, not a separate strategy - occurs when mutations alter module hierarchy relationships
 
+## 🆕 Recent Optimizations (2024)
+
+### **Reorganized Structure**
+- **scripts/**: All Python scripts organized in dedicated directory
+- **modules/**: SystemVerilog modules in structured hierarchy
+- **examples/**: Working example scripts with proper configurations
+- **docs/**: Documentation and analysis notebooks
+
+### **Dual Simulation Capability**
+- **Cross-validation**: Compare Verilator vs Icarus Verilog results
+- **Bug detection**: Automatically find simulator discrepancies
+- **Deterministic inputs**: Same random seed ensures identical test patterns
+- **Comprehensive reporting**: Detailed bug analysis with complete test cases
+
+### **Performance Improvements**
+- **Optimized file discovery**: Using pathlib for better performance
+- **Pre-compiled regex**: Faster log parsing in dual simulation
+- **Better caching**: Reduced redundant operations in mutation loops
+- **Improved error handling**: More robust validation and recovery
+
+### **Enhanced Default Settings**
+- **Verilator flags**: Automatic warning suppression for common issues
+- **Required arguments**: Clear documentation of `--rtl-dir` and `--incdir` requirements
+- **Better validation**: Improved path checking and directory creation
+
 ---
 
-**This workflow ensures a systematic approach from raw LLM-generated files to comprehensive fuzzing tests with proper error handling and result preservation. Remember: wrapper generation is essential for the system to function!**
+**This workflow ensures a systematic approach from raw LLM-generated files to comprehensive fuzzing tests with dual simulation capabilities and optimized performance. Remember: wrapper generation is essential for the system to function!**

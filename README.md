@@ -26,12 +26,22 @@ module-fuzz/
 ├── test_library_structured/   # Final structured test library
 │   ├── flattened/            # Wrapper modules for fuzzing
 │   └── unflattened/          # Base modules for includes
-├── rewiring/                 # Core fuzzing engine
-│   ├── fuzz_state.py         # Core fuzzing logic and state management
-│   ├── fuzz_and_sim_loop.py  # Main fuzzing and simulation loop
-│   ├── IO_map.py             # I/O port mapping utilities
-│   ├── output/               # Dedicated test results folder (gitignored)
-│   └── test_library_structured/  # Test library for fuzzing
+├── rewiring/                 # Core fuzzing engine (optimized and reorganized)
+│   ├── scripts/              # Main scripts and utilities
+│   │   ├── dual_fuzz_and_sim_loop.py  # Dual simulator comparison (Verilator + Icarus)
+│   │   ├── dual_simulator.py          # Dual simulator core functions
+│   │   ├── fuzz_and_sim_loop.py      # Single simulator fuzzing loop
+│   │   ├── fuzz_state.py             # Core fuzzing logic and state management
+│   │   ├── IO_map.py                 # I/O port mapping utilities
+│   │   └── verilator_coverage.py     # Coverage analysis tools
+│   ├── modules/              # SystemVerilog module libraries
+│   │   └── test_library_structured/
+│   │       ├── flattened/            # Wrapper modules
+│   │       └── unflattened/          # Original modules
+│   ├── examples/             # Working example scripts
+│   │   ├── run_dual_sim_example.py  # Full-featured dual sim example
+│   │   └── simple_dual_sim.py       # Simple demo script
+│   └── docs/                 # Documentation and notebooks
 └── Archive/                  # Archived test results
 ```
 
@@ -189,25 +199,28 @@ cp -r test_libraries/basic_tests test_library_structured/
 
 Run the following commands inside the Docker container (see the Docker section above).
 
-**⚠️ IMPORTANT: Use absolute paths when running from the rewiring folder**
+**⚠️ IMPORTANT: Run from the rewiring/scripts directory with proper module paths**
 
 ```bash
-cd rewiring
+cd rewiring/scripts
 
-# Working configuration (use absolute paths)
-python3 fuzz_and_sim_loop.py \
-    /opt/module-fuzz/rewiring/test_library_structured/flattened \
-    -o /opt/module-fuzz/rewiring/output/runs_tb \
-    -t top \
-    -m 10 \
-    -k 5 \
+# Dual Simulator Testing (Recommended - finds simulator bugs)
+python3 dual_fuzz_and_sim_loop.py ../modules/test_library_structured/flattened/ \
+    -o dual_test_results \
     -c 5 \
-    --tb-cycles 20 \
-    --tb-clk-period 2 \
-    --tb-hold-reset 2 \
-    --incdir /opt/module-fuzz/rewiring/test_library_structured/unflattened/ \
-    --incdir /opt/module-fuzz/rewiring/test_library_structured/flattened/ \
-    --verilator-flags="--timescale 1ns/1ps --Wno-WIDTHTRUNC --Wno-MODDUP"
+    --tb-cycles 50 \
+    --mutations-per-cycle 20 \
+    --rtl-dir ../modules/test_library_structured/flattened/ \
+    --incdir ../modules/test_library_structured/unflattened/
+
+# Single Simulator Testing (Faster - validates RTL generation)
+python3 fuzz_and_sim_loop.py ../modules/test_library_structured/flattened/ \
+    -o single_test_results \
+    -c 10 \
+    --tb-cycles 100 \
+    --mutations-per-cycle 30 \
+    --rtl-dir ../modules/test_library_structured/flattened/ \
+    --incdir ../modules/test_library_structured/unflattened/
 ```
 
 **❌ Common Mistake (Relative Paths):**
@@ -303,50 +316,52 @@ sudo make install
 
 ### **Quick Start with Pre-built Library**
 ```bash
-# Copy existing test library
-cp -r test_libraries/const_tests test_library_structured/
+# The test library is already included in rewiring/modules/
+cd rewiring/scripts
 
-# Run fuzzing test
-cd rewiring
-python3 fuzz_and_sim_loop.py \
-    /opt/module-fuzz/rewiring/test_library_structured/flattened \
-    -o /opt/module-fuzz/rewiring/output/quick_test \
-    -t top \
-    -m 5 \
+# Quick dual simulation test (recommended)
+python3 dual_fuzz_and_sim_loop.py ../modules/test_library_structured/flattened/ \
+    -o quick_dual_test \
     -c 2 \
     --tb-cycles 10 \
-    --incdir /opt/module-fuzz/rewiring/test_library_structured/unflattened/ \
-    --incdir /opt/module-fuzz/rewiring/test_library_structured/flattened/ \
-    --verilator-flags="--timescale 1ns/1ps --Wno-WIDTHTRUNC --Wno-MODDUP"
+    --mutations-per-cycle 5 \
+    --rtl-dir ../modules/test_library_structured/flattened/ \
+    --incdir ../modules/test_library_structured/unflattened/
+
+# Quick single simulation test
+python3 fuzz_and_sim_loop.py ../modules/test_library_structured/flattened/ \
+    -o quick_single_test \
+    -c 5 \
+    --tb-cycles 20 \
+    --mutations-per-cycle 10 \
+    --rtl-dir ../modules/test_library_structured/flattened/ \
+    --incdir ../modules/test_library_structured/unflattened/
 ```
 
-### **Quick Validation Test**
+### **Dual Simulation Testing (Recommended)**
 ```bash
-# Test with 5 cycles, 10 mutations each
-python3 fuzz_and_sim_loop.py \
-    /opt/module-fuzz/rewiring/test_library_structured/flattened \
-    -o /opt/module-fuzz/rewiring/output/test_run \
-    -t top \
-    -m 10 \
+# Dual simulation: Compare Verilator vs Icarus Verilog
+cd rewiring/scripts
+python3 dual_fuzz_and_sim_loop.py ../modules/test_library_structured/flattened/ \
+    -o dual_validation_test \
     -c 5 \
-    --tb-cycles 10 \
-    --incdir /opt/module-fuzz/rewiring/test_library_structured/unflattened/ \
-    --incdir /opt/module-fuzz/rewiring/test_library_structured/flattened/
+    --tb-cycles 50 \
+    --mutations-per-cycle 15 \
+    --rtl-dir ../modules/test_library_structured/flattened/ \
+    --incdir ../modules/test_library_structured/unflattened/
 ```
 
 ### **Comprehensive Test Run**
 ```bash
-# Large-scale test: 50 cycles, 100 mutations each
-python3 fuzz_and_sim_loop.py \
-    /opt/module-fuzz/rewiring/test_library_structured/flattened \
-    -o /opt/module-fuzz/rewiring/output/comprehensive_test \
-    -t top \
-    -m 100 \
-    -c 50 \
-    --tb-cycles 20 \
-    --incdir /opt/module-fuzz/rewiring/test_library_structured/unflattened/ \
-    --incdir /opt/module-fuzz/rewiring/test_library_structured/flattened/ \
-    --verilator-flags="--trace --timescale 1ns/1ps --Wno-WIDTHTRUNC --Wno-MODDUP"
+# Large-scale dual simulation: 20 cycles, 50 mutations each
+cd rewiring/scripts
+python3 dual_fuzz_and_sim_loop.py ../modules/test_library_structured/flattened/ \
+    -o comprehensive_dual_test \
+    -c 20 \
+    --tb-cycles 100 \
+    --mutations-per-cycle 50 \
+    --rtl-dir ../modules/test_library_structured/flattened/ \
+    --incdir ../modules/test_library_structured/unflattened/
 ```
 
 ### **Debug/Development Mode**
