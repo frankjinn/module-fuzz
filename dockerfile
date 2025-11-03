@@ -45,6 +45,27 @@ RUN make install
 # Add iverilog to PATH
 ENV PATH="/opt/iverilog/bin:${PATH}"
 
+# Install Yosys for CXXRTL backend (third simulator)
+# Yosys with CXXRTL provides a fast, open-source cycle-based simulator for arbitration
+WORKDIR /opt
+RUN git clone https://github.com/YosysHQ/yosys.git /opt/yosys
+
+# Build Yosys (without coverage instrumentation)
+WORKDIR /opt/yosys
+RUN unset CFLAGS CXXFLAGS LFLAGS && \
+    make config-gcc && \
+    make -j `nproc`
+RUN make install
+
+# Add Yosys to PATH
+ENV PATH="/opt/yosys:${PATH}"
+
+# Install C++ compiler tools for CXXRTL simulation
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    clang libclang-dev && \
+    rm -rf /var/lib/apt/lists/*
+
 # Reinstate coverage instrumentation flags for Verilator coverage generation
 ENV CFLAGS=" -fprofile-arcs -ftest-coverage"
 ENV CXXFLAGS=" -fprofile-arcs -ftest-coverage"
