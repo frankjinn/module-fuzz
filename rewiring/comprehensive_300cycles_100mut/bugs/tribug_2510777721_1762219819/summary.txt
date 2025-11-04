@@ -1,0 +1,78 @@
+
+Three-Way Simulator Comparison Bug Report
+==========================================
+Bug ID: tribug_2510777721_1762219819
+Seed: 2510777721
+Timestamp: 2025-11-04 01:30:19
+
+ARBITRATION VERDICT
+-------------------
+verilator is likely correct
+Confidence: high
+
+AGREEMENT STATISTICS
+--------------------
+Total cycles: 102
+All three agree: 44 cycles
+Disagreements: 18 cycles
+Agreement rate: 43.14%
+
+DISAGREEMENT BREAKDOWN
+----------------------
+Verilator & Icarus agree (CXXRTL differs): 12
+Verilator & CXXRTL agree (Icarus differs): 2
+Icarus & CXXRTL agree (Verilator differs): 0
+All three differ: 4
+X-only differences (ignored): 40
+
+LIKELY BUG LOCATION
+-------------------
+Verilator likely has bugs: False
+Icarus likely has bugs: False
+CXXRTL likely has bugs: True
+Unclear cases: 4
+
+SAMPLE DIFFERENCES (First 5)
+-----------------------------
+
+Cycle 7:
+Verilator:  485A61AB8063409CC1636C26A534A408ACA44CC21090AA64C5364CCC0C0F69AA8071F555100025
+Icarus:     485A61AB8063409CC16B6C26A534A408ACA44CC21090AA64C5364CCC0C0F69AA8071F555100025
+Diff:                          ^                                                          
+  Ground truth: verilator_cxxrtl
+  Likely bug in: icarus
+
+Cycle 8:
+Verilator:  2C2C04802E29041004098000094397E34E623FFDCDEC00101632C2A1986FFBAFFABEAAA4DEFFDC60076
+Icarus:     2C2C04802E29041004098000094397E34E623FFDCDEC00101632C2A1986FFBAFFABEAAA4DEFFDC60076
+Diff:                                                                                          
+  Ground truth: verilator_icarus
+  Likely bug in: cxxrtl
+
+Cycle 10:
+Verilator:  8C615D0706D630050D2C48524434A400EAEB10D555553802061986CA4A4A7A3BAA71AA7C350013
+Icarus:     8C615D0706D630050D2C48524434A400EAEB10D555553802061986CA4A4A7A3BAA71AA7C350013
+Diff:                                                                                     
+  Ground truth: verilator_icarus
+  Likely bug in: cxxrtl
+
+Cycle 17:
+Verilator:  14140618AA00B402100AC5190500D1C2AE46577121EA0057D3883A03748703039AC2EC04D074B8E0029
+Icarus:     14140618AA00B402100AC5190500D1C2AE46577121EA0057D3883A03748703039AC2EC04D074B8E0029
+Diff:                                                                                          
+  Ground truth: verilator_icarus
+  Likely bug in: cxxrtl
+
+Cycle 18:
+Verilator:  2A2AA6F4247A141D4008100002412C0471583CA49B6C00080B9C0026E987BBB95B4F76A716E50910605
+Icarus:     2A2AA6F4247A141D4008100002412C0471583CA49B6C00080B9C0026E987BBB95B4F76A716E50910605
+Diff:                                                                                          
+  Ground truth: verilator_icarus
+  Likely bug in: cxxrtl
+
+... and 13 more differences (see bug_report.json)
+
+FILES
+-----
+Full report: comprehensive_300cycles_100mut/bugs/tribug_2510777721_1762219819/bug_report.json
+Test files: comprehensive_300cycles_100mut/bugs/tribug_2510777721_1762219819

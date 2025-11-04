@@ -1,4 +1,3 @@
-`include "sample_const_logic.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for const_logic

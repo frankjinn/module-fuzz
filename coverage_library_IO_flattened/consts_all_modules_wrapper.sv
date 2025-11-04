@@ -1,4 +1,3 @@
-`include "consts_all_modules.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for const_arith

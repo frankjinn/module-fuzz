@@ -1,0 +1,78 @@
+
+Three-Way Simulator Comparison Bug Report
+==========================================
+Bug ID: tribug_1125089309_1762278311
+Seed: 1125089309
+Timestamp: 2025-11-04 17:45:11
+
+ARBITRATION VERDICT
+-------------------
+verilator is likely correct
+Confidence: high
+
+AGREEMENT STATISTICS
+--------------------
+Total cycles: 102
+All three agree: 52 cycles
+Disagreements: 16 cycles
+Agreement rate: 50.98%
+
+DISAGREEMENT BREAKDOWN
+----------------------
+Verilator & Icarus agree (CXXRTL differs): 10
+Verilator & CXXRTL agree (Icarus differs): 2
+Icarus & CXXRTL agree (Verilator differs): 0
+All three differ: 4
+X-only differences (ignored): 34
+
+LIKELY BUG LOCATION
+-------------------
+Verilator likely has bugs: False
+Icarus likely has bugs: False
+CXXRTL likely has bugs: True
+Unclear cases: 4
+
+SAMPLE DIFFERENCES (First 5)
+-----------------------------
+
+Cycle 11:
+Verilator:  20200644E8AEC00AD902516E60001632AA507FEF99E8000FFB8A31A1DC2652525383B95712DCDF0007D
+Icarus:     20200644E8AEC00AD902516E60001632AA507FEF99E8000FFB8A31A1DC2652525383B95712DCDF0007D
+Diff:                                                                                          
+  Ground truth: verilator_icarus
+  Likely bug in: cxxrtl
+
+Cycle 13:
+Verilator:  151554ADA9691C1B8906F0000F80F4E34B701D6D620F007FFAB34801DCAC4500475777F72397D6A021F
+Icarus:     151554ADA9691C1B8906F0000F80F4E34B701D6D620F007FFAB34801DCAC4500475777F72397D6A021F
+Diff:                                                                                          
+  Ground truth: verilator_icarus
+  Likely bug in: cxxrtl
+
+Cycle 15:
+Verilator:  1010089220D18C04A20A3BB7EE003472AA5959E0B28C005FDB94240198E63A3A3B9FB954D51C1080089
+Icarus:     1010089220D18C04A20A3BC8EE003472AA5959E0B28C005FDB94240198E63A3A3B9FB954D51C1080089
+Diff:                             ^^                                                           
+  Ground truth: unknown
+  Likely bug in: unknown
+
+Cycle 16:
+Verilator:  3333F68783C0280B4B04ABB7EC42CCD2AE749DC9464C81CFCB86524AE50DBDBDBF6B76A4E7ECCDD0025
+Icarus:     3333F68783C0280B4B04ABC8EC42CCD2AE749DC9464C81CFCB86524AE50DBDBDBF6B76A4E7ECCDD0025
+Diff:                             ^^                                                           
+  Ground truth: verilator_cxxrtl
+  Likely bug in: icarus
+
+Cycle 25:
+Verilator:  2D2D54F2A83E540F530C3BE69C42C2834B647FFB83ED0037F2AED009D43A7A7A790913F716B83EC020F
+Icarus:     2D2D54F2A83E540F530C3BE69C42C2834B647FFB83ED0037F2AED009D43A7A7A790913F716B83EC020F
+Diff:                                                                                          
+  Ground truth: verilator_icarus
+  Likely bug in: cxxrtl
+
+... and 11 more differences (see bug_report.json)
+
+FILES
+-----
+Full report: comprehensive_300cycles_100mut/bugs/tribug_1125089309_1762278311/bug_report.json
+Test files: comprehensive_300cycles_100mut/bugs/tribug_1125089309_1762278311

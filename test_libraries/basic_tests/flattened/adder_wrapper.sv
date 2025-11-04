@@ -1,5 +1,3 @@
-`include "adder.sv"
-
 //------------------------------------------------------------------------------
 // Wrapper for adder
 // Flattens 2 inputs (4 bits) into `in_flat`,

@@ -1,4 +1,3 @@
-`include "numbers_relational.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for numbers_relational

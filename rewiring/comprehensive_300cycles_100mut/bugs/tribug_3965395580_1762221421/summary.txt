@@ -1,0 +1,48 @@
+
+Three-Way Simulator Comparison Bug Report
+==========================================
+Bug ID: tribug_3965395580_1762221421
+Seed: 3965395580
+Timestamp: 2025-11-04 01:57:01
+
+ARBITRATION VERDICT
+-------------------
+Unclear - no consistent agreement pattern
+Confidence: low
+
+AGREEMENT STATISTICS
+--------------------
+Total cycles: 102
+All three agree: 10 cycles
+Disagreements: 1 cycles
+Agreement rate: 9.80%
+
+DISAGREEMENT BREAKDOWN
+----------------------
+Verilator & Icarus agree (CXXRTL differs): 0
+Verilator & CXXRTL agree (Icarus differs): 0
+Icarus & CXXRTL agree (Verilator differs): 0
+All three differ: 1
+X-only differences (ignored): 91
+
+LIKELY BUG LOCATION
+-------------------
+Verilator likely has bugs: False
+Icarus likely has bugs: False
+CXXRTL likely has bugs: False
+Unclear cases: 1
+
+SAMPLE DIFFERENCES (First 5)
+-----------------------------
+
+Cycle 12:
+Verilator:  3636A6DAB7FF9C0638000AD260001512AE511F6E6007800000FA4411EE4FABAB38100157192B8C100A5
+Icarus:     3636A6DAB7FF9C0638000CF600001512AE511F6E6007800000FA4411EE4FABAB38100007192B8C100A5
+Diff:                            ^^^^                                            ^^            
+  Ground truth: unknown
+  Likely bug in: unknown
+
+FILES
+-----
+Full report: comprehensive_300cycles_100mut/bugs/tribug_3965395580_1762221421/bug_report.json
+Test files: comprehensive_300cycles_100mut/bugs/tribug_3965395580_1762221421

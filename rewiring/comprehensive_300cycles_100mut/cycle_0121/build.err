@@ -1,0 +1,132 @@
+%Warning-UNOPTFLAT: /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:43:12: Signal unoptimizable: Circular combinational logic: 'tb_top.dut.numbers_concat_repl_wrapper_in_flat'
+   43 | wire [5:0] numbers_concat_repl_wrapper_in_flat;
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    ... For warning description see https://verilator.org/warn/UNOPTFLAT?v=5.033
+                    ... Use "/* verilator lint_off UNOPTFLAT */" and lint_on around source to disable this message.
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:43:12:      Example path: tb_top.dut.numbers_concat_repl_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/numbers_concat_repl_wrapper.sv:18:14:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:44:13:      Example path: tb_top.dut.numbers_concat_repl_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:76:42:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:23:13:      Example path: tb_top.dut.const_arith_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/const_arith_wrapper.sv:20:14:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:24:13:      Example path: tb_top.dut.const_arith_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:77:50:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:25:13:      Example path: tb_top.dut.const_compare_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/const_compare_wrapper.sv:25:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:26:12:      Example path: tb_top.dut.const_compare_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:204:47:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:11:13:      Example path: tb_top.dut.arithmetic_reduce_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/unflattened/arithmetic_reduce.sv:21:27:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/arithmetic_reduce_wrapper.sv:16:14:      Example path: tb_top.dut.u_arithmetic_reduce_wrapper.complex_expr
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/arithmetic_reduce_wrapper.sv:18:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:12:12:      Example path: tb_top.dut.arithmetic_reduce_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:107:47:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:29:13:      Example path: tb_top.dut.const_conditional_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/const_conditional_wrapper.sv:22:14:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:30:13:      Example path: tb_top.dut.const_conditional_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:224:51:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:17:12:      Example path: tb_top.dut.bitwise_reduce_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/bitwise_reduce_wrapper.sv:17:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:18:12:      Example path: tb_top.dut.bitwise_reduce_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:379:71:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:41:12:      Example path: tb_top.dut.logical_op_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/logical_op_wrapper.sv:18:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:42:12:      Example path: tb_top.dut.logical_op_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:254:35:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:51:13:      Example path: tb_top.dut.shift_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/shift_wrapper.sv:17:14:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:52:13:      Example path: tb_top.dut.shift_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:204:47:      Example path: ASSIGNW
+%Warning-UNOPTFLAT: /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:56:12: Signal unoptimizable: Circular combinational logic: 'tb_top.dut.width_logic_wrapper_out_flat'
+   56 | wire [5:0] width_logic_wrapper_out_flat;
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:56:12:      Example path: tb_top.dut.width_logic_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:76:42:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:23:13:      Example path: tb_top.dut.const_arith_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/const_arith_wrapper.sv:20:14:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:24:13:      Example path: tb_top.dut.const_arith_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:77:50:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:25:13:      Example path: tb_top.dut.const_compare_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/const_compare_wrapper.sv:25:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:26:12:      Example path: tb_top.dut.const_compare_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:204:47:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:11:13:      Example path: tb_top.dut.arithmetic_reduce_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/unflattened/arithmetic_reduce.sv:21:27:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/arithmetic_reduce_wrapper.sv:16:14:      Example path: tb_top.dut.u_arithmetic_reduce_wrapper.complex_expr
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/arithmetic_reduce_wrapper.sv:18:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:12:12:      Example path: tb_top.dut.arithmetic_reduce_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:107:47:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:29:13:      Example path: tb_top.dut.const_conditional_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/const_conditional_wrapper.sv:22:14:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:30:13:      Example path: tb_top.dut.const_conditional_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:224:51:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:17:12:      Example path: tb_top.dut.bitwise_reduce_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/bitwise_reduce_wrapper.sv:17:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:18:12:      Example path: tb_top.dut.bitwise_reduce_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:379:71:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:41:12:      Example path: tb_top.dut.logical_op_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/logical_op_wrapper.sv:18:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:42:12:      Example path: tb_top.dut.logical_op_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:254:35:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:51:13:      Example path: tb_top.dut.shift_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/shift_wrapper.sv:17:14:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:52:13:      Example path: tb_top.dut.shift_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:204:47:      Example path: ASSIGNW
+%Warning-UNOPTFLAT: /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:50:12: Signal unoptimizable: Circular combinational logic: 'tb_top.dut.select_wrapper_out_flat'
+   50 | wire [8:0] select_wrapper_out_flat;
+      |            ^~~~~~~~~~~~~~~~~~~~~~~
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:50:12:      Example path: tb_top.dut.select_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:77:50:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:25:13:      Example path: tb_top.dut.const_compare_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/const_compare_wrapper.sv:25:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:26:12:      Example path: tb_top.dut.const_compare_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:204:47:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:11:13:      Example path: tb_top.dut.arithmetic_reduce_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/unflattened/arithmetic_reduce.sv:21:27:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/arithmetic_reduce_wrapper.sv:16:14:      Example path: tb_top.dut.u_arithmetic_reduce_wrapper.complex_expr
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/arithmetic_reduce_wrapper.sv:18:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:12:12:      Example path: tb_top.dut.arithmetic_reduce_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:107:47:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:29:13:      Example path: tb_top.dut.const_conditional_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/const_conditional_wrapper.sv:22:14:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:30:13:      Example path: tb_top.dut.const_conditional_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:224:51:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:17:12:      Example path: tb_top.dut.bitwise_reduce_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/bitwise_reduce_wrapper.sv:17:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:18:12:      Example path: tb_top.dut.bitwise_reduce_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:379:71:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:41:12:      Example path: tb_top.dut.logical_op_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/logical_op_wrapper.sv:18:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:42:12:      Example path: tb_top.dut.logical_op_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:254:35:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:51:13:      Example path: tb_top.dut.shift_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/shift_wrapper.sv:17:14:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:52:13:      Example path: tb_top.dut.shift_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:204:47:      Example path: ASSIGNW
+%Warning-UNOPTFLAT: /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:42:12: Signal unoptimizable: Circular combinational logic: 'tb_top.dut.logical_op_wrapper_out_flat'
+   42 | wire [2:0] logical_op_wrapper_out_flat;
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:42:12:      Example path: tb_top.dut.logical_op_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:254:35:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:51:13:      Example path: tb_top.dut.shift_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/shift_wrapper.sv:17:14:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:52:13:      Example path: tb_top.dut.shift_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:204:47:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:11:13:      Example path: tb_top.dut.arithmetic_reduce_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/unflattened/arithmetic_reduce.sv:21:27:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/arithmetic_reduce_wrapper.sv:16:14:      Example path: tb_top.dut.u_arithmetic_reduce_wrapper.complex_expr
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/arithmetic_reduce_wrapper.sv:18:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:12:12:      Example path: tb_top.dut.arithmetic_reduce_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:107:47:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:29:13:      Example path: tb_top.dut.const_conditional_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/const_conditional_wrapper.sv:22:14:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:30:13:      Example path: tb_top.dut.const_conditional_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:224:51:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:17:12:      Example path: tb_top.dut.bitwise_reduce_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/bitwise_reduce_wrapper.sv:17:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:18:12:      Example path: tb_top.dut.bitwise_reduce_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:379:71:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:41:12:      Example path: tb_top.dut.logical_op_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/logical_op_wrapper.sv:18:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/comprehensive_300cycles_100mut/cycle_0121/top.sv:42:12:      Example path: tb_top.dut.logical_op_wrapper_out_flat
+%Error: Exiting due to 4 warning(s)

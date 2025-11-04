@@ -1,4 +1,3 @@
-`include "numbers_bitwise_logic.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for numbers_bitwise_logic

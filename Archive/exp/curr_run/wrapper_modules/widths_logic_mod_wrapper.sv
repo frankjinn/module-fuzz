@@ -1,4 +1,3 @@
-`include "widths_logic_mod.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for widths_logic_mod

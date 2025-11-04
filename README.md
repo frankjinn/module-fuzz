@@ -1,539 +1,194 @@
-# Module Fuzzing System
+# module-fuzz
 
-A comprehensive hardware verification system that automatically generates, mutates, and tests SystemVerilog modules using advanced fuzzing techniques and Verilator simulation.
+Differential fuzzing framework for SystemVerilog modules with multi-simulator validation.
 
-## 🚀 Overview
+## 📚 Documentation
 
-This system takes LLM-generated SystemVerilog test files and transforms them into a structured test library for automated fuzzing. It generates wrapper modules, creates comprehensive testbenches, and runs extensive mutation-based testing to verify hardware designs.
+**All documentation is now in the [`docs/`](docs/) directory.**
 
-## 📁 Project Structure
+**Start here:** [docs/TRIPLE_SIMULATOR.md](docs/TRIPLE_SIMULATOR.md) ⭐
+
+### Quick Links
+
+- [Triple Simulator Guide](docs/TRIPLE_SIMULATOR.md) - **Recommended:** Verilator + Icarus + CXXRTL with arbitration
+- [Documentation Index](docs/README.md) - Navigate all docs
+- [Workflow Guide](docs/WORKFLOW.md) - Development process
+- [Test Report](docs/TRIPLE_SIMULATOR_TEST_REPORT.md) - Verification results
+
+## 🚀 Quick Start (5 minutes)
+
+### Option 1: Docker (Recommended)
+
+```bash
+# Build image with all simulators
+docker build -t modulefuzz:latest .
+
+# Run container
+docker run -it modulefuzz:latest
+
+# Inside container - run triple simulator
+cd /opt/module-fuzz/rewiring
+python scripts/tri_fuzz_and_sim_loop.py \
+  ../test_libraries/basic_tests/flattened/ \
+  --rtl-dir ../test_libraries/basic_tests/unflattened/ \
+  --incdir ../test_libraries/basic_tests/flattened/ \
+  --incdir ../test_libraries/basic_tests/unflattened/ \
+  --max-cycles 10
+```
+
+### Option 2: Quick Start Script
+
+```bash
+./quick_start.sh
+```
+
+## 🎯 What Does This Do?
+
+**module-fuzz** validates hardware designs by:
+
+1. **Mutating** Verilog designs (rewiring module connections)
+2. **Simulating** with multiple independent simulators
+3. **Comparing** outputs to find disagreements
+4. **Arbitrating** using 2-of-3 voting to identify bugs
+
+### Triple Simulator (NEW! ✨)
+
+Run your design through **three independent simulators**:
+
+- **Verilator** - Fast C++ compiler-based simulator
+- **Icarus Verilog** - Traditional event-driven simulator  
+- **Yosys CXXRTL** - Cycle-based C++ simulator
+
+When simulators disagree, automatic **majority voting** determines which is likely correct.
+
+## 📊 Features
+
+| Feature | Triple Sim | Dual Sim | Single Sim |
+|---------|-----------|----------|------------|
+| Simulators | 3 | 2 | 1 |
+| Bug Detection | ✅ High confidence | ✅ Medium | ❌ None |
+| Arbitration | ✅ 2-of-3 voting | ❌ | ❌ |
+| Speed | Slower | Medium | Fast |
+
+## 🏗️ Project Structure
 
 ```
 module-fuzz/
-├── llm_preprocess/           # LLM file processing and wrapper generation
-│   ├── llm_to_sv.py         # Split multi-module files into individual files
-│   ├── generate_wrappers.py  # Generate flattened wrapper modules
-│   └── module_library/       # Processed LLM-generated modules
-├── test_libraries/           # Pre-built test libraries for quick start
-│   ├── basic_tests/          # Basic arithmetic operations (adder, multiplier, subtractor)
-│   │   ├── flattened/        # Wrapper modules
-│   │   └── unflattened/      # Base modules
-│   └── const_tests/          # Constant operations (logic, arithmetic, comparison)
+├── docs/                      # 📚 All documentation here
+│   ├── README.md             # Documentation index
+│   ├── TRIPLE_SIMULATOR.md   # ⭐ Start here
+│   └── ...
+│
+├── rewiring/                  # Fuzzing engine
+│   ├── scripts/
+│   │   ├── tri_fuzz_and_sim_loop.py    # Triple simulator
+│   │   ├── dual_fuzz_and_sim_loop.py   # Dual simulator
+│   │   ├── tri_simulator.py            # Comparison engine
+│   │   └── fuzz_state.py               # Mutation engine
+│   └── examples/
+│       └── simple_tri_sim.py
+│
+├── test_libraries/           # Test modules
+│   └── basic_tests/
 │       ├── flattened/        # Wrapper modules
 │       └── unflattened/      # Base modules
-├── coverage_library/          # Generated coverage library modules
-├── coverage_library_IO_flattened/  # Flattened wrapper modules
-├── test_library_structured/   # Final structured test library
-│   ├── flattened/            # Wrapper modules for fuzzing
-│   └── unflattened/          # Base modules for includes
-├── rewiring/                 # Core fuzzing engine (optimized and reorganized)
-│   ├── scripts/              # Main scripts and utilities
-│   │   ├── dual_fuzz_and_sim_loop.py  # Dual simulator comparison (Verilator + Icarus)
-│   │   ├── dual_simulator.py          # Dual simulator core functions
-│   │   ├── fuzz_and_sim_loop.py      # Single simulator fuzzing loop
-│   │   ├── fuzz_state.py             # Core fuzzing logic and state management
-│   │   ├── IO_map.py                 # I/O port mapping utilities
-│   │   └── verilator_coverage.py     # Coverage analysis tools
-│   ├── modules/              # SystemVerilog module libraries
-│   │   └── test_library_structured/
-│   │       ├── flattened/            # Wrapper modules
-│   │       └── unflattened/          # Original modules
-│   ├── examples/             # Working example scripts
-│   │   ├── run_dual_sim_example.py  # Full-featured dual sim example
-│   │   └── simple_dual_sim.py       # Simple demo script
-│   └── docs/                 # Documentation and notebooks
-└── Archive/                  # Archived test results
+│
+├── dockerfile                # Container with all tools
+└── quick_start.sh           # Automated setup
 ```
 
-## 🐳 Docker (Recommended)
+## 🔧 Requirements
 
-To ensure consistent toolchains and paths, run the project inside the provided Docker container. All examples below use absolute paths under `/opt/module-fuzz`, which exist inside the container.
+### Docker (Easiest)
+- Docker 20.10+
+- 4GB RAM
+- 10GB disk space
+
+### Manual Installation
+- Python 3.8+
+- Verilator 5.0+
+- Icarus Verilog 11.0+
+- Yosys 0.30+ (for CXXRTL)
+- C++ compiler (clang++ or g++)
+
+## 📖 Usage Examples
+
+### Basic Triple Simulation
 
 ```bash
-# From the repo root, build the image (note the lowercase dockerfile name)
-docker build -t module-fuzz:latest -f dockerfile .
-
-# Option A: Use the repo cloned in the image
-docker run --rm -it -p 8888:8888 module-fuzz:latest bash
-
-# Option B (recommended for local edits): bind-mount your local repo
-docker run --rm -it -p 8888:8888 -v "$PWD":/opt/module-fuzz module-fuzz:latest bash
-
-# Inside the container, run all commands from the rewiring folder
-cd /opt/module-fuzz/rewiring
-```
-
-Note: The container starts Jupyter by default. If you prefer Jupyter, simply run the container without overriding the command and open `http://localhost:8888`.
-
-## 🔄 Complete Workflow
-
-### **Option 1: Full LLM Processing Workflow**
-**Step 1: Upload LLM-Generated Test Files**
-
-Place your LLM-generated SystemVerilog files in the `llm_preprocess/` directory. These files should contain one or more module definitions.
-
-**Example LLM-generated file:**
-```systemverilog
-// Arithmetic operations module
-module const_arith (
-    input wire [7:0] a,
-    input wire [7:0] b,
-    input wire [2:0] op,
-    output wire [7:0] result
-);
-    // ... module implementation
-endmodule
-
-// Logic operations module  
-module const_logic (
-    input wire [3:0] in1,
-    input wire [3:0] in2,
-    output wire [3:0] out
-);
-    // ... module implementation
-endmodule
-```
-
-**Step 2: Generate Individual Module Files**
-
-Use `llm_to_sv.py` to split multi-module files into individual files:
-
-```bash
-cd llm_preprocess
-python3 llm_to_sv.py your_llm_file.sv -o module_library -t llm
-```
-
-**Options:**
-- `-o, --output-dir`: Output directory (default: `modules_out`)
-- `-t, --tag`: Optional filename prefix to avoid conflicts
-
-**Result:** Each module gets its own `.sv` file in the `module_library/` directory.
-
-**Step 3: Generate Flattened Wrapper Modules**
-
-Use `generate_wrappers.py` to create flattened wrapper modules:
-
-```bash
-python3 generate_wrappers.py module_library/ coverage_library_IO_flattened/
-```
-
-**What this does:**
-- Scans all `.sv` files in the input directory
-- Parses port declarations (inputs/outputs)
-- Generates wrapper modules that:
-  - Concatenate all inputs into a single `in_flat` bus
-  - Concatenate all outputs into a single `out_flat` bus
-  - Automatically include the original module file
-  - Wire the flattened buses to individual ports
-
-**Example generated wrapper:**
-```systemverilog
-`include "const_arith.sv"
-
-module const_arith_wrapper (
-    input wire [18:0] in_flat,    // All inputs concatenated
-    output wire [7:0] out_flat    // All outputs concatenated
-);
-    // Extract individual inputs
-    wire [7:0] a = in_flat[17:10];
-    wire [7:0] b = in_flat[9:2];
-    wire [2:0] op = in_flat[1:0];
-    
-    // Instantiate original module
-    const_arith inst (
-        .a(a), .b(b), .op(op), .result(result)
-    );
-    
-    // Concatenate outputs
-    assign out_flat = result;
-endmodule
-```
-
-**⚠️ CRITICAL: Wrapper generation is ESSENTIAL for the fuzzing system to work!**
-The `generate_wrappers.py` script creates the standardized I/O interfaces that enable the fuzzer to manipulate module connections. **Never skip this step.**
-
-**Step 4: Organize Test Library Structure**
-
-Create the final test library structure:
-
-```bash
-mkdir -p test_library_structured/{flattened,unflattened}
-
-# Copy wrapper modules (for fuzzing)
-cp coverage_library_IO_flattened/*.sv test_library_structured/flattened/
-
-# Copy base modules (for includes)
-cp module_library/*.sv test_library_structured/unflattened/
-```
-
-**Final structure:**
-```
-test_library_structured/
-├── flattened/           # Wrapper modules used by fuzzer
-│   ├── const_arith_wrapper.sv
-│   ├── const_logic_wrapper.sv
-│   └── ...
-└── unflattened/        # Base modules for include directives
-    ├── const_arith.sv
-    ├── const_logic.sv
-    └── ...
-```
-
-### **Option 2: Quick Start with Pre-built Test Libraries**
-
-**Skip the LLM processing steps and use existing test libraries:**
-
-```bash
-# Copy a pre-built test library
-cp -r test_libraries/const_tests test_library_structured/
-
-# Or copy basic tests
-cp -r test_libraries/basic_tests test_library_structured/
-```
-
-**Available pre-built libraries:**
-- **`basic_tests/`**: Simple arithmetic operations (adder, multiplier, subtractor)
-- **`const_tests/`**: Comprehensive constant operations (logic, arithmetic, comparison, etc.)
-
-### **Step 5: Run Fuzzing Tests**
-
-Run the following commands inside the Docker container (see the Docker section above).
-
-**⚠️ IMPORTANT: Run from the rewiring/scripts directory with proper module paths**
-
-```bash
-cd rewiring/scripts
-
-# Dual Simulator Testing (Recommended - finds simulator bugs)
-python3 dual_fuzz_and_sim_loop.py ../modules/test_library_structured/flattened/ \
-    -o dual_test_results \
-    -c 5 \
-    --tb-cycles 50 \
-    --mutations-per-cycle 20 \
-    --rtl-dir ../modules/test_library_structured/flattened/ \
-    --incdir ../modules/test_library_structured/unflattened/
-
-# Single Simulator Testing (Faster - validates RTL generation)
-python3 fuzz_and_sim_loop.py ../modules/test_library_structured/flattened/ \
-    -o single_test_results \
-    -c 10 \
-    --tb-cycles 100 \
-    --mutations-per-cycle 30 \
-    --rtl-dir ../modules/test_library_structured/flattened/ \
-    --incdir ../modules/test_library_structured/unflattened/
-```
-
-**❌ Common Mistake (Relative Paths):**
-```bash
-# This will NOT work from rewiring folder
-python3 fuzz_and_sim_loop.py test_library_structured/flattened -o output/runs_tb ...
-```
-
-**✅ Correct Approach (Absolute Paths):**
-```bash
-# This WILL work from rewiring folder
-python3 fuzz_and_sim_loop.py /opt/module-fuzz/rewiring/test_library_structured/flattened -o /opt/module-fuzz/rewiring/output/runs_tb ...
-```
-
-## 🎯 Fuzzing Engine Features
-
-### **Core Capabilities**
-- **Linear Rewiring**: Sequential module connections and mutations
-- **Cyclical Rewiring**: Creates and resolves combinational loops
-- **Automatic Register Insertion**: Breaks combinational loops with registers
-- **Consistency Checking**: Validates internal data structures after mutations
-- **Error Tolerance**: Continues running despite individual cycle failures
-
-### **Mutation Strategies**
-- **Linear Rewiring**: Sequential module connections and mutations
-- **Cyclical Rewiring**: Creates and resolves combinational loops
-- **Tree Merging**: Combines module trees for complex topologies
-- **Depth Changes**: **Result from mutations**, not a separate strategy - occurs when mutations alter module hierarchy relationships
-
-### **Simulation & Verification**
-- **Verilator Integration**: Automatic SystemVerilog compilation and simulation
-- **Testbench Generation**: Creates comprehensive testbenches with randomized inputs
-- **Coverage Tracking**: Monitors mutation success rates and consistency
-- **Detailed Logging**: Per-cycle logs, error summaries, and performance metrics
-
-## 📊 Command Line Options
-
-### **Basic Parameters**
-- `flattened_lib`: Path to flattened wrapper modules (use absolute paths)
-- `-o, --outdir`: Output directory for test results (use absolute paths)
-- `-t, --top-name`: Name of the generated top module
-- `-m, --mutations-per-cycle`: Maximum mutations per fuzzing cycle
-- `-k, --check-every`: Run consistency checks every N mutations
-- `-c, --max-cycles`: Number of fuzzing cycles to run
-
-### **Testbench Configuration**
-- `--tb-cycles`: Number of simulation cycles per testbench
-- `--tb-clk-period`: Clock period for simulation
-- `--tb-hold-reset`: Reset assertion length in cycles
-
-### **Verilator Options**
-- `--verilator`: Custom path to Verilator binary
-- `--verilator-flags`: Additional Verilator compilation flags
-- `--incdir`: Include directories for module resolution (use absolute paths)
-- `--rtl-dir`: Additional RTL source directories
-
-### **Advanced Options**
-- `--seed`: Base seed for reproducible results
-- `--quiet`: Reduce console output
-- `--rtl-recursive`: Recursively search RTL directories
-
-## 🔧 Prerequisites
-
-### **Required Software**
-- **Python 3.8+**: Core scripting and automation
-- **Verilator**: SystemVerilog compilation and simulation
-- **Git**: Version control (optional but recommended)
-
-### **System Requirements**
-- **Memory**: 4GB+ RAM for large test runs
-- **Storage**: 10GB+ free space for test results
-- **OS**: Linux, macOS, or Windows with WSL
-
-### **Installation**
-```bash
-# Install Verilator
-# Ubuntu/Debian
-sudo apt-get install verilator
-
-# macOS
-brew install verilator
-
-# Or build from source
-git clone https://github.com/verilator/verilator
-cd verilator
-autoconf
-./configure
-make
-sudo make install
-```
-
-## 📈 Example Test Runs
-
-### **Quick Start with Pre-built Library**
-```bash
-# The test library is already included in rewiring/modules/
-cd rewiring/scripts
-
-# Quick dual simulation test (recommended)
-python3 dual_fuzz_and_sim_loop.py ../modules/test_library_structured/flattened/ \
-    -o quick_dual_test \
-    -c 2 \
-    --tb-cycles 10 \
-    --mutations-per-cycle 5 \
-    --rtl-dir ../modules/test_library_structured/flattened/ \
-    --incdir ../modules/test_library_structured/unflattened/
-
-# Quick single simulation test
-python3 fuzz_and_sim_loop.py ../modules/test_library_structured/flattened/ \
-    -o quick_single_test \
-    -c 5 \
-    --tb-cycles 20 \
-    --mutations-per-cycle 10 \
-    --rtl-dir ../modules/test_library_structured/flattened/ \
-    --incdir ../modules/test_library_structured/unflattened/
-```
-
-### **Dual Simulation Testing (Recommended)**
-```bash
-# Dual simulation: Compare Verilator vs Icarus Verilog
-cd rewiring/scripts
-python3 dual_fuzz_and_sim_loop.py ../modules/test_library_structured/flattened/ \
-    -o dual_validation_test \
-    -c 5 \
-    --tb-cycles 50 \
-    --mutations-per-cycle 15 \
-    --rtl-dir ../modules/test_library_structured/flattened/ \
-    --incdir ../modules/test_library_structured/unflattened/
-```
-
-### **Comprehensive Test Run**
-```bash
-# Large-scale dual simulation: 20 cycles, 50 mutations each
-cd rewiring/scripts
-python3 dual_fuzz_and_sim_loop.py ../modules/test_library_structured/flattened/ \
-    -o comprehensive_dual_test \
-    -c 20 \
-    --tb-cycles 100 \
-    --mutations-per-cycle 50 \
-    --rtl-dir ../modules/test_library_structured/flattened/ \
-    --incdir ../modules/test_library_structured/unflattened/
-```
-
-### **Debug/Development Mode**
-```bash
-# Single cycle with detailed output
-python3 fuzz_and_sim_loop.py \
-    /opt/module-fuzz/rewiring/test_library_structured/flattened \
-    -o /opt/module-fuzz/rewiring/output/debug_run \
-    -t top \
-    -m 5 \
-    -c 1 \
-    --tb-cycles 5 \
-    --incdir /opt/module-fuzz/rewiring/test_library_structured/unflattened/ \
-    --incdir /opt/module-fuzz/rewiring/test_library_structured/flattened/
-```
-
-## 📋 Output Structure
-
-### **Dedicated Output Folder**
-All test results are automatically saved to the dedicated `rewiring/output/` folder, which is gitignored to prevent accidental commits of test data.
-
-### **Per-Cycle Results**
-```
-rewiring/output/
-├── quick_test/              # Quick validation test results
-│   └── cycle_0000/
-│       ├── top.sv              # Generated top module
-│       ├── tb_top.sv           # Generated testbench
-│       ├── summary.json        # Cycle results summary
-│       └── error_log.json      # Error details (if any)
-├── comprehensive_test/       # Large-scale test results
-│   ├── cycle_0000/
-│   ├── cycle_0001/
-│   └── ...
-├── debug_run/               # Debug/development test results
-│   └── cycle_0000/
-└── error_summary.json       # Overall run summary (if errors occur)
-```
-
-### **Summary Files**
-- **`summary.json`**: Per-cycle mutation counts, build status, simulation results
-- **`error_log.json`**: Detailed error information for failed cycles
-- **`error_summary.json`**: Overall success/failure statistics
-
-### **Output Folder Management**
-- **Automatic Archiving**: Existing output folders are automatically archived with timestamps before new tests
-- **Clean Organization**: All test results are organized in the dedicated `rewiring/output/` folder
-- **Git Safety**: The output folder is gitignored to prevent accidental commits of test data
-- **Easy Cleanup**: Remove all test results with: `rm -rf rewiring/output/*`
-
-## 🚨 Troubleshooting
-
-### **Common Issues**
-
-**Verilator Not Found**
-```bash
-# Set environment variable
-export VERILATOR_ROOT=/path/to/verilator
-export PATH=$VERILATOR_ROOT/bin:$PATH
-
-# Or specify path explicitly
---verilator /path/to/verilator
-```
-
-**Module Resolution Errors**
-```bash
-# Ensure include directories are specified with absolute paths
---incdir /opt/module-fuzz/rewiring/test_library_structured/unflattened/
---incdir /opt/module-fuzz/rewiring/test_library_structured/flattened/
-
-# Add Verilator flags to suppress warnings
---verilator-flags="--Wno-MODDUP --Wno-WIDTHTRUNC"
-```
-
-**Path Resolution Issues**
-```bash
-# ❌ DON'T use relative paths from rewiring folder
-python3 fuzz_and_sim_loop.py test_library_structured/flattened ...
-
-# ✅ DO use absolute paths from rewiring folder
-python3 fuzz_and_sim_loop.py /opt/module-fuzz/rewiring/test_library_structured/flattened ...
-```
-
-**Permission Errors**
-```bash
-# Check file permissions
-chmod -R 755 test_library_structured/
-chmod -R 755 output/
-```
-
-### **Debug Mode**
-```bash
-# Enable verbose output
-python3 fuzz_and_sim_loop.py ... --quiet=false
-
-# Check individual components
-python3 -c "import fuzz_state; print('Fuzz state OK')"
-verilator --version
-```
-
-## 🔄 Automation & CI/CD
-
-### **Batch Processing**
-```bash
-#!/bin/bash
-# Process multiple LLM files
-for file in llm_preprocess/*.sv; do
-    echo "Processing $file..."
-    python3 llm_preprocess/llm_to_sv.py "$file" -o modules_out -t $(basename "$file" .sv)
-done
-
-# Generate wrappers
-python3 llm_preprocess/generate_wrappers.py modules_out/ coverage_library_IO_flattened/
-
-# Run fuzzing tests
 cd rewiring
-python3 fuzz_and_sim_loop.py \
-    /opt/module-fuzz/rewiring/test_library_structured/flattened \
-    -o /opt/module-fuzz/rewiring/output/automated_test_run \
-    -t top \
-    -m 50 \
-    -c 10 \
-    --tb-cycles 15 \
-    --incdir /opt/module-fuzz/rewiring/test_library_structured/unflattened/ \
-    --incdir /opt/module-fuzz/rewiring/test_library_structured/flattened/
+python scripts/tri_fuzz_and_sim_loop.py \
+  ../test_libraries/basic_tests/flattened/ \
+  --rtl-dir ../test_libraries/basic_tests/unflattened/ \
+  --incdir ../test_libraries/basic_tests/flattened/ \
+  --incdir ../test_libraries/basic_tests/unflattened/ \
+  --max-cycles 100
 ```
 
-### **Scheduled Testing**
+### With Custom Options
+
 ```bash
-# Add to crontab for daily testing
-0 2 * * * cd /opt/module-fuzz/rewiring && python3 fuzz_and_sim_loop.py /opt/module-fuzz/rewiring/test_library_structured/flattened -o /opt/module-fuzz/rewiring/output/daily_test -t top -m 20 -c 5 --tb-cycles 10 --incdir /opt/module-fuzz/rewiring/test_library_structured/unflattened/ --incdir /opt/module-fuzz/rewiring/test_library_structured/flattened/ --verilator-flags="--timescale 1ns/1ps --Wno-WIDTHTRUNC --Wno-MODDUP"
+python scripts/tri_fuzz_and_sim_loop.py \
+  path/to/modules/ \
+  --rtl-dir path/to/base_modules/ \
+  --incdir path/to/modules/ \
+  --incdir path/to/base_modules/ \
+  --max-cycles 500 \
+  --mutations-per-cycle 50 \
+  --tb-cycles 1000 \
+  --outdir my_results
 ```
 
-## 📚 Advanced Usage
+### Fallback to Dual Sim
 
-### **Custom Mutation Strategies**
-Extend `fuzz_state.py` to add new mutation types:
-```python
-def custom_mutation_strategy(self):
-    # Implement custom mutation logic
-    pass
+```bash
+# Run with --yosys-optional to fall back if CXXRTL unavailable
+python scripts/tri_fuzz_and_sim_loop.py \
+  modules/ \
+  --yosys-optional \
+  --max-cycles 100
 ```
 
-### **Custom Testbench Generation**
-Modify testbench generation in `fuzz_state.py`:
-```python
-def generate_custom_testbench(self, **kwargs):
-    # Custom testbench logic
-    pass
+## 📈 Results
+
+When complete, check:
+
+```bash
+# View bug summary
+cat runs_triple/bug_summary.json
+
+# Check arbitration results
+grep -r "verdict" runs_triple/bugs/
+
+# View cycle summaries
+cat runs_triple/cycle_*/summary.json
 ```
 
-### **Integration with Other Tools**
-- **Coverage Tools**: Integrate with coverage analysis tools
-- **Formal Verification**: Add formal property checking
-- **Performance Analysis**: Measure mutation effectiveness
+## ✅ Status
+
+**Production Ready** (November 2025)
+
+- ✅ Triple simulator fully functional
+- ✅ All three simulators produce identical outputs on test suite
+- ✅ Arbitration logic verified
+- ✅ Comprehensive documentation
+
+See [docs/TRIPLE_SIMULATOR_TEST_REPORT.md](docs/TRIPLE_SIMULATOR_TEST_REPORT.md) for test results.
 
 ## 🤝 Contributing
 
-1. **Fork** the repository
-2. **Create** a feature branch
-3. **Implement** your changes
-4. **Test** thoroughly with various module types
-5. **Submit** a pull request with detailed description
+See [docs/WORKFLOW.md](docs/WORKFLOW.md) for development workflow.
 
-## 🆘 Support
+## 📝 License
 
-For issues and questions:
-1. Check the troubleshooting section above
-2. Review existing GitHub issues
-3. Create a new issue with detailed error information
-4. Include system details, error logs, and reproduction steps
+See LICENSE file for details.
+
+## 🙏 Credits
+
+- **Yosys CXXRTL** - https://github.com/YosysHQ/yosys
+- **Verilator** - https://www.veripool.org/verilator/
+- **Icarus Verilog** - http://iverilog.icarus.com/
 
 ---
 
-**Happy Fuzzing! 🎯✨**
+**For detailed documentation, visit [`docs/`](docs/) directory** 📚

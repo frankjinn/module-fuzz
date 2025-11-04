@@ -1,4 +1,3 @@
-`include "widths_partselect.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for widths_partselect

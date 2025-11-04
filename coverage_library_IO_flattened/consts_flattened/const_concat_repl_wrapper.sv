@@ -1,4 +1,3 @@
-`include "const_concat_repl.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for const_concat_repl

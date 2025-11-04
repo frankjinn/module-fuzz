@@ -1,0 +1,24 @@
+%Warning-WIDTHEXPAND: /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/unflattened/partselect.sv:18:32: Bit extraction of var[15:0] requires 4 bit index, not 3 bits.
+                                                                                                                     : ... note: In instance 'tb_top.dut.u_partselect_wrapper.u_partselect'
+   18 |     assign dynamic_ps = data_in[idx +: 4];
+      |                                ^
+                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.033
+                      ... Use "/* verilator lint_off WIDTHEXPAND */" and lint_on around source to disable this message.
+%Warning-ASCRANGE: /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/constant_wrapper.sv:7:17: Ascending bit range vector: left < right of bit range: [-1:0]
+                                                                                                                     : ... note: In instance 'tb_top.dut.u_constant_wrapper'
+    7 |     input  wire [-1:0] in_flat,
+      |                 ^
+%Warning-WIDTHEXPAND: /opt/module-fuzz/rewiring/test_comprehensive_SUCCESS/cycle_0001/top.sv:896:6: Input port connection 'in_flat' expects 2 bits on the pin connection, but pin connection's VARREF 'constant_wrapper_in_flat' generates 1 bits.
+                                                                                                  : ... note: In instance 'tb_top.dut'
+  896 |     .in_flat(constant_wrapper_in_flat),
+      |      ^~~~~~~
+%Error-UNSUPPORTED: /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/unflattened/reduce_case.sv:19:30: Unsupported tristate construct: XOR
+                                                                                                                    : ... note: In instance 'tb_top.dut.u_reduce_case_wrapper.u_reduce_case'
+   19 |                       (&( (b ^ 4'bzzzz) === 4'bzzzz ));                 
+      |                              ^
+%Error-UNSUPPORTED: /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/unflattened/reduce_case.sv:19:30: Unsupported tristate construct: XOR in function getEnExprBasedOnOriginalp
+   19 |                       (&( (b ^ 4'bzzzz) === 4'bzzzz ));                 
+      |                              ^
+%Error: Internal Error: /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/unflattened/reduce_case.sv:19:41: ../V3Ast.cpp:432: Null item passed to setOp2p
+   19 |                       (&( (b ^ 4'bzzzz) === 4'bzzzz ));                 
+      |                                         ^~~

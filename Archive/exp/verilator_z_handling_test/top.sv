@@ -1,5 +1,3 @@
-`include "adder_wrapper.sv"
-`include "multiplier_wrapper.sv"
 
 // Automatically generated top module
 module top (

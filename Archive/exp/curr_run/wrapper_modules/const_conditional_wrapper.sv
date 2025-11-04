@@ -1,4 +1,3 @@
-`include "const_conditional.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for const_conditional

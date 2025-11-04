@@ -1,4 +1,3 @@
-`include "sample_const_compare.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for const_compare

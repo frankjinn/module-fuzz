@@ -1,4 +1,3 @@
-`include "widths_union_mod.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for widths_union_mod

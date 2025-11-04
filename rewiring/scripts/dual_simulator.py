@@ -124,10 +124,11 @@ def parse_simulation_log(log_file: Path) -> Dict[int, Dict[str, str]]:
         return cycles
     
     # Compile regex patterns once for better performance
-    pattern1 = re.compile(r'CYCLE[=\s]*(\d+).*?IN[=\s]*([0-9a-fA-FXx]+).*?OUT[=\s]*([0-9a-fA-FXx]+)', re.IGNORECASE)
-    pattern2 = re.compile(r'CYCLE[=\s]*(\d+).*?OUT[=\s]*([0-9a-fA-FXx]+)', re.IGNORECASE)
-    pattern3 = re.compile(r'CYCLE[=\s]*(\d+).*?IN[=\s]*([0-9a-fA-FXx]+)', re.IGNORECASE)
-    pattern4 = re.compile(r'CYCLE[=\s]*(\d+)', re.IGNORECASE)
+    # Support both "CYCLE" and "CYC" (for CXXRTL), and both "OUT" and "out_flat"
+    pattern1 = re.compile(r'(?:CYCLE|CYC)[=\s]*(\d+).*?(?:IN|in_flat)[=\s]*(?:0x)?([0-9a-fA-FXx]+).*?(?:OUT|out_flat)[=\s]*(?:0x)?([0-9a-fA-FXx]+)', re.IGNORECASE)
+    pattern2 = re.compile(r'(?:CYCLE|CYC)[=\s]*(\d+).*?(?:OUT|out_flat)[=\s]*(?:0x)?([0-9a-fA-FXx]+)', re.IGNORECASE)
+    pattern3 = re.compile(r'(?:CYCLE|CYC)[=\s]*(\d+).*?(?:IN|in_flat)[=\s]*(?:0x)?([0-9a-fA-FXx]+)', re.IGNORECASE)
+    pattern4 = re.compile(r'(?:CYCLE|CYC)[=\s]*(\d+)', re.IGNORECASE)
     
     try:
         with log_file.open("r") as f:

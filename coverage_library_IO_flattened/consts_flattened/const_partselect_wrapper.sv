@@ -1,4 +1,3 @@
-`include "const_partselect.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for const_partselect

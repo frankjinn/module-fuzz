@@ -45,13 +45,13 @@ def run_simple_tri_sim_example():
         print(f"  ✗ Icarus Verilog not found: {e}")
         return 1
     
-    # Check CXXRTL
+    # Check CXXRTL (via Yosys)
     try:
-        vlog_bin, vsim_bin = tri_simulator.resolve_cxxrtl(None)
-        print(f"  ✓ CXXRTL found at: vlog={vlog_bin}, vsim={vsim_bin}")
+        yosys_bin, yosys_config_bin = tri_simulator.resolve_yosys(None)
+        print(f"  ✓ Yosys/CXXRTL found at: yosys={yosys_bin}, yosys-config={yosys_config_bin}")
         has_cxxrtl = True
     except SystemExit:
-        print(f"  ✗ CXXRTL not found - will use dual comparison only")
+        print(f"  ✗ Yosys/CXXRTL not found - will use dual comparison only")
         has_cxxrtl = False
     
     # Example usage
@@ -66,8 +66,8 @@ def run_simple_tri_sim_example():
     print("    --mutations-per-cycle 20")
     
     if not has_cxxrtl:
-        print("\n  Note: Add --cxxrtl-optional flag to run dual simulation")
-        print("        when CXXRTL is not available")
+        print("\n  Note: Add --yosys-optional flag to run dual simulation")
+        print("        when Yosys/CXXRTL is not available")
     
     print("\n[3] Key Features:")
     print("  • Three-way comparison: Verilator, Icarus, CXXRTL")

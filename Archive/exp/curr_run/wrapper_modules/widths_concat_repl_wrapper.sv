@@ -1,4 +1,3 @@
-`include "widths_concat_repl.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for widths_concat_repl

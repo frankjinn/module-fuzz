@@ -1,4 +1,3 @@
-`include "numbers_reduce_case.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for numbers_reduce_case

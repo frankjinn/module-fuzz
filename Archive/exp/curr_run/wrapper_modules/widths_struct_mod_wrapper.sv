@@ -1,4 +1,3 @@
-`include "widths_struct_mod.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for widths_struct_mod

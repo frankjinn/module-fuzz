@@ -1,4 +1,3 @@
-`include "numbers_logical_op.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for numbers_logical_op

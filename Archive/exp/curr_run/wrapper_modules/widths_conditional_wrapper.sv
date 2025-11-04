@@ -1,4 +1,3 @@
-`include "widths_conditional.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for widths_conditional

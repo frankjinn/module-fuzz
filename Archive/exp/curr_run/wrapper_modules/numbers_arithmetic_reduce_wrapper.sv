@@ -1,4 +1,3 @@
-`include "numbers_arithmetic_reduce.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for numbers_arithmetic_reduce

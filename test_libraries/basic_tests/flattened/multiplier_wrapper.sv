@@ -1,5 +1,3 @@
-`include "multiplier.sv"
-
 //------------------------------------------------------------------------------
 // Wrapper for multiplier
 // Flattens 2 inputs (4 bits) into `in_flat`,

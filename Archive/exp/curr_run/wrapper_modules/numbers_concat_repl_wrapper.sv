@@ -1,4 +1,3 @@
-`include "numbers_concat_repl.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for numbers_concat_repl

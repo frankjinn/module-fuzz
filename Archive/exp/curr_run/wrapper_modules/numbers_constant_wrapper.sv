@@ -1,4 +1,3 @@
-`include "numbers_constant.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for numbers_constant

@@ -1,4 +1,3 @@
-`include "widths_enum_mod.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for widths_enum_mod

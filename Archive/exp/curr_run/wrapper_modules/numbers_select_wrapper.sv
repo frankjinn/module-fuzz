@@ -1,4 +1,3 @@
-`include "numbers_select.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for numbers_select

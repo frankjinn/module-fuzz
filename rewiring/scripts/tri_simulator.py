@@ -82,13 +82,40 @@ def resolve_yosys(custom_path: str | None) -> tuple[str, str]:
     sys.exit(2)
 
 
+def parse_top_module_ports(top_sv: Path, tb_sv: Path) -> tuple[int, int, int]:
+    """
+    Parse top.sv and tb.sv to extract port widths and cycle count.
+    Returns (tb_cycles, in_flat_width, out_flat_width)
+    """
+    try:
+        top_content = top_sv.read_text()
+        
+        # Find in_flat and out_flat widths from top module
+        in_match = re.search(r'input\s+wire\s+\[(\d+):0\]\s+in_flat', top_content)
+        out_match = re.search(r'output\s+wire\s+\[(\d+):0\]\s+out_flat', top_content)
+        
+        in_width = int(in_match.group(1)) + 1 if in_match else 1
+        out_width = int(out_match.group(1)) + 1 if out_match else 1
+        
+        # Find tb_cycles from testbench
+        tb_content = tb_sv.read_text()
+        cycles_match = re.search(r'cycles\s*=\s*(\d+)\s*;', tb_content)
+        tb_cycles = int(cycles_match.group(1)) if cycles_match else 200
+        
+        return (tb_cycles, in_width, out_width)
+    except Exception as e:
+        print(f"[CXXRTL] Warning: Could not parse module ports: {e}")
+        return (200, 10, 11)  # Reasonable defaults
+
+
 def run_cxxrtl(yosys_bin: str,
                yosys_config_bin: str,
                cycle_dir: Path,
                top_name: str,
                tb_name: str,
                extra_sv: list[Path],
-               cxxrtl_flags: list[str]) -> tuple[bool, bool, int, Path]:
+               cxxrtl_flags: list[str],
+               seed: int = 0) -> tuple[bool, bool, int, Path]:
     """
     Build & run using Yosys CXXRTL backend:
       1) Use Yosys to convert Verilog to C++ (write_cxxrtl)
@@ -103,17 +130,20 @@ def run_cxxrtl(yosys_bin: str,
     cxxrtl_dir = cycle_dir / "cxxrtl_build"
     cxxrtl_dir.mkdir(exist_ok=True)
     
+    # Parse top and testbench modules to get port information and cycle count
+    tb_cycles, in_width, out_width = parse_top_module_ports(top_sv, tb_sv)
+    
     cxxrtl_cpp = cxxrtl_dir / "design.cpp"
     wrapper_cpp = cxxrtl_dir / "wrapper.cpp"
     executable = cxxrtl_dir / "cxxrtl_sim"
     
     # Step 1: Convert Verilog to C++ using Yosys
-    # Build Yosys command to read all sources and convert to CXXRTL
+    # IMPORTANT: Only synthesize the DUT (top), not the testbench
+    # The testbench has procedural timing (@posedge) that CXXRTL can't handle
     yosys_script = f"""
 read_verilog -sv {' '.join([str(p.absolute()) for p in extra_sv])}
 read_verilog -sv {top_sv.absolute()}
-read_verilog -sv {tb_sv.absolute()}
-hierarchy -top {tb_name}
+hierarchy -top {top_name}
 proc
 write_cxxrtl {cxxrtl_cpp.absolute()}
 """
@@ -137,43 +167,130 @@ write_cxxrtl {cxxrtl_cpp.absolute()}
         return (False, False, yosys_rc, cxxrtl_dir)
     
     # Step 2: Create C++ wrapper that runs simulation and logs output
+    # This wrapper replicates the testbench logic in C++
+    # Handle wide buses by using CXXRTL's native value types
     wrapper_code = f"""
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <cstdint>
+#include <sstream>
 #include "design.cpp"
 
 using namespace std;
 
+// Linear Congruential Generator (same as testbench)
+uint32_t lcg(uint32_t& state) {{
+    state = (state * 0x41C64E6D + 0x3039) & 0xFFFFFFFF;
+    return state;
+}}
+
+// Convert CXXRTL value to hex string for logging
+template<size_t Bits>
+string value_to_hex(const cxxrtl::value<Bits>& val) {{
+    ostringstream oss;
+    oss << hex << setfill('0');
+    // Get raw chunks and print in reverse order (MSB first)
+    const auto* chunks = val.data;
+    int num_chunks = (Bits + 31) / 32;
+    bool started = false;
+    for (int i = num_chunks - 1; i >= 0; i--) {{
+        if (started || chunks[i] != 0) {{
+            if (started) {{
+                oss << setw(8) << chunks[i];
+            }} else {{
+                oss << chunks[i];
+                started = true;
+            }}
+        }}
+    }}
+    if (!started) oss << "0";
+    return oss.str();
+}}
+
 int main() {{
-    cxxrtl_design::p_{tb_name} top;
+    cxxrtl_design::p_{top_name} dut;
     
     ofstream logfile("cxxrtl_sim.log");
+    if (!logfile.is_open()) {{
+        cerr << "Failed to open log file" << endl;
+        return 1;
+    }}
     
-    // Initial step
-    top.step();
+    // Simulation parameters  
+    const int cycles = {tb_cycles};
+    uint32_t rng_state = {seed};
     
-    // Run simulation - extract cycle count from testbench
-    // The testbench should finish on its own via $finish
-    for(int cycle = 0; cycle < 10000; ++cycle) {{
-        // Toggle clock
-        top.p_clk.set<bool>(false);
-        top.step();
-        top.p_clk.set<bool>(true);
-        top.step();
+    // Initialize - match testbench initialization exactly
+    dut.p_rst__n.set<bool>(false);
+    dut.p_clk.set<bool>(false);
+    dut.step();
+    
+    // Initialize input with first random value (before first clock)
+    // For wide buses, fill all chunks by calling LCG repeatedly (match testbench)
+    int num_input_chunks = ({in_width} + 31) / 32;
+    for (int chunk = 0; chunk < num_input_chunks; chunk++) {{
+        lcg(rng_state);
+        if (chunk < num_input_chunks - 1) {{
+            dut.p_in__flat.data[chunk] = rng_state;  // Full 32 bits
+        }} else {{
+            // Last chunk may be partial
+            int remaining_bits = {in_width} - (chunk * 32);
+            uint32_t mask = (remaining_bits >= 32) ? 0xFFFFFFFF : ((1U << remaining_bits) - 1);
+            dut.p_in__flat.data[chunk] = rng_state & mask;
+        }}
+    }}
+    
+    int cyc = 0;
+    
+    // The testbench logs on @(posedge clk) starting from the very first edge
+    // We need to match this exactly, including during reset
+    // TB behavior:
+    // - Init input with 1st random value
+    // - 1st posedge: log cyc=0 with 1st value
+    // - 1st negedge: wait (don't update input yet)
+    // - 2nd posedge: log cyc=1 with 1st value (same!)
+    // - 2nd negedge: NOW update input to 2nd value
+    // - 3rd posedge: log cyc=2 with 2nd value
+    // Reset is released after 2 clock cycles (4ns)
+    
+    for (int i = 0; i < cycles + 2; i++) {{
+        // Positive clock edge
+        dut.p_clk.set<bool>(true);
+        dut.step();
         
-        // Try to log outputs if available
-        // This is a generic approach - log what we can
-        try {{
-            // The testbench itself should do the logging via $display
-            // But CXXRTL doesn't support $display, so we exit here
-            // The testbench needs to be instrumented differently
-        }} catch(...) {{
-            // Ignore errors accessing signals
+        // Log on positive edge (match testbench @(posedge clk) behavior)
+        string out_hex = value_to_hex(dut.p_out__flat);
+        logfile << "CYC=" << dec << cyc << " out_flat=0x" << out_hex << endl;
+        cyc++;
+        
+        // Negative clock edge
+        dut.p_clk.set<bool>(false);
+        dut.step();
+        
+        // Release reset after 2 full clock cycles (after 2nd negedge, before 3rd posedge)
+        // Testbench: rst_n = 0 at t=0, rst_n = 1 at t=4ns (after 2 clock cycles)
+        if (i == 1) {{
+            dut.p_rst__n.set<bool>(true);
         }}
         
-        // Check for finish signal if available
-        // CXXRTL doesn't support $finish, so we rely on fixed cycle count
+        // Update inputs on negative edge (match testbench)
+        // NOTE: TB waits one negedge before entering the update loop,
+        // so the first input value is used for cycles 0 AND 1
+        // We skip updating on i==0 (first negedge) to match this
+        if (i > 0 && i < cycles + 1) {{
+            // For wide buses, fill all chunks by calling LCG repeatedly (match testbench)
+            for (int chunk = 0; chunk < num_input_chunks; chunk++) {{
+                lcg(rng_state);
+                if (chunk < num_input_chunks - 1) {{
+                    dut.p_in__flat.data[chunk] = rng_state;
+                }} else {{
+                    int remaining_bits = {in_width} - (chunk * 32);
+                    uint32_t mask = (remaining_bits >= 32) ? 0xFFFFFFFF : ((1U << remaining_bits) - 1);
+                    dut.p_in__flat.data[chunk] = rng_state & mask;
+                }}
+            }}
+        }}
     }}
     
     logfile.close();
@@ -191,7 +308,8 @@ int main() {{
             check=True
         )
         yosys_datdir = yosys_datdir_proc.stdout.strip()
-        yosys_include = f"{yosys_datdir}/include"
+        # CXXRTL headers are in backends/cxxrtl/runtime subdirectory
+        yosys_include = f"{yosys_datdir}/include/backends/cxxrtl/runtime"
     except Exception as e:
         print(f"[CXXRTL] Failed to get yosys datdir: {e}")
         return (False, False, 127, cxxrtl_dir)
@@ -285,6 +403,9 @@ def compare_three_simulators(verilator_log: Path,
         i_data = icarus_cycles.get(cycle, {"IN": "", "OUT": ""})
         m_data = cxxrtl_cycles.get(cycle, {"IN": "", "OUT": ""})
         
+        # Check if ANY simulator has X values in output
+        has_x = 'X' in v_data["OUT"].upper() or 'X' in i_data["OUT"].upper() or 'X' in m_data["OUT"].upper()
+        
         # Compare outputs (ignoring X differences)
         v_i_match = hex_values_match_ignoring_x(v_data["OUT"], i_data["OUT"])
         v_m_match = hex_values_match_ignoring_x(v_data["OUT"], m_data["OUT"])
@@ -293,6 +414,9 @@ def compare_three_simulators(verilator_log: Path,
         # Determine agreement pattern
         if v_i_match and v_m_match and i_m_match:
             agreement_counts["all_three"] += 1
+        elif has_x:
+            # If any simulator has X, count as X-only difference (not a real bug)
+            agreement_counts["x_only_differences"] += 1
         else:
             all_match = False
             
@@ -313,6 +437,11 @@ def compare_three_simulators(verilator_log: Path,
                 ground_truth = "unknown"
                 likely_bug_in = "unknown"
             
+            # Create visual diffs for all pairwise comparisons
+            visual_diff_v_i = create_visual_diff(v_data["OUT"], i_data["OUT"])
+            visual_diff_v_m = create_visual_diff(v_data["OUT"], m_data["OUT"])
+            visual_diff_i_m = create_visual_diff(i_data["OUT"], m_data["OUT"])
+            
             differences.append({
                 "cycle": cycle,
                 "verilator": {
@@ -331,6 +460,11 @@ def compare_three_simulators(verilator_log: Path,
                     "verilator_icarus": v_i_match,
                     "verilator_cxxrtl": v_m_match,
                     "icarus_cxxrtl": i_m_match
+                },
+                "visual_diffs": {
+                    "verilator_vs_icarus": visual_diff_v_i,
+                    "verilator_vs_cxxrtl": visual_diff_v_m,
+                    "icarus_vs_cxxrtl": visual_diff_i_m
                 },
                 "ground_truth": ground_truth,
                 "likely_bug_in": likely_bug_in
@@ -477,7 +611,7 @@ def save_tri_bug_report(cycle_dir: Path,
     with bug_report_file.open("w") as f:
         json.dump(bug_report, f, indent=2)
     
-    # Create human-readable summary
+    # Create human-readable summary with visual diffs
     summary_text = f"""
 Three-Way Simulator Comparison Bug Report
 ==========================================
@@ -503,6 +637,7 @@ Verilator & Icarus agree (CXXRTL differs): {agreement_status['counts']['verilato
 Verilator & CXXRTL agree (Icarus differs): {agreement_status['counts']['verilator_cxxrtl']}
 Icarus & CXXRTL agree (Verilator differs): {agreement_status['counts']['icarus_cxxrtl']}
 All three differ: {agreement_status['counts']['all_differ']}
+X-only differences (ignored): {agreement_status['counts']['x_only_differences']}
 
 LIKELY BUG LOCATION
 -------------------
@@ -511,6 +646,24 @@ Icarus likely has bugs: {arbitration['icarus_likely_correct'] < 0}
 CXXRTL likely has bugs: {arbitration['cxxrtl_likely_correct'] < 0}
 Unclear cases: {arbitration['unclear_cases']}
 
+SAMPLE DIFFERENCES (First 5)
+-----------------------------
+"""
+    
+    # Add visual diffs for first few differences
+    for i, diff in enumerate(differences[:5]):
+        summary_text += f"\nCycle {diff['cycle']}:\n"
+        if 'visual_diffs' in diff and 'verilator_vs_icarus' in diff['visual_diffs']:
+            vd = diff['visual_diffs']['verilator_vs_icarus']
+            if 'formatted_diff' in vd:
+                summary_text += vd['formatted_diff'] + "\n"
+        summary_text += f"  Ground truth: {diff['ground_truth']}\n"
+        summary_text += f"  Likely bug in: {diff['likely_bug_in']}\n"
+    
+    if len(differences) > 5:
+        summary_text += f"\n... and {len(differences) - 5} more differences (see bug_report.json)\n"
+    
+    summary_text += f"""
 FILES
 -----
 Full report: {bug_report_file}
@@ -568,7 +721,7 @@ def run_tri_simulation(verilator_bin: str,
     # Run CXXRTL
     print(f"[TriSim] Running CXXRTL simulation...")
     m_build_ok, m_run_ok, m_rc, cxxrtl_dir = run_cxxrtl(
-        yosys_bin, yosys_config_bin, cycle_dir, top_name, tb_name, extra_sv, cxxrtl_flags
+        yosys_bin, yosys_config_bin, cycle_dir, top_name, tb_name, extra_sv, cxxrtl_flags, seed
     )
     
     if not (m_build_ok and m_run_ok):

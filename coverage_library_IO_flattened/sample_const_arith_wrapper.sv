@@ -1,4 +1,3 @@
-`include "sample_const_arith.sv"
 
 //------------------------------------------------------------------------------
 // Wrapper for const_arith

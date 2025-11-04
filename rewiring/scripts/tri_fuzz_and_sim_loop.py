@@ -307,6 +307,8 @@ def main():
         return 2
     
     # Collect RTL sources
+    # Note: Properly generated wrappers should NOT have `include statements.
+    # All modules are passed explicitly to simulators.
     extra_sv = []
     if args.rtl_dir:
         extra_sv.extend(collect_rtl_sources(Path(args.rtl_dir), args.rtl_recursive))
