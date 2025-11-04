@@ -240,6 +240,9 @@ def wrap_mutation_counters(fr) -> Tuple[dict, callable]:
 # ------------------------- Main Loop -------------------------
 
 def main():
+    # Capture original command for bug reports (make it executable)
+    original_command = "python " + " ".join(sys.argv)
+    
     ap = argparse.ArgumentParser(description="Triple simulator fuzzing: Verilator + Icarus + CXXRTL comparison with arbitration.")
     ap.add_argument("flattened_lib", help="Path to flattened module library (JSON or directory).")
     ap.add_argument("-o", "--outdir", default="runs_tri", help="Base output directory for generated top/tb & logs.")
@@ -440,7 +443,8 @@ def main():
                             verilator_bin, iverilog_bin, vvp_bin,
                             yosys_bin, yosys_config_bin,
                             cycle_dir, args.top_name, tb_name, extra_sv,
-                            verilator_flags, icarus_flags, cxxrtl_flags, seed
+                            verilator_flags, icarus_flags, cxxrtl_flags, seed,
+                            original_command
                         )
                     else:
                         # Fall back to dual simulation

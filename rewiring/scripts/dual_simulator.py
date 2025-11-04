@@ -271,9 +271,15 @@ def remove_x_values(hex_str: str, replacement: str = "_") -> str:
     return hex_str.upper().replace('X', replacement)
 
 
-def create_visual_diff(str1: str, str2: str) -> Dict:
+def create_visual_diff(str1: str, str2: str, label1: str = "Verilator", label2: str = "Icarus") -> Dict:
     """
     Create a visual diff showing differences between two strings with proper alignment.
+    
+    Args:
+        str1: First string to compare
+        str2: Second string to compare  
+        label1: Label for first string (default: "Verilator")
+        label2: Label for second string (default: "Icarus")
     """
     if not str1 or not str2:
         return {"diff_line": "Cannot create diff - one string is empty"}
@@ -291,18 +297,17 @@ def create_visual_diff(str1: str, str2: str) -> Dict:
         else:
             diff_indicators.append(' ')  # Same characters
     
-    # The labels are all 11 characters long, so the hex values start at position 11
-    label_width = 11  # "Verilator: " = 11 chars, "Icarus:    " = 11 chars, "Diff:      " = 11 chars
+    # Pad labels to consistent width for alignment
+    label1_padded = (label1 + ":").ljust(12)
+    label2_padded = (label2 + ":").ljust(12)
+    diff_label = "Diff:".ljust(12)
     
     return {
-        "verilator_aligned": aligned1,
-        "icarus_aligned": aligned2,
-        "diff_markers": ''.join(diff_indicators),
-        "formatted_diff": f"Verilator:  {aligned1}\nIcarus:     {aligned2}\nDiff:       {''.join(diff_indicators)}",
+        "formatted_diff": f"{label1_padded}{aligned1}\n{label2_padded}{aligned2}\n{diff_label}{''.join(diff_indicators)}",
         "formatted_lines": [
-            f"Verilator:  {aligned1}",
-            f"Icarus:     {aligned2}",
-            f"Diff:       {''.join(diff_indicators)}"
+            f"{label1_padded}{aligned1}",
+            f"{label2_padded}{aligned2}",
+            f"{diff_label}{''.join(diff_indicators)}"
         ]
     }
 

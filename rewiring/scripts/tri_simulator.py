@@ -260,8 +260,9 @@ int main() {{
         dut.step();
         
         // Log on positive edge (match testbench @(posedge clk) behavior)
+        string in_hex = value_to_hex(dut.p_in__flat);
         string out_hex = value_to_hex(dut.p_out__flat);
-        logfile << "CYC=" << dec << cyc << " out_flat=0x" << out_hex << endl;
+        logfile << "CYC=" << dec << cyc << " in_flat=0x" << in_hex << " out_flat=0x" << out_hex << endl;
         cyc++;
         
         // Negative clock edge
@@ -416,7 +417,9 @@ def compare_three_simulators(verilator_log: Path,
             agreement_counts["all_three"] += 1
         elif has_x:
             # If any simulator has X, count as X-only difference (not a real bug)
+            # Skip adding to differences - continue to next cycle
             agreement_counts["x_only_differences"] += 1
+            continue  # Don't report X-only differences as bugs
         else:
             all_match = False
             
@@ -437,10 +440,10 @@ def compare_three_simulators(verilator_log: Path,
                 ground_truth = "unknown"
                 likely_bug_in = "unknown"
             
-            # Create visual diffs for all pairwise comparisons
-            visual_diff_v_i = create_visual_diff(v_data["OUT"], i_data["OUT"])
-            visual_diff_v_m = create_visual_diff(v_data["OUT"], m_data["OUT"])
-            visual_diff_i_m = create_visual_diff(i_data["OUT"], m_data["OUT"])
+            # Create visual diffs for all pairwise comparisons with correct labels
+            visual_diff_v_i = create_visual_diff(v_data["OUT"], i_data["OUT"], "Verilator", "Icarus")
+            visual_diff_v_m = create_visual_diff(v_data["OUT"], m_data["OUT"], "Verilator", "CXXRTL")
+            visual_diff_i_m = create_visual_diff(i_data["OUT"], m_data["OUT"], "Icarus", "CXXRTL")
             
             differences.append({
                 "cycle": cycle,
@@ -551,7 +554,8 @@ def save_tri_bug_report(cycle_dir: Path,
                        arbitration: Dict,
                        verilator_summary: Dict,
                        icarus_summary: Dict,
-                       cxxrtl_summary: Dict) -> Path:
+                       cxxrtl_summary: Dict,
+                       original_command: str = None) -> Path:
     """
     Save a detailed bug report for three-way simulator comparison.
     
@@ -580,6 +584,7 @@ def save_tri_bug_report(cycle_dir: Path,
         "timestamp": timestamp,
         "seed": seed,
         "bug_type": "three_way_comparison",
+        "original_command": original_command if original_command else "Command not captured",
         "cycle_info": {
             "cycle_number": cycle_info["cycle_number"],
             "cycle_directory": str(cycle_dir),
@@ -688,7 +693,8 @@ def run_tri_simulation(verilator_bin: str,
                       verilator_flags: list[str],
                       iverilog_flags: list[str],
                       cxxrtl_flags: list[str],
-                      seed: int) -> Tuple[Optional[bool], Optional[Path], Optional[Dict]]:
+                      seed: int,
+                      original_command: str = None) -> Tuple[Optional[bool], Optional[Path], Optional[Dict]]:
     """
     Run all three simulators and compare results with arbitration.
     
@@ -779,7 +785,7 @@ def run_tri_simulation(verilator_bin: str,
             # Save bug report
             bug_report_path = save_tri_bug_report(
                 cycle_dir, seed, agreement_status, differences, arbitration,
-                verilator_summary, icarus_summary, cxxrtl_summary
+                verilator_summary, icarus_summary, cxxrtl_summary, original_command
             )
             
             return True, bug_report_path, arbitration
