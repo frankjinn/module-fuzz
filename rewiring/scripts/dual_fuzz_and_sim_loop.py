@@ -300,14 +300,25 @@ def main():
     max_consecutive_failures = 10
     bugs_found = 0
     
+    # Generate explicit base seed if not provided
+    if args.seed is None:
+        base_seed = random.randint(0, 2**32 - 1)
+    else:
+        base_seed = args.seed
+    
+    # Save base seed to output directory for reproducibility
+    seed_file = base_out / "base_seed.txt"
+    with open(seed_file, 'w') as f:
+        f.write(f"{base_seed}\n")
+    
     # Initialize random number generator
-    rng = random.Random(args.seed)
+    rng = random.Random(base_seed)
     
     # Bug tracking
     bug_summary = []
     
     if not args.quiet:
-        print(f"[DualLoop] Base seed: {args.seed}")
+        print(f"[DualLoop] Base seed: {base_seed}")
         if cycles_target:
             print(f"[DualLoop] Will run {cycles_target} cycle(s).")
         print(f"[DualLoop] Mut/Cycle: {args.mutations_per_cycle} | Check every: {args.check_every} | TB cycles: {args.tb_cycles}")
@@ -408,7 +419,7 @@ def main():
                     bug_found, bug_report_path = dual_simulator.run_dual_simulation(
                         verilator_bin, iverilog_bin, vvp_bin,
                         cycle_dir, args.top_name, tb_name, extra_sv,
-                        verilator_flags, icarus_flags, seed
+                        verilator_flags, icarus_flags, seed, base_seed
                     )
                     
                     # Check if dual simulation actually succeeded

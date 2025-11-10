@@ -349,10 +349,22 @@ def main():
     consecutive_failures = 0
     max_consecutive_failures = 10  # Continue running even with many consecutive failures
     
+    # Generate explicit base seed if not provided
+    if args.seed is None:
+        base_seed = random.randint(0, 2**32 - 1)
+    else:
+        base_seed = args.seed
+    
+    # Save base seed to output directory for reproducibility
+    seed_file = base_out / "base_seed.txt"
+    with open(seed_file, 'w') as f:
+        f.write(f"{base_seed}\n")
+    
     # Initialize random number generator
-    rng = random.Random(args.seed)
+    rng = random.Random(base_seed)
     
     if not args.quiet:
+        print(f"[Loop] Base seed: {base_seed}")
         if cycles_target:
             print(f"[Loop] Will run {cycles_target} cycle(s).")
         print(f"[Loop] Mut/Cycle: {args.mutations_per_cycle} | Check every: {args.check_every} | TB cycles: {args.tb_cycles}")
@@ -610,6 +622,7 @@ def main():
                 # Persist stats
                 summary = {
                     "cycle": cycle_idx,
+                    "base_seed": base_seed,
                     "seed": seed,
                     "mutations_requested": args.mutations_per_cycle,
                     "mutations_done": int(total_done),
@@ -698,6 +711,7 @@ def main():
                 if not cycle_success:
                     summary = {
                         "cycle": cycle_idx,
+                        "base_seed": base_seed,
                         "seed": seed if 'seed' in locals() else None,
                         "mutations_requested": args.mutations_per_cycle,
                         "mutations_done": 0,

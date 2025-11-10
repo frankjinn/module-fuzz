@@ -1,0 +1,4272 @@
+{
+  "bug_id": "bug_1847090067_1762813479",
+  "timestamp": 1762813479,
+  "base_seed": 1663257571,
+  "seed": 1847090067,
+  "cycle_info": {
+    "cycle_number": 20,
+    "cycle_directory": "large_test/cycle_0020",
+    "preserved_in_bug_folder": true,
+    "complete_test_case_saved": true
+  },
+  "test_files": {
+    "top_sv": "large_test/bugs/bug_1847090067_1762813479/top.sv",
+    "testbench_sv": "large_test/bugs/bug_1847090067_1762813479/tb_top.sv",
+    "all_cycle_files": "Complete cycle directory contents preserved in bug folder"
+  },
+  "location_info": {
+    "generated_top_module": "large_test/cycle_0020/top.sv",
+    "modules_instantiated": [
+      {
+        "module_type": "arithmetic_reduce_wrapper",
+        "instance_name": "u_arithmetic_reduce_wrapper",
+        "full_name": "arithmetic_reduce_wrapper"
+      },
+      {
+        "module_type": "array_wrapper",
+        "instance_name": "u_array_wrapper",
+        "full_name": "array_wrapper"
+      },
+      {
+        "module_type": "bitwise_logic_wrapper",
+        "instance_name": "u_bitwise_logic_wrapper",
+        "full_name": "bitwise_logic_wrapper"
+      },
+      {
+        "module_type": "bitwise_reduce_wrapper",
+        "instance_name": "u_bitwise_reduce_wrapper",
+        "full_name": "bitwise_reduce_wrapper"
+      },
+      {
+        "module_type": "cast_wrapper",
+        "instance_name": "u_cast_wrapper",
+        "full_name": "cast_wrapper"
+      },
+      {
+        "module_type": "conditional_wrapper",
+        "instance_name": "u_conditional_wrapper",
+        "full_name": "conditional_wrapper"
+      },
+      {
+        "module_type": "const_arith_wrapper",
+        "instance_name": "u_const_arith_wrapper",
+        "full_name": "const_arith_wrapper"
+      },
+      {
+        "module_type": "const_compare_wrapper",
+        "instance_name": "u_const_compare_wrapper",
+        "full_name": "const_compare_wrapper"
+      },
+      {
+        "module_type": "const_concat_repl_wrapper",
+        "instance_name": "u_const_concat_repl_wrapper",
+        "full_name": "const_concat_repl_wrapper"
+      },
+      {
+        "module_type": "const_conditional_wrapper",
+        "instance_name": "u_const_conditional_wrapper",
+        "full_name": "const_conditional_wrapper"
+      },
+      {
+        "module_type": "const_logic_wrapper",
+        "instance_name": "u_const_logic_wrapper",
+        "full_name": "const_logic_wrapper"
+      },
+      {
+        "module_type": "const_nested_wrapper",
+        "instance_name": "u_const_nested_wrapper",
+        "full_name": "const_nested_wrapper"
+      },
+      {
+        "module_type": "const_partselect_wrapper",
+        "instance_name": "u_const_partselect_wrapper",
+        "full_name": "const_partselect_wrapper"
+      },
+      {
+        "module_type": "const_reduce_wrapper",
+        "instance_name": "u_const_reduce_wrapper",
+        "full_name": "const_reduce_wrapper"
+      },
+      {
+        "module_type": "const_shift_wrapper",
+        "instance_name": "u_const_shift_wrapper",
+        "full_name": "const_shift_wrapper"
+      },
+      {
+        "module_type": "logical_op_wrapper",
+        "instance_name": "u_logical_op_wrapper",
+        "full_name": "logical_op_wrapper"
+      },
+      {
+        "module_type": "numbers_concat_repl_wrapper",
+        "instance_name": "u_numbers_concat_repl_wrapper",
+        "full_name": "numbers_concat_repl_wrapper"
+      },
+      {
+        "module_type": "partselect_wrapper",
+        "instance_name": "u_partselect_wrapper",
+        "full_name": "partselect_wrapper"
+      },
+      {
+        "module_type": "relational_wrapper",
+        "instance_name": "u_relational_wrapper",
+        "full_name": "relational_wrapper"
+      },
+      {
+        "module_type": "select_wrapper",
+        "instance_name": "u_select_wrapper",
+        "full_name": "select_wrapper"
+      },
+      {
+        "module_type": "shift_wrapper",
+        "instance_name": "u_shift_wrapper",
+        "full_name": "shift_wrapper"
+      },
+      {
+        "module_type": "width_enum_wrapper",
+        "instance_name": "u_width_enum_wrapper",
+        "full_name": "width_enum_wrapper"
+      },
+      {
+        "module_type": "width_logic_wrapper",
+        "instance_name": "u_width_logic_wrapper",
+        "full_name": "width_logic_wrapper"
+      },
+      {
+        "module_type": "width_struct_wrapper",
+        "instance_name": "u_width_struct_wrapper",
+        "full_name": "width_struct_wrapper"
+      },
+      {
+        "module_type": "width_union_wrapper",
+        "instance_name": "u_width_union_wrapper",
+        "full_name": "width_union_wrapper"
+      }
+    ],
+    "total_modules": 25,
+    "wire_connections": 50,
+    "description": "Bug found in cycle 20 - auto-generated top.sv with 25 module instances"
+  },
+  "simulation_results": {
+    "verilator": {
+      "simulator": "Verilator",
+      "build_ok": true,
+      "run_ok": true,
+      "return_code": 0,
+      "log_file": "large_test/cycle_0020/sim.log",
+      "top_name": "top"
+    },
+    "icarus": {
+      "simulator": "Icarus Verilog",
+      "build_ok": true,
+      "run_ok": true,
+      "return_code": 0,
+      "log_file": "large_test/cycle_0020/icarus_sim.log",
+      "top_name": "top"
+    }
+  },
+  "differences": [
+    {
+      "cycle": 16,
+      "verilator": {
+        "IN": "69400B13F7A1760209F10B4DEE95CAE43593FE7780714876B7F38F11552CB338",
+        "OUT": "A19D001204000A1DA500F8FF9E2E2E273FB893649E6FFE69E99D49B96DF6C003AE06EA22A888F7DCC9",
+        "IN_norm": "69400B13F7A1760209F10B4DEE95CAE43593FE7780714876B7F38F11552CB338",
+        "OUT_norm": "A19D001204000A1DA500F8FF9E2E2E273FB893649E6FFE69E99D49B96DF6C003AE06EA22A888F7DCC9"
+      },
+      "icarus": {
+        "IN": "69400B13F7A1760209F10B4DEE95CAE43593FE7780714876B7F38F11552CB338",
+        "OUT": "A19D001204000AXDA500F8FF9E2E2E273XX893649E6FFE69E99D49B96DF6C003AE06EA22A888F65CC9",
+        "IN_norm": "69400B13F7A1760209F10B4DEE95CAE43593FE7780714876B7F38F11552CB338",
+        "OUT_norm": "A19D001204000AXDA500F8FF9E2E2E273XX893649E6FFE69E99D49B96DF6C003AE06EA22A888F65CC9"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 14,
+            "verilator": "1",
+            "icarus": "X"
+          },
+          {
+            "position": 33,
+            "verilator": "F",
+            "icarus": "X"
+          },
+          {
+            "position": 34,
+            "verilator": "B",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 77,
+            "verilator": "7",
+            "icarus": "6"
+          },
+          {
+            "position": 78,
+            "verilator": "D",
+            "icarus": "5"
+          }
+        ],
+        "total_positions": 82,
+        "explanation": "Mixed differences: 2 real differences and 3 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "A19D001204000A1DA500F8FF9E2E2E273FB893649E6FFE69E99D49B96DF6C003AE06EA22A888F7DCC9",
+          "icarus_x_removed": "A19D001204000A_DA500F8FF9E2E2E273__893649E6FFE69E99D49B96DF6C003AE06EA22A888F65CC9",
+          "visual_diff": {
+            "verilator_aligned": "A19D001204000A1DA500F8FF9E2E2E273FB893649E6FFE69E99D49B96DF6C003AE06EA22A888F7DCC9",
+            "icarus_aligned": "A19D001204000A_DA500F8FF9E2E2E273__893649E6FFE69E99D49B96DF6C003AE06EA22A888F65CC9",
+            "diff_markers": "              ^                  ^^                                          ^^   ",
+            "formatted_diff": "Verilator:  A19D001204000A1DA500F8FF9E2E2E273FB893649E6FFE69E99D49B96DF6C003AE06EA22A888F7DCC9\nIcarus:     A19D001204000A_DA500F8FF9E2E2E273__893649E6FFE69E99D49B96DF6C003AE06EA22A888F65CC9\nDiff:                     ^                  ^^                                          ^^   ",
+            "formatted_lines": [
+              "Verilator:  A19D001204000A1DA500F8FF9E2E2E273FB893649E6FFE69E99D49B96DF6C003AE06EA22A888F7DCC9",
+              "Icarus:     A19D001204000A_DA500F8FF9E2E2E273__893649E6FFE69E99D49B96DF6C003AE06EA22A888F65CC9",
+              "Diff:                     ^                  ^^                                          ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 17,
+      "verilator": {
+        "IN": "146BC98BDC73C35A128157058CFD927C8596456F01B4F04EEDD00F49B756B150",
+        "OUT": "23431D612016097015500B8BF940000073F0015429CBCBCBD65554E390BCDE0026E00EF037C7CF7DE41",
+        "IN_norm": "146BC98BDC73C35A128157058CFD927C8596456F01B4F04EEDD00F49B756B150",
+        "OUT_norm": "23431D612016097015500B8BF940000073F0015429CBCBCBD65554E390BCDE0026E00EF037C7CF7DE41"
+      },
+      "icarus": {
+        "IN": "146BC98BDC73C35A128157058CFD927C8596456F01B4F04EEDD00F49B756B150",
+        "OUT": "23431D612016097015500B8BF940000073F0015429CBCBCBD65554E390BCDE0026E00EF037C7CF65E41",
+        "IN_norm": "146BC98BDC73C35A128157058CFD927C8596456F01B4F04EEDD00F49B756B150",
+        "OUT_norm": "23431D612016097015500B8BF940000073F0015429CBCBCBD65554E390BCDE0026E00EF037C7CF65E41"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "7",
+            "icarus": "6"
+          },
+          {
+            "position": 79,
+            "verilator": "D",
+            "icarus": "5"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 2 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "23431D612016097015500B8BF940000073F0015429CBCBCBD65554E390BCDE0026E00EF037C7CF7DE41",
+          "icarus_x_removed": "23431D612016097015500B8BF940000073F0015429CBCBCBD65554E390BCDE0026E00EF037C7CF65E41",
+          "visual_diff": {
+            "verilator_aligned": "23431D612016097015500B8BF940000073F0015429CBCBCBD65554E390BCDE0026E00EF037C7CF7DE41",
+            "icarus_aligned": "23431D612016097015500B8BF940000073F0015429CBCBCBD65554E390BCDE0026E00EF037C7CF65E41",
+            "diff_markers": "                                                                              ^^   ",
+            "formatted_diff": "Verilator:  23431D612016097015500B8BF940000073F0015429CBCBCBD65554E390BCDE0026E00EF037C7CF7DE41\nIcarus:     23431D612016097015500B8BF940000073F0015429CBCBCBD65554E390BCDE0026E00EF037C7CF65E41\nDiff:                                                                                     ^^   ",
+            "formatted_lines": [
+              "Verilator:  23431D612016097015500B8BF940000073F0015429CBCBCBD65554E390BCDE0026E00EF037C7CF7DE41",
+              "Icarus:     23431D612016097015500B8BF940000073F0015429CBCBCBD65554E390BCDE0026E00EF037C7CF65E41",
+              "Diff:                                                                                     ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 18,
+      "verilator": {
+        "IN": "B591DF0379E763B204E861BD9573B5149DCB7367281ABB26EB455E81B5CF5A68",
+        "OUT": "2CAA5175E040006715510909510003FF1F59045529E55CE57E7FD49B0C18CA021800BA8036B68F7DC99",
+        "IN_norm": "B591DF0379E763B204E861BD9573B5149DCB7367281ABB26EB455E81B5CF5A68",
+        "OUT_norm": "2CAA5175E040006715510909510003FF1F59045529E55CE57E7FD49B0C18CA021800BA8036B68F7DC99"
+      },
+      "icarus": {
+        "IN": "B591DF0379E763B204E861BD9573B5149DCB7367281ABB26EB455E81B5CF5A68",
+        "OUT": "2CAA5175E040006715510909510003FF1F59045529E55CE57E7FD49B0C18CA021800BA8036B68F65C99",
+        "IN_norm": "B591DF0379E763B204E861BD9573B5149DCB7367281ABB26EB455E81B5CF5A68",
+        "OUT_norm": "2CAA5175E040006715510909510003FF1F59045529E55CE57E7FD49B0C18CA021800BA8036B68F65C99"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "7",
+            "icarus": "6"
+          },
+          {
+            "position": 79,
+            "verilator": "D",
+            "icarus": "5"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 2 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "2CAA5175E040006715510909510003FF1F59045529E55CE57E7FD49B0C18CA021800BA8036B68F7DC99",
+          "icarus_x_removed": "2CAA5175E040006715510909510003FF1F59045529E55CE57E7FD49B0C18CA021800BA8036B68F65C99",
+          "visual_diff": {
+            "verilator_aligned": "2CAA5175E040006715510909510003FF1F59045529E55CE57E7FD49B0C18CA021800BA8036B68F7DC99",
+            "icarus_aligned": "2CAA5175E040006715510909510003FF1F59045529E55CE57E7FD49B0C18CA021800BA8036B68F65C99",
+            "diff_markers": "                                                                              ^^   ",
+            "formatted_diff": "Verilator:  2CAA5175E040006715510909510003FF1F59045529E55CE57E7FD49B0C18CA021800BA8036B68F7DC99\nIcarus:     2CAA5175E040006715510909510003FF1F59045529E55CE57E7FD49B0C18CA021800BA8036B68F65C99\nDiff:                                                                                     ^^   ",
+            "formatted_lines": [
+              "Verilator:  2CAA5175E040006715510909510003FF1F59045529E55CE57E7FD49B0C18CA021800BA8036B68F7DC99",
+              "Icarus:     2CAA5175E040006715510909510003FF1F59045529E55CE57E7FD49B0C18CA021800BA8036B68F65C99",
+              "Diff:                                                                                     ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 23,
+      "verilator": {
+        "IN": "1487035B0C93826A25FB68552CDAD70C21E2823FF9EBDE5E3194AB994535CCE0",
+        "OUT": "24023595202003139A52BD1D538003FF7311043749C2C2F136B32AE24A13840212208AE02B8B91A8919",
+        "IN_norm": "1487035B0C93826A25FB68552CDAD70C21E2823FF9EBDE5E3194AB994535CCE0",
+        "OUT_norm": "24023595202003139A52BD1D538003FF7311043749C2C2F136B32AE24A13840212208AE02B8B91A8919"
+      },
+      "icarus": {
+        "IN": "1487035B0C93826A25FB68552CDAD70C21E2823FF9EBDE5E3194AB994535CCE0",
+        "OUT": "24023595202003139A52BD1D538003FF73XX043749C2C2F136B32AE24A13840212208AE02B8B91B8919",
+        "IN_norm": "1487035B0C93826A25FB68552CDAD70C21E2823FF9EBDE5E3194AB994535CCE0",
+        "OUT_norm": "24023595202003139A52BD1D538003FF73XX043749C2C2F136B32AE24A13840212208AE02B8B91B8919"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "1",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "1",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "A",
+            "icarus": "B"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 1 real differences and 2 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "24023595202003139A52BD1D538003FF7311043749C2C2F136B32AE24A13840212208AE02B8B91A8919",
+          "icarus_x_removed": "24023595202003139A52BD1D538003FF73__043749C2C2F136B32AE24A13840212208AE02B8B91B8919",
+          "visual_diff": {
+            "verilator_aligned": "24023595202003139A52BD1D538003FF7311043749C2C2F136B32AE24A13840212208AE02B8B91A8919",
+            "icarus_aligned": "24023595202003139A52BD1D538003FF73__043749C2C2F136B32AE24A13840212208AE02B8B91B8919",
+            "diff_markers": "                                  ^^                                          ^    ",
+            "formatted_diff": "Verilator:  24023595202003139A52BD1D538003FF7311043749C2C2F136B32AE24A13840212208AE02B8B91A8919\nIcarus:     24023595202003139A52BD1D538003FF73__043749C2C2F136B32AE24A13840212208AE02B8B91B8919\nDiff:                                         ^^                                          ^    ",
+            "formatted_lines": [
+              "Verilator:  24023595202003139A52BD1D538003FF7311043749C2C2F136B32AE24A13840212208AE02B8B91A8919",
+              "Icarus:     24023595202003139A52BD1D538003FF73__043749C2C2F136B32AE24A13840212208AE02B8B91B8919",
+              "Diff:                                         ^^                                          ^    "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 24,
+      "verilator": {
+        "IN": "890082D3363DF4C27EC94D0D9002FBA4DC287A37745F5B368CD734D193E457F8",
+        "OUT": "820D8C520500539DA506909532009F9555800552B3E1E943E3BAAE2DC59DA025860F0F2364451A89DD",
+        "IN_norm": "890082D3363DF4C27EC94D0D9002FBA4DC287A37745F5B368CD734D193E457F8",
+        "OUT_norm": "820D8C520500539DA506909532009F9555800552B3E1E943E3BAAE2DC59DA025860F0F2364451A89DD"
+      },
+      "icarus": {
+        "IN": "890082D3363DF4C27EC94D0D9002FBA4DC287A37745F5B368CD734D193E457F8",
+        "OUT": "820D8C52050053XDA506909532009F9555800552B3E1E943E3BAAE2DC59DA025860F0F2364451B89DD",
+        "IN_norm": "890082D3363DF4C27EC94D0D9002FBA4DC287A37745F5B368CD734D193E457F8",
+        "OUT_norm": "820D8C52050053XDA506909532009F9555800552B3E1E943E3BAAE2DC59DA025860F0F2364451B89DD"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 14,
+            "verilator": "9",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 77,
+            "verilator": "A",
+            "icarus": "B"
+          }
+        ],
+        "total_positions": 82,
+        "explanation": "Mixed differences: 1 real differences and 1 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "820D8C520500539DA506909532009F9555800552B3E1E943E3BAAE2DC59DA025860F0F2364451A89DD",
+          "icarus_x_removed": "820D8C52050053_DA506909532009F9555800552B3E1E943E3BAAE2DC59DA025860F0F2364451B89DD",
+          "visual_diff": {
+            "verilator_aligned": "820D8C520500539DA506909532009F9555800552B3E1E943E3BAAE2DC59DA025860F0F2364451A89DD",
+            "icarus_aligned": "820D8C52050053_DA506909532009F9555800552B3E1E943E3BAAE2DC59DA025860F0F2364451B89DD",
+            "diff_markers": "              ^                                                              ^    ",
+            "formatted_diff": "Verilator:  820D8C520500539DA506909532009F9555800552B3E1E943E3BAAE2DC59DA025860F0F2364451A89DD\nIcarus:     820D8C52050053_DA506909532009F9555800552B3E1E943E3BAAE2DC59DA025860F0F2364451B89DD\nDiff:                     ^                                                              ^    ",
+            "formatted_lines": [
+              "Verilator:  820D8C520500539DA506909532009F9555800552B3E1E943E3BAAE2DC59DA025860F0F2364451A89DD",
+              "Icarus:     820D8C52050053_DA506909532009F9555800552B3E1E943E3BAAE2DC59DA025860F0F2364451B89DD",
+              "Diff:                     ^                                                              ^    "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 25,
+      "verilator": {
+        "IN": "754B794BECC95A1A866810C5CF481B3C6B46792F457A9B0E034AAD093F462E10",
+        "OUT": "2A5A1D29A040004B1A57640401A068E81D0004156923232336332AE48687000286414A8527E2D5D5875",
+        "IN_norm": "754B794BECC95A1A866810C5CF481B3C6B46792F457A9B0E034AAD093F462E10",
+        "OUT_norm": "2A5A1D29A040004B1A57640401A068E81D0004156923232336332AE48687000286414A8527E2D5D5875"
+      },
+      "icarus": {
+        "IN": "754B794BECC95A1A866810C5CF481B3C6B46792F457A9B0E034AAD093F462E10",
+        "OUT": "2A5A1D29A040004B1A57640401A068E81DX004156923232336332AE48687000286414A8527E2D5DD875",
+        "IN_norm": "754B794BECC95A1A866810C5CF481B3C6B46792F457A9B0E034AAD093F462E10",
+        "OUT_norm": "2A5A1D29A040004B1A57640401A068E81DX004156923232336332AE48687000286414A8527E2D5DD875"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "0",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 79,
+            "verilator": "5",
+            "icarus": "D"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 1 real differences and 1 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "2A5A1D29A040004B1A57640401A068E81D0004156923232336332AE48687000286414A8527E2D5D5875",
+          "icarus_x_removed": "2A5A1D29A040004B1A57640401A068E81D_004156923232336332AE48687000286414A8527E2D5DD875",
+          "visual_diff": {
+            "verilator_aligned": "2A5A1D29A040004B1A57640401A068E81D0004156923232336332AE48687000286414A8527E2D5D5875",
+            "icarus_aligned": "2A5A1D29A040004B1A57640401A068E81D_004156923232336332AE48687000286414A8527E2D5DD875",
+            "diff_markers": "                                  ^                                            ^   ",
+            "formatted_diff": "Verilator:  2A5A1D29A040004B1A57640401A068E81D0004156923232336332AE48687000286414A8527E2D5D5875\nIcarus:     2A5A1D29A040004B1A57640401A068E81D_004156923232336332AE48687000286414A8527E2D5DD875\nDiff:                                         ^                                            ^   ",
+            "formatted_lines": [
+              "Verilator:  2A5A1D29A040004B1A57640401A068E81D0004156923232336332AE48687000286414A8527E2D5D5875",
+              "Icarus:     2A5A1D29A040004B1A57640401A068E81D_004156923232336332AE48687000286414A8527E2D5DD875",
+              "Diff:                                         ^                                            ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 26,
+      "verilator": {
+        "IN": "53FC6C3870112728C34937D5BEE95D4A3565F27BC12FDE6EE3DF441CB19AF28",
+        "OUT": "29C43DE53005858015554080ABD2343471E0C17608AB97ABFEFF809A5D891A00F201B4D0396955D58FD",
+        "IN_norm": "53FC6C3870112728C34937D5BEE95D4A3565F27BC12FDE6EE3DF441CB19AF28",
+        "OUT_norm": "29C43DE53005858015554080ABD2343471E0C17608AB97ABFEFF809A5D891A00F201B4D0396955D58FD"
+      },
+      "icarus": {
+        "IN": "53FC6C3870112728C34937D5BEE95D4A3565F27BC12FDE6EE3DF441CB19AF28",
+        "OUT": "29C43DE53005858015554080ABD2343471E0C17608AB97ABFEFF809A5D891A00F201B4D0396955DD8FD",
+        "IN_norm": "53FC6C3870112728C34937D5BEE95D4A3565F27BC12FDE6EE3DF441CB19AF28",
+        "OUT_norm": "29C43DE53005858015554080ABD2343471E0C17608AB97ABFEFF809A5D891A00F201B4D0396955DD8FD"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 79,
+            "verilator": "5",
+            "icarus": "D"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 1 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "29C43DE53005858015554080ABD2343471E0C17608AB97ABFEFF809A5D891A00F201B4D0396955D58FD",
+          "icarus_x_removed": "29C43DE53005858015554080ABD2343471E0C17608AB97ABFEFF809A5D891A00F201B4D0396955DD8FD",
+          "visual_diff": {
+            "verilator_aligned": "29C43DE53005858015554080ABD2343471E0C17608AB97ABFEFF809A5D891A00F201B4D0396955D58FD",
+            "icarus_aligned": "29C43DE53005858015554080ABD2343471E0C17608AB97ABFEFF809A5D891A00F201B4D0396955DD8FD",
+            "diff_markers": "                                                                               ^   ",
+            "formatted_diff": "Verilator:  29C43DE53005858015554080ABD2343471E0C17608AB97ABFEFF809A5D891A00F201B4D0396955D58FD\nIcarus:     29C43DE53005858015554080ABD2343471E0C17608AB97ABFEFF809A5D891A00F201B4D0396955DD8FD\nDiff:                                                                                      ^   ",
+            "formatted_lines": [
+              "Verilator:  29C43DE53005858015554080ABD2343471E0C17608AB97ABFEFF809A5D891A00F201B4D0396955D58FD",
+              "Icarus:     29C43DE53005858015554080ABD2343471E0C17608AB97ABFEFF809A5D891A00F201B4D0396955DD8FD",
+              "Diff:                                                                                      ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 37,
+      "verilator": {
+        "IN": "50FC8EB24F4A43ABDA7AF65639E905CB3070ECF3E6F832E8C1FA1A93F799130",
+        "OUT": "28443DE5305002771A56B919533C131371E8407709830363B633009AE84406024401E2C12FEEE2B6CD1",
+        "IN_norm": "50FC8EB24F4A43ABDA7AF65639E905CB3070ECF3E6F832E8C1FA1A93F799130",
+        "OUT_norm": "28443DE5305002771A56B919533C131371E8407709830363B633009AE84406024401E2C12FEEE2B6CD1"
+      },
+      "icarus": {
+        "IN": "50FC8EB24F4A43ABDA7AF65639E905CB3070ECF3E6F832E8C1FA1A93F799130",
+        "OUT": "28443DE5305002771A56B919533C131371XX407709830363B633009AE84406024401E2C12FEEE2AECD1",
+        "IN_norm": "50FC8EB24F4A43ABDA7AF65639E905CB3070ECF3E6F832E8C1FA1A93F799130",
+        "OUT_norm": "28443DE5305002771A56B919533C131371XX407709830363B633009AE84406024401E2C12FEEE2AECD1"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "E",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "8",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "B",
+            "icarus": "A"
+          },
+          {
+            "position": 79,
+            "verilator": "6",
+            "icarus": "E"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 2 real differences and 2 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "28443DE5305002771A56B919533C131371E8407709830363B633009AE84406024401E2C12FEEE2B6CD1",
+          "icarus_x_removed": "28443DE5305002771A56B919533C131371__407709830363B633009AE84406024401E2C12FEEE2AECD1",
+          "visual_diff": {
+            "verilator_aligned": "28443DE5305002771A56B919533C131371E8407709830363B633009AE84406024401E2C12FEEE2B6CD1",
+            "icarus_aligned": "28443DE5305002771A56B919533C131371__407709830363B633009AE84406024401E2C12FEEE2AECD1",
+            "diff_markers": "                                  ^^                                          ^^   ",
+            "formatted_diff": "Verilator:  28443DE5305002771A56B919533C131371E8407709830363B633009AE84406024401E2C12FEEE2B6CD1\nIcarus:     28443DE5305002771A56B919533C131371__407709830363B633009AE84406024401E2C12FEEE2AECD1\nDiff:                                         ^^                                          ^^   ",
+            "formatted_lines": [
+              "Verilator:  28443DE5305002771A56B919533C131371E8407709830363B633009AE84406024401E2C12FEEE2B6CD1",
+              "Icarus:     28443DE5305002771A56B919533C131371__407709830363B633009AE84406024401E2C12FEEE2AECD1",
+              "Diff:                                         ^^                                          ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 38,
+      "verilator": {
+        "IN": "AC0A6A6357C7809266B5661DC7BA8EF430A008C76D78CA06A0E8DCE107B25648",
+        "OUT": "20699CA93000004795506F0F5380010155B1003749D0026076772A9A4BBB480102811A8038F8E2B6F9D",
+        "IN_norm": "AC0A6A6357C7809266B5661DC7BA8EF430A008C76D78CA06A0E8DCE107B25648",
+        "OUT_norm": "20699CA93000004795506F0F5380010155B1003749D0026076772A9A4BBB480102811A8038F8E2B6F9D"
+      },
+      "icarus": {
+        "IN": "AC0A6A6357C7809266B5661DC7BA8EF430A008C76D78CA06A0E8DCE107B25648",
+        "OUT": "20699CA93000004795506F0F5380010155B1003749D0026076772A9A4BBB480102811A8038F8E2AEF9D",
+        "IN_norm": "AC0A6A6357C7809266B5661DC7BA8EF430A008C76D78CA06A0E8DCE107B25648",
+        "OUT_norm": "20699CA93000004795506F0F5380010155B1003749D0026076772A9A4BBB480102811A8038F8E2AEF9D"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "B",
+            "icarus": "A"
+          },
+          {
+            "position": 79,
+            "verilator": "6",
+            "icarus": "E"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 2 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "20699CA93000004795506F0F5380010155B1003749D0026076772A9A4BBB480102811A8038F8E2B6F9D",
+          "icarus_x_removed": "20699CA93000004795506F0F5380010155B1003749D0026076772A9A4BBB480102811A8038F8E2AEF9D",
+          "visual_diff": {
+            "verilator_aligned": "20699CA93000004795506F0F5380010155B1003749D0026076772A9A4BBB480102811A8038F8E2B6F9D",
+            "icarus_aligned": "20699CA93000004795506F0F5380010155B1003749D0026076772A9A4BBB480102811A8038F8E2AEF9D",
+            "diff_markers": "                                                                              ^^   ",
+            "formatted_diff": "Verilator:  20699CA93000004795506F0F5380010155B1003749D0026076772A9A4BBB480102811A8038F8E2B6F9D\nIcarus:     20699CA93000004795506F0F5380010155B1003749D0026076772A9A4BBB480102811A8038F8E2AEF9D\nDiff:                                                                                     ^^   ",
+            "formatted_lines": [
+              "Verilator:  20699CA93000004795506F0F5380010155B1003749D0026076772A9A4BBB480102811A8038F8E2B6F9D",
+              "Icarus:     20699CA93000004795506F0F5380010155B1003749D0026076772A9A4BBB480102811A8038F8E2AEF9D",
+              "Diff:                                                                                     ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 44,
+      "verilator": {
+        "IN": "B2F7D6334EBAF9A2B175D96DA4527D84F69F57973CDBD2160EF1BB319D157BD8",
+        "OUT": "17AA7575B05415385556C888A96007FF734BE5760B6555E55E5DD4E21DF85A010A603EA23F9D89A2065",
+        "IN_norm": "B2F7D6334EBAF9A2B175D96DA4527D84F69F57973CDBD2160EF1BB319D157BD8",
+        "OUT_norm": "17AA7575B05415385556C888A96007FF734BE5760B6555E55E5DD4E21DF85A010A603EA23F9D89A2065"
+      },
+      "icarus": {
+        "IN": "B2F7D6334EBAF9A2B175D96DA4527D84F69F57973CDBD2160EF1BB319D157BD8",
+        "OUT": "17AA7575B0XXXXXX5X56X0X0A96007FFXXXXX576096X55XXXEXXD4XX1DF85A010A603EA23F9D8992XXX",
+        "IN_norm": "B2F7D6334EBAF9A2B175D96DA4527D84F69F57973CDBD2160EF1BB319D157BD8",
+        "OUT_norm": "17AA7575B0XXXXXX5X56X0X0A96007FFXXXXX576096X55XXXEXXD4XX1DF85A010A603EA23F9D8992XXX"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 10,
+            "verilator": "5",
+            "icarus": "X"
+          },
+          {
+            "position": 11,
+            "verilator": "4",
+            "icarus": "X"
+          },
+          {
+            "position": 12,
+            "verilator": "1",
+            "icarus": "X"
+          },
+          {
+            "position": 13,
+            "verilator": "5",
+            "icarus": "X"
+          },
+          {
+            "position": 14,
+            "verilator": "3",
+            "icarus": "X"
+          },
+          {
+            "position": 15,
+            "verilator": "8",
+            "icarus": "X"
+          },
+          {
+            "position": 17,
+            "verilator": "5",
+            "icarus": "X"
+          },
+          {
+            "position": 20,
+            "verilator": "C",
+            "icarus": "X"
+          },
+          {
+            "position": 22,
+            "verilator": "8",
+            "icarus": "X"
+          },
+          {
+            "position": 32,
+            "verilator": "7",
+            "icarus": "X"
+          },
+          {
+            "position": 33,
+            "verilator": "3",
+            "icarus": "X"
+          },
+          {
+            "position": 34,
+            "verilator": "4",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "B",
+            "icarus": "X"
+          },
+          {
+            "position": 36,
+            "verilator": "E",
+            "icarus": "X"
+          },
+          {
+            "position": 43,
+            "verilator": "5",
+            "icarus": "X"
+          },
+          {
+            "position": 46,
+            "verilator": "E",
+            "icarus": "X"
+          },
+          {
+            "position": 47,
+            "verilator": "5",
+            "icarus": "X"
+          },
+          {
+            "position": 48,
+            "verilator": "5",
+            "icarus": "X"
+          },
+          {
+            "position": 50,
+            "verilator": "5",
+            "icarus": "X"
+          },
+          {
+            "position": 51,
+            "verilator": "D",
+            "icarus": "X"
+          },
+          {
+            "position": 54,
+            "verilator": "E",
+            "icarus": "X"
+          },
+          {
+            "position": 55,
+            "verilator": "2",
+            "icarus": "X"
+          },
+          {
+            "position": 80,
+            "verilator": "0",
+            "icarus": "X"
+          },
+          {
+            "position": 81,
+            "verilator": "6",
+            "icarus": "X"
+          },
+          {
+            "position": 82,
+            "verilator": "5",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 21,
+            "verilator": "8",
+            "icarus": "0"
+          },
+          {
+            "position": 23,
+            "verilator": "8",
+            "icarus": "0"
+          },
+          {
+            "position": 41,
+            "verilator": "B",
+            "icarus": "9"
+          },
+          {
+            "position": 78,
+            "verilator": "A",
+            "icarus": "9"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 4 real differences and 25 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "17AA7575B05415385556C888A96007FF734BE5760B6555E55E5DD4E21DF85A010A603EA23F9D89A2065",
+          "icarus_x_removed": "17AA7575B0______5_56_0_0A96007FF_____576096_55___E__D4__1DF85A010A603EA23F9D8992___",
+          "visual_diff": {
+            "verilator_aligned": "17AA7575B05415385556C888A96007FF734BE5760B6555E55E5DD4E21DF85A010A603EA23F9D89A2065",
+            "icarus_aligned": "17AA7575B0______5_56_0_0A96007FF_____576096_55___E__D4__1DF85A010A603EA23F9D8992___",
+            "diff_markers": "          ^^^^^^ ^  ^^^^        ^^^^^    ^ ^  ^^^ ^^  ^^                      ^ ^^^",
+            "formatted_diff": "Verilator:  17AA7575B05415385556C888A96007FF734BE5760B6555E55E5DD4E21DF85A010A603EA23F9D89A2065\nIcarus:     17AA7575B0______5_56_0_0A96007FF_____576096_55___E__D4__1DF85A010A603EA23F9D8992___\nDiff:                 ^^^^^^ ^  ^^^^        ^^^^^    ^ ^  ^^^ ^^  ^^                      ^ ^^^",
+            "formatted_lines": [
+              "Verilator:  17AA7575B05415385556C888A96007FF734BE5760B6555E55E5DD4E21DF85A010A603EA23F9D89A2065",
+              "Icarus:     17AA7575B0______5_56_0_0A96007FF_____576096_55___E__D4__1DF85A010A603EA23F9D8992___",
+              "Diff:                 ^^^^^^ ^  ^^^^        ^^^^^    ^ ^  ^^^ ^^  ^^                      ^ ^^^"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 45,
+      "verilator": {
+        "IN": "E9ADD8AB51861AFA2BCDC925EE09F91C1B4FA28F48730DEE84A39F69553BEDF0",
+        "OUT": "D7CB175B028048095520D0D51B009F95550041569A72739DE5DFEE237B7C000F6407A883BB389A2309",
+        "IN_norm": "E9ADD8AB51861AFA2BCDC925EE09F91C1B4FA28F48730DEE84A39F69553BEDF0",
+        "OUT_norm": "D7CB175B028048095520D0D51B009F95550041569A72739DE5DFEE237B7C000F6407A883BB389A2309"
+      },
+      "icarus": {
+        "IN": "E9ADD8AB51861AFA2BCDC925EE09F91C1B4FA28F48730DEE84A39F69553BEDF0",
+        "OUT": "D7CB175B02804809552050551B009F955XX041568A72739DE5DFEE237B7C000F6407A883BB38992309",
+        "IN_norm": "E9ADD8AB51861AFA2BCDC925EE09F91C1B4FA28F48730DEE84A39F69553BEDF0",
+        "OUT_norm": "D7CB175B02804809552050551B009F955XX041568A72739DE5DFEE237B7C000F6407A883BB38992309"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 33,
+            "verilator": "5",
+            "icarus": "X"
+          },
+          {
+            "position": 34,
+            "verilator": "0",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 20,
+            "verilator": "D",
+            "icarus": "5"
+          },
+          {
+            "position": 22,
+            "verilator": "D",
+            "icarus": "5"
+          },
+          {
+            "position": 40,
+            "verilator": "9",
+            "icarus": "8"
+          },
+          {
+            "position": 77,
+            "verilator": "A",
+            "icarus": "9"
+          }
+        ],
+        "total_positions": 82,
+        "explanation": "Mixed differences: 4 real differences and 2 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "D7CB175B028048095520D0D51B009F95550041569A72739DE5DFEE237B7C000F6407A883BB389A2309",
+          "icarus_x_removed": "D7CB175B02804809552050551B009F955__041568A72739DE5DFEE237B7C000F6407A883BB38992309",
+          "visual_diff": {
+            "verilator_aligned": "D7CB175B028048095520D0D51B009F95550041569A72739DE5DFEE237B7C000F6407A883BB389A2309",
+            "icarus_aligned": "D7CB175B02804809552050551B009F955__041568A72739DE5DFEE237B7C000F6407A883BB38992309",
+            "diff_markers": "                    ^ ^          ^^     ^                                    ^    ",
+            "formatted_diff": "Verilator:  D7CB175B028048095520D0D51B009F95550041569A72739DE5DFEE237B7C000F6407A883BB389A2309\nIcarus:     D7CB175B02804809552050551B009F955__041568A72739DE5DFEE237B7C000F6407A883BB38992309\nDiff:                           ^ ^          ^^     ^                                    ^    ",
+            "formatted_lines": [
+              "Verilator:  D7CB175B028048095520D0D51B009F95550041569A72739DE5DFEE237B7C000F6407A883BB389A2309",
+              "Icarus:     D7CB175B02804809552050551B009F955__041568A72739DE5DFEE237B7C000F6407A883BB38992309",
+              "Diff:                           ^ ^          ^^     ^                                    ^    "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 49,
+      "verilator": {
+        "IN": "816D088B89C69E5AC63ABE0515B0357C3AB1946F9E001B4EAAF1064917152450",
+        "OUT": "B617901A035B5C09A55620201A80E0E5790041568D8587B36B3549B004D2E024DA022A033D3C98F795",
+        "IN_norm": "816D088B89C69E5AC63ABE0515B0357C3AB1946F9E001B4EAAF1064917152450",
+        "OUT_norm": "B617901A035B5C09A55620201A80E0E5790041568D8587B36B3549B004D2E024DA022A033D3C98F795"
+      },
+      "icarus": {
+        "IN": "816D088B89C69E5AC63ABE0515B0357C3AB1946F9E001B4EAAF1064917152450",
+        "OUT": "B617901A035B5C09A55620201A80E0E5790041568D8587B36B3549B004D2E024DA022A033D3C99F795",
+        "IN_norm": "816D088B89C69E5AC63ABE0515B0357C3AB1946F9E001B4EAAF1064917152450",
+        "OUT_norm": "B617901A035B5C09A55620201A80E0E5790041568D8587B36B3549B004D2E024DA022A033D3C99F795"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 77,
+            "verilator": "8",
+            "icarus": "9"
+          }
+        ],
+        "total_positions": 82,
+        "explanation": "Real simulator differences at 1 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "B617901A035B5C09A55620201A80E0E5790041568D8587B36B3549B004D2E024DA022A033D3C98F795",
+          "icarus_x_removed": "B617901A035B5C09A55620201A80E0E5790041568D8587B36B3549B004D2E024DA022A033D3C99F795",
+          "visual_diff": {
+            "verilator_aligned": "B617901A035B5C09A55620201A80E0E5790041568D8587B36B3549B004D2E024DA022A033D3C98F795",
+            "icarus_aligned": "B617901A035B5C09A55620201A80E0E5790041568D8587B36B3549B004D2E024DA022A033D3C99F795",
+            "diff_markers": "                                                                             ^    ",
+            "formatted_diff": "Verilator:  B617901A035B5C09A55620201A80E0E5790041568D8587B36B3549B004D2E024DA022A033D3C98F795\nIcarus:     B617901A035B5C09A55620201A80E0E5790041568D8587B36B3549B004D2E024DA022A033D3C99F795\nDiff:                                                                                    ^    ",
+            "formatted_lines": [
+              "Verilator:  B617901A035B5C09A55620201A80E0E5790041568D8587B36B3549B004D2E024DA022A033D3C98F795",
+              "Icarus:     B617901A035B5C09A55620201A80E0E5790041568D8587B36B3549B004D2E024DA022A033D3C99F795",
+              "Diff:                                                                                    ^    "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 75,
+      "verilator": {
+        "IN": "D9CCC9BB8994E64A2B166FB594A9DFECCD96A29FB714C43EBC9BFCF9E52C07C0",
+        "OUT": "E72F0F1205807111A5210100300000055E08055291E9ECB3EBBD49B6CD192001E417AD83FA78F5C7F1",
+        "IN_norm": "D9CCC9BB8994E64A2B166FB594A9DFECCD96A29FB714C43EBC9BFCF9E52C07C0",
+        "OUT_norm": "E72F0F1205807111A5210100300000055E08055291E9ECB3EBBD49B6CD192001E417AD83FA78F5C7F1"
+      },
+      "icarus": {
+        "IN": "D9CCC9BB8994E64A2B166FB594A9DFECCD96A29FB714C43EBC9BFCF9E52C07C0",
+        "OUT": "E72F0F1205807111A5210100300000055E08055291E9ECB3EBBD49B6CD192001E417AD83FA78F547F1",
+        "IN_norm": "D9CCC9BB8994E64A2B166FB594A9DFECCD96A29FB714C43EBC9BFCF9E52C07C0",
+        "OUT_norm": "E72F0F1205807111A5210100300000055E08055291E9ECB3EBBD49B6CD192001E417AD83FA78F547F1"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "C",
+            "icarus": "4"
+          }
+        ],
+        "total_positions": 82,
+        "explanation": "Real simulator differences at 1 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "E72F0F1205807111A5210100300000055E08055291E9ECB3EBBD49B6CD192001E417AD83FA78F5C7F1",
+          "icarus_x_removed": "E72F0F1205807111A5210100300000055E08055291E9ECB3EBBD49B6CD192001E417AD83FA78F547F1",
+          "visual_diff": {
+            "verilator_aligned": "E72F0F1205807111A5210100300000055E08055291E9ECB3EBBD49B6CD192001E417AD83FA78F5C7F1",
+            "icarus_aligned": "E72F0F1205807111A5210100300000055E08055291E9ECB3EBBD49B6CD192001E417AD83FA78F547F1",
+            "diff_markers": "                                                                              ^   ",
+            "formatted_diff": "Verilator:  E72F0F1205807111A5210100300000055E08055291E9ECB3EBBD49B6CD192001E417AD83FA78F5C7F1\nIcarus:     E72F0F1205807111A5210100300000055E08055291E9ECB3EBBD49B6CD192001E417AD83FA78F547F1\nDiff:                                                                                     ^   ",
+            "formatted_lines": [
+              "Verilator:  E72F0F1205807111A5210100300000055E08055291E9ECB3EBBD49B6CD192001E417AD83FA78F5C7F1",
+              "Icarus:     E72F0F1205807111A5210100300000055E08055291E9ECB3EBBD49B6CD192001E417AD83FA78F547F1",
+              "Diff:                                                                                     ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 76,
+      "verilator": {
+        "IN": "9FACB533E1CBF4A2B091E06D13CE40847974469709431D16B88B5231A34B0ED8",
+        "OUT": "3D62F8D9B1E001495A558181FBC0000071210136497291F2961154E3D93C06008A4174843E7A4F5C521",
+        "IN_norm": "9FACB533E1CBF4A2B091E06D13CE40847974469709431D16B88B5231A34B0ED8",
+        "OUT_norm": "3D62F8D9B1E001495A558181FBC0000071210136497291F2961154E3D93C06008A4174843E7A4F5C521"
+      },
+      "icarus": {
+        "IN": "9FACB533E1CBF4A2B091E06D13CE40847974469709431D16B88B5231A34B0ED8",
+        "OUT": "3D62F8D9B1E0014X5A558181FBC0000071210136497291F2961154E3D93C06008A4174843E7A4F54521",
+        "IN_norm": "9FACB533E1CBF4A2B091E06D13CE40847974469709431D16B88B5231A34B0ED8",
+        "OUT_norm": "3D62F8D9B1E0014X5A558181FBC0000071210136497291F2961154E3D93C06008A4174843E7A4F54521"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 15,
+            "verilator": "9",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 79,
+            "verilator": "C",
+            "icarus": "4"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 1 real differences and 1 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "3D62F8D9B1E001495A558181FBC0000071210136497291F2961154E3D93C06008A4174843E7A4F5C521",
+          "icarus_x_removed": "3D62F8D9B1E0014_5A558181FBC0000071210136497291F2961154E3D93C06008A4174843E7A4F54521",
+          "visual_diff": {
+            "verilator_aligned": "3D62F8D9B1E001495A558181FBC0000071210136497291F2961154E3D93C06008A4174843E7A4F5C521",
+            "icarus_aligned": "3D62F8D9B1E0014_5A558181FBC0000071210136497291F2961154E3D93C06008A4174843E7A4F54521",
+            "diff_markers": "               ^                                                               ^   ",
+            "formatted_diff": "Verilator:  3D62F8D9B1E001495A558181FBC0000071210136497291F2961154E3D93C06008A4174843E7A4F5C521\nIcarus:     3D62F8D9B1E0014_5A558181FBC0000071210136497291F2961154E3D93C06008A4174843E7A4F54521\nDiff:                      ^                                                               ^   ",
+            "formatted_lines": [
+              "Verilator:  3D62F8D9B1E001495A558181FBC0000071210136497291F2961154E3D93C06008A4174843E7A4F5C521",
+              "Icarus:     3D62F8D9B1E0014_5A558181FBC0000071210136497291F2961154E3D93C06008A4174843E7A4F54521",
+              "Diff:                      ^                                                               ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 87,
+      "verilator": {
+        "IN": "A858015BC531B86A3DF8B65588649D0CCDFFA03F49F2B45EB0B919995D8F32E0",
+        "OUT": "2E9D005202C0EB41A52B71751881EFE7190447709169696BE3BAAE38AD344002FA13AA32B88A40FC9D",
+        "IN_norm": "A858015BC531B86A3DF8B65588649D0CCDFFA03F49F2B45EB0B919995D8F32E0",
+        "OUT_norm": "2E9D005202C0EB41A52B71751881EFE7190447709169696BE3BAAE38AD344002FA13AA32B88A40FC9D"
+      },
+      "icarus": {
+        "IN": "A858015BC531B86A3DF8B65588649D0CCDFFA03F49F2B45EB0B919995D8F32E0",
+        "OUT": "2E9D005202C0EB41A52B71751881EFE7190447709169696BE3BAAE38AD344002FA13AA32B88A407C9D",
+        "IN_norm": "A858015BC531B86A3DF8B65588649D0CCDFFA03F49F2B45EB0B919995D8F32E0",
+        "OUT_norm": "2E9D005202C0EB41A52B71751881EFE7190447709169696BE3BAAE38AD344002FA13AA32B88A407C9D"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "F",
+            "icarus": "7"
+          }
+        ],
+        "total_positions": 82,
+        "explanation": "Real simulator differences at 1 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "2E9D005202C0EB41A52B71751881EFE7190447709169696BE3BAAE38AD344002FA13AA32B88A40FC9D",
+          "icarus_x_removed": "2E9D005202C0EB41A52B71751881EFE7190447709169696BE3BAAE38AD344002FA13AA32B88A407C9D",
+          "visual_diff": {
+            "verilator_aligned": "2E9D005202C0EB41A52B71751881EFE7190447709169696BE3BAAE38AD344002FA13AA32B88A40FC9D",
+            "icarus_aligned": "2E9D005202C0EB41A52B71751881EFE7190447709169696BE3BAAE38AD344002FA13AA32B88A407C9D",
+            "diff_markers": "                                                                              ^   ",
+            "formatted_diff": "Verilator:  2E9D005202C0EB41A52B71751881EFE7190447709169696BE3BAAE38AD344002FA13AA32B88A40FC9D\nIcarus:     2E9D005202C0EB41A52B71751881EFE7190447709169696BE3BAAE38AD344002FA13AA32B88A407C9D\nDiff:                                                                                     ^   ",
+            "formatted_lines": [
+              "Verilator:  2E9D005202C0EB41A52B71751881EFE7190447709169696BE3BAAE38AD344002FA13AA32B88A40FC9D",
+              "Icarus:     2E9D005202C0EB41A52B71751881EFE7190447709169696BE3BAAE38AD344002FA13AA32B88A407C9D",
+              "Diff:                                                                                     ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 88,
+      "verilator": {
+        "IN": "EA3340D371ACEAC293625B0D4E3F81A44F0B583777AAF136A25B62D1A5447DF8",
+        "OUT": "11B8C5A5200000AB63968404038006FE73F380112D1DD61DBE3BAAE3F34378009B6162F43682A40FC51",
+        "IN_norm": "EA3340D371ACEAC293625B0D4E3F81A44F0B583777AAF136A25B62D1A5447DF8",
+        "OUT_norm": "11B8C5A5200000AB63968404038006FE73F380112D1DD61DBE3BAAE3F34378009B6162F43682A40FC51"
+      },
+      "icarus": {
+        "IN": "EA3340D371ACEAC293625B0D4E3F81A44F0B583777AAF136A25B62D1A5447DF8",
+        "OUT": "11B8C5A5200000AX63968404038006FE73F380112D1DD61DBE3BAAE3F34378009B6162F43682A407C51",
+        "IN_norm": "EA3340D371ACEAC293625B0D4E3F81A44F0B583777AAF136A25B62D1A5447DF8",
+        "OUT_norm": "11B8C5A5200000AX63968404038006FE73F380112D1DD61DBE3BAAE3F34378009B6162F43682A407C51"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 15,
+            "verilator": "B",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 79,
+            "verilator": "F",
+            "icarus": "7"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 1 real differences and 1 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "11B8C5A5200000AB63968404038006FE73F380112D1DD61DBE3BAAE3F34378009B6162F43682A40FC51",
+          "icarus_x_removed": "11B8C5A5200000A_63968404038006FE73F380112D1DD61DBE3BAAE3F34378009B6162F43682A407C51",
+          "visual_diff": {
+            "verilator_aligned": "11B8C5A5200000AB63968404038006FE73F380112D1DD61DBE3BAAE3F34378009B6162F43682A40FC51",
+            "icarus_aligned": "11B8C5A5200000A_63968404038006FE73F380112D1DD61DBE3BAAE3F34378009B6162F43682A407C51",
+            "diff_markers": "               ^                                                               ^   ",
+            "formatted_diff": "Verilator:  11B8C5A5200000AB63968404038006FE73F380112D1DD61DBE3BAAE3F34378009B6162F43682A40FC51\nIcarus:     11B8C5A5200000A_63968404038006FE73F380112D1DD61DBE3BAAE3F34378009B6162F43682A407C51\nDiff:                      ^                                                               ^   ",
+            "formatted_lines": [
+              "Verilator:  11B8C5A5200000AB63968404038006FE73F380112D1DD61DBE3BAAE3F34378009B6162F43682A40FC51",
+              "Icarus:     11B8C5A5200000A_63968404038006FE73F380112D1DD61DBE3BAAE3F34378009B6162F43682A407C51",
+              "Diff:                      ^                                                               ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 89,
+      "verilator": {
+        "IN": "3657F74B9C61101A9754DEC5BBCF613C7FE7172F07E2F10EA3669B090BC51410",
+        "OUT": "328B3DED204B12E01A55B616032005FD57A0001569737373363300E3CF3FD8008680D8C12160640FDF5",
+        "IN_norm": "3657F74B9C61101A9754DEC5BBCF613C7FE7172F07E2F10EA3669B090BC51410",
+        "OUT_norm": "328B3DED204B12E01A55B616032005FD57A0001569737373363300E3CF3FD8008680D8C12160640FDF5"
+      },
+      "icarus": {
+        "IN": "3657F74B9C61101A9754DEC5BBCF613C7FE7172F07E2F10EA3669B090BC51410",
+        "OUT": "328B3DED204B12E01A55B616032005FD57XX001569737373363300E3CF3FD8008680D8C121606407DF5",
+        "IN_norm": "3657F74B9C61101A9754DEC5BBCF613C7FE7172F07E2F10EA3669B090BC51410",
+        "OUT_norm": "328B3DED204B12E01A55B616032005FD57XX001569737373363300E3CF3FD8008680D8C121606407DF5"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "A",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "0",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 79,
+            "verilator": "F",
+            "icarus": "7"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 1 real differences and 2 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "328B3DED204B12E01A55B616032005FD57A0001569737373363300E3CF3FD8008680D8C12160640FDF5",
+          "icarus_x_removed": "328B3DED204B12E01A55B616032005FD57__001569737373363300E3CF3FD8008680D8C121606407DF5",
+          "visual_diff": {
+            "verilator_aligned": "328B3DED204B12E01A55B616032005FD57A0001569737373363300E3CF3FD8008680D8C12160640FDF5",
+            "icarus_aligned": "328B3DED204B12E01A55B616032005FD57__001569737373363300E3CF3FD8008680D8C121606407DF5",
+            "diff_markers": "                                  ^^                                           ^   ",
+            "formatted_diff": "Verilator:  328B3DED204B12E01A55B616032005FD57A0001569737373363300E3CF3FD8008680D8C12160640FDF5\nIcarus:     328B3DED204B12E01A55B616032005FD57__001569737373363300E3CF3FD8008680D8C121606407DF5\nDiff:                                         ^^                                           ^   ",
+            "formatted_lines": [
+              "Verilator:  328B3DED204B12E01A55B616032005FD57A0001569737373363300E3CF3FD8008680D8C12160640FDF5",
+              "Icarus:     328B3DED204B12E01A55B616032005FD57__001569737373363300E3CF3FD8008680D8C121606407DF5",
+              "Diff:                                         ^^                                           ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 90,
+      "verilator": {
+        "IN": "8F9E04C36F198872D82D217D1D589BD49BACBD27EC7013E65C29A2413FCF5528",
+        "OUT": "3CE0FC15305C059C9556C888A96816167178055429D6AF56FEFFAA9B28BD8602BC01268437F3F422FFF",
+        "IN_norm": "8F9E04C36F198872D82D217D1D589BD49BACBD27EC7013E65C29A2413FCF5528",
+        "OUT_norm": "3CE0FC15305C059C9556C888A96816167178055429D6AF56FEFFAA9B28BD8602BC01268437F3F422FFF"
+      },
+      "icarus": {
+        "IN": "8F9E04C36F198872D82D217D1D589BD49BACBD27EC7013E65C29A2413FCF5528",
+        "OUT": "3CE0FC15305C059C9556C080A968161671X8055428D6AF56FEFFAA9B28BD8602BC01268437F3F40AFFF",
+        "IN_norm": "8F9E04C36F198872D82D217D1D589BD49BACBD27EC7013E65C29A2413FCF5528",
+        "OUT_norm": "3CE0FC15305C059C9556C080A968161671X8055428D6AF56FEFFAA9B28BD8602BC01268437F3F40AFFF"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "7",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 21,
+            "verilator": "8",
+            "icarus": "0"
+          },
+          {
+            "position": 23,
+            "verilator": "8",
+            "icarus": "0"
+          },
+          {
+            "position": 41,
+            "verilator": "9",
+            "icarus": "8"
+          },
+          {
+            "position": 78,
+            "verilator": "2",
+            "icarus": "0"
+          },
+          {
+            "position": 79,
+            "verilator": "2",
+            "icarus": "A"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 5 real differences and 1 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "3CE0FC15305C059C9556C888A96816167178055429D6AF56FEFFAA9B28BD8602BC01268437F3F422FFF",
+          "icarus_x_removed": "3CE0FC15305C059C9556C080A968161671_8055428D6AF56FEFFAA9B28BD8602BC01268437F3F40AFFF",
+          "visual_diff": {
+            "verilator_aligned": "3CE0FC15305C059C9556C888A96816167178055429D6AF56FEFFAA9B28BD8602BC01268437F3F422FFF",
+            "icarus_aligned": "3CE0FC15305C059C9556C080A968161671_8055428D6AF56FEFFAA9B28BD8602BC01268437F3F40AFFF",
+            "diff_markers": "                     ^ ^          ^      ^                                    ^^   ",
+            "formatted_diff": "Verilator:  3CE0FC15305C059C9556C888A96816167178055429D6AF56FEFFAA9B28BD8602BC01268437F3F422FFF\nIcarus:     3CE0FC15305C059C9556C080A968161671_8055428D6AF56FEFFAA9B28BD8602BC01268437F3F40AFFF\nDiff:                            ^ ^          ^      ^                                    ^^   ",
+            "formatted_lines": [
+              "Verilator:  3CE0FC15305C059C9556C888A96816167178055429D6AF56FEFFAA9B28BD8602BC01268437F3F422FFF",
+              "Icarus:     3CE0FC15305C059C9556C080A968161671_8055428D6AF56FEFFAA9B28BD8602BC01268437F3F40AFFF",
+              "Diff:                            ^ ^          ^      ^                                    ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 91,
+      "verilator": {
+        "IN": "BFF9493B55ADB3CAF7040335B74B916C2AD22A1F1073B9BE93EF58797D8DA140",
+        "OUT": "3FEBD13130380EAE9A55BE1E0108080873E2801569DB5B5B3633009C239A7C00DEC1FA0F3FB0B422CF5",
+        "IN_norm": "BFF9493B55ADB3CAF7040335B74B916C2AD22A1F1073B9BE93EF58797D8DA140",
+        "OUT_norm": "3FEBD13130380EAE9A55BE1E0108080873E2801569DB5B5B3633009C239A7C00DEC1FA0F3FB0B422CF5"
+      },
+      "icarus": {
+        "IN": "BFF9493B55ADB3CAF7040335B74B916C2AD22A1F1073B9BE93EF58797D8DA140",
+        "OUT": "3FEBD13130380EAE9A55B6160108080873XX801568DB5B5B3633009C239A7C00DEC1FA0F3FB0B40ACF5",
+        "IN_norm": "BFF9493B55ADB3CAF7040335B74B916C2AD22A1F1073B9BE93EF58797D8DA140",
+        "OUT_norm": "3FEBD13130380EAE9A55B6160108080873XX801568DB5B5B3633009C239A7C00DEC1FA0F3FB0B40ACF5"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "E",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "2",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 21,
+            "verilator": "E",
+            "icarus": "6"
+          },
+          {
+            "position": 23,
+            "verilator": "E",
+            "icarus": "6"
+          },
+          {
+            "position": 41,
+            "verilator": "9",
+            "icarus": "8"
+          },
+          {
+            "position": 78,
+            "verilator": "2",
+            "icarus": "0"
+          },
+          {
+            "position": 79,
+            "verilator": "2",
+            "icarus": "A"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 5 real differences and 2 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "3FEBD13130380EAE9A55BE1E0108080873E2801569DB5B5B3633009C239A7C00DEC1FA0F3FB0B422CF5",
+          "icarus_x_removed": "3FEBD13130380EAE9A55B6160108080873__801568DB5B5B3633009C239A7C00DEC1FA0F3FB0B40ACF5",
+          "visual_diff": {
+            "verilator_aligned": "3FEBD13130380EAE9A55BE1E0108080873E2801569DB5B5B3633009C239A7C00DEC1FA0F3FB0B422CF5",
+            "icarus_aligned": "3FEBD13130380EAE9A55B6160108080873__801568DB5B5B3633009C239A7C00DEC1FA0F3FB0B40ACF5",
+            "diff_markers": "                     ^ ^          ^^     ^                                    ^^   ",
+            "formatted_diff": "Verilator:  3FEBD13130380EAE9A55BE1E0108080873E2801569DB5B5B3633009C239A7C00DEC1FA0F3FB0B422CF5\nIcarus:     3FEBD13130380EAE9A55B6160108080873__801568DB5B5B3633009C239A7C00DEC1FA0F3FB0B40ACF5\nDiff:                            ^ ^          ^^     ^                                    ^^   ",
+            "formatted_lines": [
+              "Verilator:  3FEBD13130380EAE9A55BE1E0108080873E2801569DB5B5B3633009C239A7C00DEC1FA0F3FB0B422CF5",
+              "Icarus:     3FEBD13130380EAE9A55B6160108080873__801568DB5B5B3633009C239A7C00DEC1FA0F3FB0B40ACF5",
+              "Diff:                            ^ ^          ^^     ^                                    ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 99,
+      "verilator": {
+        "IN": "4A3828FBC9A13A8A238A6CF597268A2CC14E8DDF34D8547E9E6EA6392DE68E00",
+        "OUT": "11D0C009A0561D262392090951000000551804374F0080A7363354E384F97A003E21C2E12F8EBDFCB91",
+        "IN_norm": "4A3828FBC9A13A8A238A6CF597268A2CC14E8DDF34D8547E9E6EA6392DE68E00",
+        "OUT_norm": "11D0C009A0561D262392090951000000551804374F0080A7363354E384F97A003E21C2E12F8EBDFCB91"
+      },
+      "icarus": {
+        "IN": "4A3828FBC9A13A8A238A6CF597268A2CC14E8DDF34D8547E9E6EA6392DE68E00",
+        "OUT": "11D0C009A0561D262392090951000000551804374F0080A7363354E384F97A003E21C2E12F8EBDE4B91",
+        "IN_norm": "4A3828FBC9A13A8A238A6CF597268A2CC14E8DDF34D8547E9E6EA6392DE68E00",
+        "OUT_norm": "11D0C009A0561D262392090951000000551804374F0080A7363354E384F97A003E21C2E12F8EBDE4B91"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "F",
+            "icarus": "E"
+          },
+          {
+            "position": 79,
+            "verilator": "C",
+            "icarus": "4"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 2 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "11D0C009A0561D262392090951000000551804374F0080A7363354E384F97A003E21C2E12F8EBDFCB91",
+          "icarus_x_removed": "11D0C009A0561D262392090951000000551804374F0080A7363354E384F97A003E21C2E12F8EBDE4B91",
+          "visual_diff": {
+            "verilator_aligned": "11D0C009A0561D262392090951000000551804374F0080A7363354E384F97A003E21C2E12F8EBDFCB91",
+            "icarus_aligned": "11D0C009A0561D262392090951000000551804374F0080A7363354E384F97A003E21C2E12F8EBDE4B91",
+            "diff_markers": "                                                                              ^^   ",
+            "formatted_diff": "Verilator:  11D0C009A0561D262392090951000000551804374F0080A7363354E384F97A003E21C2E12F8EBDFCB91\nIcarus:     11D0C009A0561D262392090951000000551804374F0080A7363354E384F97A003E21C2E12F8EBDE4B91\nDiff:                                                                                     ^^   ",
+            "formatted_lines": [
+              "Verilator:  11D0C009A0561D262392090951000000551804374F0080A7363354E384F97A003E21C2E12F8EBDFCB91",
+              "Icarus:     11D0C009A0561D262392090951000000551804374F0080A7363354E384F97A003E21C2E12F8EBDE4B91",
+              "Diff:                                                                                     ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 100,
+      "verilator": {
+        "IN": "9FBCBC735C0690E2216045ADB76DF2C4F05659D7E16075563261E37123881D18",
+        "OUT": "3DE3F85DC000008195508E0E01000CFC5547B0770B60162B5EDDFE9BB79EFC00AA8020C03E7E7DFC945",
+        "IN_norm": "9FBCBC735C0690E2216045ADB76DF2C4F05659D7E16075563261E37123881D18",
+        "OUT_norm": "3DE3F85DC000008195508E0E01000CFC5547B0770B60162B5EDDFE9BB79EFC00AA8020C03E7E7DFC945"
+      },
+      "icarus": {
+        "IN": "9FBCBC735C0690E2216045ADB76DF2C4F05659D7E16075563261E37123881D18",
+        "OUT": "3DE3F85DC000008195508E0E01000CFC5547B0770B60162B5EDDFE9BB79EFC00AA8020C03E7E7DE4945",
+        "IN_norm": "9FBCBC735C0690E2216045ADB76DF2C4F05659D7E16075563261E37123881D18",
+        "OUT_norm": "3DE3F85DC000008195508E0E01000CFC5547B0770B60162B5EDDFE9BB79EFC00AA8020C03E7E7DE4945"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "F",
+            "icarus": "E"
+          },
+          {
+            "position": 79,
+            "verilator": "C",
+            "icarus": "4"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 2 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "3DE3F85DC000008195508E0E01000CFC5547B0770B60162B5EDDFE9BB79EFC00AA8020C03E7E7DFC945",
+          "icarus_x_removed": "3DE3F85DC000008195508E0E01000CFC5547B0770B60162B5EDDFE9BB79EFC00AA8020C03E7E7DE4945",
+          "visual_diff": {
+            "verilator_aligned": "3DE3F85DC000008195508E0E01000CFC5547B0770B60162B5EDDFE9BB79EFC00AA8020C03E7E7DFC945",
+            "icarus_aligned": "3DE3F85DC000008195508E0E01000CFC5547B0770B60162B5EDDFE9BB79EFC00AA8020C03E7E7DE4945",
+            "diff_markers": "                                                                              ^^   ",
+            "formatted_diff": "Verilator:  3DE3F85DC000008195508E0E01000CFC5547B0770B60162B5EDDFE9BB79EFC00AA8020C03E7E7DFC945\nIcarus:     3DE3F85DC000008195508E0E01000CFC5547B0770B60162B5EDDFE9BB79EFC00AA8020C03E7E7DE4945\nDiff:                                                                                     ^^   ",
+            "formatted_lines": [
+              "Verilator:  3DE3F85DC000008195508E0E01000CFC5547B0770B60162B5EDDFE9BB79EFC00AA8020C03E7E7DFC945",
+              "Icarus:     3DE3F85DC000008195508E0E01000CFC5547B0770B60162B5EDDFE9BB79EFC00AA8020C03E7E7DE4945",
+              "Diff:                                                                                     ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 107,
+      "verilator": {
+        "IN": "1E3CC8BB9FD9814AF17096B5C70842ECDCB4B19F1CB5AF3E5FD1B3F9D75A3AC0",
+        "OUT": "31C3F8E5A05807599A57D292ABC270F071BA0154293E3E5ABE3BD4E2C479BA0278E036FA3FC5DADE255",
+        "IN_norm": "1E3CC8BB9FD9814AF17096B5C70842ECDCB4B19F1CB5AF3E5FD1B3F9D75A3AC0",
+        "OUT_norm": "31C3F8E5A05807599A57D292ABC270F071BA0154293E3E5ABE3BD4E2C479BA0278E036FA3FC5DADE255"
+      },
+      "icarus": {
+        "IN": "1E3CC8BB9FD9814AF17096B5C70842ECDCB4B19F1CB5AF3E5FD1B3F9D75A3AC0",
+        "OUT": "31C3F8E5A05807599A57D292ABC270F071BA0154293E3E5ABE3BD4E2C479BA0278E036FA3FC5DAC6255",
+        "IN_norm": "1E3CC8BB9FD9814AF17096B5C70842ECDCB4B19F1CB5AF3E5FD1B3F9D75A3AC0",
+        "OUT_norm": "31C3F8E5A05807599A57D292ABC270F071BA0154293E3E5ABE3BD4E2C479BA0278E036FA3FC5DAC6255"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "D",
+            "icarus": "C"
+          },
+          {
+            "position": 79,
+            "verilator": "E",
+            "icarus": "6"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 2 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "31C3F8E5A05807599A57D292ABC270F071BA0154293E3E5ABE3BD4E2C479BA0278E036FA3FC5DADE255",
+          "icarus_x_removed": "31C3F8E5A05807599A57D292ABC270F071BA0154293E3E5ABE3BD4E2C479BA0278E036FA3FC5DAC6255",
+          "visual_diff": {
+            "verilator_aligned": "31C3F8E5A05807599A57D292ABC270F071BA0154293E3E5ABE3BD4E2C479BA0278E036FA3FC5DADE255",
+            "icarus_aligned": "31C3F8E5A05807599A57D292ABC270F071BA0154293E3E5ABE3BD4E2C479BA0278E036FA3FC5DAC6255",
+            "diff_markers": "                                                                              ^^   ",
+            "formatted_diff": "Verilator:  31C3F8E5A05807599A57D292ABC270F071BA0154293E3E5ABE3BD4E2C479BA0278E036FA3FC5DADE255\nIcarus:     31C3F8E5A05807599A57D292ABC270F071BA0154293E3E5ABE3BD4E2C479BA0278E036FA3FC5DAC6255\nDiff:                                                                                     ^^   ",
+            "formatted_lines": [
+              "Verilator:  31C3F8E5A05807599A57D292ABC270F071BA0154293E3E5ABE3BD4E2C479BA0278E036FA3FC5DADE255",
+              "Icarus:     31C3F8E5A05807599A57D292ABC270F071BA0154293E3E5ABE3BD4E2C479BA0278E036FA3FC5DAC6255",
+              "Diff:                                                                                     ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 127,
+      "verilator": {
+        "IN": "57A5801B2ADEFA2A6A6EE7154C8618CCD98EB2FF3C5B5A1EABE9BE59ADBC72A0",
+        "OUT": "3D1361D520777758E390DA9AAB4003FF71C849146F38B8C79611009A69B476010EC13ED537A2B361CAD",
+        "IN_norm": "57A5801B2ADEFA2A6A6EE7154C8618CCD98EB2FF3C5B5A1EABE9BE59ADBC72A0",
+        "OUT_norm": "3D1361D520777758E390DA9AAB4003FF71C849146F38B8C79611009A69B476010EC13ED537A2B361CAD"
+      },
+      "icarus": {
+        "IN": "57A5801B2ADEFA2A6A6EE7154C8618CCD98EB2FF3C5B5A1EABE9BE59ADBC72A0",
+        "OUT": "3D1361D520XXXXXXXX90X2X2AB4003FF71XXX9146D3XBXXXX6XX00XX69B476010EC13ED537A2B349XXX",
+        "IN_norm": "57A5801B2ADEFA2A6A6EE7154C8618CCD98EB2FF3C5B5A1EABE9BE59ADBC72A0",
+        "OUT_norm": "3D1361D520XXXXXXXX90X2X2AB4003FF71XXX9146D3XBXXXX6XX00XX69B476010EC13ED537A2B349XXX"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 10,
+            "verilator": "7",
+            "icarus": "X"
+          },
+          {
+            "position": 11,
+            "verilator": "7",
+            "icarus": "X"
+          },
+          {
+            "position": 12,
+            "verilator": "7",
+            "icarus": "X"
+          },
+          {
+            "position": 13,
+            "verilator": "7",
+            "icarus": "X"
+          },
+          {
+            "position": 14,
+            "verilator": "5",
+            "icarus": "X"
+          },
+          {
+            "position": 15,
+            "verilator": "8",
+            "icarus": "X"
+          },
+          {
+            "position": 16,
+            "verilator": "E",
+            "icarus": "X"
+          },
+          {
+            "position": 17,
+            "verilator": "3",
+            "icarus": "X"
+          },
+          {
+            "position": 20,
+            "verilator": "D",
+            "icarus": "X"
+          },
+          {
+            "position": 22,
+            "verilator": "9",
+            "icarus": "X"
+          },
+          {
+            "position": 34,
+            "verilator": "C",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "8",
+            "icarus": "X"
+          },
+          {
+            "position": 36,
+            "verilator": "4",
+            "icarus": "X"
+          },
+          {
+            "position": 43,
+            "verilator": "8",
+            "icarus": "X"
+          },
+          {
+            "position": 45,
+            "verilator": "8",
+            "icarus": "X"
+          },
+          {
+            "position": 46,
+            "verilator": "C",
+            "icarus": "X"
+          },
+          {
+            "position": 47,
+            "verilator": "7",
+            "icarus": "X"
+          },
+          {
+            "position": 48,
+            "verilator": "9",
+            "icarus": "X"
+          },
+          {
+            "position": 50,
+            "verilator": "1",
+            "icarus": "X"
+          },
+          {
+            "position": 51,
+            "verilator": "1",
+            "icarus": "X"
+          },
+          {
+            "position": 54,
+            "verilator": "9",
+            "icarus": "X"
+          },
+          {
+            "position": 55,
+            "verilator": "A",
+            "icarus": "X"
+          },
+          {
+            "position": 80,
+            "verilator": "C",
+            "icarus": "X"
+          },
+          {
+            "position": 81,
+            "verilator": "A",
+            "icarus": "X"
+          },
+          {
+            "position": 82,
+            "verilator": "D",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 21,
+            "verilator": "A",
+            "icarus": "2"
+          },
+          {
+            "position": 23,
+            "verilator": "A",
+            "icarus": "2"
+          },
+          {
+            "position": 41,
+            "verilator": "F",
+            "icarus": "D"
+          },
+          {
+            "position": 78,
+            "verilator": "6",
+            "icarus": "4"
+          },
+          {
+            "position": 79,
+            "verilator": "1",
+            "icarus": "9"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 5 real differences and 25 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "3D1361D520777758E390DA9AAB4003FF71C849146F38B8C79611009A69B476010EC13ED537A2B361CAD",
+          "icarus_x_removed": "3D1361D520________90_2_2AB4003FF71___9146D3_B____6__00__69B476010EC13ED537A2B349___",
+          "visual_diff": {
+            "verilator_aligned": "3D1361D520777758E390DA9AAB4003FF71C849146F38B8C79611009A69B476010EC13ED537A2B361CAD",
+            "icarus_aligned": "3D1361D520________90_2_2AB4003FF71___9146D3_B____6__00__69B476010EC13ED537A2B349___",
+            "diff_markers": "          ^^^^^^^^  ^^^^          ^^^    ^ ^ ^^^^ ^^  ^^                      ^^^^^",
+            "formatted_diff": "Verilator:  3D1361D520777758E390DA9AAB4003FF71C849146F38B8C79611009A69B476010EC13ED537A2B361CAD\nIcarus:     3D1361D520________90_2_2AB4003FF71___9146D3_B____6__00__69B476010EC13ED537A2B349___\nDiff:                 ^^^^^^^^  ^^^^          ^^^    ^ ^ ^^^^ ^^  ^^                      ^^^^^",
+            "formatted_lines": [
+              "Verilator:  3D1361D520777758E390DA9AAB4003FF71C849146F38B8C79611009A69B476010EC13ED537A2B361CAD",
+              "Icarus:     3D1361D520________90_2_2AB4003FF71___9146D3_B____6__00__69B476010EC13ED537A2B349___",
+              "Diff:                 ^^^^^^^^  ^^^^          ^^^    ^ ^ ^^^^ ^^  ^^                      ^^^^^"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 136,
+      "verilator": {
+        "IN": "64FACF530CB7A342EA7AA58DCDB86624B3FEFEB7482321B642CC0551C5601A78",
+        "OUT": "27DC54F5302002B31555D494ABD43DFD5570057608E1BFFFDE5DFEE5FBBAA000DA0186903AAA9C4D009",
+        "IN_norm": "64FACF530CB7A342EA7AA58DCDB86624B3FEFEB7482321B642CC0551C5601A78",
+        "OUT_norm": "27DC54F5302002B31555D494ABD43DFD5570057608E1BFFFDE5DFEE5FBBAA000DA0186903AAA9C4D009"
+      },
+      "icarus": {
+        "IN": "64FACF530CB7A342EA7AA58DCDB86624B3FEFEB7482321B642CC0551C5601A78",
+        "OUT": "27DC54F5302002B31555D494ABD43DFD5570057608E1BFFFDE5DFEE5FBBAA000DA0186903AAA9C5D009",
+        "IN_norm": "64FACF530CB7A342EA7AA58DCDB86624B3FEFEB7482321B642CC0551C5601A78",
+        "OUT_norm": "27DC54F5302002B31555D494ABD43DFD5570057608E1BFFFDE5DFEE5FBBAA000DA0186903AAA9C5D009"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "4",
+            "icarus": "5"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 1 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "27DC54F5302002B31555D494ABD43DFD5570057608E1BFFFDE5DFEE5FBBAA000DA0186903AAA9C4D009",
+          "icarus_x_removed": "27DC54F5302002B31555D494ABD43DFD5570057608E1BFFFDE5DFEE5FBBAA000DA0186903AAA9C5D009",
+          "visual_diff": {
+            "verilator_aligned": "27DC54F5302002B31555D494ABD43DFD5570057608E1BFFFDE5DFEE5FBBAA000DA0186903AAA9C4D009",
+            "icarus_aligned": "27DC54F5302002B31555D494ABD43DFD5570057608E1BFFFDE5DFEE5FBBAA000DA0186903AAA9C5D009",
+            "diff_markers": "                                                                              ^    ",
+            "formatted_diff": "Verilator:  27DC54F5302002B31555D494ABD43DFD5570057608E1BFFFDE5DFEE5FBBAA000DA0186903AAA9C4D009\nIcarus:     27DC54F5302002B31555D494ABD43DFD5570057608E1BFFFDE5DFEE5FBBAA000DA0186903AAA9C5D009\nDiff:                                                                                     ^    ",
+            "formatted_lines": [
+              "Verilator:  27DC54F5302002B31555D494ABD43DFD5570057608E1BFFFDE5DFEE5FBBAA000DA0186903AAA9C4D009",
+              "Icarus:     27DC54F5302002B31555D494ABD43DFD5570057608E1BFFFDE5DFEE5FBBAA000DA0186903AAA9C5D009",
+              "Diff:                                                                                     ^    "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 137,
+      "verilator": {
+        "IN": "63B2D5CBB5FA589ACADBF9453BF055BCFDD90DAFF820B18E37F90D89D727C090",
+        "OUT": "1D991CF5B030017D15558707538001FF57440477096C6C74DEDDFE9BD3BBA400C6E12AA03FDFDC4D2A9",
+        "IN_norm": "63B2D5CBB5FA589ACADBF9453BF055BCFDD90DAFF820B18E37F90D89D727C090",
+        "OUT_norm": "1D991CF5B030017D15558707538001FF57440477096C6C74DEDDFE9BD3BBA400C6E12AA03FDFDC4D2A9"
+      },
+      "icarus": {
+        "IN": "63B2D5CBB5FA589ACADBF9453BF055BCFDD90DAFF820B18E37F90D89D727C090",
+        "OUT": "1D991CF5B030017D15558707538001FF57440477096C6C74DEDDFE9BD3BBA400C6E12AA03FDFDC5D2A9",
+        "IN_norm": "63B2D5CBB5FA589ACADBF9453BF055BCFDD90DAFF820B18E37F90D89D727C090",
+        "OUT_norm": "1D991CF5B030017D15558707538001FF57440477096C6C74DEDDFE9BD3BBA400C6E12AA03FDFDC5D2A9"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "4",
+            "icarus": "5"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 1 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "1D991CF5B030017D15558707538001FF57440477096C6C74DEDDFE9BD3BBA400C6E12AA03FDFDC4D2A9",
+          "icarus_x_removed": "1D991CF5B030017D15558707538001FF57440477096C6C74DEDDFE9BD3BBA400C6E12AA03FDFDC5D2A9",
+          "visual_diff": {
+            "verilator_aligned": "1D991CF5B030017D15558707538001FF57440477096C6C74DEDDFE9BD3BBA400C6E12AA03FDFDC4D2A9",
+            "icarus_aligned": "1D991CF5B030017D15558707538001FF57440477096C6C74DEDDFE9BD3BBA400C6E12AA03FDFDC5D2A9",
+            "diff_markers": "                                                                              ^    ",
+            "formatted_diff": "Verilator:  1D991CF5B030017D15558707538001FF57440477096C6C74DEDDFE9BD3BBA400C6E12AA03FDFDC4D2A9\nIcarus:     1D991CF5B030017D15558707538001FF57440477096C6C74DEDDFE9BD3BBA400C6E12AA03FDFDC5D2A9\nDiff:                                                                                     ^    ",
+            "formatted_lines": [
+              "Verilator:  1D991CF5B030017D15558707538001FF57440477096C6C74DEDDFE9BD3BBA400C6E12AA03FDFDC4D2A9",
+              "Icarus:     1D991CF5B030017D15558707538001FF57440477096C6C74DEDDFE9BD3BBA400C6E12AA03FDFDC5D2A9",
+              "Diff:                                                                                     ^    "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 154,
+      "verilator": {
+        "IN": "9D6C42C30261FE72BE15AF7DEA72A1D4C0731B2774FD29E6A50550416534FB28",
+        "OUT": "2B63B0A1200A02E05A567E1E03AC0A0A57F0D0770B3946821E19AA9A4B9A9800F280B2003CBC9168249",
+        "IN_norm": "9D6C42C30261FE72BE15AF7DEA72A1D4C0731B2774FD29E6A50550416534FB28",
+        "OUT_norm": "2B63B0A1200A02E05A567E1E03AC0A0A57F0D0770B3946821E19AA9A4B9A9800F280B2003CBC9168249"
+      },
+      "icarus": {
+        "IN": "9D6C42C30261FE72BE15AF7DEA72A1D4C0731B2774FD29E6A50550416534FB28",
+        "OUT": "2B63B0A120XXXXXX5X56XEXE03AC0A0A57XXXX770B3946XXXEXXAAXX4B9A9800F280B2003CBC9170XXX",
+        "IN_norm": "9D6C42C30261FE72BE15AF7DEA72A1D4C0731B2774FD29E6A50550416534FB28",
+        "OUT_norm": "2B63B0A120XXXXXX5X56XEXE03AC0A0A57XXXX770B3946XXXEXXAAXX4B9A9800F280B2003CBC9170XXX"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 10,
+            "verilator": "0",
+            "icarus": "X"
+          },
+          {
+            "position": 11,
+            "verilator": "A",
+            "icarus": "X"
+          },
+          {
+            "position": 12,
+            "verilator": "0",
+            "icarus": "X"
+          },
+          {
+            "position": 13,
+            "verilator": "2",
+            "icarus": "X"
+          },
+          {
+            "position": 14,
+            "verilator": "E",
+            "icarus": "X"
+          },
+          {
+            "position": 15,
+            "verilator": "0",
+            "icarus": "X"
+          },
+          {
+            "position": 17,
+            "verilator": "A",
+            "icarus": "X"
+          },
+          {
+            "position": 20,
+            "verilator": "7",
+            "icarus": "X"
+          },
+          {
+            "position": 22,
+            "verilator": "1",
+            "icarus": "X"
+          },
+          {
+            "position": 34,
+            "verilator": "F",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "0",
+            "icarus": "X"
+          },
+          {
+            "position": 36,
+            "verilator": "D",
+            "icarus": "X"
+          },
+          {
+            "position": 37,
+            "verilator": "0",
+            "icarus": "X"
+          },
+          {
+            "position": 46,
+            "verilator": "8",
+            "icarus": "X"
+          },
+          {
+            "position": 47,
+            "verilator": "2",
+            "icarus": "X"
+          },
+          {
+            "position": 48,
+            "verilator": "1",
+            "icarus": "X"
+          },
+          {
+            "position": 50,
+            "verilator": "1",
+            "icarus": "X"
+          },
+          {
+            "position": 51,
+            "verilator": "9",
+            "icarus": "X"
+          },
+          {
+            "position": 54,
+            "verilator": "9",
+            "icarus": "X"
+          },
+          {
+            "position": 55,
+            "verilator": "A",
+            "icarus": "X"
+          },
+          {
+            "position": 80,
+            "verilator": "2",
+            "icarus": "X"
+          },
+          {
+            "position": 81,
+            "verilator": "4",
+            "icarus": "X"
+          },
+          {
+            "position": 82,
+            "verilator": "9",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "6",
+            "icarus": "7"
+          },
+          {
+            "position": 79,
+            "verilator": "8",
+            "icarus": "0"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 2 real differences and 23 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "2B63B0A1200A02E05A567E1E03AC0A0A57F0D0770B3946821E19AA9A4B9A9800F280B2003CBC9168249",
+          "icarus_x_removed": "2B63B0A120______5_56_E_E03AC0A0A57____770B3946___E__AA__4B9A9800F280B2003CBC9170___",
+          "visual_diff": {
+            "verilator_aligned": "2B63B0A1200A02E05A567E1E03AC0A0A57F0D0770B3946821E19AA9A4B9A9800F280B2003CBC9168249",
+            "icarus_aligned": "2B63B0A120______5_56_E_E03AC0A0A57____770B3946___E__AA__4B9A9800F280B2003CBC9170___",
+            "diff_markers": "          ^^^^^^ ^  ^ ^           ^^^^        ^^^ ^^  ^^                      ^^^^^",
+            "formatted_diff": "Verilator:  2B63B0A1200A02E05A567E1E03AC0A0A57F0D0770B3946821E19AA9A4B9A9800F280B2003CBC9168249\nIcarus:     2B63B0A120______5_56_E_E03AC0A0A57____770B3946___E__AA__4B9A9800F280B2003CBC9170___\nDiff:                 ^^^^^^ ^  ^ ^           ^^^^        ^^^ ^^  ^^                      ^^^^^",
+            "formatted_lines": [
+              "Verilator:  2B63B0A1200A02E05A567E1E03AC0A0A57F0D0770B3946821E19AA9A4B9A9800F280B2003CBC9168249",
+              "Icarus:     2B63B0A120______5_56_E_E03AC0A0A57____770B3946___E__AA__4B9A9800F280B2003CBC9170___",
+              "Diff:                 ^^^^^^ ^  ^ ^           ^^^^        ^^^ ^^  ^^                      ^^^^^"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 155,
+      "verilator": {
+        "IN": "B591473B4ECEE9CAC3B0513500E0576CDA46481F8ECD8FBE8AD2C67929420740",
+        "OUT": "2CAA513131DC1DC8D556C90951000303716188770B31313176F700E3308D8E028C6040E53F1A1168059",
+        "IN_norm": "B591473B4ECEE9CAC3B0513500E0576CDA46481F8ECD8FBE8AD2C67929420740",
+        "OUT_norm": "2CAA513131DC1DC8D556C90951000303716188770B31313176F700E3308D8E028C6040E53F1A1168059"
+      },
+      "icarus": {
+        "IN": "B591473B4ECEE9CAC3B0513500E0576CDA46481F8ECD8FBE8AD2C67929420740",
+        "OUT": "2CAA513131DC1DCXD556C90951000303716188770B31313176F700E3308D8E028C6040E53F1A1170059",
+        "IN_norm": "B591473B4ECEE9CAC3B0513500E0576CDA46481F8ECD8FBE8AD2C67929420740",
+        "OUT_norm": "2CAA513131DC1DCXD556C90951000303716188770B31313176F700E3308D8E028C6040E53F1A1170059"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 15,
+            "verilator": "8",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "6",
+            "icarus": "7"
+          },
+          {
+            "position": 79,
+            "verilator": "8",
+            "icarus": "0"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 2 real differences and 1 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "2CAA513131DC1DC8D556C90951000303716188770B31313176F700E3308D8E028C6040E53F1A1168059",
+          "icarus_x_removed": "2CAA513131DC1DC_D556C90951000303716188770B31313176F700E3308D8E028C6040E53F1A1170059",
+          "visual_diff": {
+            "verilator_aligned": "2CAA513131DC1DC8D556C90951000303716188770B31313176F700E3308D8E028C6040E53F1A1168059",
+            "icarus_aligned": "2CAA513131DC1DC_D556C90951000303716188770B31313176F700E3308D8E028C6040E53F1A1170059",
+            "diff_markers": "               ^                                                              ^^   ",
+            "formatted_diff": "Verilator:  2CAA513131DC1DC8D556C90951000303716188770B31313176F700E3308D8E028C6040E53F1A1168059\nIcarus:     2CAA513131DC1DC_D556C90951000303716188770B31313176F700E3308D8E028C6040E53F1A1170059\nDiff:                      ^                                                              ^^   ",
+            "formatted_lines": [
+              "Verilator:  2CAA513131DC1DC8D556C90951000303716188770B31313176F700E3308D8E028C6040E53F1A1168059",
+              "Icarus:     2CAA513131DC1DC_D556C90951000303716188770B31313176F700E3308D8E028C6040E53F1A1170059",
+              "Diff:                      ^                                                              ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 161,
+      "verilator": {
+        "IN": "C25E50B4F9F1CDAFB44268529D3EFFCBF7DA8EF29D5B1CEA9DCE6C96DBA36D0",
+        "OUT": "2100B1E93040009B9A56C000032022E255A2087708BE3E779E1980E2418D6E00E66182A53D98B2D5C89",
+        "IN_norm": "C25E50B4F9F1CDAFB44268529D3EFFCBF7DA8EF29D5B1CEA9DCE6C96DBA36D0",
+        "OUT_norm": "2100B1E93040009B9A56C000032022E255A2087708BE3E779E1980E2418D6E00E66182A53D98B2D5C89"
+      },
+      "icarus": {
+        "IN": "C25E50B4F9F1CDAFB44268529D3EFFCBF7DA8EF29D5B1CEA9DCE6C96DBA36D0",
+        "OUT": "2100B1E93040009B9A56C000032022E255XX087708BE3E779E1980E2418D6E00E66182A53D98B2DDC89",
+        "IN_norm": "C25E50B4F9F1CDAFB44268529D3EFFCBF7DA8EF29D5B1CEA9DCE6C96DBA36D0",
+        "OUT_norm": "2100B1E93040009B9A56C000032022E255XX087708BE3E779E1980E2418D6E00E66182A53D98B2DDC89"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "A",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "2",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 79,
+            "verilator": "5",
+            "icarus": "D"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 1 real differences and 2 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "2100B1E93040009B9A56C000032022E255A2087708BE3E779E1980E2418D6E00E66182A53D98B2D5C89",
+          "icarus_x_removed": "2100B1E93040009B9A56C000032022E255__087708BE3E779E1980E2418D6E00E66182A53D98B2DDC89",
+          "visual_diff": {
+            "verilator_aligned": "2100B1E93040009B9A56C000032022E255A2087708BE3E779E1980E2418D6E00E66182A53D98B2D5C89",
+            "icarus_aligned": "2100B1E93040009B9A56C000032022E255__087708BE3E779E1980E2418D6E00E66182A53D98B2DDC89",
+            "diff_markers": "                                  ^^                                           ^   ",
+            "formatted_diff": "Verilator:  2100B1E93040009B9A56C000032022E255A2087708BE3E779E1980E2418D6E00E66182A53D98B2D5C89\nIcarus:     2100B1E93040009B9A56C000032022E255__087708BE3E779E1980E2418D6E00E66182A53D98B2DDC89\nDiff:                                         ^^                                           ^   ",
+            "formatted_lines": [
+              "Verilator:  2100B1E93040009B9A56C000032022E255A2087708BE3E779E1980E2418D6E00E66182A53D98B2D5C89",
+              "Icarus:     2100B1E93040009B9A56C000032022E255__087708BE3E779E1980E2418D6E00E66182A53D98B2DDC89",
+              "Diff:                                         ^^                                           ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 162,
+      "verilator": {
+        "IN": "3EA83D8F46D325A45A13DC008429409CBC6E768622CA6E225A601A96E0FE8",
+        "OUT": "115E930400071DA508606032C22E27378801568E5719AB6332A9BCADA38005380A0C0353532D5FFF",
+        "IN_norm": "3EA83D8F46D325A45A13DC008429409CBC6E768622CA6E225A601A96E0FE8",
+        "OUT_norm": "115E930400071DA508606032C22E27378801568E5719AB6332A9BCADA38005380A0C0353532D5FFF"
+      },
+      "icarus": {
+        "IN": "3EA83D8F46D325A45A13DC008429409CBC6E768622CA6E225A601A96E0FE8",
+        "OUT": "115E93040007XDA508606032C22E273X8801568E5719AB6332A9BCADA38005380A0C0353532DDFFF",
+        "IN_norm": "3EA83D8F46D325A45A13DC008429409CBC6E768622CA6E225A601A96E0FE8",
+        "OUT_norm": "115E93040007XDA508606032C22E273X8801568E5719AB6332A9BCADA38005380A0C0353532DDFFF"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 12,
+            "verilator": "1",
+            "icarus": "X"
+          },
+          {
+            "position": 31,
+            "verilator": "7",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 76,
+            "verilator": "5",
+            "icarus": "D"
+          }
+        ],
+        "total_positions": 80,
+        "explanation": "Mixed differences: 1 real differences and 2 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "115E930400071DA508606032C22E27378801568E5719AB6332A9BCADA38005380A0C0353532D5FFF",
+          "icarus_x_removed": "115E93040007_DA508606032C22E273_8801568E5719AB6332A9BCADA38005380A0C0353532DDFFF",
+          "visual_diff": {
+            "verilator_aligned": "115E930400071DA508606032C22E27378801568E5719AB6332A9BCADA38005380A0C0353532D5FFF",
+            "icarus_aligned": "115E93040007_DA508606032C22E273_8801568E5719AB6332A9BCADA38005380A0C0353532DDFFF",
+            "diff_markers": "            ^                  ^                                            ^   ",
+            "formatted_diff": "Verilator:  115E930400071DA508606032C22E27378801568E5719AB6332A9BCADA38005380A0C0353532D5FFF\nIcarus:     115E93040007_DA508606032C22E273_8801568E5719AB6332A9BCADA38005380A0C0353532DDFFF\nDiff:                   ^                  ^                                            ^   ",
+            "formatted_lines": [
+              "Verilator:  115E930400071DA508606032C22E27378801568E5719AB6332A9BCADA38005380A0C0353532D5FFF",
+              "Icarus:     115E93040007_DA508606032C22E273_8801568E5719AB6332A9BCADA38005380A0C0353532DDFFF",
+              "Diff:                   ^                  ^                                            ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 163,
+      "verilator": {
+        "IN": "96FE26FB61E8708A9C34BAF5E5F1502C1110ABDF8BF82A7EDD701439D770F400",
+        "OUT": "37E37C19304001E95A554282A9480D0D5588051468AAAA88B6B300E2A5D85A013EA016AA3FD5E043DFD",
+        "IN_norm": "96FE26FB61E8708A9C34BAF5E5F1502C1110ABDF8BF82A7EDD701439D770F400",
+        "OUT_norm": "37E37C19304001E95A554282A9480D0D5588051468AAAA88B6B300E2A5D85A013EA016AA3FD5E043DFD"
+      },
+      "icarus": {
+        "IN": "96FE26FB61E8708A9C34BAF5E5F1502C1110ABDF8BF82A7EDD701439D770F400",
+        "OUT": "37E37C19304001EX5A554A8AA9480D0D55XX051469AAAA88B6B300E2A5D85A013EA016AA3FD5E06BDFD",
+        "IN_norm": "96FE26FB61E8708A9C34BAF5E5F1502C1110ABDF8BF82A7EDD701439D770F400",
+        "OUT_norm": "37E37C19304001EX5A554A8AA9480D0D55XX051469AAAA88B6B300E2A5D85A013EA016AA3FD5E06BDFD"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 15,
+            "verilator": "9",
+            "icarus": "X"
+          },
+          {
+            "position": 34,
+            "verilator": "8",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "8",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 21,
+            "verilator": "2",
+            "icarus": "A"
+          },
+          {
+            "position": 23,
+            "verilator": "2",
+            "icarus": "A"
+          },
+          {
+            "position": 41,
+            "verilator": "8",
+            "icarus": "9"
+          },
+          {
+            "position": 78,
+            "verilator": "4",
+            "icarus": "6"
+          },
+          {
+            "position": 79,
+            "verilator": "3",
+            "icarus": "B"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 5 real differences and 3 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "37E37C19304001E95A554282A9480D0D5588051468AAAA88B6B300E2A5D85A013EA016AA3FD5E043DFD",
+          "icarus_x_removed": "37E37C19304001E_5A554A8AA9480D0D55__051469AAAA88B6B300E2A5D85A013EA016AA3FD5E06BDFD",
+          "visual_diff": {
+            "verilator_aligned": "37E37C19304001E95A554282A9480D0D5588051468AAAA88B6B300E2A5D85A013EA016AA3FD5E043DFD",
+            "icarus_aligned": "37E37C19304001E_5A554A8AA9480D0D55__051469AAAA88B6B300E2A5D85A013EA016AA3FD5E06BDFD",
+            "diff_markers": "               ^     ^ ^          ^^     ^                                    ^^   ",
+            "formatted_diff": "Verilator:  37E37C19304001E95A554282A9480D0D5588051468AAAA88B6B300E2A5D85A013EA016AA3FD5E043DFD\nIcarus:     37E37C19304001E_5A554A8AA9480D0D55__051469AAAA88B6B300E2A5D85A013EA016AA3FD5E06BDFD\nDiff:                      ^     ^ ^          ^^     ^                                    ^^   ",
+            "formatted_lines": [
+              "Verilator:  37E37C19304001E95A554282A9480D0D5588051468AAAA88B6B300E2A5D85A013EA016AA3FD5E043DFD",
+              "Icarus:     37E37C19304001E_5A554A8AA9480D0D55__051469AAAA88B6B300E2A5D85A013EA016AA3FD5E06BDFD",
+              "Diff:                      ^     ^ ^          ^^     ^                                    ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 164,
+      "verilator": {
+        "IN": "43847A73A33E86E25F4653AD700B78C4367E37D795E50B56866311719B394318",
+        "OUT": "1C1078BDA02B2ABE9A513414038004FC1DE0803748E70DBF3EBB80E2EA6A40026A2070F23F4D6043EF5",
+        "IN_norm": "43847A73A33E86E25F4653AD700B78C4367E37D795E50B56866311719B394318",
+        "OUT_norm": "1C1078BDA02B2ABE9A513414038004FC1DE0803748E70DBF3EBB80E2EA6A40026A2070F23F4D6043EF5"
+      },
+      "icarus": {
+        "IN": "43847A73A33E86E25F4653AD700B78C4367E37D795E50B56866311719B394318",
+        "OUT": "1C1078BDA02B2ABE9A513C1C038004FC1DXX803749E70DBF3EBB80E2EA6A40026A2070F23F4D606BEF5",
+        "IN_norm": "43847A73A33E86E25F4653AD700B78C4367E37D795E50B56866311719B394318",
+        "OUT_norm": "1C1078BDA02B2ABE9A513C1C038004FC1DXX803749E70DBF3EBB80E2EA6A40026A2070F23F4D606BEF5"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "E",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "0",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 21,
+            "verilator": "4",
+            "icarus": "C"
+          },
+          {
+            "position": 23,
+            "verilator": "4",
+            "icarus": "C"
+          },
+          {
+            "position": 41,
+            "verilator": "8",
+            "icarus": "9"
+          },
+          {
+            "position": 78,
+            "verilator": "4",
+            "icarus": "6"
+          },
+          {
+            "position": 79,
+            "verilator": "3",
+            "icarus": "B"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 5 real differences and 2 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "1C1078BDA02B2ABE9A513414038004FC1DE0803748E70DBF3EBB80E2EA6A40026A2070F23F4D6043EF5",
+          "icarus_x_removed": "1C1078BDA02B2ABE9A513C1C038004FC1D__803749E70DBF3EBB80E2EA6A40026A2070F23F4D606BEF5",
+          "visual_diff": {
+            "verilator_aligned": "1C1078BDA02B2ABE9A513414038004FC1DE0803748E70DBF3EBB80E2EA6A40026A2070F23F4D6043EF5",
+            "icarus_aligned": "1C1078BDA02B2ABE9A513C1C038004FC1D__803749E70DBF3EBB80E2EA6A40026A2070F23F4D606BEF5",
+            "diff_markers": "                     ^ ^          ^^     ^                                    ^^   ",
+            "formatted_diff": "Verilator:  1C1078BDA02B2ABE9A513414038004FC1DE0803748E70DBF3EBB80E2EA6A40026A2070F23F4D6043EF5\nIcarus:     1C1078BDA02B2ABE9A513C1C038004FC1D__803749E70DBF3EBB80E2EA6A40026A2070F23F4D606BEF5\nDiff:                            ^ ^          ^^     ^                                    ^^   ",
+            "formatted_lines": [
+              "Verilator:  1C1078BDA02B2ABE9A513414038004FC1DE0803748E70DBF3EBB80E2EA6A40026A2070F23F4D6043EF5",
+              "Icarus:     1C1078BDA02B2ABE9A513C1C038004FC1D__803749E70DBF3EBB80E2EA6A40026A2070F23F4D606BEF5",
+              "Diff:                            ^ ^          ^^     ^                                    ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 167,
+      "verilator": {
+        "IN": "9F62BEDB09E2FBEAD85ED7D568F0548C421185BF5C2EBFDE507823199F267260",
+        "OUT": "3B23CC4DE06A3AE06396DE1E01A005FD71D148112F09090936337E9B12CBBC02CBA102A333D0CDE1E19",
+        "IN_norm": "9F62BEDB09E2FBEAD85ED7D568F0548C421185BF5C2EBFDE507823199F267260",
+        "OUT_norm": "3B23CC4DE06A3AE06396DE1E01A005FD71D148112F09090936337E9B12CBBC02CBA102A333D0CDE1E19"
+      },
+      "icarus": {
+        "IN": "9F62BEDB09E2FBEAD85ED7D568F0548C421185BF5C2EBFDE507823199F267260",
+        "OUT": "3B23CC4DE0XXXXXXXX96X6X601A005FD71XXXX112D0X0X0XX6XX7EXX12CBBC02CBA102A333D0CDD9XXX",
+        "IN_norm": "9F62BEDB09E2FBEAD85ED7D568F0548C421185BF5C2EBFDE507823199F267260",
+        "OUT_norm": "3B23CC4DE0XXXXXXXX96X6X601A005FD71XXXX112D0X0X0XX6XX7EXX12CBBC02CBA102A333D0CDD9XXX"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 10,
+            "verilator": "6",
+            "icarus": "X"
+          },
+          {
+            "position": 11,
+            "verilator": "A",
+            "icarus": "X"
+          },
+          {
+            "position": 12,
+            "verilator": "3",
+            "icarus": "X"
+          },
+          {
+            "position": 13,
+            "verilator": "A",
+            "icarus": "X"
+          },
+          {
+            "position": 14,
+            "verilator": "E",
+            "icarus": "X"
+          },
+          {
+            "position": 15,
+            "verilator": "0",
+            "icarus": "X"
+          },
+          {
+            "position": 16,
+            "verilator": "6",
+            "icarus": "X"
+          },
+          {
+            "position": 17,
+            "verilator": "3",
+            "icarus": "X"
+          },
+          {
+            "position": 20,
+            "verilator": "D",
+            "icarus": "X"
+          },
+          {
+            "position": 22,
+            "verilator": "1",
+            "icarus": "X"
+          },
+          {
+            "position": 34,
+            "verilator": "D",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "1",
+            "icarus": "X"
+          },
+          {
+            "position": 36,
+            "verilator": "4",
+            "icarus": "X"
+          },
+          {
+            "position": 37,
+            "verilator": "8",
+            "icarus": "X"
+          },
+          {
+            "position": 43,
+            "verilator": "9",
+            "icarus": "X"
+          },
+          {
+            "position": 45,
+            "verilator": "9",
+            "icarus": "X"
+          },
+          {
+            "position": 47,
+            "verilator": "9",
+            "icarus": "X"
+          },
+          {
+            "position": 48,
+            "verilator": "3",
+            "icarus": "X"
+          },
+          {
+            "position": 50,
+            "verilator": "3",
+            "icarus": "X"
+          },
+          {
+            "position": 51,
+            "verilator": "3",
+            "icarus": "X"
+          },
+          {
+            "position": 54,
+            "verilator": "9",
+            "icarus": "X"
+          },
+          {
+            "position": 55,
+            "verilator": "B",
+            "icarus": "X"
+          },
+          {
+            "position": 80,
+            "verilator": "E",
+            "icarus": "X"
+          },
+          {
+            "position": 81,
+            "verilator": "1",
+            "icarus": "X"
+          },
+          {
+            "position": 82,
+            "verilator": "9",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 21,
+            "verilator": "E",
+            "icarus": "6"
+          },
+          {
+            "position": 23,
+            "verilator": "E",
+            "icarus": "6"
+          },
+          {
+            "position": 41,
+            "verilator": "F",
+            "icarus": "D"
+          },
+          {
+            "position": 78,
+            "verilator": "E",
+            "icarus": "D"
+          },
+          {
+            "position": 79,
+            "verilator": "1",
+            "icarus": "9"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 5 real differences and 25 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "3B23CC4DE06A3AE06396DE1E01A005FD71D148112F09090936337E9B12CBBC02CBA102A333D0CDE1E19",
+          "icarus_x_removed": "3B23CC4DE0________96_6_601A005FD71____112D0_0_0__6__7E__12CBBC02CBA102A333D0CDD9___",
+          "visual_diff": {
+            "verilator_aligned": "3B23CC4DE06A3AE06396DE1E01A005FD71D148112F09090936337E9B12CBBC02CBA102A333D0CDE1E19",
+            "icarus_aligned": "3B23CC4DE0________96_6_601A005FD71____112D0_0_0__6__7E__12CBBC02CBA102A333D0CDD9___",
+            "diff_markers": "          ^^^^^^^^  ^^^^          ^^^^   ^ ^ ^ ^^ ^^  ^^                      ^^^^^",
+            "formatted_diff": "Verilator:  3B23CC4DE06A3AE06396DE1E01A005FD71D148112F09090936337E9B12CBBC02CBA102A333D0CDE1E19\nIcarus:     3B23CC4DE0________96_6_601A005FD71____112D0_0_0__6__7E__12CBBC02CBA102A333D0CDD9___\nDiff:                 ^^^^^^^^  ^^^^          ^^^^   ^ ^ ^ ^^ ^^  ^^                      ^^^^^",
+            "formatted_lines": [
+              "Verilator:  3B23CC4DE06A3AE06396DE1E01A005FD71D148112F09090936337E9B12CBBC02CBA102A333D0CDE1E19",
+              "Icarus:     3B23CC4DE0________96_6_601A005FD71____112D0_0_0__6__7E__12CBBC02CBA102A333D0CDD9___",
+              "Diff:                 ^^^^^^^^  ^^^^          ^^^^   ^ ^ ^ ^^ ^^  ^^                      ^^^^^"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 168,
+      "verilator": {
+        "IN": "35282E537BD31E42DD3B2C8DDE9AA9247BC46DB78CECECB656C21C512B942D78",
+        "OUT": "294E588D30280AD21A54BC9CABD81D1D711805146B7B9B62969154E37F3754005A605CA037574DE1DC9",
+        "IN_norm": "35282E537BD31E42DD3B2C8DDE9AA9247BC46DB78CECECB656C21C512B942D78",
+        "OUT_norm": "294E588D30280AD21A54BC9CABD81D1D711805146B7B9B62969154E37F3754005A605CA037574DE1DC9"
+      },
+      "icarus": {
+        "IN": "35282E537BD31E42DD3B2C8DDE9AA9247BC46DB78CECECB656C21C512B942D78",
+        "OUT": "294E588D30280AD21A54B494ABD81D1D71180514697B9B62969154E37F3754005A605CA037574DD9DC9",
+        "IN_norm": "35282E537BD31E42DD3B2C8DDE9AA9247BC46DB78CECECB656C21C512B942D78",
+        "OUT_norm": "294E588D30280AD21A54B494ABD81D1D71180514697B9B62969154E37F3754005A605CA037574DD9DC9"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 21,
+            "verilator": "C",
+            "icarus": "4"
+          },
+          {
+            "position": 23,
+            "verilator": "C",
+            "icarus": "4"
+          },
+          {
+            "position": 41,
+            "verilator": "B",
+            "icarus": "9"
+          },
+          {
+            "position": 78,
+            "verilator": "E",
+            "icarus": "D"
+          },
+          {
+            "position": 79,
+            "verilator": "1",
+            "icarus": "9"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 5 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "294E588D30280AD21A54BC9CABD81D1D711805146B7B9B62969154E37F3754005A605CA037574DE1DC9",
+          "icarus_x_removed": "294E588D30280AD21A54B494ABD81D1D71180514697B9B62969154E37F3754005A605CA037574DD9DC9",
+          "visual_diff": {
+            "verilator_aligned": "294E588D30280AD21A54BC9CABD81D1D711805146B7B9B62969154E37F3754005A605CA037574DE1DC9",
+            "icarus_aligned": "294E588D30280AD21A54B494ABD81D1D71180514697B9B62969154E37F3754005A605CA037574DD9DC9",
+            "diff_markers": "                     ^ ^                 ^                                    ^^   ",
+            "formatted_diff": "Verilator:  294E588D30280AD21A54BC9CABD81D1D711805146B7B9B62969154E37F3754005A605CA037574DE1DC9\nIcarus:     294E588D30280AD21A54B494ABD81D1D71180514697B9B62969154E37F3754005A605CA037574DD9DC9\nDiff:                            ^ ^                 ^                                    ^^   ",
+            "formatted_lines": [
+              "Verilator:  294E588D30280AD21A54BC9CABD81D1D711805146B7B9B62969154E37F3754005A605CA037574DE1DC9",
+              "Icarus:     294E588D30280AD21A54B494ABD81D1D71180514697B9B62969154E37F3754005A605CA037574DD9DC9",
+              "Diff:                            ^ ^                 ^                                    ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 169,
+      "verilator": {
+        "IN": "C24D14CB27AA339A564660455877F8BC8CFD5CAFDCF8DC8E03BB0489C76B3390",
+        "OUT": "12713985B04A12AE9A517616030002FE7320047708FE7E163EBBFEE55737300046E162A03DDDDF15EF5",
+        "IN_norm": "C24D14CB27AA339A564660455877F8BC8CFD5CAFDCF8DC8E03BB0489C76B3390",
+        "OUT_norm": "12713985B04A12AE9A517616030002FE7320047708FE7E163EBBFEE55737300046E162A03DDDDF15EF5"
+      },
+      "icarus": {
+        "IN": "C24D14CB27AA339A564660455877F8BC8CFD5CAFDCF8DC8E03BB0489C76B3390",
+        "OUT": "12713985B04A12AE9A517616030002FE73X0047708FE7E163EBBFEE55737300046E162A03DDDDF1DEF5",
+        "IN_norm": "C24D14CB27AA339A564660455877F8BC8CFD5CAFDCF8DC8E03BB0489C76B3390",
+        "OUT_norm": "12713985B04A12AE9A517616030002FE73X0047708FE7E163EBBFEE55737300046E162A03DDDDF1DEF5"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "2",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 79,
+            "verilator": "5",
+            "icarus": "D"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 1 real differences and 1 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "12713985B04A12AE9A517616030002FE7320047708FE7E163EBBFEE55737300046E162A03DDDDF15EF5",
+          "icarus_x_removed": "12713985B04A12AE9A517616030002FE73_0047708FE7E163EBBFEE55737300046E162A03DDDDF1DEF5",
+          "visual_diff": {
+            "verilator_aligned": "12713985B04A12AE9A517616030002FE7320047708FE7E163EBBFEE55737300046E162A03DDDDF15EF5",
+            "icarus_aligned": "12713985B04A12AE9A517616030002FE73_0047708FE7E163EBBFEE55737300046E162A03DDDDF1DEF5",
+            "diff_markers": "                                  ^                                            ^   ",
+            "formatted_diff": "Verilator:  12713985B04A12AE9A517616030002FE7320047708FE7E163EBBFEE55737300046E162A03DDDDF15EF5\nIcarus:     12713985B04A12AE9A517616030002FE73_0047708FE7E163EBBFEE55737300046E162A03DDDDF1DEF5\nDiff:                                         ^                                            ^   ",
+            "formatted_lines": [
+              "Verilator:  12713985B04A12AE9A517616030002FE7320047708FE7E163EBBFEE55737300046E162A03DDDDF15EF5",
+              "Icarus:     12713985B04A12AE9A517616030002FE73_0047708FE7E163EBBFEE55737300046E162A03DDDDF1DEF5",
+              "Diff:                                         ^                                            ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 170,
+      "verilator": {
+        "IN": "166952433EF39BF2209D52FD748CA354319632A749E7EF66E271BBC1D729E4A8",
+        "OUT": "33435921A02A0AF61A511797F94001011D84013648CB8CE2BE3BFEE31A4B28024BA03EB03ACADF15D3D",
+        "IN_norm": "166952433EF39BF2209D52FD748CA354319632A749E7EF66E271BBC1D729E4A8",
+        "OUT_norm": "33435921A02A0AF61A511797F94001011D84013648CB8CE2BE3BFEE31A4B28024BA03EB03ACADF15D3D"
+      },
+      "icarus": {
+        "IN": "166952433EF39BF2209D52FD748CA354319632A749E7EF66E271BBC1D729E4A8",
+        "OUT": "33435921A02A0AF61A511797F94001011D84013648CB8CE2BE3BFEE31A4B28024BA03EB03ACADF1DD3D",
+        "IN_norm": "166952433EF39BF2209D52FD748CA354319632A749E7EF66E271BBC1D729E4A8",
+        "OUT_norm": "33435921A02A0AF61A511797F94001011D84013648CB8CE2BE3BFEE31A4B28024BA03EB03ACADF1DD3D"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 79,
+            "verilator": "5",
+            "icarus": "D"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 1 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "33435921A02A0AF61A511797F94001011D84013648CB8CE2BE3BFEE31A4B28024BA03EB03ACADF15D3D",
+          "icarus_x_removed": "33435921A02A0AF61A511797F94001011D84013648CB8CE2BE3BFEE31A4B28024BA03EB03ACADF1DD3D",
+          "visual_diff": {
+            "verilator_aligned": "33435921A02A0AF61A511797F94001011D84013648CB8CE2BE3BFEE31A4B28024BA03EB03ACADF15D3D",
+            "icarus_aligned": "33435921A02A0AF61A511797F94001011D84013648CB8CE2BE3BFEE31A4B28024BA03EB03ACADF1DD3D",
+            "diff_markers": "                                                                               ^   ",
+            "formatted_diff": "Verilator:  33435921A02A0AF61A511797F94001011D84013648CB8CE2BE3BFEE31A4B28024BA03EB03ACADF15D3D\nIcarus:     33435921A02A0AF61A511797F94001011D84013648CB8CE2BE3BFEE31A4B28024BA03EB03ACADF1DD3D\nDiff:                                                                                      ^   ",
+            "formatted_lines": [
+              "Verilator:  33435921A02A0AF61A511797F94001011D84013648CB8CE2BE3BFEE31A4B28024BA03EB03ACADF15D3D",
+              "Icarus:     33435921A02A0AF61A511797F94001011D84013648CB8CE2BE3BFEE31A4B28024BA03EB03ACADF1DD3D",
+              "Diff:                                                                                      ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 173,
+      "verilator": {
+        "IN": "481CD4AB90A386FA208D65251DD6851CE786DE8FEA51B9EE15617B69B517B9F0",
+        "OUT": "D1B0E1B03001239A510F0F53800000575088770B43434336B37E9BFBF2EC00F6A03AF03F8F8A2627D",
+        "IN_norm": "481CD4AB90A386FA208D65251DD6851CE786DE8FEA51B9EE15617B69B517B9F0",
+        "OUT_norm": "D1B0E1B03001239A510F0F53800000575088770B43434336B37E9BFBF2EC00F6A03AF03F8F8A2627D"
+      },
+      "icarus": {
+        "IN": "481CD4AB90A386FA208D65251DD6851CE786DE8FEA51B9EE15617B69B517B9F0",
+        "OUT": "D1B0E1B03001239A510F0F5380000057X088770B43434336B37E9BFBF2EC00F6A03AF03F8F8A2E27D",
+        "IN_norm": "481CD4AB90A386FA208D65251DD6851CE786DE8FEA51B9EE15617B69B517B9F0",
+        "OUT_norm": "D1B0E1B03001239A510F0F5380000057X088770B43434336B37E9BFBF2EC00F6A03AF03F8F8A2E27D"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 32,
+            "verilator": "5",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 77,
+            "verilator": "6",
+            "icarus": "E"
+          }
+        ],
+        "total_positions": 81,
+        "explanation": "Mixed differences: 1 real differences and 1 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "D1B0E1B03001239A510F0F53800000575088770B43434336B37E9BFBF2EC00F6A03AF03F8F8A2627D",
+          "icarus_x_removed": "D1B0E1B03001239A510F0F5380000057_088770B43434336B37E9BFBF2EC00F6A03AF03F8F8A2E27D",
+          "visual_diff": {
+            "verilator_aligned": "D1B0E1B03001239A510F0F53800000575088770B43434336B37E9BFBF2EC00F6A03AF03F8F8A2627D",
+            "icarus_aligned": "D1B0E1B03001239A510F0F5380000057_088770B43434336B37E9BFBF2EC00F6A03AF03F8F8A2E27D",
+            "diff_markers": "                                ^                                            ^   ",
+            "formatted_diff": "Verilator:  D1B0E1B03001239A510F0F53800000575088770B43434336B37E9BFBF2EC00F6A03AF03F8F8A2627D\nIcarus:     D1B0E1B03001239A510F0F5380000057_088770B43434336B37E9BFBF2EC00F6A03AF03F8F8A2E27D\nDiff:                                       ^                                            ^   ",
+            "formatted_lines": [
+              "Verilator:  D1B0E1B03001239A510F0F53800000575088770B43434336B37E9BFBF2EC00F6A03AF03F8F8A2627D",
+              "Icarus:     D1B0E1B03001239A510F0F5380000057_088770B43434336B37E9BFBF2EC00F6A03AF03F8F8A2E27D",
+              "Diff:                                       ^                                            ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 178,
+      "verilator": {
+        "IN": "445C7A03CF1F8AB25EDCC4BDF4BFC414DF925E67884E722697A991818F287968",
+        "OUT": "22D538ADB040001F9552670753900BFB551A0055294917C97EFFD49A67BFF40112C1328035F5CE5A059",
+        "IN_norm": "445C7A03CF1F8AB25EDCC4BDF4BFC414DF925E67884E722697A991818F287968",
+        "OUT_norm": "22D538ADB040001F9552670753900BFB551A0055294917C97EFFD49A67BFF40112C1328035F5CE5A059"
+      },
+      "icarus": {
+        "IN": "445C7A03CF1F8AB25EDCC4BDF4BFC414DF925E67884E722697A991818F287968",
+        "OUT": "22D538ADB040001F95526F0F53900BFB55XX00552B4917C97EFFD49A67BFF40112C1328035F5CE62059",
+        "IN_norm": "445C7A03CF1F8AB25EDCC4BDF4BFC414DF925E67884E722697A991818F287968",
+        "OUT_norm": "22D538ADB040001F95526F0F53900BFB55XX00552B4917C97EFFD49A67BFF40112C1328035F5CE62059"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "1",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "A",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 21,
+            "verilator": "7",
+            "icarus": "F"
+          },
+          {
+            "position": 23,
+            "verilator": "7",
+            "icarus": "F"
+          },
+          {
+            "position": 41,
+            "verilator": "9",
+            "icarus": "B"
+          },
+          {
+            "position": 78,
+            "verilator": "5",
+            "icarus": "6"
+          },
+          {
+            "position": 79,
+            "verilator": "A",
+            "icarus": "2"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 5 real differences and 2 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "22D538ADB040001F9552670753900BFB551A0055294917C97EFFD49A67BFF40112C1328035F5CE5A059",
+          "icarus_x_removed": "22D538ADB040001F95526F0F53900BFB55__00552B4917C97EFFD49A67BFF40112C1328035F5CE62059",
+          "visual_diff": {
+            "verilator_aligned": "22D538ADB040001F9552670753900BFB551A0055294917C97EFFD49A67BFF40112C1328035F5CE5A059",
+            "icarus_aligned": "22D538ADB040001F95526F0F53900BFB55__00552B4917C97EFFD49A67BFF40112C1328035F5CE62059",
+            "diff_markers": "                     ^ ^          ^^     ^                                    ^^   ",
+            "formatted_diff": "Verilator:  22D538ADB040001F9552670753900BFB551A0055294917C97EFFD49A67BFF40112C1328035F5CE5A059\nIcarus:     22D538ADB040001F95526F0F53900BFB55__00552B4917C97EFFD49A67BFF40112C1328035F5CE62059\nDiff:                            ^ ^          ^^     ^                                    ^^   ",
+            "formatted_lines": [
+              "Verilator:  22D538ADB040001F9552670753900BFB551A0055294917C97EFFD49A67BFF40112C1328035F5CE5A059",
+              "Icarus:     22D538ADB040001F95526F0F53900BFB55__00552B4917C97EFFD49A67BFF40112C1328035F5CE62059",
+              "Diff:                            ^ ^          ^^     ^                                    ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 179,
+      "verilator": {
+        "IN": "ECE9267BA3A9BE0A011CCE75D6E781ACE722B35FF9779FFEFB15EFB969DF0D80",
+        "OUT": "277C81992067E7AE239010100390030357B800156D4DCD913EBBFEE37C8082028060A8ED2F020E5A379",
+        "IN_norm": "ECE9267BA3A9BE0A011CCE75D6E781ACE722B35FF9779FFEFB15EFB969DF0D80",
+        "OUT_norm": "277C81992067E7AE239010100390030357B800156D4DCD913EBBFEE37C8082028060A8ED2F020E5A379"
+      },
+      "icarus": {
+        "IN": "ECE9267BA3A9BE0A011CCE75D6E781ACE722B35FF9779FFEFB15EFB969DF0D80",
+        "OUT": "277C81992067E7AE239018180390030357X800156F4DCD913EBBFEE37C8082028060A8ED2F020E62379",
+        "IN_norm": "ECE9267BA3A9BE0A011CCE75D6E781ACE722B35FF9779FFEFB15EFB969DF0D80",
+        "OUT_norm": "277C81992067E7AE239018180390030357X800156F4DCD913EBBFEE37C8082028060A8ED2F020E62379"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "B",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 21,
+            "verilator": "0",
+            "icarus": "8"
+          },
+          {
+            "position": 23,
+            "verilator": "0",
+            "icarus": "8"
+          },
+          {
+            "position": 41,
+            "verilator": "D",
+            "icarus": "F"
+          },
+          {
+            "position": 78,
+            "verilator": "5",
+            "icarus": "6"
+          },
+          {
+            "position": 79,
+            "verilator": "A",
+            "icarus": "2"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 5 real differences and 1 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "277C81992067E7AE239010100390030357B800156D4DCD913EBBFEE37C8082028060A8ED2F020E5A379",
+          "icarus_x_removed": "277C81992067E7AE239018180390030357_800156F4DCD913EBBFEE37C8082028060A8ED2F020E62379",
+          "visual_diff": {
+            "verilator_aligned": "277C81992067E7AE239010100390030357B800156D4DCD913EBBFEE37C8082028060A8ED2F020E5A379",
+            "icarus_aligned": "277C81992067E7AE239018180390030357_800156F4DCD913EBBFEE37C8082028060A8ED2F020E62379",
+            "diff_markers": "                     ^ ^          ^      ^                                    ^^   ",
+            "formatted_diff": "Verilator:  277C81992067E7AE239010100390030357B800156D4DCD913EBBFEE37C8082028060A8ED2F020E5A379\nIcarus:     277C81992067E7AE239018180390030357_800156F4DCD913EBBFEE37C8082028060A8ED2F020E62379\nDiff:                            ^ ^          ^      ^                                    ^^   ",
+            "formatted_lines": [
+              "Verilator:  277C81992067E7AE239010100390030357B800156D4DCD913EBBFEE37C8082028060A8ED2F020E5A379",
+              "Icarus:     277C81992067E7AE239018180390030357_800156F4DCD913EBBFEE37C8082028060A8ED2F020E62379",
+              "Diff:                            ^ ^          ^      ^                                    ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 180,
+      "verilator": {
+        "IN": "1CDFE9F3E72C0462DFAD572D30665A447CD9AF57AA2DB0D6D078DCF1E7210C98",
+        "OUT": "26C3FDF9203C0AAC1A543797FB40020273E34114697E6BFE1691549BDEF704006BE11EBC3EC2CC8C9A5",
+        "IN_norm": "1CDFE9F3E72C0462DFAD572D30665A447CD9AF57AA2DB0D6D078DCF1E7210C98",
+        "OUT_norm": "26C3FDF9203C0AAC1A543797FB40020273E34114697E6BFE1691549BDEF704006BE11EBC3EC2CC8C9A5"
+      },
+      "icarus": {
+        "IN": "1CDFE9F3E72C0462DFAD572D30665A447CD9AF57AA2DB0D6D078DCF1E7210C98",
+        "OUT": "26C3FDF9203C0AAC1A543797FB40020273XX4114697E6BFE1691549BDEF704006BE11EBC3EC2CC849A5",
+        "IN_norm": "1CDFE9F3E72C0462DFAD572D30665A447CD9AF57AA2DB0D6D078DCF1E7210C98",
+        "OUT_norm": "26C3FDF9203C0AAC1A543797FB40020273XX4114697E6BFE1691549BDEF704006BE11EBC3EC2CC849A5"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "E",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "3",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 79,
+            "verilator": "C",
+            "icarus": "4"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 1 real differences and 2 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "26C3FDF9203C0AAC1A543797FB40020273E34114697E6BFE1691549BDEF704006BE11EBC3EC2CC8C9A5",
+          "icarus_x_removed": "26C3FDF9203C0AAC1A543797FB40020273__4114697E6BFE1691549BDEF704006BE11EBC3EC2CC849A5",
+          "visual_diff": {
+            "verilator_aligned": "26C3FDF9203C0AAC1A543797FB40020273E34114697E6BFE1691549BDEF704006BE11EBC3EC2CC8C9A5",
+            "icarus_aligned": "26C3FDF9203C0AAC1A543797FB40020273__4114697E6BFE1691549BDEF704006BE11EBC3EC2CC849A5",
+            "diff_markers": "                                  ^^                                           ^   ",
+            "formatted_diff": "Verilator:  26C3FDF9203C0AAC1A543797FB40020273E34114697E6BFE1691549BDEF704006BE11EBC3EC2CC8C9A5\nIcarus:     26C3FDF9203C0AAC1A543797FB40020273__4114697E6BFE1691549BDEF704006BE11EBC3EC2CC849A5\nDiff:                                         ^^                                           ^   ",
+            "formatted_lines": [
+              "Verilator:  26C3FDF9203C0AAC1A543797FB40020273E34114697E6BFE1691549BDEF704006BE11EBC3EC2CC8C9A5",
+              "Icarus:     26C3FDF9203C0AAC1A543797FB40020273__4114697E6BFE1691549BDEF704006BE11EBC3EC2CC849A5",
+              "Diff:                                         ^^                                           ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 181,
+      "verilator": {
+        "IN": "68CA46BF835BDBA463F3EE51BA4ADDC3C05324F3CCA04AE903539292990D6B0",
+        "OUT": "34453059A040003115516686A9F00F0F55A20936488282F45655549BAB031C0056A0BCE12D0C0C8CBAD",
+        "IN_norm": "68CA46BF835BDBA463F3EE51BA4ADDC3C05324F3CCA04AE903539292990D6B0",
+        "OUT_norm": "34453059A040003115516686A9F00F0F55A20936488282F45655549BAB031C0056A0BCE12D0C0C8CBAD"
+      },
+      "icarus": {
+        "IN": "68CA46BF835BDBA463F3EE51BA4ADDC3C05324F3CCA04AE903539292990D6B0",
+        "OUT": "34453059A040003115516686A9F00F0F55A20936488282F45655549BAB031C0056A0BCE12D0C0C84BAD",
+        "IN_norm": "68CA46BF835BDBA463F3EE51BA4ADDC3C05324F3CCA04AE903539292990D6B0",
+        "OUT_norm": "34453059A040003115516686A9F00F0F55A20936488282F45655549BAB031C0056A0BCE12D0C0C84BAD"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 79,
+            "verilator": "C",
+            "icarus": "4"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 1 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "34453059A040003115516686A9F00F0F55A20936488282F45655549BAB031C0056A0BCE12D0C0C8CBAD",
+          "icarus_x_removed": "34453059A040003115516686A9F00F0F55A20936488282F45655549BAB031C0056A0BCE12D0C0C84BAD",
+          "visual_diff": {
+            "verilator_aligned": "34453059A040003115516686A9F00F0F55A20936488282F45655549BAB031C0056A0BCE12D0C0C8CBAD",
+            "icarus_aligned": "34453059A040003115516686A9F00F0F55A20936488282F45655549BAB031C0056A0BCE12D0C0C84BAD",
+            "diff_markers": "                                                                               ^   ",
+            "formatted_diff": "Verilator:  34453059A040003115516686A9F00F0F55A20936488282F45655549BAB031C0056A0BCE12D0C0C8CBAD\nIcarus:     34453059A040003115516686A9F00F0F55A20936488282F45655549BAB031C0056A0BCE12D0C0C84BAD\nDiff:                                                                                      ^   ",
+            "formatted_lines": [
+              "Verilator:  34453059A040003115516686A9F00F0F55A20936488282F45655549BAB031C0056A0BCE12D0C0C8CBAD",
+              "Icarus:     34453059A040003115516686A9F00F0F55A20936488282F45655549BAB031C0056A0BCE12D0C0C84BAD",
+              "Diff:                                                                                      ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 182,
+      "verilator": {
+        "IN": "9DD735E3CBE24A1269BF659DCBB6DC745FCF1C475971FB864029E461F9BCCBC8",
+        "OUT": "2EA3A599B0400063A391870753800101575804112D67473DBE3BFE9AE2A32002A28120983F270C8C8FD",
+        "IN_norm": "9DD735E3CBE24A1269BF659DCBB6DC745FCF1C475971FB864029E461F9BCCBC8",
+        "OUT_norm": "2EA3A599B0400063A391870753800101575804112D67473DBE3BFE9AE2A32002A28120983F270C8C8FD"
+      },
+      "icarus": {
+        "IN": "9DD735E3CBE24A1269BF659DCBB6DC745FCF1C475971FB864029E461F9BCCBC8",
+        "OUT": "2EA3A599B0400063A39187075380010157X804112D67473DBE3BFE9AE2A32002A28120983F270C848FD",
+        "IN_norm": "9DD735E3CBE24A1269BF659DCBB6DC745FCF1C475971FB864029E461F9BCCBC8",
+        "OUT_norm": "2EA3A599B0400063A39187075380010157X804112D67473DBE3BFE9AE2A32002A28120983F270C848FD"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "5",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 79,
+            "verilator": "C",
+            "icarus": "4"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 1 real differences and 1 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "2EA3A599B0400063A391870753800101575804112D67473DBE3BFE9AE2A32002A28120983F270C8C8FD",
+          "icarus_x_removed": "2EA3A599B0400063A39187075380010157_804112D67473DBE3BFE9AE2A32002A28120983F270C848FD",
+          "visual_diff": {
+            "verilator_aligned": "2EA3A599B0400063A391870753800101575804112D67473DBE3BFE9AE2A32002A28120983F270C8C8FD",
+            "icarus_aligned": "2EA3A599B0400063A39187075380010157_804112D67473DBE3BFE9AE2A32002A28120983F270C848FD",
+            "diff_markers": "                                  ^                                            ^   ",
+            "formatted_diff": "Verilator:  2EA3A599B0400063A391870753800101575804112D67473DBE3BFE9AE2A32002A28120983F270C8C8FD\nIcarus:     2EA3A599B0400063A39187075380010157_804112D67473DBE3BFE9AE2A32002A28120983F270C848FD\nDiff:                                         ^                                            ^   ",
+            "formatted_lines": [
+              "Verilator:  2EA3A599B0400063A391870753800101575804112D67473DBE3BFE9AE2A32002A28120983F270C8C8FD",
+              "Icarus:     2EA3A599B0400063A39187075380010157_804112D67473DBE3BFE9AE2A32002A28120983F270C848FD",
+              "Diff:                                         ^                                            ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 183,
+      "verilator": {
+        "IN": "AFC37E5BB359096AD3D6AB5575DD460C62BD4D3F1B96F55E2731BE99179F4BE0",
+        "OUT": "3E2DDDB9E06B3ADC9556DF1F53B42BEB73E080156B4949497677549BC7972800AE803AC227E5E820A79",
+        "IN_norm": "AFC37E5BB359096AD3D6AB5575DD460C62BD4D3F1B96F55E2731BE99179F4BE0",
+        "OUT_norm": "3E2DDDB9E06B3ADC9556DF1F53B42BEB73E080156B4949497677549BC7972800AE803AC227E5E820A79"
+      },
+      "icarus": {
+        "IN": "AFC37E5BB359096AD3D6AB5575DD460C62BD4D3F1B96F55E2731BE99179F4BE0",
+        "OUT": "3E2DDDB9E06B3ADC9556D71753B42BEB73XX8015694949497677549BC7972800AE803AC227E5E808A79",
+        "IN_norm": "AFC37E5BB359096AD3D6AB5575DD460C62BD4D3F1B96F55E2731BE99179F4BE0",
+        "OUT_norm": "3E2DDDB9E06B3ADC9556D71753B42BEB73XX8015694949497677549BC7972800AE803AC227E5E808A79"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "E",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "0",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 21,
+            "verilator": "F",
+            "icarus": "7"
+          },
+          {
+            "position": 23,
+            "verilator": "F",
+            "icarus": "7"
+          },
+          {
+            "position": 41,
+            "verilator": "B",
+            "icarus": "9"
+          },
+          {
+            "position": 78,
+            "verilator": "2",
+            "icarus": "0"
+          },
+          {
+            "position": 79,
+            "verilator": "0",
+            "icarus": "8"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 5 real differences and 2 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "3E2DDDB9E06B3ADC9556DF1F53B42BEB73E080156B4949497677549BC7972800AE803AC227E5E820A79",
+          "icarus_x_removed": "3E2DDDB9E06B3ADC9556D71753B42BEB73__8015694949497677549BC7972800AE803AC227E5E808A79",
+          "visual_diff": {
+            "verilator_aligned": "3E2DDDB9E06B3ADC9556DF1F53B42BEB73E080156B4949497677549BC7972800AE803AC227E5E820A79",
+            "icarus_aligned": "3E2DDDB9E06B3ADC9556D71753B42BEB73__8015694949497677549BC7972800AE803AC227E5E808A79",
+            "diff_markers": "                     ^ ^          ^^     ^                                    ^^   ",
+            "formatted_diff": "Verilator:  3E2DDDB9E06B3ADC9556DF1F53B42BEB73E080156B4949497677549BC7972800AE803AC227E5E820A79\nIcarus:     3E2DDDB9E06B3ADC9556D71753B42BEB73__8015694949497677549BC7972800AE803AC227E5E808A79\nDiff:                            ^ ^          ^^     ^                                    ^^   ",
+            "formatted_lines": [
+              "Verilator:  3E2DDDB9E06B3ADC9556DF1F53B42BEB73E080156B4949497677549BC7972800AE803AC227E5E820A79",
+              "Icarus:     3E2DDDB9E06B3ADC9556D71753B42BEB73__8015694949497677549BC7972800AE803AC227E5E808A79",
+              "Diff:                            ^ ^          ^^     ^                                    ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 187,
+      "verilator": {
+        "IN": "58E7463BF7D184CAD90078352C4CBA6C05EA571F374C7ABE599E7D79FF9E3A40",
+        "OUT": "712FD31206001D19A5740000100000071218015688E8EF53E3BD49A8438FA023821DABB3FC4EBDE211",
+        "IN_norm": "58E7463BF7D184CAD90078352C4CBA6C05EA571F374C7ABE599E7D79FF9E3A40",
+        "OUT_norm": "712FD31206001D19A5740000100000071218015688E8EF53E3BD49A8438FA023821DABB3FC4EBDE211"
+      },
+      "icarus": {
+        "IN": "58E7463BF7D184CAD90078352C4CBA6C05EA571F374C7ABE599E7D79FF9E3A40",
+        "OUT": "712FD31206001D19A5740000100000071XX8015688E8EF53E3BD49A8438FA023821DABB3FC4EBD6211",
+        "IN_norm": "58E7463BF7D184CAD90078352C4CBA6C05EA571F374C7ABE599E7D79FF9E3A40",
+        "OUT_norm": "712FD31206001D19A5740000100000071XX8015688E8EF53E3BD49A8438FA023821DABB3FC4EBD6211"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 33,
+            "verilator": "2",
+            "icarus": "X"
+          },
+          {
+            "position": 34,
+            "verilator": "1",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "E",
+            "icarus": "6"
+          }
+        ],
+        "total_positions": 82,
+        "explanation": "Mixed differences: 1 real differences and 2 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "712FD31206001D19A5740000100000071218015688E8EF53E3BD49A8438FA023821DABB3FC4EBDE211",
+          "icarus_x_removed": "712FD31206001D19A5740000100000071__8015688E8EF53E3BD49A8438FA023821DABB3FC4EBD6211",
+          "visual_diff": {
+            "verilator_aligned": "712FD31206001D19A5740000100000071218015688E8EF53E3BD49A8438FA023821DABB3FC4EBDE211",
+            "icarus_aligned": "712FD31206001D19A5740000100000071__8015688E8EF53E3BD49A8438FA023821DABB3FC4EBD6211",
+            "diff_markers": "                                 ^^                                           ^   ",
+            "formatted_diff": "Verilator:  712FD31206001D19A5740000100000071218015688E8EF53E3BD49A8438FA023821DABB3FC4EBDE211\nIcarus:     712FD31206001D19A5740000100000071__8015688E8EF53E3BD49A8438FA023821DABB3FC4EBD6211\nDiff:                                        ^^                                           ^   ",
+            "formatted_lines": [
+              "Verilator:  712FD31206001D19A5740000100000071218015688E8EF53E3BD49A8438FA023821DABB3FC4EBDE211",
+              "Icarus:     712FD31206001D19A5740000100000071__8015688E8EF53E3BD49A8438FA023821DABB3FC4EBD6211",
+              "Diff:                                        ^^                                           ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 198,
+      "verilator": {
+        "IN": "D7648563AC1D2792FBCD491D92881DF43CFE73C74DF2010635388FE10F74F548",
+        "OUT": "3B333845303000199A56CF0F51A009F95549003749FF1CFF1E19AAE38F760C0082810AC03DFDE169FED",
+        "IN_norm": "D7648563AC1D2792FBCD491D92881DF43CFE73C74DF2010635388FE10F74F548",
+        "OUT_norm": "3B333845303000199A56CF0F51A009F95549003749FF1CFF1E19AAE38F760C0082810AC03DFDE169FED"
+      },
+      "icarus": {
+        "IN": "D7648563AC1D2792FBCD491D92881DF43CFE73C74DF2010635388FE10F74F548",
+        "OUT": "3B333845303000199A56CF0F51A009F955X9003749FF1CFF1E19AAE38F760C0082810AC03DFDE179FED",
+        "IN_norm": "D7648563AC1D2792FBCD491D92881DF43CFE73C74DF2010635388FE10F74F548",
+        "OUT_norm": "3B333845303000199A56CF0F51A009F955X9003749FF1CFF1E19AAE38F760C0082810AC03DFDE179FED"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "4",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "6",
+            "icarus": "7"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 1 real differences and 1 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "3B333845303000199A56CF0F51A009F95549003749FF1CFF1E19AAE38F760C0082810AC03DFDE169FED",
+          "icarus_x_removed": "3B333845303000199A56CF0F51A009F955_9003749FF1CFF1E19AAE38F760C0082810AC03DFDE179FED",
+          "visual_diff": {
+            "verilator_aligned": "3B333845303000199A56CF0F51A009F95549003749FF1CFF1E19AAE38F760C0082810AC03DFDE169FED",
+            "icarus_aligned": "3B333845303000199A56CF0F51A009F955_9003749FF1CFF1E19AAE38F760C0082810AC03DFDE179FED",
+            "diff_markers": "                                  ^                                           ^    ",
+            "formatted_diff": "Verilator:  3B333845303000199A56CF0F51A009F95549003749FF1CFF1E19AAE38F760C0082810AC03DFDE169FED\nIcarus:     3B333845303000199A56CF0F51A009F955_9003749FF1CFF1E19AAE38F760C0082810AC03DFDE179FED\nDiff:                                         ^                                           ^    ",
+            "formatted_lines": [
+              "Verilator:  3B333845303000199A56CF0F51A009F95549003749FF1CFF1E19AAE38F760C0082810AC03DFDE169FED",
+              "Icarus:     3B333845303000199A56CF0F51A009F955_9003749FF1CFF1E19AAE38F760C0082810AC03DFDE179FED",
+              "Diff:                                         ^                                           ^    "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 207,
+      "verilator": {
+        "IN": "2C4FBD9BC9FDBDAAB68888958F63504C6848187F152CE59E612447D9478D3220",
+        "OUT": "224DFDCDB04000FF955567075311111157309437495050505655009BF7A71800CEC082C03FFFE79DC09",
+        "IN_norm": "2C4FBD9BC9FDBDAAB68888958F63504C6848187F152CE59E612447D9478D3220",
+        "OUT_norm": "224DFDCDB04000FF955567075311111157309437495050505655009BF7A71800CEC082C03FFFE79DC09"
+      },
+      "icarus": {
+        "IN": "2C4FBD9BC9FDBDAAB68888958F63504C6848187F152CE59E612447D9478D3220",
+        "OUT": "224DFDCDB04000FF955567075311111157309437495050505655009BF7A71800CEC082C03FFFE785C09",
+        "IN_norm": "2C4FBD9BC9FDBDAAB68888958F63504C6848187F152CE59E612447D9478D3220",
+        "OUT_norm": "224DFDCDB04000FF955567075311111157309437495050505655009BF7A71800CEC082C03FFFE785C09"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "9",
+            "icarus": "8"
+          },
+          {
+            "position": 79,
+            "verilator": "D",
+            "icarus": "5"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 2 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "224DFDCDB04000FF955567075311111157309437495050505655009BF7A71800CEC082C03FFFE79DC09",
+          "icarus_x_removed": "224DFDCDB04000FF955567075311111157309437495050505655009BF7A71800CEC082C03FFFE785C09",
+          "visual_diff": {
+            "verilator_aligned": "224DFDCDB04000FF955567075311111157309437495050505655009BF7A71800CEC082C03FFFE79DC09",
+            "icarus_aligned": "224DFDCDB04000FF955567075311111157309437495050505655009BF7A71800CEC082C03FFFE785C09",
+            "diff_markers": "                                                                              ^^   ",
+            "formatted_diff": "Verilator:  224DFDCDB04000FF955567075311111157309437495050505655009BF7A71800CEC082C03FFFE79DC09\nIcarus:     224DFDCDB04000FF955567075311111157309437495050505655009BF7A71800CEC082C03FFFE785C09\nDiff:                                                                                     ^^   ",
+            "formatted_lines": [
+              "Verilator:  224DFDCDB04000FF955567075311111157309437495050505655009BF7A71800CEC082C03FFFE79DC09",
+              "Icarus:     224DFDCDB04000FF955567075311111157309437495050505655009BF7A71800CEC082C03FFFE785C09",
+              "Diff:                                                                                     ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 236,
+      "verilator": {
+        "IN": "E51910338014DBA2FE62036D220D0F845740F197FEFB9416FE8F45317DEAEDD8",
+        "OUT": "28F84181A055D59023966080ABC4C4C41DC481102D2DBC209E99FEE3789D26000A41E68A2FA5BEC18E1",
+        "IN_norm": "E51910338014DBA2FE62036D220D0F845740F197FEFB9416FE8F45317DEAEDD8",
+        "OUT_norm": "28F84181A055D59023966080ABC4C4C41DC481102D2DBC209E99FEE3789D26000A41E68A2FA5BEC18E1"
+      },
+      "icarus": {
+        "IN": "E51910338014DBA2FE62036D220D0F845740F197FEFB9416FE8F45317DEAEDD8",
+        "OUT": "28F84181A055D59023966888ABC4C4C41DC481102F2DBC209E99FEE3789D26000A41E68A2FA5BEE98E1",
+        "IN_norm": "E51910338014DBA2FE62036D220D0F845740F197FEFB9416FE8F45317DEAEDD8",
+        "OUT_norm": "28F84181A055D59023966888ABC4C4C41DC481102F2DBC209E99FEE3789D26000A41E68A2FA5BEE98E1"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 21,
+            "verilator": "0",
+            "icarus": "8"
+          },
+          {
+            "position": 23,
+            "verilator": "0",
+            "icarus": "8"
+          },
+          {
+            "position": 41,
+            "verilator": "D",
+            "icarus": "F"
+          },
+          {
+            "position": 78,
+            "verilator": "C",
+            "icarus": "E"
+          },
+          {
+            "position": 79,
+            "verilator": "1",
+            "icarus": "9"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 5 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "28F84181A055D59023966080ABC4C4C41DC481102D2DBC209E99FEE3789D26000A41E68A2FA5BEC18E1",
+          "icarus_x_removed": "28F84181A055D59023966888ABC4C4C41DC481102F2DBC209E99FEE3789D26000A41E68A2FA5BEE98E1",
+          "visual_diff": {
+            "verilator_aligned": "28F84181A055D59023966080ABC4C4C41DC481102D2DBC209E99FEE3789D26000A41E68A2FA5BEC18E1",
+            "icarus_aligned": "28F84181A055D59023966888ABC4C4C41DC481102F2DBC209E99FEE3789D26000A41E68A2FA5BEE98E1",
+            "diff_markers": "                     ^ ^                 ^                                    ^^   ",
+            "formatted_diff": "Verilator:  28F84181A055D59023966080ABC4C4C41DC481102D2DBC209E99FEE3789D26000A41E68A2FA5BEC18E1\nIcarus:     28F84181A055D59023966888ABC4C4C41DC481102F2DBC209E99FEE3789D26000A41E68A2FA5BEE98E1\nDiff:                            ^ ^                 ^                                    ^^   ",
+            "formatted_lines": [
+              "Verilator:  28F84181A055D59023966080ABC4C4C41DC481102D2DBC209E99FEE3789D26000A41E68A2FA5BEC18E1",
+              "Icarus:     28F84181A055D59023966888ABC4C4C41DC481102F2DBC209E99FEE3789D26000A41E68A2FA5BEE98E1",
+              "Diff:                            ^ ^                 ^                                    ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 237,
+      "verilator": {
+        "IN": "637C52AB13FA3CFA10D53325B244CB1C474A7C8F72890FEEC5286969A90D9FF0",
+        "OUT": "1BDD30A5A04E13FE9A509797FB5015F51DC401364925A5A59E19FE9B5697200296810C953D283EC1800",
+        "IN_norm": "637C52AB13FA3CFA10D53325B244CB1C474A7C8F72890FEEC5286969A90D9FF0",
+        "OUT_norm": "1BDD30A5A04E13FE9A509797FB5015F51DC401364925A5A59E19FE9B5697200296810C953D283EC1800"
+      },
+      "icarus": {
+        "IN": "637C52AB13FA3CFA10D53325B244CB1C474A7C8F72890FEEC5286969A90D9FF0",
+        "OUT": "1BDD30A5A04E13FE9A509F9FFB5015F51DC401364B25A5A59E19FE9B5697200296810C953D283EE9800",
+        "IN_norm": "637C52AB13FA3CFA10D53325B244CB1C474A7C8F72890FEEC5286969A90D9FF0",
+        "OUT_norm": "1BDD30A5A04E13FE9A509F9FFB5015F51DC401364B25A5A59E19FE9B5697200296810C953D283EE9800"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 21,
+            "verilator": "7",
+            "icarus": "F"
+          },
+          {
+            "position": 23,
+            "verilator": "7",
+            "icarus": "F"
+          },
+          {
+            "position": 41,
+            "verilator": "9",
+            "icarus": "B"
+          },
+          {
+            "position": 78,
+            "verilator": "C",
+            "icarus": "E"
+          },
+          {
+            "position": 79,
+            "verilator": "1",
+            "icarus": "9"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 5 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "1BDD30A5A04E13FE9A509797FB5015F51DC401364925A5A59E19FE9B5697200296810C953D283EC1800",
+          "icarus_x_removed": "1BDD30A5A04E13FE9A509F9FFB5015F51DC401364B25A5A59E19FE9B5697200296810C953D283EE9800",
+          "visual_diff": {
+            "verilator_aligned": "1BDD30A5A04E13FE9A509797FB5015F51DC401364925A5A59E19FE9B5697200296810C953D283EC1800",
+            "icarus_aligned": "1BDD30A5A04E13FE9A509F9FFB5015F51DC401364B25A5A59E19FE9B5697200296810C953D283EE9800",
+            "diff_markers": "                     ^ ^                 ^                                    ^^   ",
+            "formatted_diff": "Verilator:  1BDD30A5A04E13FE9A509797FB5015F51DC401364925A5A59E19FE9B5697200296810C953D283EC1800\nIcarus:     1BDD30A5A04E13FE9A509F9FFB5015F51DC401364B25A5A59E19FE9B5697200296810C953D283EE9800\nDiff:                            ^ ^                 ^                                    ^^   ",
+            "formatted_lines": [
+              "Verilator:  1BDD30A5A04E13FE9A509797FB5015F51DC401364925A5A59E19FE9B5697200296810C953D283EC1800",
+              "Icarus:     1BDD30A5A04E13FE9A509F9FFB5015F51DC401364B25A5A59E19FE9B5697200296810C953D283EE9800",
+              "Diff:                            ^ ^                 ^                                    ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 239,
+      "verilator": {
+        "IN": "B41B3C9BF1DBD8AAD6F22F95045F334CD409A77F9DCF509EB4717ED9C580E520",
+        "OUT": "20EE550DB02C0EDC15557D1D519039F971CB00770B2424247EFF80E39B0294004E203AF03F8FA4715FD",
+        "IN_norm": "B41B3C9BF1DBD8AAD6F22F95045F334CD409A77F9DCF509EB4717ED9C580E520",
+        "OUT_norm": "20EE550DB02C0EDC15557D1D519039F971CB00770B2424247EFF80E39B0294004E203AF03F8FA4715FD"
+      },
+      "icarus": {
+        "IN": "B41B3C9BF1DBD8AAD6F22F95045F334CD409A77F9DCF509EB4717ED9C580E520",
+        "OUT": "20EE550DB02C0EDC15557515519039F971CB0077092424247EFF80E39B0294004E203AF03F8FA4415FD",
+        "IN_norm": "B41B3C9BF1DBD8AAD6F22F95045F334CD409A77F9DCF509EB4717ED9C580E520",
+        "OUT_norm": "20EE550DB02C0EDC15557515519039F971CB0077092424247EFF80E39B0294004E203AF03F8FA4415FD"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 21,
+            "verilator": "D",
+            "icarus": "5"
+          },
+          {
+            "position": 23,
+            "verilator": "D",
+            "icarus": "5"
+          },
+          {
+            "position": 41,
+            "verilator": "B",
+            "icarus": "9"
+          },
+          {
+            "position": 78,
+            "verilator": "7",
+            "icarus": "4"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 4 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "20EE550DB02C0EDC15557D1D519039F971CB00770B2424247EFF80E39B0294004E203AF03F8FA4715FD",
+          "icarus_x_removed": "20EE550DB02C0EDC15557515519039F971CB0077092424247EFF80E39B0294004E203AF03F8FA4415FD",
+          "visual_diff": {
+            "verilator_aligned": "20EE550DB02C0EDC15557D1D519039F971CB00770B2424247EFF80E39B0294004E203AF03F8FA4715FD",
+            "icarus_aligned": "20EE550DB02C0EDC15557515519039F971CB0077092424247EFF80E39B0294004E203AF03F8FA4415FD",
+            "diff_markers": "                     ^ ^                 ^                                    ^    ",
+            "formatted_diff": "Verilator:  20EE550DB02C0EDC15557D1D519039F971CB00770B2424247EFF80E39B0294004E203AF03F8FA4715FD\nIcarus:     20EE550DB02C0EDC15557515519039F971CB0077092424247EFF80E39B0294004E203AF03F8FA4415FD\nDiff:                            ^ ^                 ^                                    ^    ",
+            "formatted_lines": [
+              "Verilator:  20EE550DB02C0EDC15557D1D519039F971CB00770B2424247EFF80E39B0294004E203AF03F8FA4715FD",
+              "Icarus:     20EE550DB02C0EDC15557515519039F971CB0077092424247EFF80E39B0294004E203AF03F8FA4415FD",
+              "Diff:                            ^ ^                 ^                                    ^    "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 243,
+      "verilator": {
+        "IN": "537B247BAD6CF40A13B31C7583CE47AC0BF0D15F625375FECD435DB987C57380",
+        "OUT": "1BD35D8D905807695A521B9BFBCC333371300136499393F896112A9A718D8E00FEA07EA03FDFF5A3CE5",
+        "IN_norm": "537B247BAD6CF40A13B31C7583CE47AC0BF0D15F625375FECD435DB987C57380",
+        "OUT_norm": "1BD35D8D905807695A521B9BFBCC333371300136499393F896112A9A718D8E00FEA07EA03FDFF5A3CE5"
+      },
+      "icarus": {
+        "IN": "537B247BAD6CF40A13B31C7583CE47AC0BF0D15F625375FECD435DB987C57380",
+        "OUT": "1BD35D8D9058076X5A521393FBCC333371X00136489393F896112A9A718D8E00FEA07EA03FDFF59BCE5",
+        "IN_norm": "537B247BAD6CF40A13B31C7583CE47AC0BF0D15F625375FECD435DB987C57380",
+        "OUT_norm": "1BD35D8D9058076X5A521393FBCC333371X00136489393F896112A9A718D8E00FEA07EA03FDFF59BCE5"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 15,
+            "verilator": "9",
+            "icarus": "X"
+          },
+          {
+            "position": 34,
+            "verilator": "3",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 21,
+            "verilator": "B",
+            "icarus": "3"
+          },
+          {
+            "position": 23,
+            "verilator": "B",
+            "icarus": "3"
+          },
+          {
+            "position": 41,
+            "verilator": "9",
+            "icarus": "8"
+          },
+          {
+            "position": 78,
+            "verilator": "A",
+            "icarus": "9"
+          },
+          {
+            "position": 79,
+            "verilator": "3",
+            "icarus": "B"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 5 real differences and 2 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "1BD35D8D905807695A521B9BFBCC333371300136499393F896112A9A718D8E00FEA07EA03FDFF5A3CE5",
+          "icarus_x_removed": "1BD35D8D9058076_5A521393FBCC333371_00136489393F896112A9A718D8E00FEA07EA03FDFF59BCE5",
+          "visual_diff": {
+            "verilator_aligned": "1BD35D8D905807695A521B9BFBCC333371300136499393F896112A9A718D8E00FEA07EA03FDFF5A3CE5",
+            "icarus_aligned": "1BD35D8D9058076_5A521393FBCC333371_00136489393F896112A9A718D8E00FEA07EA03FDFF59BCE5",
+            "diff_markers": "               ^     ^ ^          ^      ^                                    ^^   ",
+            "formatted_diff": "Verilator:  1BD35D8D905807695A521B9BFBCC333371300136499393F896112A9A718D8E00FEA07EA03FDFF5A3CE5\nIcarus:     1BD35D8D9058076_5A521393FBCC333371_00136489393F896112A9A718D8E00FEA07EA03FDFF59BCE5\nDiff:                      ^     ^ ^          ^      ^                                    ^^   ",
+            "formatted_lines": [
+              "Verilator:  1BD35D8D905807695A521B9BFBCC333371300136499393F896112A9A718D8E00FEA07EA03FDFF5A3CE5",
+              "Icarus:     1BD35D8D9058076_5A521393FBCC333371_00136489393F896112A9A718D8E00FEA07EA03FDFF59BCE5",
+              "Diff:                      ^     ^ ^          ^      ^                                    ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 267,
+      "verilator": {
+        "IN": "61D0C3BB83A4884A3EF759B5FD3431EC476EFC9F6E0E463EE96246F90F5539C0",
+        "OUT": "E9958753075F5A215536383F9C007FF55450136490585B7FE7FFE9C99A526011E8046C13BFAD99E275",
+        "IN_norm": "61D0C3BB83A4884A3EF759B5FD3431EC476EFC9F6E0E463EE96246F90F5539C0",
+        "OUT_norm": "E9958753075F5A215536383F9C007FF55450136490585B7FE7FFE9C99A526011E8046C13BFAD99E275"
+      },
+      "icarus": {
+        "IN": "61D0C3BB83A4884A3EF759B5FD3431EC476EFC9F6E0E463EE96246F90F5539C0",
+        "OUT": "E9958753075F5A215536383F9C007FF55450136490585B7FE7FFE9C99A526011E8046C13BFAD996275",
+        "IN_norm": "61D0C3BB83A4884A3EF759B5FD3431EC476EFC9F6E0E463EE96246F90F5539C0",
+        "OUT_norm": "E9958753075F5A215536383F9C007FF55450136490585B7FE7FFE9C99A526011E8046C13BFAD996275"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "E",
+            "icarus": "6"
+          }
+        ],
+        "total_positions": 82,
+        "explanation": "Real simulator differences at 1 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "E9958753075F5A215536383F9C007FF55450136490585B7FE7FFE9C99A526011E8046C13BFAD99E275",
+          "icarus_x_removed": "E9958753075F5A215536383F9C007FF55450136490585B7FE7FFE9C99A526011E8046C13BFAD996275",
+          "visual_diff": {
+            "verilator_aligned": "E9958753075F5A215536383F9C007FF55450136490585B7FE7FFE9C99A526011E8046C13BFAD99E275",
+            "icarus_aligned": "E9958753075F5A215536383F9C007FF55450136490585B7FE7FFE9C99A526011E8046C13BFAD996275",
+            "diff_markers": "                                                                              ^   ",
+            "formatted_diff": "Verilator:  E9958753075F5A215536383F9C007FF55450136490585B7FE7FFE9C99A526011E8046C13BFAD99E275\nIcarus:     E9958753075F5A215536383F9C007FF55450136490585B7FE7FFE9C99A526011E8046C13BFAD996275\nDiff:                                                                                     ^   ",
+            "formatted_lines": [
+              "Verilator:  E9958753075F5A215536383F9C007FF55450136490585B7FE7FFE9C99A526011E8046C13BFAD99E275",
+              "Icarus:     E9958753075F5A215536383F9C007FF55450136490585B7FE7FFE9C99A526011E8046C13BFAD996275",
+              "Diff:                                                                                     ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 268,
+      "verilator": {
+        "IN": "70F5EF3395EDD6A22E660A6DD510D28456BDE09731AADF161A90DC311F2880D8",
+        "OUT": "79A39793045C5EA9A526080A9CCCCCC73A0793649277827161154E290859E0284601EE22FCDD99E025",
+        "IN_norm": "70F5EF3395EDD6A22E660A6DD510D28456BDE09731AADF161A90DC311F2880D8",
+        "OUT_norm": "79A39793045C5EA9A526080A9CCCCCC73A0793649277827161154E290859E0284601EE22FCDD99E025"
+      },
+      "icarus": {
+        "IN": "70F5EF3395EDD6A22E660A6DD510D28456BDE09731AADF161A90DC311F2880D8",
+        "OUT": "79A39793045C5EA9A526080A9CCCCCC73A0793649277827161154E290859E0284601EE22FCDD996025",
+        "IN_norm": "70F5EF3395EDD6A22E660A6DD510D28456BDE09731AADF161A90DC311F2880D8",
+        "OUT_norm": "79A39793045C5EA9A526080A9CCCCCC73A0793649277827161154E290859E0284601EE22FCDD996025"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "E",
+            "icarus": "6"
+          }
+        ],
+        "total_positions": 82,
+        "explanation": "Real simulator differences at 1 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "79A39793045C5EA9A526080A9CCCCCC73A0793649277827161154E290859E0284601EE22FCDD99E025",
+          "icarus_x_removed": "79A39793045C5EA9A526080A9CCCCCC73A0793649277827161154E290859E0284601EE22FCDD996025",
+          "visual_diff": {
+            "verilator_aligned": "79A39793045C5EA9A526080A9CCCCCC73A0793649277827161154E290859E0284601EE22FCDD99E025",
+            "icarus_aligned": "79A39793045C5EA9A526080A9CCCCCC73A0793649277827161154E290859E0284601EE22FCDD996025",
+            "diff_markers": "                                                                              ^   ",
+            "formatted_diff": "Verilator:  79A39793045C5EA9A526080A9CCCCCC73A0793649277827161154E290859E0284601EE22FCDD99E025\nIcarus:     79A39793045C5EA9A526080A9CCCCCC73A0793649277827161154E290859E0284601EE22FCDD996025\nDiff:                                                                                     ^   ",
+            "formatted_lines": [
+              "Verilator:  79A39793045C5EA9A526080A9CCCCCC73A0793649277827161154E290859E0284601EE22FCDD99E025",
+              "Icarus:     79A39793045C5EA9A526080A9CCCCCC73A0793649277827161154E290859E0284601EE22FCDD996025",
+              "Diff:                                                                                     ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 271,
+      "verilator": {
+        "IN": "B242BB9B4005F3AAD757D6952BC7164CC867367F3FFDBB9E9FFAB5D967209820",
+        "OUT": "122B5C4D30541D005554AA8AA9E005FD55A005760B1010105655549B14882A0288E156E03FDFCC7D289",
+        "IN_norm": "B242BB9B4005F3AAD757D6952BC7164CC867367F3FFDBB9E9FFAB5D967209820",
+        "OUT_norm": "122B5C4D30541D005554AA8AA9E005FD55A005760B1010105655549B14882A0288E156E03FDFCC7D289"
+      },
+      "icarus": {
+        "IN": "B242BB9B4005F3AAD757D6952BC7164CC867367F3FFDBB9E9FFAB5D967209820",
+        "OUT": "122B5C4D30541D0X5554AA8AA9E005FD55XX05760B1010105655549B14882A0288E156E03FDFCC65289",
+        "IN_norm": "B242BB9B4005F3AAD757D6952BC7164CC867367F3FFDBB9E9FFAB5D967209820",
+        "OUT_norm": "122B5C4D30541D0X5554AA8AA9E005FD55XX05760B1010105655549B14882A0288E156E03FDFCC65289"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 15,
+            "verilator": "0",
+            "icarus": "X"
+          },
+          {
+            "position": 34,
+            "verilator": "A",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "0",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "7",
+            "icarus": "6"
+          },
+          {
+            "position": 79,
+            "verilator": "D",
+            "icarus": "5"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 2 real differences and 3 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "122B5C4D30541D005554AA8AA9E005FD55A005760B1010105655549B14882A0288E156E03FDFCC7D289",
+          "icarus_x_removed": "122B5C4D30541D0_5554AA8AA9E005FD55__05760B1010105655549B14882A0288E156E03FDFCC65289",
+          "visual_diff": {
+            "verilator_aligned": "122B5C4D30541D005554AA8AA9E005FD55A005760B1010105655549B14882A0288E156E03FDFCC7D289",
+            "icarus_aligned": "122B5C4D30541D0_5554AA8AA9E005FD55__05760B1010105655549B14882A0288E156E03FDFCC65289",
+            "diff_markers": "               ^                  ^^                                          ^^   ",
+            "formatted_diff": "Verilator:  122B5C4D30541D005554AA8AA9E005FD55A005760B1010105655549B14882A0288E156E03FDFCC7D289\nIcarus:     122B5C4D30541D0_5554AA8AA9E005FD55__05760B1010105655549B14882A0288E156E03FDFCC65289\nDiff:                      ^                  ^^                                          ^^   ",
+            "formatted_lines": [
+              "Verilator:  122B5C4D30541D005554AA8AA9E005FD55A005760B1010105655549B14882A0288E156E03FDFCC7D289",
+              "Icarus:     122B5C4D30541D0_5554AA8AA9E005FD55__05760B1010105655549B14882A0288E156E03FDFCC65289",
+              "Diff:                      ^                  ^^                                          ^^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 275,
+      "verilator": {
+        "IN": "4D4E237B34C08F0A39F8437546E3AAAC3041E05FF61360FE17B414B99D3AA680",
+        "OUT": "2A51F40D206A3AC01A50DF1F51000FFF1FF0043749E2626216912A9B936BEC007EC092833BB892FD5A1",
+        "IN_norm": "4D4E237B34C08F0A39F8437546E3AAAC3041E05FF61360FE17B414B99D3AA680",
+        "OUT_norm": "2A51F40D206A3AC01A50DF1F51000FFF1FF0043749E2626216912A9B936BEC007EC092833BB892FD5A1"
+      },
+      "icarus": {
+        "IN": "4D4E237B34C08F0A39F8437546E3AAAC3041E05FF61360FE17B414B99D3AA680",
+        "OUT": "2A51F40D206A3AC01A50DF1F51000FFF1FX0043749E2626216912A9B936BEC007EC092833BB892F55A1",
+        "IN_norm": "4D4E237B34C08F0A39F8437546E3AAAC3041E05FF61360FE17B414B99D3AA680",
+        "OUT_norm": "2A51F40D206A3AC01A50DF1F51000FFF1FX0043749E2626216912A9B936BEC007EC092833BB892F55A1"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 34,
+            "verilator": "F",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 79,
+            "verilator": "D",
+            "icarus": "5"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 1 real differences and 1 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "2A51F40D206A3AC01A50DF1F51000FFF1FF0043749E2626216912A9B936BEC007EC092833BB892FD5A1",
+          "icarus_x_removed": "2A51F40D206A3AC01A50DF1F51000FFF1F_0043749E2626216912A9B936BEC007EC092833BB892F55A1",
+          "visual_diff": {
+            "verilator_aligned": "2A51F40D206A3AC01A50DF1F51000FFF1FF0043749E2626216912A9B936BEC007EC092833BB892FD5A1",
+            "icarus_aligned": "2A51F40D206A3AC01A50DF1F51000FFF1F_0043749E2626216912A9B936BEC007EC092833BB892F55A1",
+            "diff_markers": "                                  ^                                            ^   ",
+            "formatted_diff": "Verilator:  2A51F40D206A3AC01A50DF1F51000FFF1FF0043749E2626216912A9B936BEC007EC092833BB892FD5A1\nIcarus:     2A51F40D206A3AC01A50DF1F51000FFF1F_0043749E2626216912A9B936BEC007EC092833BB892F55A1\nDiff:                                         ^                                            ^   ",
+            "formatted_lines": [
+              "Verilator:  2A51F40D206A3AC01A50DF1F51000FFF1FF0043749E2626216912A9B936BEC007EC092833BB892FD5A1",
+              "Icarus:     2A51F40D206A3AC01A50DF1F51000FFF1F_0043749E2626216912A9B936BEC007EC092833BB892F55A1",
+              "Diff:                                         ^                                            ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 276,
+      "verilator": {
+        "IN": "EB4786F3E82BF5625FE26C2DAC9EA344EB117C57846091D63416A1F16536C598",
+        "OUT": "1A38F545304000A95A512D0D510003FF730A1C552B5BDF5BBEBB80E407CFCC00EA00C2CC3EB292FD779",
+        "IN_norm": "EB4786F3E82BF5625FE26C2DAC9EA344EB117C57846091D63416A1F16536C598",
+        "OUT_norm": "1A38F545304000A95A512D0D510003FF730A1C552B5BDF5BBEBB80E407CFCC00EA00C2CC3EB292FD779"
+      },
+      "icarus": {
+        "IN": "EB4786F3E82BF5625FE26C2DAC9EA344EB117C57846091D63416A1F16536C598",
+        "OUT": "1A38F545304000AX5A512D0D510003FF73XX1C552B5BDF5BBEBB80E407CFCC00EA00C2CC3EB292F5779",
+        "IN_norm": "EB4786F3E82BF5625FE26C2DAC9EA344EB117C57846091D63416A1F16536C598",
+        "OUT_norm": "1A38F545304000AX5A512D0D510003FF73XX1C552B5BDF5BBEBB80E407CFCC00EA00C2CC3EB292F5779"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 15,
+            "verilator": "9",
+            "icarus": "X"
+          },
+          {
+            "position": 34,
+            "verilator": "0",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "A",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 79,
+            "verilator": "D",
+            "icarus": "5"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 1 real differences and 3 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "1A38F545304000A95A512D0D510003FF730A1C552B5BDF5BBEBB80E407CFCC00EA00C2CC3EB292FD779",
+          "icarus_x_removed": "1A38F545304000A_5A512D0D510003FF73__1C552B5BDF5BBEBB80E407CFCC00EA00C2CC3EB292F5779",
+          "visual_diff": {
+            "verilator_aligned": "1A38F545304000A95A512D0D510003FF730A1C552B5BDF5BBEBB80E407CFCC00EA00C2CC3EB292FD779",
+            "icarus_aligned": "1A38F545304000A_5A512D0D510003FF73__1C552B5BDF5BBEBB80E407CFCC00EA00C2CC3EB292F5779",
+            "diff_markers": "               ^                  ^^                                           ^   ",
+            "formatted_diff": "Verilator:  1A38F545304000A95A512D0D510003FF730A1C552B5BDF5BBEBB80E407CFCC00EA00C2CC3EB292FD779\nIcarus:     1A38F545304000A_5A512D0D510003FF73__1C552B5BDF5BBEBB80E407CFCC00EA00C2CC3EB292F5779\nDiff:                      ^                  ^^                                           ^   ",
+            "formatted_lines": [
+              "Verilator:  1A38F545304000A95A512D0D510003FF730A1C552B5BDF5BBEBB80E407CFCC00EA00C2CC3EB292FD779",
+              "Icarus:     1A38F545304000A_5A512D0D510003FF73__1C552B5BDF5BBEBB80E407CFCC00EA00C2CC3EB292F5779",
+              "Diff:                      ^                  ^^                                           ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 277,
+      "verilator": {
+        "IN": "6CAAE16B1922CEBA2B61F3E52B7D16DC05C99F4FEC5805AEE7269E290B84AFB0",
+        "OUT": "25599C7D202001211A520E0E018001FF1FC6003749E464641E99AA9A3F6E7800D680D8C1296852FD5ED",
+        "IN_norm": "6CAAE16B1922CEBA2B61F3E52B7D16DC05C99F4FEC5805AEE7269E290B84AFB0",
+        "OUT_norm": "25599C7D202001211A520E0E018001FF1FC6003749E464641E99AA9A3F6E7800D680D8C1296852FD5ED"
+      },
+      "icarus": {
+        "IN": "6CAAE16B1922CEBA2B61F3E52B7D16DC05C99F4FEC5805AEE7269E290B84AFB0",
+        "OUT": "25599C7D202001211A520E0E018001FF1FC6003749E464641E99AA9A3F6E7800D680D8C1296852F55ED",
+        "IN_norm": "6CAAE16B1922CEBA2B61F3E52B7D16DC05C99F4FEC5805AEE7269E290B84AFB0",
+        "OUT_norm": "25599C7D202001211A520E0E018001FF1FC6003749E464641E99AA9A3F6E7800D680D8C1296852F55ED"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 79,
+            "verilator": "D",
+            "icarus": "5"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 1 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "25599C7D202001211A520E0E018001FF1FC6003749E464641E99AA9A3F6E7800D680D8C1296852FD5ED",
+          "icarus_x_removed": "25599C7D202001211A520E0E018001FF1FC6003749E464641E99AA9A3F6E7800D680D8C1296852F55ED",
+          "visual_diff": {
+            "verilator_aligned": "25599C7D202001211A520E0E018001FF1FC6003749E464641E99AA9A3F6E7800D680D8C1296852FD5ED",
+            "icarus_aligned": "25599C7D202001211A520E0E018001FF1FC6003749E464641E99AA9A3F6E7800D680D8C1296852F55ED",
+            "diff_markers": "                                                                               ^   ",
+            "formatted_diff": "Verilator:  25599C7D202001211A520E0E018001FF1FC6003749E464641E99AA9A3F6E7800D680D8C1296852FD5ED\nIcarus:     25599C7D202001211A520E0E018001FF1FC6003749E464641E99AA9A3F6E7800D680D8C1296852F55ED\nDiff:                                                                                      ^   ",
+            "formatted_lines": [
+              "Verilator:  25599C7D202001211A520E0E018001FF1FC6003749E464641E99AA9A3F6E7800D680D8C1296852FD5ED",
+              "Icarus:     25599C7D202001211A520E0E018001FF1FC6003749E464641E99AA9A3F6E7800D680D8C1296852F55ED",
+              "Diff:                                                                                      ^   "
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 278,
+      "verilator": {
+        "IN": "C7E012E339407B126FE3BA9DFF136574961429478A9F1C86ED42E961D932C4C8",
+        "OUT": "3F35101530050540D5502B0B513818F855990455298A0A0A56D500E3ACD8AA0042A048F83B0312FD70D",
+        "IN_norm": "C7E012E339407B126FE3BA9DFF136574961429478A9F1C86ED42E961D932C4C8",
+        "OUT_norm": "3F35101530050540D5502B0B513818F855990455298A0A0A56D500E3ACD8AA0042A048F83B0312FD70D"
+      },
+      "icarus": {
+        "IN": "C7E012E339407B126FE3BA9DFF136574961429478A9F1C86ED42E961D932C4C8",
+        "OUT": "3F35101530XXXXXXDX50XBXB513818F855XX0455298A0AXXX6XX00XXACD8AA0042A048F83B0312F5XXX",
+        "IN_norm": "C7E012E339407B126FE3BA9DFF136574961429478A9F1C86ED42E961D932C4C8",
+        "OUT_norm": "3F35101530XXXXXXDX50XBXB513818F855XX0455298A0AXXX6XX00XXACD8AA0042A048F83B0312F5XXX"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": true,
+        "has_real_differences": true,
+        "x_positions": [
+          {
+            "position": 10,
+            "verilator": "0",
+            "icarus": "X"
+          },
+          {
+            "position": 11,
+            "verilator": "5",
+            "icarus": "X"
+          },
+          {
+            "position": 12,
+            "verilator": "0",
+            "icarus": "X"
+          },
+          {
+            "position": 13,
+            "verilator": "5",
+            "icarus": "X"
+          },
+          {
+            "position": 14,
+            "verilator": "4",
+            "icarus": "X"
+          },
+          {
+            "position": 15,
+            "verilator": "0",
+            "icarus": "X"
+          },
+          {
+            "position": 17,
+            "verilator": "5",
+            "icarus": "X"
+          },
+          {
+            "position": 20,
+            "verilator": "2",
+            "icarus": "X"
+          },
+          {
+            "position": 22,
+            "verilator": "0",
+            "icarus": "X"
+          },
+          {
+            "position": 34,
+            "verilator": "9",
+            "icarus": "X"
+          },
+          {
+            "position": 35,
+            "verilator": "9",
+            "icarus": "X"
+          },
+          {
+            "position": 46,
+            "verilator": "0",
+            "icarus": "X"
+          },
+          {
+            "position": 47,
+            "verilator": "A",
+            "icarus": "X"
+          },
+          {
+            "position": 48,
+            "verilator": "5",
+            "icarus": "X"
+          },
+          {
+            "position": 50,
+            "verilator": "D",
+            "icarus": "X"
+          },
+          {
+            "position": 51,
+            "verilator": "5",
+            "icarus": "X"
+          },
+          {
+            "position": 54,
+            "verilator": "E",
+            "icarus": "X"
+          },
+          {
+            "position": 55,
+            "verilator": "3",
+            "icarus": "X"
+          },
+          {
+            "position": 80,
+            "verilator": "7",
+            "icarus": "X"
+          },
+          {
+            "position": 81,
+            "verilator": "0",
+            "icarus": "X"
+          },
+          {
+            "position": 82,
+            "verilator": "D",
+            "icarus": "X"
+          }
+        ],
+        "real_differences": [
+          {
+            "position": 79,
+            "verilator": "D",
+            "icarus": "5"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Mixed differences: 1 real differences and 21 X-value differences",
+        "x_removed_comparison": {
+          "verilator_x_removed": "3F35101530050540D5502B0B513818F855990455298A0A0A56D500E3ACD8AA0042A048F83B0312FD70D",
+          "icarus_x_removed": "3F35101530______D_50_B_B513818F855__0455298A0A___6__00__ACD8AA0042A048F83B0312F5___",
+          "visual_diff": {
+            "verilator_aligned": "3F35101530050540D5502B0B513818F855990455298A0A0A56D500E3ACD8AA0042A048F83B0312FD70D",
+            "icarus_aligned": "3F35101530______D_50_B_B513818F855__0455298A0A___6__00__ACD8AA0042A048F83B0312F5___",
+            "diff_markers": "          ^^^^^^ ^  ^ ^           ^^          ^^^ ^^  ^^                       ^^^^",
+            "formatted_diff": "Verilator:  3F35101530050540D5502B0B513818F855990455298A0A0A56D500E3ACD8AA0042A048F83B0312FD70D\nIcarus:     3F35101530______D_50_B_B513818F855__0455298A0A___6__00__ACD8AA0042A048F83B0312F5___\nDiff:                 ^^^^^^ ^  ^ ^           ^^          ^^^ ^^  ^^                       ^^^^",
+            "formatted_lines": [
+              "Verilator:  3F35101530050540D5502B0B513818F855990455298A0A0A56D500E3ACD8AA0042A048F83B0312FD70D",
+              "Icarus:     3F35101530______D_50_B_B513818F855__0455298A0A___6__00__ACD8AA0042A048F83B0312F5___",
+              "Diff:                 ^^^^^^ ^  ^ ^           ^^          ^^^ ^^  ^^                       ^^^^"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "cycle": 286,
+      "verilator": {
+        "IN": "6AD4DAA310F089D24EA3CC5D84E5A634AE37F507AA87BF462E315F21F51E7988",
+        "OUT": "169CF071B015157015526181F970040473080154289BFD1BFEFFD4E2AC992A0298003EC83EB68BD207D",
+        "IN_norm": "6AD4DAA310F089D24EA3CC5D84E5A634AE37F507AA87BF462E315F21F51E7988",
+        "OUT_norm": "169CF071B015157015526181F970040473080154289BFD1BFEFFD4E2AC992A0298003EC83EB68BD207D"
+      },
+      "icarus": {
+        "IN": "6AD4DAA310F089D24EA3CC5D84E5A634AE37F507AA87BF462E315F21F51E7988",
+        "OUT": "169CF071B015157015526181F970040473080154289BFD1BFEFFD4E2AC992A0298003EC83EB68BCA07D",
+        "IN_norm": "6AD4DAA310F089D24EA3CC5D84E5A634AE37F507AA87BF462E315F21F51E7988",
+        "OUT_norm": "169CF071B015157015526181F970040473080154289BFD1BFEFFD4E2AC992A0298003EC83EB68BCA07D"
+      },
+      "in_match": true,
+      "out_match": false,
+      "exact_in_match": true,
+      "exact_out_match": false,
+      "x_filtered": true,
+      "difference_analysis": {
+        "has_x_differences": false,
+        "has_real_differences": true,
+        "x_positions": [],
+        "real_differences": [
+          {
+            "position": 78,
+            "verilator": "D",
+            "icarus": "C"
+          },
+          {
+            "position": 79,
+            "verilator": "2",
+            "icarus": "A"
+          }
+        ],
+        "total_positions": 83,
+        "explanation": "Real simulator differences at 2 positions",
+        "x_removed_comparison": {
+          "verilator_x_removed": "169CF071B015157015526181F970040473080154289BFD1BFEFFD4E2AC992A0298003EC83EB68BD207D",
+          "icarus_x_removed": "169CF071B015157015526181F970040473080154289BFD1BFEFFD4E2AC992A0298003EC83EB68BCA07D",
+          "visual_diff": {
+            "verilator_aligned": "169CF071B015157015526181F970040473080154289BFD1BFEFFD4E2AC992A0298003EC83EB68BD207D",
+            "icarus_aligned": "169CF071B015157015526181F970040473080154289BFD1BFEFFD4E2AC992A0298003EC83EB68BCA07D",
+            "diff_markers": "                                                                              ^^   ",
+            "formatted_diff": "Verilator:  169CF071B015157015526181F970040473080154289BFD1BFEFFD4E2AC992A0298003EC83EB68BD207D\nIcarus:     169CF071B015157015526181F970040473080154289BFD1BFEFFD4E2AC992A0298003EC83EB68BCA07D\nDiff:                                                                                     ^^   ",
+            "formatted_lines": [
+              "Verilator:  169CF071B015157015526181F970040473080154289BFD1BFEFFD4E2AC992A0298003EC83EB68BD207D",
+              "Icarus:     169CF071B015157015526181F970040473080154289BFD1BFEFFD4E2AC992A0298003EC83EB68BCA07D",
+              "Diff:                                                                                     ^^   "
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "total_differences": 57,
+  "affected_cycles": [
+    16,
+    17,
+    18,
+    23,
+    24,
+    25,
+    26,
+    37,
+    38,
+    44,
+    45,
+    49,
+    75,
+    76,
+    87,
+    88,
+    89,
+    90,
+    91,
+    99,
+    100,
+    107,
+    127,
+    136,
+    137,
+    154,
+    155,
+    161,
+    162,
+    163,
+    164,
+    167,
+    168,
+    169,
+    170,
+    173,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    187,
+    198,
+    207,
+    236,
+    237,
+    239,
+    243,
+    267,
+    268,
+    271,
+    275,
+    276,
+    277,
+    278,
+    286
+  ]
+}

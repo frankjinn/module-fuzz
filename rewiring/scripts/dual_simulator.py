@@ -608,7 +608,8 @@ def save_bug_report(cycle_dir: Path,
                    seed: int,
                    differences: List[Dict],
                    verilator_summary: Dict,
-                   icarus_summary: Dict) -> Path:
+                   icarus_summary: Dict,
+                   base_seed: int = None) -> Path:
     """
     Save a detailed bug report when simulators produce different results.
     
@@ -636,6 +637,7 @@ def save_bug_report(cycle_dir: Path,
     bug_report = {
         "bug_id": bug_id,
         "timestamp": timestamp,
+        "base_seed": base_seed,
         "seed": seed,
         "cycle_info": {
             "cycle_number": cycle_info["cycle_number"],
@@ -690,7 +692,8 @@ def run_dual_simulation(verilator_bin: str,
                        extra_sv: list[Path],
                        verilator_flags: list[str],
                        iverilog_flags: list[str],
-                       seed: int) -> Tuple[bool, Optional[Path]]:
+                       seed: int,
+                       base_seed: int = None) -> Tuple[bool, Optional[Path]]:
     """
     Run both Verilator and Icarus Verilog simulations and compare results.
     
@@ -749,7 +752,7 @@ def run_dual_simulation(verilator_bin: str,
         
         # Save bug report
         bug_report_path = save_bug_report(
-            cycle_dir, seed, differences, verilator_summary, icarus_summary
+            cycle_dir, seed, differences, verilator_summary, icarus_summary, base_seed
         )
         
         return True, bug_report_path

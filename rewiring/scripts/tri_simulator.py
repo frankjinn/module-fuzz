@@ -546,6 +546,7 @@ def arbitrate_disagreement(differences: List[Dict]) -> Dict:
 
 def save_tri_bug_report(cycle_dir: Path,
                        seed: int,
+                       base_seed: int,
                        agreement_status: Dict,
                        differences: List[Dict],
                        arbitration: Dict,
@@ -578,6 +579,7 @@ def save_tri_bug_report(cycle_dir: Path,
     bug_report = {
         "bug_id": bug_id,
         "timestamp": timestamp,
+        "base_seed": base_seed,
         "seed": seed,
         "bug_type": "three_way_comparison",
         "cycle_info": {
@@ -688,7 +690,8 @@ def run_tri_simulation(verilator_bin: str,
                       verilator_flags: list[str],
                       iverilog_flags: list[str],
                       cxxrtl_flags: list[str],
-                      seed: int) -> Tuple[Optional[bool], Optional[Path], Optional[Dict]]:
+                      seed: int,
+                      base_seed: int = None) -> Tuple[Optional[bool], Optional[Path], Optional[Dict]]:
     """
     Run all three simulators and compare results with arbitration.
     
@@ -778,7 +781,7 @@ def run_tri_simulation(verilator_bin: str,
             
             # Save bug report
             bug_report_path = save_tri_bug_report(
-                cycle_dir, seed, agreement_status, differences, arbitration,
+                cycle_dir, seed, base_seed, agreement_status, differences, arbitration,
                 verilator_summary, icarus_summary, cxxrtl_summary
             )
             
@@ -815,7 +818,7 @@ def run_tri_simulation(verilator_bin: str,
             }
             
             bug_report_path = save_bug_report(
-                cycle_dir, seed, differences, verilator_summary, icarus_summary
+                cycle_dir, seed, differences, verilator_summary, icarus_summary, base_seed
             )
             
             return True, bug_report_path, {"verdict": "CXXRTL unavailable - dual comparison only"}

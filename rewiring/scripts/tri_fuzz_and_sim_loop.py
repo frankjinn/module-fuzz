@@ -326,8 +326,19 @@ def main():
     max_consecutive_failures = 10
     bugs_found = 0
     
+    # Generate explicit base seed if not provided
+    if args.seed is None:
+        base_seed = random.randint(0, 2**32 - 1)
+    else:
+        base_seed = args.seed
+    
+    # Save base seed to output directory for reproducibility
+    seed_file = base_out / "base_seed.txt"
+    with open(seed_file, 'w') as f:
+        f.write(f"{base_seed}\n")
+    
     # Initialize random number generator
-    rng = random.Random(args.seed)
+    rng = random.Random(base_seed)
     
     # Bug tracking with arbitration results
     bug_summary = []
@@ -339,7 +350,7 @@ def main():
     }
     
     if not args.quiet:
-        print(f"[TriLoop] Base seed: {args.seed}")
+        print(f"[TriLoop] Base seed: {base_seed}")
         if cycles_target:
             print(f"[TriLoop] Will run {cycles_target} cycle(s).")
         print(f"[TriLoop] Mut/Cycle: {args.mutations_per_cycle} | Check every: {args.check_every} | TB cycles: {args.tb_cycles}")
@@ -441,7 +452,7 @@ def main():
                             verilator_bin, iverilog_bin, vvp_bin,
                             yosys_bin, yosys_config_bin,
                             cycle_dir, args.top_name, tb_name, extra_sv,
-                            verilator_flags, icarus_flags, cxxrtl_flags, seed
+                            verilator_flags, icarus_flags, cxxrtl_flags, seed, base_seed
                         )
                     else:
                         # Fall back to dual simulation
@@ -449,7 +460,7 @@ def main():
                         bug_found, bug_report_path = run_dual_simulation(
                             verilator_bin, iverilog_bin, vvp_bin,
                             cycle_dir, args.top_name, tb_name, extra_sv,
-                            verilator_flags, icarus_flags, seed
+                            verilator_flags, icarus_flags, seed, base_seed
                         )
                         arbitration = {"verdict": "Dual simulation mode - CXXRTL not available"}
                     
@@ -502,7 +513,7 @@ def main():
                 # Persist stats
                 summary = {
                     "cycle": cycle_idx,
-                    "base_seed": args.seed,
+                    "base_seed": base_seed,
                     "seed": seed,
                     "mutations_requested": args.mutations_per_cycle,
                     "mutations_done": int(total_done),
@@ -608,7 +619,7 @@ def main():
         bug_summary_file = base_out / "bug_summary.json"
         with bug_summary_file.open("w") as f:
             json.dump({
-                "base_seed": args.seed,
+                "base_seed": base_seed,
                 "total_cycles": cycle_idx,
                 "total_bugs": bugs_found,
                 "bug_rate_percent": bugs_found/cycle_idx*100 if cycle_idx > 0 else 0,

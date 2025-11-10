@@ -1,0 +1,27 @@
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = "C.UTF-8",
+	LANG = "en_US.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to the standard locale ("C").
+%Warning-UNOPTFLAT: /opt/module-fuzz/rewiring/large_test/cycle_0047/top.sv:46:12: Signal unoptimizable: Circular combinational logic: 'tb_top.dut.partselect_wrapper_out_flat'
+   46 | wire [8:0] partselect_wrapper_out_flat;
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    ... For warning description see https://verilator.org/warn/UNOPTFLAT?v=5.033
+                    ... Use "/* verilator lint_off UNOPTFLAT */" and lint_on around source to disable this message.
+                    /opt/module-fuzz/rewiring/large_test/cycle_0047/top.sv:46:12:      Example path: tb_top.dut.partselect_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/large_test/cycle_0047/top.sv:383:68:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/large_test/cycle_0047/top.sv:23:13:      Example path: tb_top.dut.const_arith_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/const_arith_wrapper.sv:20:14:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/large_test/cycle_0047/top.sv:24:13:      Example path: tb_top.dut.const_arith_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/large_test/cycle_0047/top.sv:365:71:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/large_test/cycle_0047/top.sv:15:13:      Example path: tb_top.dut.bitwise_logic_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/bitwise_logic_wrapper.sv:18:14:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/large_test/cycle_0047/top.sv:16:13:      Example path: tb_top.dut.bitwise_logic_wrapper_out_flat
+                    /opt/module-fuzz/rewiring/large_test/cycle_0047/top.sv:346:71:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/large_test/cycle_0047/top.sv:45:13:      Example path: tb_top.dut.partselect_wrapper_in_flat
+                    /opt/module-fuzz/rewiring/../test_libraries/comprehensive_tests/flattened/partselect_wrapper.sv:18:8:      Example path: ASSIGNW
+                    /opt/module-fuzz/rewiring/large_test/cycle_0047/top.sv:46:12:      Example path: tb_top.dut.partselect_wrapper_out_flat
+%Error: Exiting due to 1 warning(s)
