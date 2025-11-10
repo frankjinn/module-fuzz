@@ -339,6 +339,7 @@ def main():
     }
     
     if not args.quiet:
+        print(f"[TriLoop] Base seed: {args.seed}")
         if cycles_target:
             print(f"[TriLoop] Will run {cycles_target} cycle(s).")
         print(f"[TriLoop] Mut/Cycle: {args.mutations_per_cycle} | Check every: {args.check_every} | TB cycles: {args.tb_cycles}")
@@ -501,6 +502,7 @@ def main():
                 # Persist stats
                 summary = {
                     "cycle": cycle_idx,
+                    "base_seed": args.seed,
                     "seed": seed,
                     "mutations_requested": args.mutations_per_cycle,
                     "mutations_done": int(total_done),
@@ -606,6 +608,7 @@ def main():
         bug_summary_file = base_out / "bug_summary.json"
         with bug_summary_file.open("w") as f:
             json.dump({
+                "base_seed": args.seed,
                 "total_cycles": cycle_idx,
                 "total_bugs": bugs_found,
                 "bug_rate_percent": bugs_found/cycle_idx*100 if cycle_idx > 0 else 0,
