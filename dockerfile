@@ -6,7 +6,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     ca-certificates curl git make autoconf gcc g++ flex bison help2man \
     perl perl-doc libfl2 libfl-dev ccache numactl libgoogle-perftools-dev \
     pkg-config python3 python-is-python3 gperf \
-    lcov gcovr pip
+    lcov gcovr pip \
+    libreadline-dev zlib1g-dev tcl-dev libffi-dev graphviz xdot
 
 RUN pip install gcovr
 
@@ -15,45 +16,30 @@ WORKDIR /opt
 
 RUN git clone https://github.com/frankjinn/module-fuzz /opt/module-fuzz && \
     git clone https://github.com/frankjinn/verilator_LLM_Fuzzer /opt/verilator && \
-    git clone https://github.com/steveicarus/iverilog /opt/iverilog
+    git clone https://github.com/steveicarus/iverilog /opt/iverilog && \
+    git clone https://github.com/YosysHQ/yosys.git /opt/yosys
 
-
-#Instrumentation flags
+# Set basic compiler environment (no instrumentation yet)
 ENV CC=gcc
 ENV CXX=g++
-ENV CFLAGS=" -fprofile-arcs -ftest-coverage"
-ENV CXXFLAGS=" -fprofile-arcs -ftest-coverage"
-ENV LFLAGS="--coverage"
-ENV VERILATOR_ROOT="/opt/verilator"
 
-# Build instrumented Verilator with coverage support
-WORKDIR /opt/verilator
-RUN autoconf && \
-    ./configure
-RUN make -j `nproc`
-
-ENV PATH="/opt/verilator/bin:${PATH}"
-
-# Build iverilog (without coverage instrumentation to avoid conflicts)
+# Build Icarus Verilog first (without coverage instrumentation)
 WORKDIR /opt/iverilog
-RUN unset CFLAGS CXXFLAGS LFLAGS && \
-    sh autoconf.sh && \
+RUN sh autoconf.sh && \
     ./configure --prefix=/opt/iverilog
-RUN unset CFLAGS CXXFLAGS LFLAGS && make -j `nproc`
+RUN make -j `nproc`
 RUN make install
 
 # Add iverilog to PATH
 ENV PATH="/opt/iverilog/bin:${PATH}"
 
-# Install Yosys for CXXRTL backend (third simulator)
+# Build Yosys for CXXRTL backend (third simulator)
 # Yosys with CXXRTL provides a fast, open-source cycle-based simulator for arbitration
-WORKDIR /opt
-RUN git clone https://github.com/YosysHQ/yosys.git /opt/yosys
-
-# Build Yosys (without coverage instrumentation)
 WORKDIR /opt/yosys
-RUN unset CFLAGS CXXFLAGS LFLAGS && \
-    make config-gcc && \
+# Initialize git submodules (needed for ABC and other dependencies)
+RUN git submodule update --init --recursive
+# Build Yosys
+RUN make config-gcc && \
     make -j `nproc`
 RUN make install
 
@@ -66,10 +52,19 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     clang libclang-dev && \
     rm -rf /var/lib/apt/lists/*
 
-# Reinstate coverage instrumentation flags for Verilator coverage generation
+# Now set coverage instrumentation flags for Verilator
 ENV CFLAGS=" -fprofile-arcs -ftest-coverage"
 ENV CXXFLAGS=" -fprofile-arcs -ftest-coverage"
 ENV LFLAGS="--coverage"
+ENV VERILATOR_ROOT="/opt/verilator"
+
+# Build instrumented Verilator with coverage support (built LAST)
+WORKDIR /opt/verilator
+RUN autoconf && \
+    ./configure
+RUN make -j `nproc`
+
+ENV PATH="/opt/verilator/bin:${PATH}"
 
 # Needed to run gcovr
 WORKDIR /opt/verilator/src
