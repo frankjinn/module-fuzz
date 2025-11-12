@@ -438,9 +438,9 @@ def compare_three_simulators(verilator_log: Path,
                 likely_bug_in = "unknown"
             
             # Create visual diffs for all pairwise comparisons
-            visual_diff_v_i = create_visual_diff(v_data["OUT"], i_data["OUT"])
-            visual_diff_v_m = create_visual_diff(v_data["OUT"], m_data["OUT"])
-            visual_diff_i_m = create_visual_diff(i_data["OUT"], m_data["OUT"])
+            visual_diff_v_i = create_visual_diff(v_data["OUT"], i_data["OUT"], "verilator", "icarus")
+            visual_diff_v_m = create_visual_diff(v_data["OUT"], m_data["OUT"], "verilator", "cxxrtl")
+            visual_diff_i_m = create_visual_diff(i_data["OUT"], m_data["OUT"], "icarus", "cxxrtl")
             
             differences.append({
                 "cycle": cycle,

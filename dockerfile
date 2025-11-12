@@ -7,14 +7,18 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     perl perl-doc libfl2 libfl-dev ccache numactl libgoogle-perftools-dev \
     pkg-config python3 python-is-python3 gperf \
     lcov gcovr pip \
-    libreadline-dev zlib1g-dev tcl-dev libffi-dev graphviz xdot
+    libreadline-dev zlib1g-dev tcl-dev libffi-dev graphviz xdot \
+    ninja-build desktop-file-utils libgtk-3-dev libgtk-4-dev \
+    build-essential \
+    libbz2-dev libjudy-dev libgirepository1.0-dev cmake
 
-RUN pip install gcovr
+RUN pip install meson
 
 # Workspace under /opt
 WORKDIR /opt
 
 RUN git clone https://github.com/frankjinn/module-fuzz /opt/module-fuzz && \
+    git clone https://github.com/gtkwave/gtkwave.git /opt/gtkwave && \
     git clone https://github.com/frankjinn/verilator_LLM_Fuzzer /opt/verilator && \
     git clone https://github.com/steveicarus/iverilog /opt/iverilog && \
     git clone https://github.com/YosysHQ/yosys.git /opt/yosys
@@ -83,3 +87,8 @@ RUN mkdir -p /opt/coverage
 
 EXPOSE 8888
 CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root", "--NotebookApp.token="]
+
+WORKDIR /opt/gtkwave
+RUN meson setup build 
+WORKDIR /opt/gtkwave/build
+RUN meson install
