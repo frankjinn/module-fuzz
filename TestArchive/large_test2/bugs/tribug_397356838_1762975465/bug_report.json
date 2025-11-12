@@ -1,0 +1,2520 @@
+{
+  "bug_id": "tribug_397356838_1762975465",
+  "timestamp": 1762975465,
+  "base_seed": 1663257571,
+  "seed": 397356838,
+  "bug_type": "three_way_comparison",
+  "cycle_info": {
+    "cycle_number": 5,
+    "cycle_directory": "large_test2/cycle_0005",
+    "preserved_in_bug_folder": true
+  },
+  "test_files": {
+    "top_sv": "large_test2/bugs/tribug_397356838_1762975465/top.sv",
+    "testbench_sv": "large_test2/bugs/tribug_397356838_1762975465/tb_top.sv"
+  },
+  "location_info": {
+    "modules_instantiated": [
+      {
+        "module_type": "arithmetic_reduce_wrapper",
+        "instance_name": "u_arithmetic_reduce_wrapper",
+        "full_name": "arithmetic_reduce_wrapper"
+      },
+      {
+        "module_type": "array_wrapper",
+        "instance_name": "u_array_wrapper",
+        "full_name": "array_wrapper"
+      },
+      {
+        "module_type": "bitwise_logic_wrapper",
+        "instance_name": "u_bitwise_logic_wrapper",
+        "full_name": "bitwise_logic_wrapper"
+      },
+      {
+        "module_type": "bitwise_reduce_wrapper",
+        "instance_name": "u_bitwise_reduce_wrapper",
+        "full_name": "bitwise_reduce_wrapper"
+      },
+      {
+        "module_type": "cast_wrapper",
+        "instance_name": "u_cast_wrapper",
+        "full_name": "cast_wrapper"
+      },
+      {
+        "module_type": "conditional_wrapper",
+        "instance_name": "u_conditional_wrapper",
+        "full_name": "conditional_wrapper"
+      },
+      {
+        "module_type": "const_arith_wrapper",
+        "instance_name": "u_const_arith_wrapper",
+        "full_name": "const_arith_wrapper"
+      },
+      {
+        "module_type": "const_compare_wrapper",
+        "instance_name": "u_const_compare_wrapper",
+        "full_name": "const_compare_wrapper"
+      },
+      {
+        "module_type": "const_concat_repl_wrapper",
+        "instance_name": "u_const_concat_repl_wrapper",
+        "full_name": "const_concat_repl_wrapper"
+      },
+      {
+        "module_type": "const_conditional_wrapper",
+        "instance_name": "u_const_conditional_wrapper",
+        "full_name": "const_conditional_wrapper"
+      },
+      {
+        "module_type": "const_logic_wrapper",
+        "instance_name": "u_const_logic_wrapper",
+        "full_name": "const_logic_wrapper"
+      },
+      {
+        "module_type": "const_nested_wrapper",
+        "instance_name": "u_const_nested_wrapper",
+        "full_name": "const_nested_wrapper"
+      },
+      {
+        "module_type": "const_partselect_wrapper",
+        "instance_name": "u_const_partselect_wrapper",
+        "full_name": "const_partselect_wrapper"
+      },
+      {
+        "module_type": "const_reduce_wrapper",
+        "instance_name": "u_const_reduce_wrapper",
+        "full_name": "const_reduce_wrapper"
+      },
+      {
+        "module_type": "const_shift_wrapper",
+        "instance_name": "u_const_shift_wrapper",
+        "full_name": "const_shift_wrapper"
+      },
+      {
+        "module_type": "logical_op_wrapper",
+        "instance_name": "u_logical_op_wrapper",
+        "full_name": "logical_op_wrapper"
+      },
+      {
+        "module_type": "numbers_concat_repl_wrapper",
+        "instance_name": "u_numbers_concat_repl_wrapper",
+        "full_name": "numbers_concat_repl_wrapper"
+      },
+      {
+        "module_type": "partselect_wrapper",
+        "instance_name": "u_partselect_wrapper",
+        "full_name": "partselect_wrapper"
+      },
+      {
+        "module_type": "relational_wrapper",
+        "instance_name": "u_relational_wrapper",
+        "full_name": "relational_wrapper"
+      },
+      {
+        "module_type": "select_wrapper",
+        "instance_name": "u_select_wrapper",
+        "full_name": "select_wrapper"
+      },
+      {
+        "module_type": "shift_wrapper",
+        "instance_name": "u_shift_wrapper",
+        "full_name": "shift_wrapper"
+      },
+      {
+        "module_type": "width_enum_wrapper",
+        "instance_name": "u_width_enum_wrapper",
+        "full_name": "width_enum_wrapper"
+      },
+      {
+        "module_type": "width_logic_wrapper",
+        "instance_name": "u_width_logic_wrapper",
+        "full_name": "width_logic_wrapper"
+      },
+      {
+        "module_type": "width_struct_wrapper",
+        "instance_name": "u_width_struct_wrapper",
+        "full_name": "width_struct_wrapper"
+      },
+      {
+        "module_type": "width_union_wrapper",
+        "instance_name": "u_width_union_wrapper",
+        "full_name": "width_union_wrapper"
+      }
+    ],
+    "total_modules": 25,
+    "wire_connections": 50
+  },
+  "simulation_results": {
+    "verilator": {
+      "simulator": "Verilator",
+      "build_ok": true,
+      "run_ok": true,
+      "return_code": 0,
+      "log_file": "large_test2/cycle_0005/sim.log",
+      "top_name": "top"
+    },
+    "icarus": {
+      "simulator": "Icarus Verilog",
+      "build_ok": true,
+      "run_ok": true,
+      "return_code": 0,
+      "log_file": "large_test2/cycle_0005/icarus_sim.log",
+      "top_name": "top"
+    },
+    "cxxrtl": {
+      "simulator": "CXXRTL",
+      "build_ok": true,
+      "run_ok": true,
+      "return_code": 0,
+      "log_file": "large_test2/cycle_0005/cxxrtl_sim.log",
+      "top_name": "top"
+    }
+  },
+  "agreement_status": {
+    "counts": {
+      "all_three": 142,
+      "verilator_icarus": 28,
+      "verilator_cxxrtl": 5,
+      "icarus_cxxrtl": 0,
+      "all_differ": 7,
+      "x_only_differences": 120
+    },
+    "total_cycles": 302,
+    "disagreement_cycles": 40,
+    "agreement_rate": 47.019867549668874
+  },
+  "arbitration": {
+    "total_disagreements": 40,
+    "verilator_likely_correct": 33,
+    "icarus_likely_correct": 23,
+    "cxxrtl_likely_correct": -23,
+    "unclear_cases": 7,
+    "verdict": "verilator is likely correct",
+    "confidence": "high"
+  },
+  "differences": [
+    {
+      "cycle": 6,
+      "verilator": {
+        "IN": "10925326D34464A8C2AF4A510D05958FA4C0D8DE37DDC2CF36408FF8D1BBB5ABF8",
+        "OUT": "C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA133929ACDFFF"
+      },
+      "icarus": {
+        "IN": "10925326D34464A8C2AF4A510D05958FA4C0D8DE37DDC2CF36408FF8D1BBB5ABF8",
+        "OUT": "C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA13392A2CDFFF"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA133929ACDFFF"
+      },
+      "matches": {
+        "verilator_icarus": false,
+        "verilator_cxxrtl": true,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA133929ACDFFF",
+          "icarus_aligned": "C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA13392A2CDFFF",
+          "diff_markers": "                                                                           ^^     ",
+          "formatted_diff": "Verilator: C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA133929ACDFFF\nIcarus:    C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA13392A2CDFFF\nDiff:                                                                                 ^^     ",
+          "formatted_lines": [
+            "Verilator: C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA133929ACDFFF",
+            "Icarus:    C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA13392A2CDFFF",
+            "Diff:                                                                                 ^^     "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA133929ACDFFF",
+          "cxxrtl_aligned": "C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA133929ACDFFF",
+          "diff_markers": "                                                                                  ",
+          "formatted_diff": "Verilator: C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA133929ACDFFF\nCxxrtl:    C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA133929ACDFFF\nDiff:                                                                                        ",
+          "formatted_lines": [
+            "Verilator: C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA133929ACDFFF",
+            "Cxxrtl:    C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA133929ACDFFF",
+            "Diff:                                                                                        "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA13392A2CDFFF",
+          "cxxrtl_aligned": "C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA133929ACDFFF",
+          "diff_markers": "                                                                           ^^     ",
+          "formatted_diff": "Icarus:    C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA13392A2CDFFF\nCxxrtl:    C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA133929ACDFFF\nDiff:                                                                                 ^^     ",
+          "formatted_lines": [
+            "Icarus:    C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA13392A2CDFFF",
+            "Cxxrtl:    C440629204804D21A510B8BFE80000072EA08EE33323B30060054E255E92A011E600EA133929ACDFFF",
+            "Diff:                                                                                 ^^     "
+          ]
+        }
+      },
+      "ground_truth": "verilator_cxxrtl",
+      "likely_bug_in": "icarus"
+    },
+    {
+      "cycle": 33,
+      "verilator": {
+        "IN": "3F89323D5EF88D2699C12753E027DA5DE30CD912121CB44D9DDF4E64747C6FC447",
+        "OUT": "340FE919301007EE9A6E9A1A02801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E03D2023D"
+      },
+      "icarus": {
+        "IN": "3F89323D5EF88D2699C12753E027DA5DE30CD912121CB44D9DDF4E64747C6FC447",
+        "OUT": "240FE91A201007EE9A4E9A1A01801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E03523A3D"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "340FE919301007EE9A6E9A1A02801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E0000023D"
+      },
+      "matches": {
+        "verilator_icarus": false,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "340FE919301007EE9A6E9A1A02801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E03D2023D",
+          "icarus_aligned": "240FE91A201007EE9A4E9A1A01801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E03523A3D",
+          "diff_markers": "^      ^^         ^      ^                                                   ^ ^^  ",
+          "formatted_diff": "Verilator: 340FE919301007EE9A6E9A1A02801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E03D2023D\nIcarus:    240FE91A201007EE9A4E9A1A01801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E03523A3D\nDiff:      ^      ^^         ^      ^                                                   ^ ^^  ",
+          "formatted_lines": [
+            "Verilator: 340FE919301007EE9A6E9A1A02801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E03D2023D",
+            "Icarus:    240FE91A201007EE9A4E9A1A01801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E03523A3D",
+            "Diff:      ^      ^^         ^      ^                                                   ^ ^^  "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "340FE919301007EE9A6E9A1A02801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E03D2023D",
+          "cxxrtl_aligned": "340FE919301007EE9A6E9A1A02801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E0000023D",
+          "diff_markers": "                                                                            ^^^    ",
+          "formatted_diff": "Verilator: 340FE919301007EE9A6E9A1A02801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E03D2023D\nCxxrtl:    340FE919301007EE9A6E9A1A02801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E0000023D\nDiff:                                                                                  ^^^    ",
+          "formatted_lines": [
+            "Verilator: 340FE919301007EE9A6E9A1A02801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E03D2023D",
+            "Cxxrtl:    340FE919301007EE9A6E9A1A02801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E0000023D",
+            "Diff:                                                                                  ^^^    "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "240FE91A201007EE9A4E9A1A01801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E03523A3D",
+          "cxxrtl_aligned": "340FE919301007EE9A6E9A1A02801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E0000023D",
+          "diff_markers": "^      ^^         ^      ^                                                  ^^^^^  ",
+          "formatted_diff": "Icarus:    240FE91A201007EE9A4E9A1A01801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E03523A3D\nCxxrtl:    340FE919301007EE9A6E9A1A02801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E0000023D\nDiff:      ^      ^^         ^      ^                                                  ^^^^^  ",
+          "formatted_lines": [
+            "Icarus:    240FE91A201007EE9A4E9A1A01801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E03523A3D",
+            "Cxxrtl:    340FE919301007EE9A6E9A1A02801EFE1E2B681DE371BB431B19D4E2D59D100138E16EC8E8E0000023D",
+            "Diff:      ^      ^^         ^      ^                                                  ^^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "unknown",
+      "likely_bug_in": "unknown"
+    },
+    {
+      "cycle": 34,
+      "verilator": {
+        "IN": "A4084C4D373C329A36D5040FD17D9FBEF8C203A65BB360D16A8380935563DDCE0C",
+        "OUT": "1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC400000D"
+      },
+      "icarus": {
+        "IN": "A4084C4D373C329A36D5040FD17D9FBEF8C203A65BB360D16A8380935563DDCE0C",
+        "OUT": "1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC400000D"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC7D2000D"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC400000D",
+          "icarus_aligned": "1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC400000D",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC400000D\nIcarus:    1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC400000D\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC400000D",
+            "Icarus:    1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC400000D",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC400000D",
+          "cxxrtl_aligned": "1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC7D2000D",
+          "diff_markers": "                                                                            ^^^    ",
+          "formatted_diff": "Verilator: 1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC400000D\nCxxrtl:    1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC7D2000D\nDiff:                                                                                  ^^^    ",
+          "formatted_lines": [
+            "Verilator: 1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC400000D",
+            "Cxxrtl:    1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC7D2000D",
+            "Diff:                                                                                  ^^^    "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC400000D",
+          "cxxrtl_aligned": "1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC7D2000D",
+          "diff_markers": "                                                                            ^^^    ",
+          "formatted_diff": "Icarus:    1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC400000D\nCxxrtl:    1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC7D2000D\nDiff:                                                                                  ^^^    ",
+          "formatted_lines": [
+            "Icarus:    1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC400000D",
+            "Cxxrtl:    1828A8263064062E15768484A90000001E05043FE1FC1070A2222A9ACBF6E0016000A0E2AECC7D2000D",
+            "Diff:                                                                                  ^^^    "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 47,
+      "verilator": {
+        "IN": "196C1B2D60A037AD63A523EF92FD12311DFBAFA5F44B6F1BC7D29C4906E47EF7E1",
+        "OUT": "3386308D30400120157A8282AA0001FF1E0430330D3EBE9EFE7F80E21A8E7C005440BE801F9F80001B1"
+      },
+      "icarus": {
+        "IN": "196C1B2D60A037AD63A523EF92FD12311DFBAFA5F44B6F1BC7D29C4906E47EF7E1",
+        "OUT": "3386308D30400120157A8282AA0001FF1E0430330D3EBE9EFE7F80E21A8E7C005440BE801F9F80001B1"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "2386308D20400130155A8383FA0001FF1E0430330D3EBE9EFE7F80E21C9042005640BE801F9FA4969B1"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "3386308D30400120157A8282AA0001FF1E0430330D3EBE9EFE7F80E21A8E7C005440BE801F9F80001B1",
+          "icarus_aligned": "3386308D30400120157A8282AA0001FF1E0430330D3EBE9EFE7F80E21A8E7C005440BE801F9F80001B1",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 3386308D30400120157A8282AA0001FF1E0430330D3EBE9EFE7F80E21A8E7C005440BE801F9F80001B1\nIcarus:    3386308D30400120157A8282AA0001FF1E0430330D3EBE9EFE7F80E21A8E7C005440BE801F9F80001B1\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 3386308D30400120157A8282AA0001FF1E0430330D3EBE9EFE7F80E21A8E7C005440BE801F9F80001B1",
+            "Icarus:    3386308D30400120157A8282AA0001FF1E0430330D3EBE9EFE7F80E21A8E7C005440BE801F9F80001B1",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "3386308D30400120157A8282AA0001FF1E0430330D3EBE9EFE7F80E21A8E7C005440BE801F9F80001B1",
+          "cxxrtl_aligned": "2386308D20400130155A8383FA0001FF1E0430330D3EBE9EFE7F80E21C9042005640BE801F9FA4969B1",
+          "diff_markers": "^       ^     ^   ^  ^ ^^                                ^^^^^   ^          ^^^^^  ",
+          "formatted_diff": "Verilator: 3386308D30400120157A8282AA0001FF1E0430330D3EBE9EFE7F80E21A8E7C005440BE801F9F80001B1\nCxxrtl:    2386308D20400130155A8383FA0001FF1E0430330D3EBE9EFE7F80E21C9042005640BE801F9FA4969B1\nDiff:      ^       ^     ^   ^  ^ ^^                                ^^^^^   ^          ^^^^^  ",
+          "formatted_lines": [
+            "Verilator: 3386308D30400120157A8282AA0001FF1E0430330D3EBE9EFE7F80E21A8E7C005440BE801F9F80001B1",
+            "Cxxrtl:    2386308D20400130155A8383FA0001FF1E0430330D3EBE9EFE7F80E21C9042005640BE801F9FA4969B1",
+            "Diff:      ^       ^     ^   ^  ^ ^^                                ^^^^^   ^          ^^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "3386308D30400120157A8282AA0001FF1E0430330D3EBE9EFE7F80E21A8E7C005440BE801F9F80001B1",
+          "cxxrtl_aligned": "2386308D20400130155A8383FA0001FF1E0430330D3EBE9EFE7F80E21C9042005640BE801F9FA4969B1",
+          "diff_markers": "^       ^     ^   ^  ^ ^^                                ^^^^^   ^          ^^^^^  ",
+          "formatted_diff": "Icarus:    3386308D30400120157A8282AA0001FF1E0430330D3EBE9EFE7F80E21A8E7C005440BE801F9F80001B1\nCxxrtl:    2386308D20400130155A8383FA0001FF1E0430330D3EBE9EFE7F80E21C9042005640BE801F9FA4969B1\nDiff:      ^       ^     ^   ^  ^ ^^                                ^^^^^   ^          ^^^^^  ",
+          "formatted_lines": [
+            "Icarus:    3386308D30400120157A8282AA0001FF1E0430330D3EBE9EFE7F80E21A8E7C005440BE801F9F80001B1",
+            "Cxxrtl:    2386308D20400130155A8383FA0001FF1E0430330D3EBE9EFE7F80E21C9042005640BE801F9FA4969B1",
+            "Diff:      ^       ^     ^   ^  ^ ^^                                ^^^^^   ^          ^^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 72,
+      "verilator": {
+        "IN": "7EF0D8EA39623F6200C06F50830FF5AB32FFAD173D412BD0943E2CCCE7792B8AA6",
+        "OUT": "1EDEC46D305015611A66420206C00B0B709108AE753939390E08AA9BF6CE54043B81EEC8DFD7269BC7D"
+      },
+      "icarus": {
+        "IN": "7EF0D8EA39623F6200C06F50830FF5AB32FFAD173D412BD0943E2CCCE7792B8AA6",
+        "OUT": "1EDEC46D305015611A66420206C00B0B709108AE753939390E08AA9BF6CE54043B81EEC8DFD7269B47D"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "EDEC06D205015611544020202C00B0B7091082AB53939390E08AA9DF4CDC0043981EEC8DFD7000007D"
+      },
+      "matches": {
+        "verilator_icarus": false,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "1EDEC46D305015611A66420206C00B0B709108AE753939390E08AA9BF6CE54043B81EEC8DFD7269BC7D",
+          "icarus_aligned": "1EDEC46D305015611A66420206C00B0B709108AE753939390E08AA9BF6CE54043B81EEC8DFD7269B47D",
+          "diff_markers": "                                                                                ^  ",
+          "formatted_diff": "Verilator: 1EDEC46D305015611A66420206C00B0B709108AE753939390E08AA9BF6CE54043B81EEC8DFD7269BC7D\nIcarus:    1EDEC46D305015611A66420206C00B0B709108AE753939390E08AA9BF6CE54043B81EEC8DFD7269B47D\nDiff:                                                                                      ^  ",
+          "formatted_lines": [
+            "Verilator: 1EDEC46D305015611A66420206C00B0B709108AE753939390E08AA9BF6CE54043B81EEC8DFD7269BC7D",
+            "Icarus:    1EDEC46D305015611A66420206C00B0B709108AE753939390E08AA9BF6CE54043B81EEC8DFD7269B47D",
+            "Diff:                                                                                      ^  "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "1EDEC46D305015611A66420206C00B0B709108AE753939390E08AA9BF6CE54043B81EEC8DFD7269BC7D",
+          "cxxrtl_aligned": "EDEC06D205015611544020202C00B0B7091082AB53939390E08AA9DF4CDC0043981EEC8DFD7000007D ",
+          "diff_markers": "^^^^^^^^^^^^^^^ ^^^^^^^^^^^ ^^^^^^^^^^ ^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^",
+          "formatted_diff": "Verilator: 1EDEC46D305015611A66420206C00B0B709108AE753939390E08AA9BF6CE54043B81EEC8DFD7269BC7D\nCxxrtl:    EDEC06D205015611544020202C00B0B7091082AB53939390E08AA9DF4CDC0043981EEC8DFD7000007D \nDiff:      ^^^^^^^^^^^^^^^ ^^^^^^^^^^^ ^^^^^^^^^^ ^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^",
+          "formatted_lines": [
+            "Verilator: 1EDEC46D305015611A66420206C00B0B709108AE753939390E08AA9BF6CE54043B81EEC8DFD7269BC7D",
+            "Cxxrtl:    EDEC06D205015611544020202C00B0B7091082AB53939390E08AA9DF4CDC0043981EEC8DFD7000007D ",
+            "Diff:      ^^^^^^^^^^^^^^^ ^^^^^^^^^^^ ^^^^^^^^^^ ^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^"
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "1EDEC46D305015611A66420206C00B0B709108AE753939390E08AA9BF6CE54043B81EEC8DFD7269B47D",
+          "cxxrtl_aligned": "EDEC06D205015611544020202C00B0B7091082AB53939390E08AA9DF4CDC0043981EEC8DFD7000007D ",
+          "diff_markers": "^^^^^^^^^^^^^^^ ^^^^^^^^^^^ ^^^^^^^^^^ ^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^",
+          "formatted_diff": "Icarus:    1EDEC46D305015611A66420206C00B0B709108AE753939390E08AA9BF6CE54043B81EEC8DFD7269B47D\nCxxrtl:    EDEC06D205015611544020202C00B0B7091082AB53939390E08AA9DF4CDC0043981EEC8DFD7000007D \nDiff:      ^^^^^^^^^^^^^^^ ^^^^^^^^^^^ ^^^^^^^^^^ ^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^",
+          "formatted_lines": [
+            "Icarus:    1EDEC46D305015611A66420206C00B0B709108AE753939390E08AA9BF6CE54043B81EEC8DFD7269B47D",
+            "Cxxrtl:    EDEC06D205015611544020202C00B0B7091082AB53939390E08AA9DF4CDC0043981EEC8DFD7000007D ",
+            "Diff:      ^^^^^^^^^^^^^^^ ^^^^^^^^^^^ ^^^^^^^^^^ ^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^"
+          ]
+        }
+      },
+      "ground_truth": "unknown",
+      "likely_bug_in": "unknown"
+    },
+    {
+      "cycle": 73,
+      "verilator": {
+        "IN": "D7B2C1E9561750A77147A7711800B04CFB14136E8AEC54F0F51A389E2C83CC71DF",
+        "OUT": "25F4C2E12030050E1A4DC202020001FF7338000CF1FD9205585DAAE2B4CD8002CC81BCD83D654000011"
+      },
+      "icarus": {
+        "IN": "D7B2C1E9561750A77147A7711800B04CFB14136E8AEC54F0F51A389E2C83CC71DF",
+        "OUT": "25F4C2E12030050E1A4DC202020001FF7338000CF1FD9205585DAAE2B4CD8002CC81BCD83D654000011"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "35F4C6E1B030050E1A6D6202060001FF733800CC31FD9205585DAAE2B6CE7402CE81BC983D65669BC11"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "25F4C2E12030050E1A4DC202020001FF7338000CF1FD9205585DAAE2B4CD8002CC81BCD83D654000011",
+          "icarus_aligned": "25F4C2E12030050E1A4DC202020001FF7338000CF1FD9205585DAAE2B4CD8002CC81BCD83D654000011",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 25F4C2E12030050E1A4DC202020001FF7338000CF1FD9205585DAAE2B4CD8002CC81BCD83D654000011\nIcarus:    25F4C2E12030050E1A4DC202020001FF7338000CF1FD9205585DAAE2B4CD8002CC81BCD83D654000011\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 25F4C2E12030050E1A4DC202020001FF7338000CF1FD9205585DAAE2B4CD8002CC81BCD83D654000011",
+            "Icarus:    25F4C2E12030050E1A4DC202020001FF7338000CF1FD9205585DAAE2B4CD8002CC81BCD83D654000011",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "25F4C2E12030050E1A4DC202020001FF7338000CF1FD9205585DAAE2B4CD8002CC81BCD83D654000011",
+          "cxxrtl_aligned": "35F4C6E1B030050E1A6D6202060001FF733800CC31FD9205585DAAE2B6CE7402CE81BC983D65669BC11",
+          "diff_markers": "^    ^  ^         ^ ^    ^            ^ ^                ^ ^^^   ^    ^     ^^^^^  ",
+          "formatted_diff": "Verilator: 25F4C2E12030050E1A4DC202020001FF7338000CF1FD9205585DAAE2B4CD8002CC81BCD83D654000011\nCxxrtl:    35F4C6E1B030050E1A6D6202060001FF733800CC31FD9205585DAAE2B6CE7402CE81BC983D65669BC11\nDiff:      ^    ^  ^         ^ ^    ^            ^ ^                ^ ^^^   ^    ^     ^^^^^  ",
+          "formatted_lines": [
+            "Verilator: 25F4C2E12030050E1A4DC202020001FF7338000CF1FD9205585DAAE2B4CD8002CC81BCD83D654000011",
+            "Cxxrtl:    35F4C6E1B030050E1A6D6202060001FF733800CC31FD9205585DAAE2B6CE7402CE81BC983D65669BC11",
+            "Diff:      ^    ^  ^         ^ ^    ^            ^ ^                ^ ^^^   ^    ^     ^^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "25F4C2E12030050E1A4DC202020001FF7338000CF1FD9205585DAAE2B4CD8002CC81BCD83D654000011",
+          "cxxrtl_aligned": "35F4C6E1B030050E1A6D6202060001FF733800CC31FD9205585DAAE2B6CE7402CE81BC983D65669BC11",
+          "diff_markers": "^    ^  ^         ^ ^    ^            ^ ^                ^ ^^^   ^    ^     ^^^^^  ",
+          "formatted_diff": "Icarus:    25F4C2E12030050E1A4DC202020001FF7338000CF1FD9205585DAAE2B4CD8002CC81BCD83D654000011\nCxxrtl:    35F4C6E1B030050E1A6D6202060001FF733800CC31FD9205585DAAE2B6CE7402CE81BC983D65669BC11\nDiff:      ^    ^  ^         ^ ^    ^            ^ ^                ^ ^^^   ^    ^     ^^^^^  ",
+          "formatted_lines": [
+            "Icarus:    25F4C2E12030050E1A4DC202020001FF7338000CF1FD9205585DAAE2B4CD8002CC81BCD83D654000011",
+            "Cxxrtl:    35F4C6E1B030050E1A6D6202060001FF733800CC31FD9205585DAAE2B6CE7402CE81BC983D65669BC11",
+            "Diff:      ^    ^  ^         ^ ^    ^            ^ ^                ^ ^^^   ^    ^     ^^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 88,
+      "verilator": {
+        "IN": "AE630B8F293F12C4B0DC9CCFF329D4C26260AA4D2D10056844D6743557B3268ED6",
+        "OUT": "3AACF852074072A95482202068000001D04082EFCD8585814117E9BD74F640A3EC0FAAA2F858A9161D"
+      },
+      "icarus": {
+        "IN": "AE630B8F293F12C4B0DC9CCFF329D4C26260AA4D2D10056844D6743557B3268ED6",
+        "OUT": "3AACF852074072A95482202068000001D04082EFCD8585814117E9BD74F640A3EC0FAAA2F858A91E1D"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "3AACB852074072A15490202028000001D0408223CD8585814117E9BD54D200A3CC0FAEA2F85800021D"
+      },
+      "matches": {
+        "verilator_icarus": false,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "3AACF852074072A95482202068000001D04082EFCD8585814117E9BD74F640A3EC0FAAA2F858A9161D",
+          "icarus_aligned": "3AACF852074072A95482202068000001D04082EFCD8585814117E9BD74F640A3EC0FAAA2F858A91E1D",
+          "diff_markers": "                                                                               ^  ",
+          "formatted_diff": "Verilator: 3AACF852074072A95482202068000001D04082EFCD8585814117E9BD74F640A3EC0FAAA2F858A9161D\nIcarus:    3AACF852074072A95482202068000001D04082EFCD8585814117E9BD74F640A3EC0FAAA2F858A91E1D\nDiff:                                                                                     ^  ",
+          "formatted_lines": [
+            "Verilator: 3AACF852074072A95482202068000001D04082EFCD8585814117E9BD74F640A3EC0FAAA2F858A9161D",
+            "Icarus:    3AACF852074072A95482202068000001D04082EFCD8585814117E9BD74F640A3EC0FAAA2F858A91E1D",
+            "Diff:                                                                                     ^  "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "3AACF852074072A95482202068000001D04082EFCD8585814117E9BD74F640A3EC0FAAA2F858A9161D",
+          "cxxrtl_aligned": "3AACB852074072A15490202028000001D0408223CD8585814117E9BD54D200A3CC0FAEA2F85800021D",
+          "diff_markers": "    ^          ^  ^^    ^             ^^                ^ ^^^   ^    ^      ^^^^  ",
+          "formatted_diff": "Verilator: 3AACF852074072A95482202068000001D04082EFCD8585814117E9BD74F640A3EC0FAAA2F858A9161D\nCxxrtl:    3AACB852074072A15490202028000001D0408223CD8585814117E9BD54D200A3CC0FAEA2F85800021D\nDiff:          ^          ^  ^^    ^             ^^                ^ ^^^   ^    ^      ^^^^  ",
+          "formatted_lines": [
+            "Verilator: 3AACF852074072A95482202068000001D04082EFCD8585814117E9BD74F640A3EC0FAAA2F858A9161D",
+            "Cxxrtl:    3AACB852074072A15490202028000001D0408223CD8585814117E9BD54D200A3CC0FAEA2F85800021D",
+            "Diff:          ^          ^  ^^    ^             ^^                ^ ^^^   ^    ^      ^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "3AACF852074072A95482202068000001D04082EFCD8585814117E9BD74F640A3EC0FAAA2F858A91E1D",
+          "cxxrtl_aligned": "3AACB852074072A15490202028000001D0408223CD8585814117E9BD54D200A3CC0FAEA2F85800021D",
+          "diff_markers": "    ^          ^  ^^    ^             ^^                ^ ^^^   ^    ^      ^^^^  ",
+          "formatted_diff": "Icarus:    3AACF852074072A95482202068000001D04082EFCD8585814117E9BD74F640A3EC0FAAA2F858A91E1D\nCxxrtl:    3AACB852074072A15490202028000001D0408223CD8585814117E9BD54D200A3CC0FAEA2F85800021D\nDiff:          ^          ^  ^^    ^             ^^                ^ ^^^   ^    ^      ^^^^  ",
+          "formatted_lines": [
+            "Icarus:    3AACF852074072A95482202068000001D04082EFCD8585814117E9BD74F640A3EC0FAAA2F858A91E1D",
+            "Cxxrtl:    3AACB852074072A15490202028000001D0408223CD8585814117E9BD54D200A3CC0FAEA2F85800021D",
+            "Diff:          ^          ^  ^^    ^             ^^                ^ ^^^   ^    ^      ^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "unknown",
+      "likely_bug_in": "unknown"
+    },
+    {
+      "cycle": 90,
+      "verilator": {
+        "IN": "C4740133F64F1135E7F4994996078B9E071999BE38136881216E5DB9DB0356A74",
+        "OUT": "1A039B21301409739A675595FA80000072980419A77070706566549A2400A20200C0E2B33F0C04AEB01"
+      },
+      "icarus": {
+        "IN": "C4740133F64F1135E7F4994996078B9E071999BE38136881216E5DB9DB0356A74",
+        "OUT": "1A039B21301409739A675595FA80000072980419A77070706566549A2400A20200C0E2B33F0C04AEB01"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "A039F212014097795463595FE8000007298049D677070706566549C2400A20200C0E2B33F0C0A91701"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "1A039B21301409739A675595FA80000072980419A77070706566549A2400A20200C0E2B33F0C04AEB01",
+          "icarus_aligned": "1A039B21301409739A675595FA80000072980419A77070706566549A2400A20200C0E2B33F0C04AEB01",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 1A039B21301409739A675595FA80000072980419A77070706566549A2400A20200C0E2B33F0C04AEB01\nIcarus:    1A039B21301409739A675595FA80000072980419A77070706566549A2400A20200C0E2B33F0C04AEB01\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 1A039B21301409739A675595FA80000072980419A77070706566549A2400A20200C0E2B33F0C04AEB01",
+            "Icarus:    1A039B21301409739A675595FA80000072980419A77070706566549A2400A20200C0E2B33F0C04AEB01",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "1A039B21301409739A675595FA80000072980419A77070706566549A2400A20200C0E2B33F0C04AEB01",
+          "cxxrtl_aligned": "A039F212014097795463595FE8000007298049D677070706566549C2400A20200C0E2B33F0C0A91701 ",
+          "diff_markers": "^^^^^^^^^^^^^^ ^^^ ^ ^^^^^^    ^^^^^^^^^^ ^^^^^^^^ ^^^^^^^ ^^^^^ ^^^^^^ ^^^^^^^^^^^",
+          "formatted_diff": "Verilator: 1A039B21301409739A675595FA80000072980419A77070706566549A2400A20200C0E2B33F0C04AEB01\nCxxrtl:    A039F212014097795463595FE8000007298049D677070706566549C2400A20200C0E2B33F0C0A91701 \nDiff:      ^^^^^^^^^^^^^^ ^^^ ^ ^^^^^^    ^^^^^^^^^^ ^^^^^^^^ ^^^^^^^ ^^^^^ ^^^^^^ ^^^^^^^^^^^",
+          "formatted_lines": [
+            "Verilator: 1A039B21301409739A675595FA80000072980419A77070706566549A2400A20200C0E2B33F0C04AEB01",
+            "Cxxrtl:    A039F212014097795463595FE8000007298049D677070706566549C2400A20200C0E2B33F0C0A91701 ",
+            "Diff:      ^^^^^^^^^^^^^^ ^^^ ^ ^^^^^^    ^^^^^^^^^^ ^^^^^^^^ ^^^^^^^ ^^^^^ ^^^^^^ ^^^^^^^^^^^"
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "1A039B21301409739A675595FA80000072980419A77070706566549A2400A20200C0E2B33F0C04AEB01",
+          "cxxrtl_aligned": "A039F212014097795463595FE8000007298049D677070706566549C2400A20200C0E2B33F0C0A91701 ",
+          "diff_markers": "^^^^^^^^^^^^^^ ^^^ ^ ^^^^^^    ^^^^^^^^^^ ^^^^^^^^ ^^^^^^^ ^^^^^ ^^^^^^ ^^^^^^^^^^^",
+          "formatted_diff": "Icarus:    1A039B21301409739A675595FA80000072980419A77070706566549A2400A20200C0E2B33F0C04AEB01\nCxxrtl:    A039F212014097795463595FE8000007298049D677070706566549C2400A20200C0E2B33F0C0A91701 \nDiff:      ^^^^^^^^^^^^^^ ^^^ ^ ^^^^^^    ^^^^^^^^^^ ^^^^^^^^ ^^^^^^^ ^^^^^ ^^^^^^ ^^^^^^^^^^^",
+          "formatted_lines": [
+            "Icarus:    1A039B21301409739A675595FA80000072980419A77070706566549A2400A20200C0E2B33F0C04AEB01",
+            "Cxxrtl:    A039F212014097795463595FE8000007298049D677070706566549C2400A20200C0E2B33F0C0A91701 ",
+            "Diff:      ^^^^^^^^^^^^^^ ^^^ ^ ^^^^^^    ^^^^^^^^^^ ^^^^^^^^ ^^^^^^^ ^^^^^ ^^^^^^ ^^^^^^^^^^^"
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 91,
+      "verilator": {
+        "IN": "D8B4258A45B872B378A3630364D203DD1FCF7E4F860ACA45BFB37076A8495E155",
+        "OUT": "3D02A3A130420C491A76C484AAC270F07031003FC33F2EBF66662A9AE22FE8022EC1B2845FDB80001FD"
+      },
+      "icarus": {
+        "IN": "D8B4258A45B872B378A3630364D203DD1FCF7E4F860ACA45BFB37076A8495E155",
+        "OUT": "3D02A3A130420C491A76C484AAC270F07031003FC33F2EBF66662A9AE22FE8022EC1B2845FDB80001FD"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "2D02A3A120420C591A56C585FAC270F07031003FC33F2EBF66662A9AE430420230C1B2845FDB84AE9FD"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "3D02A3A130420C491A76C484AAC270F07031003FC33F2EBF66662A9AE22FE8022EC1B2845FDB80001FD",
+          "icarus_aligned": "3D02A3A130420C491A76C484AAC270F07031003FC33F2EBF66662A9AE22FE8022EC1B2845FDB80001FD",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 3D02A3A130420C491A76C484AAC270F07031003FC33F2EBF66662A9AE22FE8022EC1B2845FDB80001FD\nIcarus:    3D02A3A130420C491A76C484AAC270F07031003FC33F2EBF66662A9AE22FE8022EC1B2845FDB80001FD\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 3D02A3A130420C491A76C484AAC270F07031003FC33F2EBF66662A9AE22FE8022EC1B2845FDB80001FD",
+            "Icarus:    3D02A3A130420C491A76C484AAC270F07031003FC33F2EBF66662A9AE22FE8022EC1B2845FDB80001FD",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "3D02A3A130420C491A76C484AAC270F07031003FC33F2EBF66662A9AE22FE8022EC1B2845FDB80001FD",
+          "cxxrtl_aligned": "2D02A3A120420C591A56C585FAC270F07031003FC33F2EBF66662A9AE430420230C1B2845FDB84AE9FD",
+          "diff_markers": "^       ^     ^   ^  ^ ^^                                ^^^^^  ^^           ^^^^  ",
+          "formatted_diff": "Verilator: 3D02A3A130420C491A76C484AAC270F07031003FC33F2EBF66662A9AE22FE8022EC1B2845FDB80001FD\nCxxrtl:    2D02A3A120420C591A56C585FAC270F07031003FC33F2EBF66662A9AE430420230C1B2845FDB84AE9FD\nDiff:      ^       ^     ^   ^  ^ ^^                                ^^^^^  ^^           ^^^^  ",
+          "formatted_lines": [
+            "Verilator: 3D02A3A130420C491A76C484AAC270F07031003FC33F2EBF66662A9AE22FE8022EC1B2845FDB80001FD",
+            "Cxxrtl:    2D02A3A120420C591A56C585FAC270F07031003FC33F2EBF66662A9AE430420230C1B2845FDB84AE9FD",
+            "Diff:      ^       ^     ^   ^  ^ ^^                                ^^^^^  ^^           ^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "3D02A3A130420C491A76C484AAC270F07031003FC33F2EBF66662A9AE22FE8022EC1B2845FDB80001FD",
+          "cxxrtl_aligned": "2D02A3A120420C591A56C585FAC270F07031003FC33F2EBF66662A9AE430420230C1B2845FDB84AE9FD",
+          "diff_markers": "^       ^     ^   ^  ^ ^^                                ^^^^^  ^^           ^^^^  ",
+          "formatted_diff": "Icarus:    3D02A3A130420C491A76C484AAC270F07031003FC33F2EBF66662A9AE22FE8022EC1B2845FDB80001FD\nCxxrtl:    2D02A3A120420C591A56C585FAC270F07031003FC33F2EBF66662A9AE430420230C1B2845FDB84AE9FD\nDiff:      ^       ^     ^   ^  ^ ^^                                ^^^^^  ^^           ^^^^  ",
+          "formatted_lines": [
+            "Icarus:    3D02A3A130420C491A76C484AAC270F07031003FC33F2EBF66662A9AE22FE8022EC1B2845FDB80001FD",
+            "Cxxrtl:    2D02A3A120420C591A56C585FAC270F07031003FC33F2EBF66662A9AE430420230C1B2845FDB84AE9FD",
+            "Diff:      ^       ^     ^   ^  ^ ^^                                ^^^^^  ^^           ^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 93,
+      "verilator": {
+        "IN": "C3FC837772985D6C7D783F32D444435027E3C912E6EB5B3D414AAA7C28DA9B5A4B",
+        "OUT": "2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9F29E7FF"
+      },
+      "icarus": {
+        "IN": "C3FC837772985D6C7D783F32D444435027E3C912E6EB5B3D414AAA7C28DA9B5A4B",
+        "OUT": "2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9EA9EFFF"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9F29E7FF"
+      },
+      "matches": {
+        "verilator_icarus": false,
+        "verilator_cxxrtl": true,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9F29E7FF",
+          "icarus_aligned": "2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9EA9EFFF",
+          "diff_markers": "                                                                            ^^  ^  ",
+          "formatted_diff": "Verilator: 2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9F29E7FF\nIcarus:    2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9EA9EFFF\nDiff:                                                                                  ^^  ^  ",
+          "formatted_lines": [
+            "Verilator: 2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9F29E7FF",
+            "Icarus:    2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9EA9EFFF",
+            "Diff:                                                                                  ^^  ^  "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9F29E7FF",
+          "cxxrtl_aligned": "2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9F29E7FF",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9F29E7FF\nCxxrtl:    2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9F29E7FF\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9F29E7FF",
+            "Cxxrtl:    2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9F29E7FF",
+            "Diff:                                                                                         "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9EA9EFFF",
+          "cxxrtl_aligned": "2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9F29E7FF",
+          "diff_markers": "                                                                            ^^  ^  ",
+          "formatted_diff": "Icarus:    2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9EA9EFFF\nCxxrtl:    2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9F29E7FF\nDiff:                                                                                  ^^  ^  ",
+          "formatted_lines": [
+            "Icarus:    2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9EA9EFFF",
+            "Cxxrtl:    2EF17441A040018E1559361606F817F71C48001DECB3F933F57754E21B9A4000DA612CD039E9F29E7FF",
+            "Diff:                                                                                  ^^  ^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_cxxrtl",
+      "likely_bug_in": "icarus"
+    },
+    {
+      "cycle": 94,
+      "verilator": {
+        "IN": "58895B6C3B2A8682CA8D92AE35A78E086CF7481D1F9C0D98BE0E59537975C6A840",
+        "OUT": "1D172DAD306016331A665393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D45FD1441"
+      },
+      "icarus": {
+        "IN": "58895B6C3B2A8682CA8D92AE35A78E086CF7481D1F9C0D98BE0E59537975C6A840",
+        "OUT": "1D172DAD306016331A665393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D457D1441"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "D172DAD206016331A445393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D4729E441"
+      },
+      "matches": {
+        "verilator_icarus": false,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "1D172DAD306016331A665393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D45FD1441",
+          "icarus_aligned": "1D172DAD306016331A665393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D457D1441",
+          "diff_markers": "                                                                             ^     ",
+          "formatted_diff": "Verilator: 1D172DAD306016331A665393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D45FD1441\nIcarus:    1D172DAD306016331A665393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D457D1441\nDiff:                                                                                   ^     ",
+          "formatted_lines": [
+            "Verilator: 1D172DAD306016331A665393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D45FD1441",
+            "Icarus:    1D172DAD306016331A665393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D457D1441",
+            "Diff:                                                                                   ^     "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "1D172DAD306016331A665393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D45FD1441",
+          "cxxrtl_aligned": "D172DAD206016331A445393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D4729E441 ",
+          "diff_markers": "^^^^^^^^^^^^^^ ^^^^^^^^^^^^    ^^^^^^^^^^^^^^^^^^^ ^^^^^^^^ ^^ ^^^^^^^^^^^^^^^^^ ^^",
+          "formatted_diff": "Verilator: 1D172DAD306016331A665393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D45FD1441\nCxxrtl:    D172DAD206016331A445393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D4729E441 \nDiff:      ^^^^^^^^^^^^^^ ^^^^^^^^^^^^    ^^^^^^^^^^^^^^^^^^^ ^^^^^^^^ ^^ ^^^^^^^^^^^^^^^^^ ^^",
+          "formatted_lines": [
+            "Verilator: 1D172DAD306016331A665393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D45FD1441",
+            "Cxxrtl:    D172DAD206016331A445393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D4729E441 ",
+            "Diff:      ^^^^^^^^^^^^^^ ^^^^^^^^^^^^    ^^^^^^^^^^^^^^^^^^^ ^^^^^^^^ ^^ ^^^^^^^^^^^^^^^^^ ^^"
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "1D172DAD306016331A665393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D457D1441",
+          "cxxrtl_aligned": "D172DAD206016331A445393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D4729E441 ",
+          "diff_markers": "^^^^^^^^^^^^^^ ^^^^^^^^^^^^    ^^^^^^^^^^^^^^^^^^^ ^^^^^^^^ ^^ ^^^^^^^^^^^^^^^^^ ^^",
+          "formatted_diff": "Icarus:    1D172DAD306016331A665393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D457D1441\nCxxrtl:    D172DAD206016331A445393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D4729E441 \nDiff:      ^^^^^^^^^^^^^^ ^^^^^^^^^^^^    ^^^^^^^^^^^^^^^^^^^ ^^^^^^^^ ^^ ^^^^^^^^^^^^^^^^^ ^^",
+          "formatted_lines": [
+            "Icarus:    1D172DAD306016331A665393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D457D1441",
+            "Cxxrtl:    D172DAD206016331A445393FE8000001F0420AE54FDFDF603002A9B31B44E007201FCE2B6D4729E441 ",
+            "Diff:      ^^^^^^^^^^^^^^ ^^^^^^^^^^^^    ^^^^^^^^^^^^^^^^^^^ ^^^^^^^^ ^^ ^^^^^^^^^^^^^^^^^ ^^"
+          ]
+        }
+      },
+      "ground_truth": "unknown",
+      "likely_bug_in": "unknown"
+    },
+    {
+      "cycle": 95,
+      "verilator": {
+        "IN": "E92AF4A170491D27B3B2C4A12211876EEDB8FEF904B38A911740F201965CCCF8B1",
+        "OUT": "29BA26F9A0400150954D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF9FD1439"
+      },
+      "icarus": {
+        "IN": "E92AF4A170491D27B3B2C4A12211876EEDB8FEF904B38A911740F201965CCCF8B1",
+        "OUT": "29BA26F9A0400150154D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF97D1439"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "29BA26F9A0400150954D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF9FD1439"
+      },
+      "matches": {
+        "verilator_icarus": false,
+        "verilator_cxxrtl": true,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "29BA26F9A0400150954D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF9FD1439",
+          "icarus_aligned": "29BA26F9A0400150154D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF97D1439",
+          "diff_markers": "                ^                                                            ^     ",
+          "formatted_diff": "Verilator: 29BA26F9A0400150954D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF9FD1439\nIcarus:    29BA26F9A0400150154D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF97D1439\nDiff:                      ^                                                            ^     ",
+          "formatted_lines": [
+            "Verilator: 29BA26F9A0400150954D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF9FD1439",
+            "Icarus:    29BA26F9A0400150154D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF97D1439",
+            "Diff:                      ^                                                            ^     "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "29BA26F9A0400150954D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF9FD1439",
+          "cxxrtl_aligned": "29BA26F9A0400150954D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF9FD1439",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 29BA26F9A0400150954D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF9FD1439\nCxxrtl:    29BA26F9A0400150954D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF9FD1439\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 29BA26F9A0400150954D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF9FD1439",
+            "Cxxrtl:    29BA26F9A0400150954D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF9FD1439",
+            "Diff:                                                                                         "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "29BA26F9A0400150154D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF97D1439",
+          "cxxrtl_aligned": "29BA26F9A0400150954D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF9FD1439",
+          "diff_markers": "                ^                                                            ^     ",
+          "formatted_diff": "Icarus:    29BA26F9A0400150154D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF97D1439\nCxxrtl:    29BA26F9A0400150954D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF9FD1439\nDiff:                      ^                                                            ^     ",
+          "formatted_lines": [
+            "Icarus:    29BA26F9A0400150154D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF97D1439",
+            "Cxxrtl:    29BA26F9A0400150954D2383FE8C63E3719004EE31AE2E2E1011009B592DD60042C098802FAF9FD1439",
+            "Diff:                      ^                                                            ^     "
+          ]
+        }
+      },
+      "ground_truth": "verilator_cxxrtl",
+      "likely_bug_in": "icarus"
+    },
+    {
+      "cycle": 102,
+      "verilator": {
+        "IN": "30D99B3F731E113FE2F53C50AD3E5749C43C42ACD7C0CE34561E033E71FBBA0418",
+        "OUT": "164C254D3040019F1A7FE181FE0000001E11888C770F180F7277009B40954E043E81E0A0FFDF2BB8C3D"
+      },
+      "icarus": {
+        "IN": "30D99B3F731E113FE2F53C50AD3E5749C43C42ACD7C0CE34561E033E71FBBA0418",
+        "OUT": "164C254D3040019F1A7FE181FE0000001E11888C770F180F7277009B40954E043E81E0A0FFDF2BB843D"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "164C214D3040018F1A7FC282AA0000001E118808B70F180F7277009B3E92F8043C81E8A0FFDF000003D"
+      },
+      "matches": {
+        "verilator_icarus": false,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "164C254D3040019F1A7FE181FE0000001E11888C770F180F7277009B40954E043E81E0A0FFDF2BB8C3D",
+          "icarus_aligned": "164C254D3040019F1A7FE181FE0000001E11888C770F180F7277009B40954E043E81E0A0FFDF2BB843D",
+          "diff_markers": "                                                                                ^  ",
+          "formatted_diff": "Verilator: 164C254D3040019F1A7FE181FE0000001E11888C770F180F7277009B40954E043E81E0A0FFDF2BB8C3D\nIcarus:    164C254D3040019F1A7FE181FE0000001E11888C770F180F7277009B40954E043E81E0A0FFDF2BB843D\nDiff:                                                                                      ^  ",
+          "formatted_lines": [
+            "Verilator: 164C254D3040019F1A7FE181FE0000001E11888C770F180F7277009B40954E043E81E0A0FFDF2BB8C3D",
+            "Icarus:    164C254D3040019F1A7FE181FE0000001E11888C770F180F7277009B40954E043E81E0A0FFDF2BB843D",
+            "Diff:                                                                                      ^  "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "164C254D3040019F1A7FE181FE0000001E11888C770F180F7277009B40954E043E81E0A0FFDF2BB8C3D",
+          "cxxrtl_aligned": "164C214D3040018F1A7FC282AA0000001E118808B70F180F7277009B3E92F8043C81E8A0FFDF000003D",
+          "diff_markers": "     ^        ^     ^^ ^^^            ^^^               ^^ ^^^   ^   ^      ^^^^^  ",
+          "formatted_diff": "Verilator: 164C254D3040019F1A7FE181FE0000001E11888C770F180F7277009B40954E043E81E0A0FFDF2BB8C3D\nCxxrtl:    164C214D3040018F1A7FC282AA0000001E118808B70F180F7277009B3E92F8043C81E8A0FFDF000003D\nDiff:           ^        ^     ^^ ^^^            ^^^               ^^ ^^^   ^   ^      ^^^^^  ",
+          "formatted_lines": [
+            "Verilator: 164C254D3040019F1A7FE181FE0000001E11888C770F180F7277009B40954E043E81E0A0FFDF2BB8C3D",
+            "Cxxrtl:    164C214D3040018F1A7FC282AA0000001E118808B70F180F7277009B3E92F8043C81E8A0FFDF000003D",
+            "Diff:           ^        ^     ^^ ^^^            ^^^               ^^ ^^^   ^   ^      ^^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "164C254D3040019F1A7FE181FE0000001E11888C770F180F7277009B40954E043E81E0A0FFDF2BB843D",
+          "cxxrtl_aligned": "164C214D3040018F1A7FC282AA0000001E118808B70F180F7277009B3E92F8043C81E8A0FFDF000003D",
+          "diff_markers": "     ^        ^     ^^ ^^^            ^^^               ^^ ^^^   ^   ^      ^^^^^  ",
+          "formatted_diff": "Icarus:    164C254D3040019F1A7FE181FE0000001E11888C770F180F7277009B40954E043E81E0A0FFDF2BB843D\nCxxrtl:    164C214D3040018F1A7FC282AA0000001E118808B70F180F7277009B3E92F8043C81E8A0FFDF000003D\nDiff:           ^        ^     ^^ ^^^            ^^^               ^^ ^^^   ^   ^      ^^^^^  ",
+          "formatted_lines": [
+            "Icarus:    164C254D3040019F1A7FE181FE0000001E11888C770F180F7277009B40954E043E81E0A0FFDF2BB843D",
+            "Cxxrtl:    164C214D3040018F1A7FC282AA0000001E118808B70F180F7277009B3E92F8043C81E8A0FFDF000003D",
+            "Diff:           ^        ^     ^^ ^^^            ^^^               ^^ ^^^   ^   ^      ^^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "unknown",
+      "likely_bug_in": "unknown"
+    },
+    {
+      "cycle": 106,
+      "verilator": {
+        "IN": "BCACE9F1AF4F16A58EA1FE5189A4A7949004057353147657421BF3A98D4D22FA24",
+        "OUT": "5AFB0F520061842154B1494AA200C0C1FA80015699818183B3BD4E28E0ACC020AA130921B8980003ED"
+      },
+      "icarus": {
+        "IN": "BCACE9F1AF4F16A58EA1FE5189A4A7949004057353147657421BF3A98D4D22FA24",
+        "OUT": "5AFB0F520061842154B1494AA200C0C1FA80015699818183B3BD4E28E0ACC020AA130921B8980003ED"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "5AFB4F52006184215489494AE200C0C1FA8005DA99818183B3BD4E28E0ACC020AA130921B898638BED"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "5AFB0F520061842154B1494AA200C0C1FA80015699818183B3BD4E28E0ACC020AA130921B8980003ED",
+          "icarus_aligned": "5AFB0F520061842154B1494AA200C0C1FA80015699818183B3BD4E28E0ACC020AA130921B8980003ED",
+          "diff_markers": "                                                                                  ",
+          "formatted_diff": "Verilator: 5AFB0F520061842154B1494AA200C0C1FA80015699818183B3BD4E28E0ACC020AA130921B8980003ED\nIcarus:    5AFB0F520061842154B1494AA200C0C1FA80015699818183B3BD4E28E0ACC020AA130921B8980003ED\nDiff:                                                                                        ",
+          "formatted_lines": [
+            "Verilator: 5AFB0F520061842154B1494AA200C0C1FA80015699818183B3BD4E28E0ACC020AA130921B8980003ED",
+            "Icarus:    5AFB0F520061842154B1494AA200C0C1FA80015699818183B3BD4E28E0ACC020AA130921B8980003ED",
+            "Diff:                                                                                        "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "5AFB0F520061842154B1494AA200C0C1FA80015699818183B3BD4E28E0ACC020AA130921B8980003ED",
+          "cxxrtl_aligned": "5AFB4F52006184215489494AE200C0C1FA8005DA99818183B3BD4E28E0ACC020AA130921B898638BED",
+          "diff_markers": "    ^             ^^    ^            ^^^                                    ^^^^  ",
+          "formatted_diff": "Verilator: 5AFB0F520061842154B1494AA200C0C1FA80015699818183B3BD4E28E0ACC020AA130921B8980003ED\nCxxrtl:    5AFB4F52006184215489494AE200C0C1FA8005DA99818183B3BD4E28E0ACC020AA130921B898638BED\nDiff:          ^             ^^    ^            ^^^                                    ^^^^  ",
+          "formatted_lines": [
+            "Verilator: 5AFB0F520061842154B1494AA200C0C1FA80015699818183B3BD4E28E0ACC020AA130921B8980003ED",
+            "Cxxrtl:    5AFB4F52006184215489494AE200C0C1FA8005DA99818183B3BD4E28E0ACC020AA130921B898638BED",
+            "Diff:          ^             ^^    ^            ^^^                                    ^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "5AFB0F520061842154B1494AA200C0C1FA80015699818183B3BD4E28E0ACC020AA130921B8980003ED",
+          "cxxrtl_aligned": "5AFB4F52006184215489494AE200C0C1FA8005DA99818183B3BD4E28E0ACC020AA130921B898638BED",
+          "diff_markers": "    ^             ^^    ^            ^^^                                    ^^^^  ",
+          "formatted_diff": "Icarus:    5AFB0F520061842154B1494AA200C0C1FA80015699818183B3BD4E28E0ACC020AA130921B8980003ED\nCxxrtl:    5AFB4F52006184215489494AE200C0C1FA8005DA99818183B3BD4E28E0ACC020AA130921B898638BED\nDiff:          ^             ^^    ^            ^^^                                    ^^^^  ",
+          "formatted_lines": [
+            "Icarus:    5AFB0F520061842154B1494AA200C0C1FA80015699818183B3BD4E28E0ACC020AA130921B8980003ED",
+            "Cxxrtl:    5AFB4F52006184215489494AE200C0C1FA8005DA99818183B3BD4E28E0ACC020AA130921B898638BED",
+            "Diff:          ^             ^^    ^            ^^^                                    ^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 112,
+      "verilator": {
+        "IN": "7675C4AF11510E533850FAE39BD365BBAA70B9BE95375F9E4CA86CDE7F3B71039E",
+        "OUT": "ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CA811A802110186BC3EC2EB2652D"
+      },
+      "icarus": {
+        "IN": "7675C4AF11510E533850FAE39BD365BBAA70B9BE95375F9E4CA86CDE7F3B71039E",
+        "OUT": "ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CA811A802110186BC3EC2EB2652D"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CAA13F402130186FC3EC2DAF252D"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CA811A802110186BC3EC2EB2652D",
+          "icarus_aligned": "ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CA811A802110186BC3EC2EB2652D",
+          "diff_markers": "                                                                                  ",
+          "formatted_diff": "Verilator: ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CA811A802110186BC3EC2EB2652D\nIcarus:    ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CA811A802110186BC3EC2EB2652D\nDiff:                                                                                        ",
+          "formatted_lines": [
+            "Verilator: ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CA811A802110186BC3EC2EB2652D",
+            "Icarus:    ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CA811A802110186BC3EC2EB2652D",
+            "Diff:                                                                                        "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CA811A802110186BC3EC2EB2652D",
+          "cxxrtl_aligned": "ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CAA13F402130186FC3EC2DAF252D",
+          "diff_markers": "                                                        ^ ^^^   ^    ^     ^^^^   ",
+          "formatted_diff": "Verilator: ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CA811A802110186BC3EC2EB2652D\nCxxrtl:    ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CAA13F402130186FC3EC2DAF252D\nDiff:                                                              ^ ^^^   ^    ^     ^^^^   ",
+          "formatted_lines": [
+            "Verilator: ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CA811A802110186BC3EC2EB2652D",
+            "Cxxrtl:    ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CAA13F402130186FC3EC2DAF252D",
+            "Diff:                                                              ^ ^^^   ^    ^     ^^^^   "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CA811A802110186BC3EC2EB2652D",
+          "cxxrtl_aligned": "ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CAA13F402130186FC3EC2DAF252D",
+          "diff_markers": "                                                        ^ ^^^   ^    ^     ^^^^   ",
+          "formatted_diff": "Icarus:    ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CA811A802110186BC3EC2EB2652D\nCxxrtl:    ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CAA13F402130186FC3EC2DAF252D\nDiff:                                                              ^ ^^^   ^    ^     ^^^^   ",
+          "formatted_lines": [
+            "Icarus:    ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CA811A802110186BC3EC2EB2652D",
+            "Cxxrtl:    ADDD561805D5D489A44B81806E80E0E719A00BF673537354B4C809CAA13F402130186FC3EC2DAF252D",
+            "Diff:                                                              ^ ^^^   ^    ^     ^^^^   "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 134,
+      "verilator": {
+        "IN": "90A142D2531AE1D2423144308D30D53D24A6BCD1B7C8B860B68582E051358D8178",
+        "OUT": "1CA40D21304002081A664A8AAE4C13131EB208FF0169E9E9C644009A36CA8004140048C022A2975F5E9"
+      },
+      "icarus": {
+        "IN": "90A142D2531AE1D2423144308D30D53D24A6BCD1B7C8B860B68582E051358D8178",
+        "OUT": "1CA40D21304002081A664A8AAE4C13131EB208FF0169E9E9C644009A36CA8004140048C022A2975F5E9"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "CA40921204002081A448A8AAA4C13131EB2083FC169E9E9C644009A36CA8004140048C022A280001E9"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "1CA40D21304002081A664A8AAE4C13131EB208FF0169E9E9C644009A36CA8004140048C022A2975F5E9",
+          "icarus_aligned": "1CA40D21304002081A664A8AAE4C13131EB208FF0169E9E9C644009A36CA8004140048C022A2975F5E9",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 1CA40D21304002081A664A8AAE4C13131EB208FF0169E9E9C644009A36CA8004140048C022A2975F5E9\nIcarus:    1CA40D21304002081A664A8AAE4C13131EB208FF0169E9E9C644009A36CA8004140048C022A2975F5E9\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 1CA40D21304002081A664A8AAE4C13131EB208FF0169E9E9C644009A36CA8004140048C022A2975F5E9",
+            "Icarus:    1CA40D21304002081A664A8AAE4C13131EB208FF0169E9E9C644009A36CA8004140048C022A2975F5E9",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "1CA40D21304002081A664A8AAE4C13131EB208FF0169E9E9C644009A36CA8004140048C022A2975F5E9",
+          "cxxrtl_aligned": "CA40921204002081A448A8AAA4C13131EB2083FC169E9E9C644009A36CA8004140048C022A280001E9 ",
+          "diff_markers": "^^^^^^^^^^^ ^^^^^^^^^^^  ^^^^^^^^^^^^^ ^^^^^^^^^^^ ^ ^^^^^^^^ ^^^^ ^^^^^ ^^^^^^^^^^",
+          "formatted_diff": "Verilator: 1CA40D21304002081A664A8AAE4C13131EB208FF0169E9E9C644009A36CA8004140048C022A2975F5E9\nCxxrtl:    CA40921204002081A448A8AAA4C13131EB2083FC169E9E9C644009A36CA8004140048C022A280001E9 \nDiff:      ^^^^^^^^^^^ ^^^^^^^^^^^  ^^^^^^^^^^^^^ ^^^^^^^^^^^ ^ ^^^^^^^^ ^^^^ ^^^^^ ^^^^^^^^^^",
+          "formatted_lines": [
+            "Verilator: 1CA40D21304002081A664A8AAE4C13131EB208FF0169E9E9C644009A36CA8004140048C022A2975F5E9",
+            "Cxxrtl:    CA40921204002081A448A8AAA4C13131EB2083FC169E9E9C644009A36CA8004140048C022A280001E9 ",
+            "Diff:      ^^^^^^^^^^^ ^^^^^^^^^^^  ^^^^^^^^^^^^^ ^^^^^^^^^^^ ^ ^^^^^^^^ ^^^^ ^^^^^ ^^^^^^^^^^"
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "1CA40D21304002081A664A8AAE4C13131EB208FF0169E9E9C644009A36CA8004140048C022A2975F5E9",
+          "cxxrtl_aligned": "CA40921204002081A448A8AAA4C13131EB2083FC169E9E9C644009A36CA8004140048C022A280001E9 ",
+          "diff_markers": "^^^^^^^^^^^ ^^^^^^^^^^^  ^^^^^^^^^^^^^ ^^^^^^^^^^^ ^ ^^^^^^^^ ^^^^ ^^^^^ ^^^^^^^^^^",
+          "formatted_diff": "Icarus:    1CA40D21304002081A664A8AAE4C13131EB208FF0169E9E9C644009A36CA8004140048C022A2975F5E9\nCxxrtl:    CA40921204002081A448A8AAA4C13131EB2083FC169E9E9C644009A36CA8004140048C022A280001E9 \nDiff:      ^^^^^^^^^^^ ^^^^^^^^^^^  ^^^^^^^^^^^^^ ^^^^^^^^^^^ ^ ^^^^^^^^ ^^^^ ^^^^^ ^^^^^^^^^^",
+          "formatted_lines": [
+            "Icarus:    1CA40D21304002081A664A8AAE4C13131EB208FF0169E9E9C644009A36CA8004140048C022A2975F5E9",
+            "Cxxrtl:    CA40921204002081A448A8AAA4C13131EB2083FC169E9E9C644009A36CA8004140048C022A280001E9 ",
+            "Diff:      ^^^^^^^^^^^ ^^^^^^^^^^^  ^^^^^^^^^^^^^ ^^^^^^^^^^^ ^ ^^^^^^^^ ^^^^ ^^^^^ ^^^^^^^^^^"
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 138,
+      "verilator": {
+        "IN": "1C3EE9C28FEFA1ADEEE6E8BF69AEE18DF0BB2FF633323F99A2D3A8F96D30DE1D84",
+        "OUT": "8C7BA75200484F39A5AD797FA0000007185002ED37855F81711009BF4B0F20052C02CD27AE885C0CFD"
+      },
+      "icarus": {
+        "IN": "1C3EE9C28FEFA1ADEEE6E8BF69AEE18DF0BB2FF633323F99A2D3A8F96D30DE1D84",
+        "OUT": "8C7BA75200484F39A5AD797FA0000007185002ED37855F81711009BF4B0F20052C02CD27AE885C04FD"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "8C7BA75200484E39A5AD696AA0000007185002ED37855F81711009BF2AF500050C02CD27AE880000FD"
+      },
+      "matches": {
+        "verilator_icarus": false,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "8C7BA75200484F39A5AD797FA0000007185002ED37855F81711009BF4B0F20052C02CD27AE885C0CFD",
+          "icarus_aligned": "8C7BA75200484F39A5AD797FA0000007185002ED37855F81711009BF4B0F20052C02CD27AE885C04FD",
+          "diff_markers": "                                                                               ^  ",
+          "formatted_diff": "Verilator: 8C7BA75200484F39A5AD797FA0000007185002ED37855F81711009BF4B0F20052C02CD27AE885C0CFD\nIcarus:    8C7BA75200484F39A5AD797FA0000007185002ED37855F81711009BF4B0F20052C02CD27AE885C04FD\nDiff:                                                                                     ^  ",
+          "formatted_lines": [
+            "Verilator: 8C7BA75200484F39A5AD797FA0000007185002ED37855F81711009BF4B0F20052C02CD27AE885C0CFD",
+            "Icarus:    8C7BA75200484F39A5AD797FA0000007185002ED37855F81711009BF4B0F20052C02CD27AE885C04FD",
+            "Diff:                                                                                     ^  "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "8C7BA75200484F39A5AD797FA0000007185002ED37855F81711009BF4B0F20052C02CD27AE885C0CFD",
+          "cxxrtl_aligned": "8C7BA75200484E39A5AD696AA0000007185002ED37855F81711009BF2AF500050C02CD27AE880000FD",
+          "diff_markers": "             ^      ^ ^^                                ^^^^^   ^           ^^ ^  ",
+          "formatted_diff": "Verilator: 8C7BA75200484F39A5AD797FA0000007185002ED37855F81711009BF4B0F20052C02CD27AE885C0CFD\nCxxrtl:    8C7BA75200484E39A5AD696AA0000007185002ED37855F81711009BF2AF500050C02CD27AE880000FD\nDiff:                   ^      ^ ^^                                ^^^^^   ^           ^^ ^  ",
+          "formatted_lines": [
+            "Verilator: 8C7BA75200484F39A5AD797FA0000007185002ED37855F81711009BF4B0F20052C02CD27AE885C0CFD",
+            "Cxxrtl:    8C7BA75200484E39A5AD696AA0000007185002ED37855F81711009BF2AF500050C02CD27AE880000FD",
+            "Diff:                   ^      ^ ^^                                ^^^^^   ^           ^^ ^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "8C7BA75200484F39A5AD797FA0000007185002ED37855F81711009BF4B0F20052C02CD27AE885C04FD",
+          "cxxrtl_aligned": "8C7BA75200484E39A5AD696AA0000007185002ED37855F81711009BF2AF500050C02CD27AE880000FD",
+          "diff_markers": "             ^      ^ ^^                                ^^^^^   ^           ^^ ^  ",
+          "formatted_diff": "Icarus:    8C7BA75200484F39A5AD797FA0000007185002ED37855F81711009BF4B0F20052C02CD27AE885C04FD\nCxxrtl:    8C7BA75200484E39A5AD696AA0000007185002ED37855F81711009BF2AF500050C02CD27AE880000FD\nDiff:                   ^      ^ ^^                                ^^^^^   ^           ^^ ^  ",
+          "formatted_lines": [
+            "Icarus:    8C7BA75200484F39A5AD797FA0000007185002ED37855F81711009BF4B0F20052C02CD27AE885C04FD",
+            "Cxxrtl:    8C7BA75200484E39A5AD696AA0000007185002ED37855F81711009BF2AF500050C02CD27AE880000FD",
+            "Diff:                   ^      ^ ^^                                ^^^^^   ^           ^^ ^  "
+          ]
+        }
+      },
+      "ground_truth": "unknown",
+      "likely_bug_in": "unknown"
+    },
+    {
+      "cycle": 140,
+      "verilator": {
+        "IN": "AAD1BB6595B053814C4D066D7F794B6E9EE9F354D9B72C5320C362D2232EA5AF52",
+        "OUT": "1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2642440022420A0C426624000031"
+      },
+      "icarus": {
+        "IN": "AAD1BB6595B053814C4D066D7F794B6E9EE9F354D9B72C5320C362D2232EA5AF52",
+        "OUT": "1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2642440022420A0C426624000031"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2662760022620A0C4266245C0C31"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2642440022420A0C426624000031",
+          "icarus_aligned": "1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2642440022420A0C426624000031",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2642440022420A0C426624000031\nIcarus:    1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2642440022420A0C426624000031\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2642440022420A0C426624000031",
+            "Icarus:    1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2642440022420A0C426624000031",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2642440022420A0C426624000031",
+          "cxxrtl_aligned": "1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2662760022620A0C4266245C0C31",
+          "diff_markers": "                                                         ^ ^^    ^           ^^ ^  ",
+          "formatted_diff": "Verilator: 1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2642440022420A0C426624000031\nCxxrtl:    1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2662760022620A0C4266245C0C31\nDiff:                                                               ^ ^^    ^           ^^ ^  ",
+          "formatted_lines": [
+            "Verilator: 1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2642440022420A0C426624000031",
+            "Cxxrtl:    1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2662760022620A0C4266245C0C31",
+            "Diff:                                                               ^ ^^    ^           ^^ ^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2642440022420A0C426624000031",
+          "cxxrtl_aligned": "1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2662760022620A0C4266245C0C31",
+          "diff_markers": "                                                         ^ ^^    ^           ^^ ^  ",
+          "formatted_diff": "Icarus:    1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2642440022420A0C426624000031\nCxxrtl:    1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2662760022620A0C4266245C0C31\nDiff:                                                               ^ ^^    ^           ^^ ^  ",
+          "formatted_lines": [
+            "Icarus:    1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2642440022420A0C426624000031",
+            "Cxxrtl:    1E6B415DB049C9AD15629414028000001E04042EF1BA7E3A63662AE2662760022620A0C4266245C0C31",
+            "Diff:                                                               ^ ^^    ^           ^^ ^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 142,
+      "verilator": {
+        "IN": "689519288B6E0F3E5A21C1DE055C5FD57CF5DBB46F40FEBB4E56462649F40AC450",
+        "OUT": "1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F1459BFF"
+      },
+      "icarus": {
+        "IN": "689519288B6E0F3E5A21C1DE055C5FD57CF5DBB46F40FEBB4E56462649F40AC450",
+        "OUT": "1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F1459BFF"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F00003FF"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F1459BFF",
+          "icarus_aligned": "1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F1459BFF",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F1459BFF\nIcarus:    1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F1459BFF\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F1459BFF",
+            "Icarus:    1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F1459BFF",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F1459BFF",
+          "cxxrtl_aligned": "1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F00003FF",
+          "diff_markers": "                                                                            ^^^^^  ",
+          "formatted_diff": "Verilator: 1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F1459BFF\nCxxrtl:    1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F00003FF\nDiff:                                                                                  ^^^^^  ",
+          "formatted_lines": [
+            "Verilator: 1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F1459BFF",
+            "Cxxrtl:    1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F00003FF",
+            "Diff:                                                                                  ^^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F1459BFF",
+          "cxxrtl_aligned": "1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F00003FF",
+          "diff_markers": "                                                                            ^^^^^  ",
+          "formatted_diff": "Icarus:    1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F1459BFF\nCxxrtl:    1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F00003FF\nDiff:                                                                                  ^^^^^  ",
+          "formatted_lines": [
+            "Icarus:    1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F1459BFF",
+            "Cxxrtl:    1C5B190D3052D2E71A7E5090AA4812121FC40015697D6B7E35337E9A43A72C00F480E2809F9F00003FF",
+            "Diff:                                                                                  ^^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 152,
+      "verilator": {
+        "IN": "6EAF2BFAE968868770B7CEE5B3D64E972281C77CEDED1E7F0409FC6F1750A89796",
+        "OUT": "D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0A5ED80D"
+      },
+      "icarus": {
+        "IN": "6EAF2BFAE968868770B7CEE5B3D64E972281C77CEDED1E7F0409FC6F1750A89796",
+        "OUT": "D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0ADED80D"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0A5ED80D"
+      },
+      "matches": {
+        "verilator_icarus": false,
+        "verilator_cxxrtl": true,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0A5ED80D",
+          "icarus_aligned": "D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0ADED80D",
+          "diff_markers": "                                                                            ^     ",
+          "formatted_diff": "Verilator: D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0A5ED80D\nIcarus:    D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0ADED80D\nDiff:                                                                                  ^     ",
+          "formatted_lines": [
+            "Verilator: D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0A5ED80D",
+            "Icarus:    D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0ADED80D",
+            "Diff:                                                                                  ^     "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0A5ED80D",
+          "cxxrtl_aligned": "D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0A5ED80D",
+          "diff_markers": "                                                                                  ",
+          "formatted_diff": "Verilator: D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0A5ED80D\nCxxrtl:    D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0A5ED80D\nDiff:                                                                                        ",
+          "formatted_lines": [
+            "Verilator: D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0A5ED80D",
+            "Cxxrtl:    D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0A5ED80D",
+            "Diff:                                                                                        "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0ADED80D",
+          "cxxrtl_aligned": "D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0A5ED80D",
+          "diff_markers": "                                                                            ^     ",
+          "formatted_diff": "Icarus:    D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0ADED80D\nCxxrtl:    D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0A5ED80D\nDiff:                                                                                  ^     ",
+          "formatted_lines": [
+            "Icarus:    D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0ADED80D",
+            "Cxxrtl:    D9AF395202001E61A4DC8080200000073B20235492078A074772AE2E2DABC02DA6196CE3EB0A5ED80D",
+            "Diff:                                                                                  ^     "
+          ]
+        }
+      },
+      "ground_truth": "verilator_cxxrtl",
+      "likely_bug_in": "icarus"
+    },
+    {
+      "cycle": 153,
+      "verilator": {
+        "IN": "7D6D41246B37F1E21F21FD488C167582BD93FE87AC9405CA5D124AA9C7B482A0F",
+        "OUT": "3E40D6699040022CA3BDE20206F83FFF703890BF44F657B5BEBBAAE3FEB6D40412C08A903DADAAD445D"
+      },
+      "icarus": {
+        "IN": "7D6D41246B37F1E21F21FD488C167582BD93FE87AC9405CA5D124AA9C7B482A0F",
+        "OUT": "3E40D6699040022CA3BDE20206F83FFF703890BF44F657B5BEBBAAE3FEB6D40412C08A903DADAAD445D"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "3E40D2699040022C957F020202F83FFF7038903B84F657B5BE3BFEE5FEB6D40412C08A903DADA5EDB1D"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "3E40D6699040022CA3BDE20206F83FFF703890BF44F657B5BEBBAAE3FEB6D40412C08A903DADAAD445D",
+          "icarus_aligned": "3E40D6699040022CA3BDE20206F83FFF703890BF44F657B5BEBBAAE3FEB6D40412C08A903DADAAD445D",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 3E40D6699040022CA3BDE20206F83FFF703890BF44F657B5BEBBAAE3FEB6D40412C08A903DADAAD445D\nIcarus:    3E40D6699040022CA3BDE20206F83FFF703890BF44F657B5BEBBAAE3FEB6D40412C08A903DADAAD445D\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 3E40D6699040022CA3BDE20206F83FFF703890BF44F657B5BEBBAAE3FEB6D40412C08A903DADAAD445D",
+            "Icarus:    3E40D6699040022CA3BDE20206F83FFF703890BF44F657B5BEBBAAE3FEB6D40412C08A903DADAAD445D",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "3E40D6699040022CA3BDE20206F83FFF703890BF44F657B5BEBBAAE3FEB6D40412C08A903DADAAD445D",
+          "cxxrtl_aligned": "3E40D2699040022C957F020202F83FFF7038903B84F657B5BE3BFEE5FEB6D40412C08A903DADA5EDB1D",
+          "diff_markers": "     ^          ^^^^^    ^            ^^^         ^ ^^ ^                     ^^^^^ ",
+          "formatted_diff": "Verilator: 3E40D6699040022CA3BDE20206F83FFF703890BF44F657B5BEBBAAE3FEB6D40412C08A903DADAAD445D\nCxxrtl:    3E40D2699040022C957F020202F83FFF7038903B84F657B5BE3BFEE5FEB6D40412C08A903DADA5EDB1D\nDiff:           ^          ^^^^^    ^            ^^^         ^ ^^ ^                     ^^^^^ ",
+          "formatted_lines": [
+            "Verilator: 3E40D6699040022CA3BDE20206F83FFF703890BF44F657B5BEBBAAE3FEB6D40412C08A903DADAAD445D",
+            "Cxxrtl:    3E40D2699040022C957F020202F83FFF7038903B84F657B5BE3BFEE5FEB6D40412C08A903DADA5EDB1D",
+            "Diff:           ^          ^^^^^    ^            ^^^         ^ ^^ ^                     ^^^^^ "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "3E40D6699040022CA3BDE20206F83FFF703890BF44F657B5BEBBAAE3FEB6D40412C08A903DADAAD445D",
+          "cxxrtl_aligned": "3E40D2699040022C957F020202F83FFF7038903B84F657B5BE3BFEE5FEB6D40412C08A903DADA5EDB1D",
+          "diff_markers": "     ^          ^^^^^    ^            ^^^         ^ ^^ ^                     ^^^^^ ",
+          "formatted_diff": "Icarus:    3E40D6699040022CA3BDE20206F83FFF703890BF44F657B5BEBBAAE3FEB6D40412C08A903DADAAD445D\nCxxrtl:    3E40D2699040022C957F020202F83FFF7038903B84F657B5BE3BFEE5FEB6D40412C08A903DADA5EDB1D\nDiff:           ^          ^^^^^    ^            ^^^         ^ ^^ ^                     ^^^^^ ",
+          "formatted_lines": [
+            "Icarus:    3E40D6699040022CA3BDE20206F83FFF703890BF44F657B5BEBBAAE3FEB6D40412C08A903DADAAD445D",
+            "Cxxrtl:    3E40D2699040022C957F020202F83FFF7038903B84F657B5BE3BFEE5FEB6D40412C08A903DADA5EDB1D",
+            "Diff:           ^          ^^^^^    ^            ^^^         ^ ^^ ^                     ^^^^^ "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 154,
+      "verilator": {
+        "IN": "CCF78DB4FF9ACD241E5D3C70592EC2ACA0A35CA1A3D12F0CD2348E7B5D2021B134",
+        "OUT": "1EF393453020018815681C9CAA6000007233042ED1A8A8B05555009AEB47D80019C0C6B23ECCC0000FD"
+      },
+      "icarus": {
+        "IN": "CCF78DB4FF9ACD241E5D3C70592EC2ACA0A35CA1A3D12F0CD2348E7B5D2021B134",
+        "OUT": "1EF393453020018815681C9CAA6000007233042ED1A8A8B05555009AEB47D80019C0C6B23ECCC0000FD"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "1EF397453020019C9A697D9DFE600000723304EE11A8A8B05555009AED48AA001BC0C6F23ECCEAD44FD"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "1EF393453020018815681C9CAA6000007233042ED1A8A8B05555009AEB47D80019C0C6B23ECCC0000FD",
+          "icarus_aligned": "1EF393453020018815681C9CAA6000007233042ED1A8A8B05555009AEB47D80019C0C6B23ECCC0000FD",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 1EF393453020018815681C9CAA6000007233042ED1A8A8B05555009AEB47D80019C0C6B23ECCC0000FD\nIcarus:    1EF393453020018815681C9CAA6000007233042ED1A8A8B05555009AEB47D80019C0C6B23ECCC0000FD\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 1EF393453020018815681C9CAA6000007233042ED1A8A8B05555009AEB47D80019C0C6B23ECCC0000FD",
+            "Icarus:    1EF393453020018815681C9CAA6000007233042ED1A8A8B05555009AEB47D80019C0C6B23ECCC0000FD",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "1EF393453020018815681C9CAA6000007233042ED1A8A8B05555009AEB47D80019C0C6B23ECCC0000FD",
+          "cxxrtl_aligned": "1EF397453020019C9A697D9DFE600000723304EE11A8A8B05555009AED48AA001BC0C6F23ECCEAD44FD",
+          "diff_markers": "     ^        ^^^^ ^^^ ^^^            ^ ^                ^ ^^^   ^    ^     ^^^^^  ",
+          "formatted_diff": "Verilator: 1EF393453020018815681C9CAA6000007233042ED1A8A8B05555009AEB47D80019C0C6B23ECCC0000FD\nCxxrtl:    1EF397453020019C9A697D9DFE600000723304EE11A8A8B05555009AED48AA001BC0C6F23ECCEAD44FD\nDiff:           ^        ^^^^ ^^^ ^^^            ^ ^                ^ ^^^   ^    ^     ^^^^^  ",
+          "formatted_lines": [
+            "Verilator: 1EF393453020018815681C9CAA6000007233042ED1A8A8B05555009AEB47D80019C0C6B23ECCC0000FD",
+            "Cxxrtl:    1EF397453020019C9A697D9DFE600000723304EE11A8A8B05555009AED48AA001BC0C6F23ECCEAD44FD",
+            "Diff:           ^        ^^^^ ^^^ ^^^            ^ ^                ^ ^^^   ^    ^     ^^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "1EF393453020018815681C9CAA6000007233042ED1A8A8B05555009AEB47D80019C0C6B23ECCC0000FD",
+          "cxxrtl_aligned": "1EF397453020019C9A697D9DFE600000723304EE11A8A8B05555009AED48AA001BC0C6F23ECCEAD44FD",
+          "diff_markers": "     ^        ^^^^ ^^^ ^^^            ^ ^                ^ ^^^   ^    ^     ^^^^^  ",
+          "formatted_diff": "Icarus:    1EF393453020018815681C9CAA6000007233042ED1A8A8B05555009AEB47D80019C0C6B23ECCC0000FD\nCxxrtl:    1EF397453020019C9A697D9DFE600000723304EE11A8A8B05555009AED48AA001BC0C6F23ECCEAD44FD\nDiff:           ^        ^^^^ ^^^ ^^^            ^ ^                ^ ^^^   ^    ^     ^^^^^  ",
+          "formatted_lines": [
+            "Icarus:    1EF393453020018815681C9CAA6000007233042ED1A8A8B05555009AEB47D80019C0C6B23ECCC0000FD",
+            "Cxxrtl:    1EF397453020019C9A697D9DFE600000723304EE11A8A8B05555009AED48AA001BC0C6F23ECCEAD44FD",
+            "Diff:           ^        ^^^^ ^^^ ^^^            ^ ^                ^ ^^^   ^    ^     ^^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 165,
+      "verilator": {
+        "IN": "BB1625864A03058FB568617FEC84E8C29F8DDB643E6DD91CF90EA9A7C03C241543",
+        "OUT": "206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE3536398005A81ECC00F8FB48C6AD"
+      },
+      "icarus": {
+        "IN": "BB1625864A03058FB568617FEC84E8C29F8DDB643E6DD91CF90EA9A7C03C241543",
+        "OUT": "206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE3536398005A81ECC00F8FB48C6AD"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE35160A0005881ECC00F8F80002AD"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE3536398005A81ECC00F8FB48C6AD",
+          "icarus_aligned": "206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE3536398005A81ECC00F8FB48C6AD",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE3536398005A81ECC00F8FB48C6AD\nIcarus:    206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE3536398005A81ECC00F8FB48C6AD\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE3536398005A81ECC00F8FB48C6AD",
+            "Icarus:    206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE3536398005A81ECC00F8FB48C6AD",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE3536398005A81ECC00F8FB48C6AD",
+          "cxxrtl_aligned": "206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE35160A0005881ECC00F8F80002AD",
+          "diff_markers": "                                                         ^ ^^^   ^          ^^^^^  ",
+          "formatted_diff": "Verilator: 206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE3536398005A81ECC00F8FB48C6AD\nCxxrtl:    206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE35160A0005881ECC00F8F80002AD\nDiff:                                                               ^ ^^^   ^          ^^^^^  ",
+          "formatted_lines": [
+            "Verilator: 206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE3536398005A81ECC00F8FB48C6AD",
+            "Cxxrtl:    206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE35160A0005881ECC00F8F80002AD",
+            "Diff:                                                               ^ ^^^   ^          ^^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE3536398005A81ECC00F8FB48C6AD",
+          "cxxrtl_aligned": "206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE35160A0005881ECC00F8F80002AD",
+          "diff_markers": "                                                         ^ ^^^   ^          ^^^^^  ",
+          "formatted_diff": "Icarus:    206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE3536398005A81ECC00F8FB48C6AD\nCxxrtl:    206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE35160A0005881ECC00F8F80002AD\nDiff:                                                               ^ ^^^   ^          ^^^^^  ",
+          "formatted_lines": [
+            "Icarus:    206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE3536398005A81ECC00F8FB48C6AD",
+            "Cxxrtl:    206E5211A04000801A5FC606022A4ACA1C8404223DA36B1F9E19FEE35160A0005881ECC00F8F80002AD",
+            "Diff:                                                               ^ ^^^   ^          ^^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 171,
+      "verilator": {
+        "IN": "BD2BEB5B14C661F1675F247126122C2C81CBF8A0684BF6678B332E195A7CF74505",
+        "OUT": "30AEA775303535419563A686AE8001FF723808CC31B2FF10AC2AAAE336235C022200AEB0B686363283D"
+      },
+      "icarus": {
+        "IN": "BD2BEB5B14C661F1675F247126122C2C81CBF8A0684BF6678B332E195A7CF74505",
+        "OUT": "30AEA775303535419563A686AE8001FF723808CC31B2FF10AC2AAAE336235C022200AEB0B686363283D"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "20AEA3752035354195408686AA8001FF7238080CF1B2FF10AC2AAAE336235C022200AEB0B686000003D"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "30AEA775303535419563A686AE8001FF723808CC31B2FF10AC2AAAE336235C022200AEB0B686363283D",
+          "icarus_aligned": "30AEA775303535419563A686AE8001FF723808CC31B2FF10AC2AAAE336235C022200AEB0B686363283D",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 30AEA775303535419563A686AE8001FF723808CC31B2FF10AC2AAAE336235C022200AEB0B686363283D\nIcarus:    30AEA775303535419563A686AE8001FF723808CC31B2FF10AC2AAAE336235C022200AEB0B686363283D\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 30AEA775303535419563A686AE8001FF723808CC31B2FF10AC2AAAE336235C022200AEB0B686363283D",
+            "Icarus:    30AEA775303535419563A686AE8001FF723808CC31B2FF10AC2AAAE336235C022200AEB0B686363283D",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "30AEA775303535419563A686AE8001FF723808CC31B2FF10AC2AAAE336235C022200AEB0B686363283D",
+          "cxxrtl_aligned": "20AEA3752035354195408686AA8001FF7238080CF1B2FF10AC2AAAE336235C022200AEB0B686000003D",
+          "diff_markers": "^    ^  ^         ^^^    ^            ^ ^                                   ^^^^^  ",
+          "formatted_diff": "Verilator: 30AEA775303535419563A686AE8001FF723808CC31B2FF10AC2AAAE336235C022200AEB0B686363283D\nCxxrtl:    20AEA3752035354195408686AA8001FF7238080CF1B2FF10AC2AAAE336235C022200AEB0B686000003D\nDiff:      ^    ^  ^         ^^^    ^            ^ ^                                   ^^^^^  ",
+          "formatted_lines": [
+            "Verilator: 30AEA775303535419563A686AE8001FF723808CC31B2FF10AC2AAAE336235C022200AEB0B686363283D",
+            "Cxxrtl:    20AEA3752035354195408686AA8001FF7238080CF1B2FF10AC2AAAE336235C022200AEB0B686000003D",
+            "Diff:      ^    ^  ^         ^^^    ^            ^ ^                                   ^^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "30AEA775303535419563A686AE8001FF723808CC31B2FF10AC2AAAE336235C022200AEB0B686363283D",
+          "cxxrtl_aligned": "20AEA3752035354195408686AA8001FF7238080CF1B2FF10AC2AAAE336235C022200AEB0B686000003D",
+          "diff_markers": "^    ^  ^         ^^^    ^            ^ ^                                   ^^^^^  ",
+          "formatted_diff": "Icarus:    30AEA775303535419563A686AE8001FF723808CC31B2FF10AC2AAAE336235C022200AEB0B686363283D\nCxxrtl:    20AEA3752035354195408686AA8001FF7238080CF1B2FF10AC2AAAE336235C022200AEB0B686000003D\nDiff:      ^    ^  ^         ^^^    ^            ^ ^                                   ^^^^^  ",
+          "formatted_lines": [
+            "Icarus:    30AEA775303535419563A686AE8001FF723808CC31B2FF10AC2AAAE336235C022200AEB0B686363283D",
+            "Cxxrtl:    20AEA3752035354195408686AA8001FF7238080CF1B2FF10AC2AAAE336235C022200AEB0B686000003D",
+            "Diff:      ^    ^  ^         ^^^    ^            ^ ^                                   ^^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 173,
+      "verilator": {
+        "IN": "F36DFCB36217A7622DC125B1441C3402576E016FD67A5837F1B7C8F3984F34497B",
+        "OUT": "22BD797DA04001889545161602C01BFB1E180A201CDBDBDBEB6E809ABCDDA000CCA0ECA0379780001FD"
+      },
+      "icarus": {
+        "IN": "F36DFCB36217A7622DC125B1441C3402576E016FD67A5837F1B7C8F3984F34497B",
+        "OUT": "22BD797DA04001889545161602C01BFB1E180A201CDBDBDBEB6E809ABCDDA000CCA0ECA0379780001FD"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "32BD7D7DB04001889566B61606C01BFB1E180A2CDCDBDBDBEB6E809ABCDDA000CCA0ECA03797B6329FD"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "22BD797DA04001889545161602C01BFB1E180A201CDBDBDBEB6E809ABCDDA000CCA0ECA0379780001FD",
+          "icarus_aligned": "22BD797DA04001889545161602C01BFB1E180A201CDBDBDBEB6E809ABCDDA000CCA0ECA0379780001FD",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 22BD797DA04001889545161602C01BFB1E180A201CDBDBDBEB6E809ABCDDA000CCA0ECA0379780001FD\nIcarus:    22BD797DA04001889545161602C01BFB1E180A201CDBDBDBEB6E809ABCDDA000CCA0ECA0379780001FD\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 22BD797DA04001889545161602C01BFB1E180A201CDBDBDBEB6E809ABCDDA000CCA0ECA0379780001FD",
+            "Icarus:    22BD797DA04001889545161602C01BFB1E180A201CDBDBDBEB6E809ABCDDA000CCA0ECA0379780001FD",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "22BD797DA04001889545161602C01BFB1E180A201CDBDBDBEB6E809ABCDDA000CCA0ECA0379780001FD",
+          "cxxrtl_aligned": "32BD7D7DB04001889566B61606C01BFB1E180A2CDCDBDBDBEB6E809ABCDDA000CCA0ECA03797B6329FD",
+          "diff_markers": "^    ^  ^         ^^^    ^             ^^                                   ^^^^^  ",
+          "formatted_diff": "Verilator: 22BD797DA04001889545161602C01BFB1E180A201CDBDBDBEB6E809ABCDDA000CCA0ECA0379780001FD\nCxxrtl:    32BD7D7DB04001889566B61606C01BFB1E180A2CDCDBDBDBEB6E809ABCDDA000CCA0ECA03797B6329FD\nDiff:      ^    ^  ^         ^^^    ^             ^^                                   ^^^^^  ",
+          "formatted_lines": [
+            "Verilator: 22BD797DA04001889545161602C01BFB1E180A201CDBDBDBEB6E809ABCDDA000CCA0ECA0379780001FD",
+            "Cxxrtl:    32BD7D7DB04001889566B61606C01BFB1E180A2CDCDBDBDBEB6E809ABCDDA000CCA0ECA03797B6329FD",
+            "Diff:      ^    ^  ^         ^^^    ^             ^^                                   ^^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "22BD797DA04001889545161602C01BFB1E180A201CDBDBDBEB6E809ABCDDA000CCA0ECA0379780001FD",
+          "cxxrtl_aligned": "32BD7D7DB04001889566B61606C01BFB1E180A2CDCDBDBDBEB6E809ABCDDA000CCA0ECA03797B6329FD",
+          "diff_markers": "^    ^  ^         ^^^    ^             ^^                                   ^^^^^  ",
+          "formatted_diff": "Icarus:    22BD797DA04001889545161602C01BFB1E180A201CDBDBDBEB6E809ABCDDA000CCA0ECA0379780001FD\nCxxrtl:    32BD7D7DB04001889566B61606C01BFB1E180A2CDCDBDBDBEB6E809ABCDDA000CCA0ECA03797B6329FD\nDiff:      ^    ^  ^         ^^^    ^             ^^                                   ^^^^^  ",
+          "formatted_lines": [
+            "Icarus:    22BD797DA04001889545161602C01BFB1E180A201CDBDBDBEB6E809ABCDDA000CCA0ECA0379780001FD",
+            "Cxxrtl:    32BD7D7DB04001889566B61606C01BFB1E180A2CDCDBDBDBEB6E809ABCDDA000CCA0ECA03797B6329FD",
+            "Diff:      ^    ^  ^         ^^^    ^             ^^                                   ^^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 195,
+      "verilator": {
+        "IN": "252A77DF1C0ACD608F807903EEDDCFAD69127773F0D575B433E32D8FA2D85D076D",
+        "OUT": "2089A239203D3D101A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAF4AAF0D"
+      },
+      "icarus": {
+        "IN": "252A77DF1C0ACD608F807903EEDDCFAD69127773F0D575B433E32D8FA2D85D076D",
+        "OUT": "2089A239203D3D111A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAFCAAF0D"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "2089A239203D3D101A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAF4AAF0D"
+      },
+      "matches": {
+        "verilator_icarus": false,
+        "verilator_cxxrtl": true,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "2089A239203D3D101A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAF4AAF0D",
+          "icarus_aligned": "2089A239203D3D111A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAFCAAF0D",
+          "diff_markers": "               ^                                                             ^     ",
+          "formatted_diff": "Verilator: 2089A239203D3D101A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAF4AAF0D\nIcarus:    2089A239203D3D111A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAFCAAF0D\nDiff:                     ^                                                             ^     ",
+          "formatted_lines": [
+            "Verilator: 2089A239203D3D101A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAF4AAF0D",
+            "Icarus:    2089A239203D3D111A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAFCAAF0D",
+            "Diff:                     ^                                                             ^     "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "2089A239203D3D101A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAF4AAF0D",
+          "cxxrtl_aligned": "2089A239203D3D101A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAF4AAF0D",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 2089A239203D3D101A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAF4AAF0D\nCxxrtl:    2089A239203D3D101A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAF4AAF0D\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 2089A239203D3D101A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAF4AAF0D",
+            "Cxxrtl:    2089A239203D3D101A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAF4AAF0D",
+            "Diff:                                                                                         "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "2089A239203D3D111A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAFCAAF0D",
+          "cxxrtl_aligned": "2089A239203D3D101A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAF4AAF0D",
+          "diff_markers": "               ^                                                             ^     ",
+          "formatted_diff": "Icarus:    2089A239203D3D111A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAFCAAF0D\nCxxrtl:    2089A239203D3D101A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAF4AAF0D\nDiff:                     ^                                                             ^     ",
+          "formatted_lines": [
+            "Icarus:    2089A239203D3D111A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAFCAAF0D",
+            "Cxxrtl:    2089A239203D3D101A415797FA0018F81CA0042ED174F484EF6ED4E2FC99BA080260AEC51FDAF4AAF0D",
+            "Diff:                     ^                                                             ^     "
+          ]
+        }
+      },
+      "ground_truth": "verilator_cxxrtl",
+      "likely_bug_in": "icarus"
+    },
+    {
+      "cycle": 196,
+      "verilator": {
+        "IN": "5262DBA5DDF116F5B41526D2879D99A2C6E796A0A162B1D108A64976ABC2F570FA",
+        "OUT": "A94426D201804EC9A49440402000000727002201DB9F2B9D45554E2483900023960E4853FFAC0003FF"
+      },
+      "icarus": {
+        "IN": "5262DBA5DDF116F5B41526D2879D99A2C6E796A0A162B1D108A64976ABC2F570FA",
+        "OUT": "A94426D201804EC9A49440402000000727002201DB9F2B9D45554E2483900023960E4853FFAC0003FF"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "1A94426D301804EC9A69440402000000727002201DB9F2B9D45554E24A3A08023B60E4853FFAF4AAFFF"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "A94426D201804EC9A49440402000000727002201DB9F2B9D45554E2483900023960E4853FFAC0003FF",
+          "icarus_aligned": "A94426D201804EC9A49440402000000727002201DB9F2B9D45554E2483900023960E4853FFAC0003FF",
+          "diff_markers": "                                                                                  ",
+          "formatted_diff": "Verilator: A94426D201804EC9A49440402000000727002201DB9F2B9D45554E2483900023960E4853FFAC0003FF\nIcarus:    A94426D201804EC9A49440402000000727002201DB9F2B9D45554E2483900023960E4853FFAC0003FF\nDiff:                                                                                        ",
+          "formatted_lines": [
+            "Verilator: A94426D201804EC9A49440402000000727002201DB9F2B9D45554E2483900023960E4853FFAC0003FF",
+            "Icarus:    A94426D201804EC9A49440402000000727002201DB9F2B9D45554E2483900023960E4853FFAC0003FF",
+            "Diff:                                                                                        "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "A94426D201804EC9A49440402000000727002201DB9F2B9D45554E2483900023960E4853FFAC0003FF ",
+          "cxxrtl_aligned": "1A94426D301804EC9A69440402000000727002201DB9F2B9D45554E24A3A08023B60E4853FFAF4AAFFF",
+          "diff_markers": "^^^ ^^^^^^^^^^^^^^^^ ^^^^^     ^^^^ ^ ^^^^^^^^^^^^  ^^^^^^^^ ^^^^^^^^^^^^ ^^^^^^  ^",
+          "formatted_diff": "Verilator: A94426D201804EC9A49440402000000727002201DB9F2B9D45554E2483900023960E4853FFAC0003FF \nCxxrtl:    1A94426D301804EC9A69440402000000727002201DB9F2B9D45554E24A3A08023B60E4853FFAF4AAFFF\nDiff:      ^^^ ^^^^^^^^^^^^^^^^ ^^^^^     ^^^^ ^ ^^^^^^^^^^^^  ^^^^^^^^ ^^^^^^^^^^^^ ^^^^^^  ^",
+          "formatted_lines": [
+            "Verilator: A94426D201804EC9A49440402000000727002201DB9F2B9D45554E2483900023960E4853FFAC0003FF ",
+            "Cxxrtl:    1A94426D301804EC9A69440402000000727002201DB9F2B9D45554E24A3A08023B60E4853FFAF4AAFFF",
+            "Diff:      ^^^ ^^^^^^^^^^^^^^^^ ^^^^^     ^^^^ ^ ^^^^^^^^^^^^  ^^^^^^^^ ^^^^^^^^^^^^ ^^^^^^  ^"
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "A94426D201804EC9A49440402000000727002201DB9F2B9D45554E2483900023960E4853FFAC0003FF ",
+          "cxxrtl_aligned": "1A94426D301804EC9A69440402000000727002201DB9F2B9D45554E24A3A08023B60E4853FFAF4AAFFF",
+          "diff_markers": "^^^ ^^^^^^^^^^^^^^^^ ^^^^^     ^^^^ ^ ^^^^^^^^^^^^  ^^^^^^^^ ^^^^^^^^^^^^ ^^^^^^  ^",
+          "formatted_diff": "Icarus:    A94426D201804EC9A49440402000000727002201DB9F2B9D45554E2483900023960E4853FFAC0003FF \nCxxrtl:    1A94426D301804EC9A69440402000000727002201DB9F2B9D45554E24A3A08023B60E4853FFAF4AAFFF\nDiff:      ^^^ ^^^^^^^^^^^^^^^^ ^^^^^     ^^^^ ^ ^^^^^^^^^^^^  ^^^^^^^^ ^^^^^^^^^^^^ ^^^^^^  ^",
+          "formatted_lines": [
+            "Icarus:    A94426D201804EC9A49440402000000727002201DB9F2B9D45554E2483900023960E4853FFAC0003FF ",
+            "Cxxrtl:    1A94426D301804EC9A69440402000000727002201DB9F2B9D45554E24A3A08023B60E4853FFAF4AAFFF",
+            "Diff:      ^^^ ^^^^^^^^^^^^^^^^ ^^^^^     ^^^^ ^ ^^^^^^^^^^^^  ^^^^^^^^ ^^^^^^^^^^^^ ^^^^^^  ^"
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 198,
+      "verilator": {
+        "IN": "5038B94813327587023436C04D663D33E4F9036B77A976497637D7F4116FFF8C38",
+        "OUT": "19D428DD3010102C956E0080AA000000700128332F7272723633009A879AB001118072E02ACAC000139"
+      },
+      "icarus": {
+        "IN": "5038B94813327587023436C04D663D33E4F9036B77A976497637D7F4116FFF8C38",
+        "OUT": "19D428DD3010102C956E0080AA000000700128332F7272723633009A879AB001118072E02ACAC000139"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "19D42CDD3010102C9A6EC080AE0000007001283FEF7272723633009A879AB001118072E02ACAC76CD39"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "19D428DD3010102C956E0080AA000000700128332F7272723633009A879AB001118072E02ACAC000139",
+          "icarus_aligned": "19D428DD3010102C956E0080AA000000700128332F7272723633009A879AB001118072E02ACAC000139",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 19D428DD3010102C956E0080AA000000700128332F7272723633009A879AB001118072E02ACAC000139\nIcarus:    19D428DD3010102C956E0080AA000000700128332F7272723633009A879AB001118072E02ACAC000139\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 19D428DD3010102C956E0080AA000000700128332F7272723633009A879AB001118072E02ACAC000139",
+            "Icarus:    19D428DD3010102C956E0080AA000000700128332F7272723633009A879AB001118072E02ACAC000139",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "19D428DD3010102C956E0080AA000000700128332F7272723633009A879AB001118072E02ACAC000139",
+          "cxxrtl_aligned": "19D42CDD3010102C9A6EC080AE0000007001283FEF7272723633009A879AB001118072E02ACAC76CD39",
+          "diff_markers": "     ^           ^  ^    ^             ^^                                    ^^^^  ",
+          "formatted_diff": "Verilator: 19D428DD3010102C956E0080AA000000700128332F7272723633009A879AB001118072E02ACAC000139\nCxxrtl:    19D42CDD3010102C9A6EC080AE0000007001283FEF7272723633009A879AB001118072E02ACAC76CD39\nDiff:           ^           ^  ^    ^             ^^                                    ^^^^  ",
+          "formatted_lines": [
+            "Verilator: 19D428DD3010102C956E0080AA000000700128332F7272723633009A879AB001118072E02ACAC000139",
+            "Cxxrtl:    19D42CDD3010102C9A6EC080AE0000007001283FEF7272723633009A879AB001118072E02ACAC76CD39",
+            "Diff:           ^           ^  ^    ^             ^^                                    ^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "19D428DD3010102C956E0080AA000000700128332F7272723633009A879AB001118072E02ACAC000139",
+          "cxxrtl_aligned": "19D42CDD3010102C9A6EC080AE0000007001283FEF7272723633009A879AB001118072E02ACAC76CD39",
+          "diff_markers": "     ^           ^  ^    ^             ^^                                    ^^^^  ",
+          "formatted_diff": "Icarus:    19D428DD3010102C956E0080AA000000700128332F7272723633009A879AB001118072E02ACAC000139\nCxxrtl:    19D42CDD3010102C9A6EC080AE0000007001283FEF7272723633009A879AB001118072E02ACAC76CD39\nDiff:           ^           ^  ^    ^             ^^                                    ^^^^  ",
+          "formatted_lines": [
+            "Icarus:    19D428DD3010102C956E0080AA000000700128332F7272723633009A879AB001118072E02ACAC000139",
+            "Cxxrtl:    19D42CDD3010102C9A6EC080AE0000007001283FEF7272723633009A879AB001118072E02ACAC76CD39",
+            "Diff:           ^           ^  ^    ^             ^^                                    ^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 203,
+      "verilator": {
+        "IN": "9D6D13767454B5DE47FE928586FEAE56611AA3C5C8B32B466BC381A7BA450090E5",
+        "OUT": "32A6B109300001CC957C8686AAE007FF7111023548868686F87FFEE376A37C0438C0A8C47FFB80002F1"
+      },
+      "icarus": {
+        "IN": "9D6D13767454B5DE47FE928586FEAE56611AA3C5C8B32B466BC381A7BA450090E5",
+        "OUT": "32A6B109300001CC957C8686AAE007FF7111023548868686F87FFEE376A37C0438C0A8C47FFB80002F1"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "32A6B509300001DD957FC787FEE007FF7111027D88868686F87FFE9B78A5E6043AC0A8C47FFBBBB16F1"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "32A6B109300001CC957C8686AAE007FF7111023548868686F87FFEE376A37C0438C0A8C47FFB80002F1",
+          "icarus_aligned": "32A6B109300001CC957C8686AAE007FF7111023548868686F87FFEE376A37C0438C0A8C47FFB80002F1",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 32A6B109300001CC957C8686AAE007FF7111023548868686F87FFEE376A37C0438C0A8C47FFB80002F1\nIcarus:    32A6B109300001CC957C8686AAE007FF7111023548868686F87FFEE376A37C0438C0A8C47FFB80002F1\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 32A6B109300001CC957C8686AAE007FF7111023548868686F87FFEE376A37C0438C0A8C47FFB80002F1",
+            "Icarus:    32A6B109300001CC957C8686AAE007FF7111023548868686F87FFEE376A37C0438C0A8C47FFB80002F1",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "32A6B109300001CC957C8686AAE007FF7111023548868686F87FFEE376A37C0438C0A8C47FFB80002F1",
+          "cxxrtl_aligned": "32A6B509300001DD957FC787FEE007FF7111027D88868686F87FFE9B78A5E6043AC0A8C47FFBBBB16F1",
+          "diff_markers": "     ^        ^^   ^^^ ^^^            ^^^             ^^ ^ ^^^   ^          ^^^^^  ",
+          "formatted_diff": "Verilator: 32A6B109300001CC957C8686AAE007FF7111023548868686F87FFEE376A37C0438C0A8C47FFB80002F1\nCxxrtl:    32A6B509300001DD957FC787FEE007FF7111027D88868686F87FFE9B78A5E6043AC0A8C47FFBBBB16F1\nDiff:           ^        ^^   ^^^ ^^^            ^^^             ^^ ^ ^^^   ^          ^^^^^  ",
+          "formatted_lines": [
+            "Verilator: 32A6B109300001CC957C8686AAE007FF7111023548868686F87FFEE376A37C0438C0A8C47FFB80002F1",
+            "Cxxrtl:    32A6B509300001DD957FC787FEE007FF7111027D88868686F87FFE9B78A5E6043AC0A8C47FFBBBB16F1",
+            "Diff:           ^        ^^   ^^^ ^^^            ^^^             ^^ ^ ^^^   ^          ^^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "32A6B109300001CC957C8686AAE007FF7111023548868686F87FFEE376A37C0438C0A8C47FFB80002F1",
+          "cxxrtl_aligned": "32A6B509300001DD957FC787FEE007FF7111027D88868686F87FFE9B78A5E6043AC0A8C47FFBBBB16F1",
+          "diff_markers": "     ^        ^^   ^^^ ^^^            ^^^             ^^ ^ ^^^   ^          ^^^^^  ",
+          "formatted_diff": "Icarus:    32A6B109300001CC957C8686AAE007FF7111023548868686F87FFEE376A37C0438C0A8C47FFB80002F1\nCxxrtl:    32A6B509300001DD957FC787FEE007FF7111027D88868686F87FFE9B78A5E6043AC0A8C47FFBBBB16F1\nDiff:           ^        ^^   ^^^ ^^^            ^^^             ^^ ^ ^^^   ^          ^^^^^  ",
+          "formatted_lines": [
+            "Icarus:    32A6B109300001CC957C8686AAE007FF7111023548868686F87FFEE376A37C0438C0A8C47FFB80002F1",
+            "Cxxrtl:    32A6B509300001DD957FC787FEE007FF7111027D88868686F87FFE9B78A5E6043AC0A8C47FFBBBB16F1",
+            "Diff:           ^        ^^   ^^^ ^^^            ^^^             ^^ ^ ^^^   ^          ^^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 217,
+      "verilator": {
+        "IN": "C7CE468B062B4101E1436FEF48335025EBAEB8553AA4578465BC84995C710B9BCF",
+        "OUT": "3E30F621B01515241A60A00006304CCC7285846E9B2BABAB8E08FEE28DC5D000280142B0BACA465B661"
+      },
+      "icarus": {
+        "IN": "C7CE468B062B4101E1436FEF48335025EBAEB8553AA4578465BC84995C710B9BCF",
+        "OUT": "3E30F621B01515241A60A00006304CCC7285846E9B2BABAB8E08FEE28DC5D000280142B0BACA465B661"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "2E30F221A01515241A40C00002304CCC728584265B2BABAB8E08FEE28DC5D000280142B0BACA4000261"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "3E30F621B01515241A60A00006304CCC7285846E9B2BABAB8E08FEE28DC5D000280142B0BACA465B661",
+          "icarus_aligned": "3E30F621B01515241A60A00006304CCC7285846E9B2BABAB8E08FEE28DC5D000280142B0BACA465B661",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 3E30F621B01515241A60A00006304CCC7285846E9B2BABAB8E08FEE28DC5D000280142B0BACA465B661\nIcarus:    3E30F621B01515241A60A00006304CCC7285846E9B2BABAB8E08FEE28DC5D000280142B0BACA465B661\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 3E30F621B01515241A60A00006304CCC7285846E9B2BABAB8E08FEE28DC5D000280142B0BACA465B661",
+            "Icarus:    3E30F621B01515241A60A00006304CCC7285846E9B2BABAB8E08FEE28DC5D000280142B0BACA465B661",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "3E30F621B01515241A60A00006304CCC7285846E9B2BABAB8E08FEE28DC5D000280142B0BACA465B661",
+          "cxxrtl_aligned": "2E30F221A01515241A40C00002304CCC728584265B2BABAB8E08FEE28DC5D000280142B0BACA4000261",
+          "diff_markers": "^    ^  ^         ^ ^    ^            ^^^                                    ^^^^  ",
+          "formatted_diff": "Verilator: 3E30F621B01515241A60A00006304CCC7285846E9B2BABAB8E08FEE28DC5D000280142B0BACA465B661\nCxxrtl:    2E30F221A01515241A40C00002304CCC728584265B2BABAB8E08FEE28DC5D000280142B0BACA4000261\nDiff:      ^    ^  ^         ^ ^    ^            ^^^                                    ^^^^  ",
+          "formatted_lines": [
+            "Verilator: 3E30F621B01515241A60A00006304CCC7285846E9B2BABAB8E08FEE28DC5D000280142B0BACA465B661",
+            "Cxxrtl:    2E30F221A01515241A40C00002304CCC728584265B2BABAB8E08FEE28DC5D000280142B0BACA4000261",
+            "Diff:      ^    ^  ^         ^ ^    ^            ^^^                                    ^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "3E30F621B01515241A60A00006304CCC7285846E9B2BABAB8E08FEE28DC5D000280142B0BACA465B661",
+          "cxxrtl_aligned": "2E30F221A01515241A40C00002304CCC728584265B2BABAB8E08FEE28DC5D000280142B0BACA4000261",
+          "diff_markers": "^    ^  ^         ^ ^    ^            ^^^                                    ^^^^  ",
+          "formatted_diff": "Icarus:    3E30F621B01515241A60A00006304CCC7285846E9B2BABAB8E08FEE28DC5D000280142B0BACA465B661\nCxxrtl:    2E30F221A01515241A40C00002304CCC728584265B2BABAB8E08FEE28DC5D000280142B0BACA4000261\nDiff:      ^    ^  ^         ^ ^    ^            ^^^                                    ^^^^  ",
+          "formatted_lines": [
+            "Icarus:    3E30F621B01515241A60A00006304CCC7285846E9B2BABAB8E08FEE28DC5D000280142B0BACA465B661",
+            "Cxxrtl:    2E30F221A01515241A40C00002304CCC728584265B2BABAB8E08FEE28DC5D000280142B0BACA4000261",
+            "Diff:      ^    ^  ^         ^ ^    ^            ^^^                                    ^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 220,
+      "verilator": {
+        "IN": "9AABC31945417FF5BCA7632DAFC6FF518ED2AE2D8944FD60907422EF53FCEC4342",
+        "OUT": "CA76F61203003431549B616060000005684A03FCF74F4F4D1557E9A3111000481C0C886BFB93E1CA05"
+      },
+      "icarus": {
+        "IN": "9AABC31945417FF5BCA7632DAFC6FF518ED2AE2D8944FD60907422EF53FCEC4342",
+        "OUT": "CA76F61203003431549B616060000005684A03FCF74F4F4D1557E9A3111000481C0C886BFB9361D205"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "CA76B61203003431A495616020000005684A0330F74F4F4D1557E9A3111000481C0C886BFB90000205"
+      },
+      "matches": {
+        "verilator_icarus": false,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "CA76F61203003431549B616060000005684A03FCF74F4F4D1557E9A3111000481C0C886BFB93E1CA05",
+          "icarus_aligned": "CA76F61203003431549B616060000005684A03FCF74F4F4D1557E9A3111000481C0C886BFB9361D205",
+          "diff_markers": "                                                                            ^ ^^  ",
+          "formatted_diff": "Verilator: CA76F61203003431549B616060000005684A03FCF74F4F4D1557E9A3111000481C0C886BFB93E1CA05\nIcarus:    CA76F61203003431549B616060000005684A03FCF74F4F4D1557E9A3111000481C0C886BFB9361D205\nDiff:                                                                                  ^ ^^  ",
+          "formatted_lines": [
+            "Verilator: CA76F61203003431549B616060000005684A03FCF74F4F4D1557E9A3111000481C0C886BFB93E1CA05",
+            "Icarus:    CA76F61203003431549B616060000005684A03FCF74F4F4D1557E9A3111000481C0C886BFB9361D205",
+            "Diff:                                                                                  ^ ^^  "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "CA76F61203003431549B616060000005684A03FCF74F4F4D1557E9A3111000481C0C886BFB93E1CA05",
+          "cxxrtl_aligned": "CA76B61203003431A495616020000005684A0330F74F4F4D1557E9A3111000481C0C886BFB90000205",
+          "diff_markers": "    ^           ^  ^    ^             ^^                                   ^^^^^  ",
+          "formatted_diff": "Verilator: CA76F61203003431549B616060000005684A03FCF74F4F4D1557E9A3111000481C0C886BFB93E1CA05\nCxxrtl:    CA76B61203003431A495616020000005684A0330F74F4F4D1557E9A3111000481C0C886BFB90000205\nDiff:          ^           ^  ^    ^             ^^                                   ^^^^^  ",
+          "formatted_lines": [
+            "Verilator: CA76F61203003431549B616060000005684A03FCF74F4F4D1557E9A3111000481C0C886BFB93E1CA05",
+            "Cxxrtl:    CA76B61203003431A495616020000005684A0330F74F4F4D1557E9A3111000481C0C886BFB90000205",
+            "Diff:          ^           ^  ^    ^             ^^                                   ^^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "CA76F61203003431549B616060000005684A03FCF74F4F4D1557E9A3111000481C0C886BFB9361D205",
+          "cxxrtl_aligned": "CA76B61203003431A495616020000005684A0330F74F4F4D1557E9A3111000481C0C886BFB90000205",
+          "diff_markers": "    ^           ^  ^    ^             ^^                                   ^^^^   ",
+          "formatted_diff": "Icarus:    CA76F61203003431549B616060000005684A03FCF74F4F4D1557E9A3111000481C0C886BFB9361D205\nCxxrtl:    CA76B61203003431A495616020000005684A0330F74F4F4D1557E9A3111000481C0C886BFB90000205\nDiff:          ^           ^  ^    ^             ^^                                   ^^^^   ",
+          "formatted_lines": [
+            "Icarus:    CA76F61203003431549B616060000005684A03FCF74F4F4D1557E9A3111000481C0C886BFB9361D205",
+            "Cxxrtl:    CA76B61203003431A495616020000005684A0330F74F4F4D1557E9A3111000481C0C886BFB90000205",
+            "Diff:          ^           ^  ^    ^             ^^                                   ^^^^   "
+          ]
+        }
+      },
+      "ground_truth": "unknown",
+      "likely_bug_in": "unknown"
+    },
+    {
+      "cycle": 238,
+      "verilator": {
+        "IN": "88E3BA952BE215F97A105011A5127E139C37F1970FF04A046E333A5FE9B5EB6070",
+        "OUT": "7A303DD20240A619A525292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECD41A87D"
+      },
+      "icarus": {
+        "IN": "88E3BA952BE215F97A105011A5127E139C37F1970FF04A046E333A5FE9B5EB6070",
+        "OUT": "7A303DD20240A619A525292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECD41A87D"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "17A303DD30240A619A725292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECC00007D"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "7A303DD20240A619A525292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECD41A87D",
+          "icarus_aligned": "7A303DD20240A619A525292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECD41A87D",
+          "diff_markers": "                                                                                  ",
+          "formatted_diff": "Verilator: 7A303DD20240A619A525292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECD41A87D\nIcarus:    7A303DD20240A619A525292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECD41A87D\nDiff:                                                                                        ",
+          "formatted_lines": [
+            "Verilator: 7A303DD20240A619A525292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECD41A87D",
+            "Icarus:    7A303DD20240A619A525292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECD41A87D",
+            "Diff:                                                                                        "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "7A303DD20240A619A525292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECD41A87D ",
+          "cxxrtl_aligned": "17A303DD30240A619A725292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECC00007D",
+          "diff_markers": "^^^^^^ ^^^^^^^^^^^^^^^^^ ^^ ^^^^^^ ^^^ ^^^^^^^^^^^ ^^^^^ ^^ ^^  ^^^^^^^ ^^^^^^^^^^^",
+          "formatted_diff": "Verilator: 7A303DD20240A619A525292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECD41A87D \nCxxrtl:    17A303DD30240A619A725292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECC00007D\nDiff:      ^^^^^^ ^^^^^^^^^^^^^^^^^ ^^ ^^^^^^ ^^^ ^^^^^^^^^^^ ^^^^^ ^^ ^^  ^^^^^^^ ^^^^^^^^^^^",
+          "formatted_lines": [
+            "Verilator: 7A303DD20240A619A525292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECD41A87D ",
+            "Cxxrtl:    17A303DD30240A619A725292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECC00007D",
+            "Diff:      ^^^^^^ ^^^^^^^^^^^^^^^^^ ^^ ^^^^^^ ^^^ ^^^^^^^^^^^ ^^^^^ ^^ ^^  ^^^^^^^ ^^^^^^^^^^^"
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "7A303DD20240A619A525292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECD41A87D ",
+          "cxxrtl_aligned": "17A303DD30240A619A725292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECC00007D",
+          "diff_markers": "^^^^^^ ^^^^^^^^^^^^^^^^^ ^^ ^^^^^^ ^^^ ^^^^^^^^^^^ ^^^^^ ^^ ^^  ^^^^^^^ ^^^^^^^^^^^",
+          "formatted_diff": "Icarus:    7A303DD20240A619A525292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECD41A87D \nCxxrtl:    17A303DD30240A619A725292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECC00007D\nDiff:      ^^^^^^ ^^^^^^^^^^^^^^^^^ ^^ ^^^^^^ ^^^ ^^^^^^^^^^^ ^^^^^ ^^ ^^  ^^^^^^^ ^^^^^^^^^^^",
+          "formatted_lines": [
+            "Icarus:    7A303DD20240A619A525292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECD41A87D ",
+            "Cxxrtl:    17A303DD30240A619A725292AA500505708808332F1E1E1E01002A9A779BB80009C0BC933FECC00007D",
+            "Diff:      ^^^^^^ ^^^^^^^^^^^^^^^^^ ^^ ^^^^^^ ^^^ ^^^^^^^^^^^ ^^^^^ ^^ ^^  ^^^^^^^ ^^^^^^^^^^^"
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 246,
+      "verilator": {
+        "IN": "60746106639F270C9270EBA21DF4343AF4B984E4C781B79606AEF358E1CDA94248",
+        "OUT": "1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F200003FF"
+      },
+      "icarus": {
+        "IN": "60746106639F270C9270EBA21DF4343AF4B984E4C781B79606AEF358E1CDA94248",
+        "OUT": "1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F200003FF"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F2257DFFF"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F200003FF",
+          "icarus_aligned": "1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F200003FF",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F200003FF\nIcarus:    1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F200003FF\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F200003FF",
+            "Icarus:    1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F200003FF",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F200003FF",
+          "cxxrtl_aligned": "1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F2257DFFF",
+          "diff_markers": "                                                                            ^^^^^  ",
+          "formatted_diff": "Verilator: 1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F200003FF\nCxxrtl:    1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F2257DFFF\nDiff:                                                                                  ^^^^^  ",
+          "formatted_lines": [
+            "Verilator: 1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F200003FF",
+            "Cxxrtl:    1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F2257DFFF",
+            "Diff:                                                                                  ^^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F200003FF",
+          "cxxrtl_aligned": "1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F2257DFFF",
+          "diff_markers": "                                                                            ^^^^^  ",
+          "formatted_diff": "Icarus:    1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F200003FF\nCxxrtl:    1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F2257DFFF\nDiff:                                                                                  ^^^^^  ",
+          "formatted_lines": [
+            "Icarus:    1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F200003FF",
+            "Cxxrtl:    1BD818B13000000B15788A8AAAF0070771EB023985AE70FA7077549A7267442401017881F3F2257DFFF",
+            "Diff:                                                                                  ^^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 259,
+      "verilator": {
+        "IN": "E5BCA44DDC08BF524FFD98A4AEEE9A59295BD676B07C3809F38A50A4627C00772D",
+        "OUT": "25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC344509D"
+      },
+      "icarus": {
+        "IN": "E5BCA44DDC08BF524FFD98A4AEEE9A59295BD676B07C3809F38A50A4627C00772D",
+        "OUT": "25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC344509D"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC000009D"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC344509D",
+          "icarus_aligned": "25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC344509D",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC344509D\nIcarus:    25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC344509D\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC344509D",
+            "Icarus:    25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC344509D",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC344509D",
+          "cxxrtl_aligned": "25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC000009D",
+          "diff_markers": "                                                                            ^^^^   ",
+          "formatted_diff": "Verilator: 25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC344509D\nCxxrtl:    25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC000009D\nDiff:                                                                                  ^^^^   ",
+          "formatted_lines": [
+            "Verilator: 25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC344509D",
+            "Cxxrtl:    25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC000009D",
+            "Diff:                                                                                  ^^^^   "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC344509D",
+          "cxxrtl_aligned": "25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC000009D",
+          "diff_markers": "                                                                            ^^^^   ",
+          "formatted_diff": "Icarus:    25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC344509D\nCxxrtl:    25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC000009D\nDiff:                                                                                  ^^^^   ",
+          "formatted_lines": [
+            "Icarus:    25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC344509D",
+            "Cxxrtl:    25F9B0D1A018018015449494AAE007FF1F09803B8534EA96CF4C80E2223EB00030A1B0C0CCCC000009D",
+            "Diff:                                                                                  ^^^^   "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 263,
+      "verilator": {
+        "IN": "41E0D36E2890E8D44B0767411AE8C133C5BA93EA3C6E34242F2C38120EF747A009",
+        "OUT": "2F910CE92070171C9A489393FE0001FF72A0003FEF52B26E9F19FEE4B85C66060021DCC43DB99AD3625"
+      },
+      "icarus": {
+        "IN": "41E0D36E2890E8D44B0767411AE8C133C5BA93EA3C6E34242F2C38120EF747A009",
+        "OUT": "2F910CE92070171C9A489393FE0001FF72A0003FEF52B26E9F19FEE4B85C66060021DCC43DB99AD3625"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "3F9108E9307017081A689292AA0001FF72A000332F52B26E9F19FEE2B65A38042C21DC043DB98000225"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "2F910CE92070171C9A489393FE0001FF72A0003FEF52B26E9F19FEE4B85C66060021DCC43DB99AD3625",
+          "icarus_aligned": "2F910CE92070171C9A489393FE0001FF72A0003FEF52B26E9F19FEE4B85C66060021DCC43DB99AD3625",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 2F910CE92070171C9A489393FE0001FF72A0003FEF52B26E9F19FEE4B85C66060021DCC43DB99AD3625\nIcarus:    2F910CE92070171C9A489393FE0001FF72A0003FEF52B26E9F19FEE4B85C66060021DCC43DB99AD3625\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 2F910CE92070171C9A489393FE0001FF72A0003FEF52B26E9F19FEE4B85C66060021DCC43DB99AD3625",
+            "Icarus:    2F910CE92070171C9A489393FE0001FF72A0003FEF52B26E9F19FEE4B85C66060021DCC43DB99AD3625",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "2F910CE92070171C9A489393FE0001FF72A0003FEF52B26E9F19FEE4B85C66060021DCC43DB99AD3625",
+          "cxxrtl_aligned": "3F9108E9307017081A689292AA0001FF72A000332F52B26E9F19FEE2B65A38042C21DC043DB98000225",
+          "diff_markers": "^    ^  ^     ^^^ ^  ^ ^^^             ^^              ^ ^ ^^^ ^^^    ^     ^^^^^  ",
+          "formatted_diff": "Verilator: 2F910CE92070171C9A489393FE0001FF72A0003FEF52B26E9F19FEE4B85C66060021DCC43DB99AD3625\nCxxrtl:    3F9108E9307017081A689292AA0001FF72A000332F52B26E9F19FEE2B65A38042C21DC043DB98000225\nDiff:      ^    ^  ^     ^^^ ^  ^ ^^^             ^^              ^ ^ ^^^ ^^^    ^     ^^^^^  ",
+          "formatted_lines": [
+            "Verilator: 2F910CE92070171C9A489393FE0001FF72A0003FEF52B26E9F19FEE4B85C66060021DCC43DB99AD3625",
+            "Cxxrtl:    3F9108E9307017081A689292AA0001FF72A000332F52B26E9F19FEE2B65A38042C21DC043DB98000225",
+            "Diff:      ^    ^  ^     ^^^ ^  ^ ^^^             ^^              ^ ^ ^^^ ^^^    ^     ^^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "2F910CE92070171C9A489393FE0001FF72A0003FEF52B26E9F19FEE4B85C66060021DCC43DB99AD3625",
+          "cxxrtl_aligned": "3F9108E9307017081A689292AA0001FF72A000332F52B26E9F19FEE2B65A38042C21DC043DB98000225",
+          "diff_markers": "^    ^  ^     ^^^ ^  ^ ^^^             ^^              ^ ^ ^^^ ^^^    ^     ^^^^^  ",
+          "formatted_diff": "Icarus:    2F910CE92070171C9A489393FE0001FF72A0003FEF52B26E9F19FEE4B85C66060021DCC43DB99AD3625\nCxxrtl:    3F9108E9307017081A689292AA0001FF72A000332F52B26E9F19FEE2B65A38042C21DC043DB98000225\nDiff:      ^    ^  ^     ^^^ ^  ^ ^^^             ^^              ^ ^ ^^^ ^^^    ^     ^^^^^  ",
+          "formatted_lines": [
+            "Icarus:    2F910CE92070171C9A489393FE0001FF72A0003FEF52B26E9F19FEE4B85C66060021DCC43DB99AD3625",
+            "Cxxrtl:    3F9108E9307017081A689292AA0001FF72A000332F52B26E9F19FEE2B65A38042C21DC043DB98000225",
+            "Diff:      ^    ^  ^     ^^^ ^  ^ ^^^             ^^              ^ ^ ^^^ ^^^    ^     ^^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 267,
+      "verilator": {
+        "IN": "5D374BBD34669C080702743E46BE147A21B6812088788E542B00F5547A09F7F8A5",
+        "OUT": "29D69BA520641E6615500E8EAA0014F47086003BA4EDB06DC0447EE3731EE80E22009AA03CDCC0003D9"
+      },
+      "icarus": {
+        "IN": "5D374BBD34669C080702743E46BE147A21B6812088788E542B00F5547A09F7F8A5",
+        "OUT": "29D69BA520641E6615500E8EAA0014F47086003BA4EDB06DC0447EE3731EE80E22009AA03CDCC0003D9"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "29D69FA520641E6615510E8EAE0014F4708600BF64EDB06DC0447EE3731EE80E22009AA03CDCC63CBD9"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "29D69BA520641E6615500E8EAA0014F47086003BA4EDB06DC0447EE3731EE80E22009AA03CDCC0003D9",
+          "icarus_aligned": "29D69BA520641E6615500E8EAA0014F47086003BA4EDB06DC0447EE3731EE80E22009AA03CDCC0003D9",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 29D69BA520641E6615500E8EAA0014F47086003BA4EDB06DC0447EE3731EE80E22009AA03CDCC0003D9\nIcarus:    29D69BA520641E6615500E8EAA0014F47086003BA4EDB06DC0447EE3731EE80E22009AA03CDCC0003D9\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 29D69BA520641E6615500E8EAA0014F47086003BA4EDB06DC0447EE3731EE80E22009AA03CDCC0003D9",
+            "Icarus:    29D69BA520641E6615500E8EAA0014F47086003BA4EDB06DC0447EE3731EE80E22009AA03CDCC0003D9",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "29D69BA520641E6615500E8EAA0014F47086003BA4EDB06DC0447EE3731EE80E22009AA03CDCC0003D9",
+          "cxxrtl_aligned": "29D69FA520641E6615510E8EAE0014F4708600BF64EDB06DC0447EE3731EE80E22009AA03CDCC63CBD9",
+          "diff_markers": "     ^             ^     ^            ^^^                                    ^^^^  ",
+          "formatted_diff": "Verilator: 29D69BA520641E6615500E8EAA0014F47086003BA4EDB06DC0447EE3731EE80E22009AA03CDCC0003D9\nCxxrtl:    29D69FA520641E6615510E8EAE0014F4708600BF64EDB06DC0447EE3731EE80E22009AA03CDCC63CBD9\nDiff:           ^             ^     ^            ^^^                                    ^^^^  ",
+          "formatted_lines": [
+            "Verilator: 29D69BA520641E6615500E8EAA0014F47086003BA4EDB06DC0447EE3731EE80E22009AA03CDCC0003D9",
+            "Cxxrtl:    29D69FA520641E6615510E8EAE0014F4708600BF64EDB06DC0447EE3731EE80E22009AA03CDCC63CBD9",
+            "Diff:           ^             ^     ^            ^^^                                    ^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "29D69BA520641E6615500E8EAA0014F47086003BA4EDB06DC0447EE3731EE80E22009AA03CDCC0003D9",
+          "cxxrtl_aligned": "29D69FA520641E6615510E8EAE0014F4708600BF64EDB06DC0447EE3731EE80E22009AA03CDCC63CBD9",
+          "diff_markers": "     ^             ^     ^            ^^^                                    ^^^^  ",
+          "formatted_diff": "Icarus:    29D69BA520641E6615500E8EAA0014F47086003BA4EDB06DC0447EE3731EE80E22009AA03CDCC0003D9\nCxxrtl:    29D69FA520641E6615510E8EAE0014F4708600BF64EDB06DC0447EE3731EE80E22009AA03CDCC63CBD9\nDiff:           ^             ^     ^            ^^^                                    ^^^^  ",
+          "formatted_lines": [
+            "Icarus:    29D69BA520641E6615500E8EAA0014F47086003BA4EDB06DC0447EE3731EE80E22009AA03CDCC0003D9",
+            "Cxxrtl:    29D69FA520641E6615510E8EAE0014F4708600BF64EDB06DC0447EE3731EE80E22009AA03CDCC63CBD9",
+            "Diff:           ^             ^     ^            ^^^                                    ^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 280,
+      "verilator": {
+        "IN": "EE696C1269B4E24CF0CFD051334C0C80A2088D1C6DC600EC84975622972452E916",
+        "OUT": "3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4000225"
+      },
+      "icarus": {
+        "IN": "EE696C1269B4E24CF0CFD051334C0C80A2088D1C6DC600EC84975622972452E916",
+        "OUT": "3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4000225"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4440A25"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4000225",
+          "icarus_aligned": "3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4000225",
+          "diff_markers": "                                                                                  ",
+          "formatted_diff": "Verilator: 3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4000225\nIcarus:    3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4000225\nDiff:                                                                                        ",
+          "formatted_lines": [
+            "Verilator: 3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4000225",
+            "Icarus:    3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4000225",
+            "Diff:                                                                                        "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4000225",
+          "cxxrtl_aligned": "3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4440A25",
+          "diff_markers": "                                                                            ^^ ^  ",
+          "formatted_diff": "Verilator: 3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4000225\nCxxrtl:    3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4440A25\nDiff:                                                                                  ^^ ^  ",
+          "formatted_lines": [
+            "Verilator: 3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4000225",
+            "Cxxrtl:    3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4440A25",
+            "Diff:                                                                                  ^^ ^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4000225",
+          "cxxrtl_aligned": "3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4440A25",
+          "diff_markers": "                                                                            ^^ ^  ",
+          "formatted_diff": "Icarus:    3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4000225\nCxxrtl:    3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4440A25\nDiff:                                                                                  ^^ ^  ",
+          "formatted_lines": [
+            "Icarus:    3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4000225",
+            "Cxxrtl:    3BAE1B5A00000A9155B02020280000073A900221D82318234337E9A1D1530060C80FAC42F6B4440A25",
+            "Diff:                                                                                  ^^ ^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 284,
+      "verilator": {
+        "IN": "5ACFA4E10585B1047CC0083F6F5B2A924E46EEF9495B570350AAA66513C3A0F802",
+        "OUT": "16177351904141011569161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDC0003CD"
+      },
+      "icarus": {
+        "IN": "5ACFA4E10585B1047CC0083F6F5B2A924E46EEF9495B570350AAA66513C3A0F802",
+        "OUT": "16177351904141011569161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDC0003CD"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "6177351804141011549161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDE1537CD"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "16177351904141011569161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDC0003CD",
+          "icarus_aligned": "16177351904141011569161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDC0003CD",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 16177351904141011569161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDC0003CD\nIcarus:    16177351904141011569161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDC0003CD\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 16177351904141011569161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDC0003CD",
+            "Icarus:    16177351904141011569161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDC0003CD",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "16177351904141011569161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDC0003CD",
+          "cxxrtl_aligned": "6177351804141011549161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDE1537CD ",
+          "diff_markers": "^^^ ^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^ ^^^^^^^   ^^^^ ^^ ^^^^^^^^^^^",
+          "formatted_diff": "Verilator: 16177351904141011569161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDC0003CD\nCxxrtl:    6177351804141011549161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDE1537CD \nDiff:      ^^^ ^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^ ^^^^^^^   ^^^^ ^^ ^^^^^^^^^^^",
+          "formatted_lines": [
+            "Verilator: 16177351904141011569161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDC0003CD",
+            "Cxxrtl:    6177351804141011549161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDE1537CD ",
+            "Diff:      ^^^ ^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^ ^^^^^^^   ^^^^ ^^ ^^^^^^^^^^^"
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "16177351904141011569161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDC0003CD",
+          "cxxrtl_aligned": "6177351804141011549161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDE1537CD ",
+          "diff_markers": "^^^ ^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^ ^^^^^^^   ^^^^ ^^ ^^^^^^^^^^^",
+          "formatted_diff": "Icarus:    16177351904141011569161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDC0003CD\nCxxrtl:    6177351804141011549161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDE1537CD \nDiff:      ^^^ ^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^ ^^^^^^^   ^^^^ ^^ ^^^^^^^^^^^",
+          "formatted_lines": [
+            "Icarus:    16177351904141011569161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDC0003CD",
+            "Cxxrtl:    6177351804141011549161602E01E1E700506310C919191B93BFEE354B4A0000561AA822FEDE1537CD ",
+            "Diff:      ^^^ ^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^ ^^^^^^^   ^^^^ ^^ ^^^^^^^^^^^"
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 286,
+      "verilator": {
+        "IN": "986B78457B5A95F90AA9791575477C84AC46ADE25F66862AFECE6BC6B9F619E080",
+        "OUT": "AA7233D2040004C95521292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFED877B05"
+      },
+      "icarus": {
+        "IN": "986B78457B5A95F90AA9791575477C84AC46ADE25F66862AFECE6BC6B9F619E080",
+        "OUT": "AA7233D2040004C95521292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFED877B05"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "1AA7233D3040004C95721292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFEC000305"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "AA7233D2040004C95521292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFED877B05",
+          "icarus_aligned": "AA7233D2040004C95521292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFED877B05",
+          "diff_markers": "                                                                                  ",
+          "formatted_diff": "Verilator: AA7233D2040004C95521292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFED877B05\nIcarus:    AA7233D2040004C95521292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFED877B05\nDiff:                                                                                        ",
+          "formatted_lines": [
+            "Verilator: AA7233D2040004C95521292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFED877B05",
+            "Icarus:    AA7233D2040004C95521292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFED877B05",
+            "Diff:                                                                                        "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "AA7233D2040004C95521292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFED877B05 ",
+          "cxxrtl_aligned": "1AA7233D3040004C95721292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFEC000305",
+          "diff_markers": "^ ^^^ ^^^^^  ^^^^ ^^^^^^ ^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^^ ^^^ ^^^ ^^^^^^^^^",
+          "formatted_diff": "Verilator: AA7233D2040004C95521292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFED877B05 \nCxxrtl:    1AA7233D3040004C95721292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFEC000305\nDiff:      ^ ^^^ ^^^^^  ^^^^ ^^^^^^ ^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^^ ^^^ ^^^ ^^^^^^^^^",
+          "formatted_lines": [
+            "Verilator: AA7233D2040004C95521292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFED877B05 ",
+            "Cxxrtl:    1AA7233D3040004C95721292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFEC000305",
+            "Diff:      ^ ^^^ ^^^^^  ^^^^ ^^^^^^ ^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^^ ^^^ ^^^ ^^^^^^^^^"
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "AA7233D2040004C95521292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFED877B05 ",
+          "cxxrtl_aligned": "1AA7233D3040004C95721292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFEC000305",
+          "diff_markers": "^ ^^^ ^^^^^  ^^^^ ^^^^^^ ^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^^ ^^^ ^^^ ^^^^^^^^^",
+          "formatted_diff": "Icarus:    AA7233D2040004C95521292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFED877B05 \nCxxrtl:    1AA7233D3040004C95721292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFEC000305\nDiff:      ^ ^^^ ^^^^^  ^^^^ ^^^^^^ ^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^^ ^^^ ^^^ ^^^^^^^^^",
+          "formatted_lines": [
+            "Icarus:    AA7233D2040004C95521292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFED877B05 ",
+            "Cxxrtl:    1AA7233D3040004C95721292AA6809091E88042659B635B62B2AFE9B93976C009441ECC13FFEC000305",
+            "Diff:      ^ ^^^ ^^^^^  ^^^^ ^^^^^^ ^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^^ ^^^ ^^^ ^^^^^^^^^"
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    },
+    {
+      "cycle": 287,
+      "verilator": {
+        "IN": "293FA669B0DC53E8F332049F62406B7E2D1838BD449EBBBE5763229BD66FD293F1",
+        "OUT": "28CA3351A046144F15520282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B00002D9"
+      },
+      "icarus": {
+        "IN": "293FA669B0DC53E8F332049F62406B7E2D1838BD449EBBBE5763229BD66FD293F1",
+        "OUT": "28CA3351A046144F15520282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B00002D9"
+      },
+      "cxxrtl": {
+        "IN": "",
+        "OUT": "38CA3351B046144F15720282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B1877AD9"
+      },
+      "matches": {
+        "verilator_icarus": true,
+        "verilator_cxxrtl": false,
+        "icarus_cxxrtl": false
+      },
+      "visual_diffs": {
+        "verilator_vs_icarus": {
+          "verilator_aligned": "28CA3351A046144F15520282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B00002D9",
+          "icarus_aligned": "28CA3351A046144F15520282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B00002D9",
+          "diff_markers": "                                                                                   ",
+          "formatted_diff": "Verilator: 28CA3351A046144F15520282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B00002D9\nIcarus:    28CA3351A046144F15520282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B00002D9\nDiff:                                                                                         ",
+          "formatted_lines": [
+            "Verilator: 28CA3351A046144F15520282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B00002D9",
+            "Icarus:    28CA3351A046144F15520282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B00002D9",
+            "Diff:                                                                                         "
+          ]
+        },
+        "verilator_vs_cxxrtl": {
+          "verilator_aligned": "28CA3351A046144F15520282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B00002D9",
+          "cxxrtl_aligned": "38CA3351B046144F15720282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B1877AD9",
+          "diff_markers": "^       ^         ^                                                         ^^^^^  ",
+          "formatted_diff": "Verilator: 28CA3351A046144F15520282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B00002D9\nCxxrtl:    38CA3351B046144F15720282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B1877AD9\nDiff:      ^       ^         ^                                                         ^^^^^  ",
+          "formatted_lines": [
+            "Verilator: 28CA3351A046144F15520282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B00002D9",
+            "Cxxrtl:    38CA3351B046144F15720282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B1877AD9",
+            "Diff:      ^       ^         ^                                                         ^^^^^  "
+          ]
+        },
+        "icarus_vs_cxxrtl": {
+          "icarus_aligned": "28CA3351A046144F15520282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B00002D9",
+          "cxxrtl_aligned": "38CA3351B046144F15720282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B1877AD9",
+          "diff_markers": "^       ^         ^                                                         ^^^^^  ",
+          "formatted_diff": "Icarus:    28CA3351A046144F15520282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B00002D9\nCxxrtl:    38CA3351B046144F15720282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B1877AD9\nDiff:      ^       ^         ^                                                         ^^^^^  ",
+          "formatted_lines": [
+            "Icarus:    28CA3351A046144F15520282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B00002D9",
+            "Cxxrtl:    38CA3351B046144F15720282AA4C53D37004843FE0860636A02254E352A654045040A8A4BF9B1877AD9",
+            "Diff:      ^       ^         ^                                                         ^^^^^  "
+          ]
+        }
+      },
+      "ground_truth": "verilator_icarus",
+      "likely_bug_in": "cxxrtl"
+    }
+  ],
+  "total_differences": 40,
+  "affected_cycles": [
+    6,
+    33,
+    34,
+    47,
+    72,
+    73,
+    88,
+    90,
+    91,
+    93,
+    94,
+    95,
+    102,
+    106,
+    112,
+    134,
+    138,
+    140,
+    142,
+    152,
+    153,
+    154,
+    165,
+    171,
+    173,
+    195,
+    196,
+    198,
+    203,
+    217,
+    220,
+    238,
+    246,
+    259,
+    263,
+    267,
+    280,
+    284,
+    286,
+    287
+  ]
+}

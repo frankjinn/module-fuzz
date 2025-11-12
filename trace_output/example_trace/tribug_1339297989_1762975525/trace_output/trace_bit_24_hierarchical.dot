@@ -1,0 +1,148 @@
+digraph BitTrace {
+  rankdir=LR;
+  node [shape=box, style=rounded, fontsize=9];
+
+  { rank=same;
+    "in_flat[100:93]";
+    "in_flat[127:114]";
+    "in_flat[130]";
+    "in_flat[196:184]";
+    "in_flat[22:21]";
+    "in_flat[232:230]";
+    "in_flat[26:25]";
+    "in_flat[32]";
+    "in_flat[34]";
+    "in_flat[69:54]";
+    "in_flat[6]";
+  }
+
+  { rank=same;
+    "out_flat[24]";
+  }
+
+  "out_flat[24]" [fillcolor="pink", style=filled, label="out_flat\n[24]"];
+  "array_wrapper_out_flat[14]" [fillcolor="lightyellow", style=filled, label="array_wrapper_out_flat\n[14]"];
+  "array_wrapper_in_flat[15:12]" [fillcolor="lightblue", style=filled, label="array_wrapper_in_flat\n[15:12]"];
+  "in_flat[6]" [fillcolor="lightgreen", style=filled, label="in_flat\n[6]"];
+  "in_flat[22:21]" [fillcolor="lightgreen", style=filled, label="in_flat\n[22:21]"];
+  "in_flat[26:25]" [fillcolor="lightgreen", style=filled, label="in_flat\n[26:25]"];
+  "in_flat[32]" [fillcolor="lightgreen", style=filled, label="in_flat\n[32]"];
+  "in_flat[34]" [fillcolor="lightgreen", style=filled, label="in_flat\n[34]"];
+  "in_flat[69:54]" [fillcolor="lightgreen", style=filled, label="in_flat\n[69:54]"];
+  "in_flat[100:93]" [fillcolor="lightgreen", style=filled, label="in_flat\n[100:93]"];
+  "in_flat[127:114]" [fillcolor="lightgreen", style=filled, label="in_flat\n[127:114]"];
+  "in_flat[130]" [fillcolor="lightgreen", style=filled, label="in_flat\n[130]"];
+  "in_flat[196:184]" [fillcolor="lightgreen", style=filled, label="in_flat\n[196:184]"];
+  "in_flat[232:230]" [fillcolor="lightgreen", style=filled, label="in_flat\n[232:230]"];
+  "arithmetic_reduce_wrapper_out_flat[3]" [fillcolor="lightyellow", style=filled, label="arithmetic_reduce_wrapper_out_flat\n[3]"];
+  "const_logic_wrapper_out_flat[7]" [fillcolor="lightyellow", style=filled, label="const_logic_wrapper_out_flat\n[7]"];
+  "const_logic_wrapper_out_flat[13]" [fillcolor="lightyellow", style=filled, label="const_logic_wrapper_out_flat\n[13]"];
+  "arithmetic_reduce_wrapper_in_flat[1]" [fillcolor="lightblue", style=filled, label="arithmetic_reduce_wrapper_in_flat\n[1]"];
+  "arithmetic_reduce_wrapper_in_flat[9]" [fillcolor="lightblue", style=filled, label="arithmetic_reduce_wrapper_in_flat\n[9]"];
+  "const_logic_wrapper_in_flat[2]" [fillcolor="lightblue", style=filled, label="const_logic_wrapper_in_flat\n[2]"];
+  "const_logic_wrapper_in_flat[4]" [fillcolor="lightblue", style=filled, label="const_logic_wrapper_in_flat\n[4]"];
+  "const_logic_wrapper_in_flat[6]" [fillcolor="lightblue", style=filled, label="const_logic_wrapper_in_flat\n[6]"];
+  "const_logic_wrapper_in_flat[8]" [fillcolor="lightblue", style=filled, label="const_logic_wrapper_in_flat\n[8]"];
+  "const_conditional_wrapper_out_flat[18]" [fillcolor="lightyellow", style=filled, label="const_conditional_wrapper_out_flat\n[18]"];
+  "bitwise_logic_wrapper_out_flat[9]" [fillcolor="lightyellow", style=filled, label="bitwise_logic_wrapper_out_flat\n[9]"];
+  "bitwise_logic_wrapper_out_flat[11]" [fillcolor="lightyellow", style=filled, label="bitwise_logic_wrapper_out_flat\n[11]"];
+  "bitwise_logic_wrapper_out_flat[16]" [fillcolor="lightyellow", style=filled, label="bitwise_logic_wrapper_out_flat\n[16]"];
+  "const_conditional_wrapper_in_flat[1]" [fillcolor="lightblue", style=filled, label="const_conditional_wrapper_in_flat\n[1]"];
+  "const_conditional_wrapper_in_flat[33:18]" [fillcolor="lightblue", style=filled, label="const_conditional_wrapper_in_flat\n[33:18]"];
+  "bitwise_logic_wrapper_in_flat[1:0]" [fillcolor="lightblue", style=filled, label="bitwise_logic_wrapper_in_flat\n[1:0]"];
+  "bitwise_logic_wrapper_in_flat[3]" [fillcolor="lightblue", style=filled, label="bitwise_logic_wrapper_in_flat\n[3]"];
+  "bitwise_logic_wrapper_in_flat[9:8]" [fillcolor="lightblue", style=filled, label="bitwise_logic_wrapper_in_flat\n[9:8]"];
+  "bitwise_logic_wrapper_in_flat[11]" [fillcolor="lightblue", style=filled, label="bitwise_logic_wrapper_in_flat\n[11]"];
+  "width_struct_wrapper_out_flat[0]" [fillcolor="lightyellow", style=filled, label="width_struct_wrapper_out_flat\n[0]"];
+  "width_struct_wrapper_in_flat[3:0]" [fillcolor="lightblue", style=filled, label="width_struct_wrapper_in_flat\n[3:0]"];
+  "const_arith_wrapper_out_flat[3]" [fillcolor="lightyellow", style=filled, label="const_arith_wrapper_out_flat\n[3]"];
+  "const_arith_wrapper_out_flat[11]" [fillcolor="lightyellow", style=filled, label="const_arith_wrapper_out_flat\n[11]"];
+  "const_arith_wrapper_out_flat[18]" [fillcolor="lightyellow", style=filled, label="const_arith_wrapper_out_flat\n[18]"];
+  "const_arith_wrapper_out_flat[31]" [fillcolor="lightyellow", style=filled, label="const_arith_wrapper_out_flat\n[31]"];
+  "partselect_wrapper_out_flat[5]" [fillcolor="lightyellow", style=filled, label="partselect_wrapper_out_flat\n[5]"];
+  "const_arith_wrapper_in_flat[15:0]" [fillcolor="lightblue", style=filled, label="const_arith_wrapper_in_flat\n[15:0]"];
+  "partselect_wrapper_in_flat[18:3]" [fillcolor="lightblue", style=filled, label="partselect_wrapper_in_flat\n[18:3]"];
+  "const_concat_repl_wrapper_out_flat[17]" [fillcolor="lightyellow", style=filled, label="const_concat_repl_wrapper_out_flat\n[17]"];
+  "const_concat_repl_wrapper_out_flat[20]" [fillcolor="lightyellow", style=filled, label="const_concat_repl_wrapper_out_flat\n[20]"];
+  "const_concat_repl_wrapper_in_flat[9:2]" [fillcolor="lightblue", style=filled, label="const_concat_repl_wrapper_in_flat\n[9:2]"];
+
+  "array_wrapper_out_flat[14]" -> "out_flat[24]" [label="[14]→[24]", fontsize=8, color="blue", penwidth=1.5];
+  "array_wrapper_in_flat[15:12]" -> "array_wrapper_out_flat[14]" [label="out_bit[2] = (in[15:12] + 4'd1)[2]", fontsize=8, color="darkorange", penwidth=2];
+  "in_flat[6]" -> "arithmetic_reduce_wrapper_in_flat[9]" [label="[6]→[9]", fontsize=8, color="blue", penwidth=1.5];
+  "in_flat[22:21]" -> "array_wrapper_in_flat[15:12]" [label="[22:21]→[13:12]", fontsize=8, color="blue", penwidth=1.5];
+  "in_flat[26:25]" -> "bitwise_logic_wrapper_in_flat[1:0]" [label="[26:25]→[1:0]", fontsize=8, color="blue", penwidth=1.5];
+  "in_flat[32]" -> "bitwise_logic_wrapper_in_flat[9:8]" [label="[32]→[9]", fontsize=8, color="blue", penwidth=1.5];
+  "in_flat[34]" -> "bitwise_logic_wrapper_in_flat[11]" [label="[34]→[11]", fontsize=8, color="blue", penwidth=1.5];
+  "in_flat[69:54]" -> "const_arith_wrapper_in_flat[15:0]" [label="[69:54]→[15:0]", fontsize=8, color="blue", penwidth=1.5];
+  "in_flat[100:93]" -> "const_conditional_wrapper_in_flat[1]" [label="[100]→[1]", fontsize=8, color="blue", penwidth=1.5];
+  "in_flat[100:93]" -> "const_concat_repl_wrapper_in_flat[9:2]" [label="[96:93]→[5:2], [99:97]→[9:7]", fontsize=8, color="blue", penwidth=1.5];
+  "in_flat[127:114]" -> "const_conditional_wrapper_in_flat[33:18]" [label="[116:114]→[20:18], [118:117]→[23:22], [127:119]→[3", fontsize=8, color="blue", penwidth=1.5];
+  "in_flat[130]" -> "const_logic_wrapper_in_flat[4]" [label="[130]→[4]", fontsize=8, color="blue", penwidth=1.5];
+  "in_flat[196:184]" -> "partselect_wrapper_in_flat[18:3]" [label="[184]→[3], [189:185]→[9:5], [196:190]→[17:11]", fontsize=8, color="blue", penwidth=1.5];
+  "in_flat[232:230]" -> "width_struct_wrapper_in_flat[3:0]" [label="[231:230]→[1:0], [232]→[3]", fontsize=8, color="blue", penwidth=1.5];
+  "arithmetic_reduce_wrapper_out_flat[3]" -> "array_wrapper_in_flat[15:12]" [label="[3]→[14]", fontsize=8, color="blue", penwidth=1.5];
+  "const_logic_wrapper_out_flat[7]" -> "const_conditional_wrapper_in_flat[33:18]" [label="[7]→[24]", fontsize=8, color="blue", penwidth=1.5];
+  "const_logic_wrapper_out_flat[13]" -> "array_wrapper_in_flat[15:12]" [label="[13]→[15]", fontsize=8, color="blue", penwidth=1.5];
+  "arithmetic_reduce_wrapper_in_flat[1]" -> "arithmetic_reduce_wrapper_out_flat[3]" [label="out_bit[1] = and_part | mod_part[1]", fontsize=8, color="darkorange", penwidth=2];
+  "arithmetic_reduce_wrapper_in_flat[9]" -> "arithmetic_reduce_wrapper_out_flat[3]" [label="out_bit[1] = and_part | mod_part[1]", fontsize=8, color="darkorange", penwidth=2];
+  "const_logic_wrapper_in_flat[2]" -> "const_logic_wrapper_out_flat[7]" [label="out_bit[0] = in[6] ^ in[2][0]", fontsize=8, color="darkorange", penwidth=2];
+  "const_logic_wrapper_in_flat[4]" -> "const_logic_wrapper_out_flat[13]" [label="out_bit[2] = in[8] | in[4][2]", fontsize=8, color="darkorange", penwidth=2];
+  "const_logic_wrapper_in_flat[6]" -> "const_logic_wrapper_out_flat[7]" [label="out_bit[0] = in[6] ^ in[2][0]", fontsize=8, color="darkorange", penwidth=2];
+  "const_logic_wrapper_in_flat[8]" -> "const_logic_wrapper_out_flat[13]" [label="out_bit[2] = in[8] | in[4][2]", fontsize=8, color="darkorange", penwidth=2];
+  "const_conditional_wrapper_out_flat[18]" -> "arithmetic_reduce_wrapper_in_flat[1]" [label="[18]→[1]", fontsize=8, color="blue", penwidth=1.5];
+  "bitwise_logic_wrapper_out_flat[9]" -> "const_logic_wrapper_in_flat[8]" [label="[9]→[8]", fontsize=8, color="blue", penwidth=1.5];
+  "bitwise_logic_wrapper_out_flat[11]" -> "width_struct_wrapper_in_flat[3:0]" [label="[11]→[2]", fontsize=8, color="blue", penwidth=1.5];
+  "bitwise_logic_wrapper_out_flat[16]" -> "partselect_wrapper_in_flat[18:3]" [label="[16]→[18]", fontsize=8, color="blue", penwidth=1.5];
+  "const_conditional_wrapper_in_flat[1]" -> "const_conditional_wrapper_out_flat[18]" [label="out_bit[2] = (in[1] ? in[33:26] : in[25:18])[2]", fontsize=8, color="darkorange", penwidth=2];
+  "const_conditional_wrapper_in_flat[33:18]" -> "const_conditional_wrapper_out_flat[18]" [label="out_bit[2] = (in[1] ? in[33:26] : in[25:18])[2]", fontsize=8, color="darkorange", penwidth=2];
+  "bitwise_logic_wrapper_in_flat[1:0]" -> "bitwise_logic_wrapper_out_flat[9]" [label="out_bit[1] = in[9] | in[1][1]", fontsize=8, color="darkorange", penwidth=2];
+  "bitwise_logic_wrapper_in_flat[1:0]" -> "bitwise_logic_wrapper_out_flat[16]" [label="out_bit[0] = in[8] & in[0][0]", fontsize=8, color="darkorange", penwidth=2];
+  "bitwise_logic_wrapper_in_flat[3]" -> "bitwise_logic_wrapper_out_flat[11]" [label="out_bit[3] = in[11] | in[3][3]", fontsize=8, color="darkorange", penwidth=2];
+  "bitwise_logic_wrapper_in_flat[9:8]" -> "bitwise_logic_wrapper_out_flat[9]" [label="out_bit[1] = in[9] | in[1][1]", fontsize=8, color="darkorange", penwidth=2];
+  "bitwise_logic_wrapper_in_flat[9:8]" -> "bitwise_logic_wrapper_out_flat[16]" [label="out_bit[0] = in[8] & in[0][0]", fontsize=8, color="darkorange", penwidth=2];
+  "bitwise_logic_wrapper_in_flat[11]" -> "bitwise_logic_wrapper_out_flat[11]" [label="out_bit[3] = in[11] | in[3][3]", fontsize=8, color="darkorange", penwidth=2];
+  "width_struct_wrapper_out_flat[0]" -> "const_conditional_wrapper_in_flat[33:18]" [label="[0]→[21]", fontsize=8, color="blue", penwidth=1.5];
+  "width_struct_wrapper_in_flat[3:0]" -> "width_struct_wrapper_out_flat[0]" [label="out_bit[0] = (in[3:0])[0]", fontsize=8, color="darkorange", penwidth=2];
+  "const_arith_wrapper_out_flat[3]" -> "const_concat_repl_wrapper_in_flat[9:2]" [label="[3]→[6]", fontsize=8, color="blue", penwidth=1.5];
+  "const_arith_wrapper_out_flat[11]" -> "partselect_wrapper_in_flat[18:3]" [label="[11]→[4]", fontsize=8, color="blue", penwidth=1.5];
+  "const_arith_wrapper_out_flat[18]" -> "const_logic_wrapper_in_flat[2]" [label="[18]→[2]", fontsize=8, color="blue", penwidth=1.5];
+  "const_arith_wrapper_out_flat[31]" -> "bitwise_logic_wrapper_in_flat[9:8]" [label="[31]→[8]", fontsize=8, color="blue", penwidth=1.5];
+  "partselect_wrapper_out_flat[5]" -> "const_logic_wrapper_in_flat[6]" [label="[5]→[6]", fontsize=8, color="blue", penwidth=1.5];
+  "const_arith_wrapper_in_flat[15:0]" -> "const_arith_wrapper_out_flat[18]" [label="out_bit[2] = (in[15:8] * in[7:0])[2]", fontsize=8, color="darkorange", penwidth=2];
+  "const_arith_wrapper_in_flat[15:0]" -> "const_arith_wrapper_out_flat[11]" [label="out_bit[3] = (in[7:0] != 0 ? (in[15:8] / in[7:0]) ", fontsize=8, color="darkorange", penwidth=2];
+  "const_arith_wrapper_in_flat[15:0]" -> "const_arith_wrapper_out_flat[3]" [label="out_bit[3] = (in[7:0] != 0 ? (in[15:8] % in[7:0]) ", fontsize=8, color="darkorange", penwidth=2];
+  "const_arith_wrapper_in_flat[15:0]" -> "const_arith_wrapper_out_flat[31]" [label="out_bit[7] = (in[15:8] - in[7:0])[7]", fontsize=8, color="darkorange", penwidth=2];
+  "partselect_wrapper_in_flat[18:3]" -> "partselect_wrapper_out_flat[5]" [label="out_bit[0] = (in[18:3][7:4])[0]", fontsize=8, color="darkorange", penwidth=2];
+  "const_concat_repl_wrapper_out_flat[17]" -> "partselect_wrapper_in_flat[18:3]" [label="[17]→[10]", fontsize=8, color="blue", penwidth=1.5];
+  "const_concat_repl_wrapper_out_flat[20]" -> "bitwise_logic_wrapper_in_flat[3]" [label="[20]→[3]", fontsize=8, color="blue", penwidth=1.5];
+  "const_concat_repl_wrapper_in_flat[9:2]" -> "const_concat_repl_wrapper_out_flat[20]" [label="out_bit[6] = ({ in[9:6], in[5:2] })[6]", fontsize=8, color="darkorange", penwidth=2];
+  "const_concat_repl_wrapper_in_flat[9:2]" -> "const_concat_repl_wrapper_out_flat[17]" [label="out_bit[3] = ({ in[9:6], in[5:2] })[3]", fontsize=8, color="darkorange", penwidth=2];
+
+  // Legend
+  subgraph cluster_legend {
+    label="Legend";
+    fontsize=12;
+    fontname="Arial Bold";
+    style=filled;
+    color=lightgrey;
+    node [shape=box, style="rounded,filled", fontsize=9, fontname="Arial"];
+
+    legend_input [label="External Input", fillcolor=lightgreen];
+    legend_mod_in [label="Module Input", fillcolor=lightblue];
+    legend_mod_out [label="Module Output", fillcolor=lightyellow];
+    legend_output [label="Target Output", fillcolor=pink];
+
+    legend_wire_src [label="Wire\nConnection", shape=plaintext, fontsize=8];
+    legend_wire_dst [label="[bit]→[bit]", shape=plaintext, fontsize=8];
+    legend_logic_src [label="Module\nLogic", shape=plaintext, fontsize=8];
+    legend_logic_dst [label="expression", shape=plaintext, fontsize=8];
+
+    legend_input -> legend_mod_in [style=invis];
+    legend_mod_in -> legend_mod_out [style=invis];
+    legend_mod_out -> legend_output [style=invis];
+    legend_output -> legend_wire_src [style=invis];
+    legend_wire_src -> legend_wire_dst [label="Wire", color=blue, penwidth=1.5, fontsize=8];
+    legend_wire_dst -> legend_logic_src [style=invis];
+    legend_logic_src -> legend_logic_dst [label="Logic", color=darkorange, penwidth=2, fontsize=8, fontcolor=darkgreen];
+  }
+}

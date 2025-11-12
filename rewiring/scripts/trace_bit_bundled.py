@@ -82,7 +82,7 @@ class BundledBitTracer:
         return mapping
     
     def parse_module_logic(self, module_name):
-        """Parse module logic"""
+        """Parse module logic - handles both combinational and sequential"""
         base_name = module_name.replace('_wrapper', '')
         
         if base_name in self.logic_cache:
@@ -96,9 +96,32 @@ class BundledBitTracer:
             content = f.read()
         
         expressions = {}
+        
+        # Parse combinational logic (assign statements)
         for match in re.finditer(r'assign\s+(\w+)\s*=\s*([^;]+);', content):
             output, expression = match.groups()
             expressions[output] = expression.strip()
+        
+        # Parse wire declarations with assignments (e.g., wire [7:0] name = expr;)
+        for match in re.finditer(r'wire\s+(?:\[\d+:\d+\])?\s*(\w+)\s*=\s*([^;]+);', content):
+            output, expression = match.groups()
+            expressions[output] = expression.strip()
+        
+        # Parse sequential logic (always blocks with non-blocking assignments)
+        # For sequential logic, we extract the non-reset logic (else clause)
+        # Pattern: if (reset_condition) ... else begin ... output <= expression; ... end
+        
+        # Look for else blocks that contain non-blocking assignments
+        else_blocks = re.findall(r'end\s+else\s+begin(.*?)end', content, re.DOTALL)
+        for else_block in else_blocks:
+            # Extract non-blocking assignments from else block
+            for assign_match in re.finditer(r'(\w+)\s*<=\s*([^;]+);', else_block):
+                output, expression = assign_match.groups()
+                output = output.strip()
+                expression = expression.strip()
+                # Only store if it's not a reset value (filter out reset constants)
+                if not re.match(r'^\d+\'[bdh]', expression):
+                    expressions[output] = expression
         
         self.logic_cache[base_name] = expressions
         return expressions
@@ -116,10 +139,54 @@ class BundledBitTracer:
         
         expression = expressions[output_signal]
         
-        # Extract input signals from expression
-        identifiers = re.findall(r'\b[a-zA-Z_]\w*\b', expression)
+        # Recursively expand intermediate signals
+        def expand_expression(expr, expressions_dict, wrapper_inputs, max_depth=10):
+            """Recursively expand intermediate signals to get actual inputs"""
+            if max_depth <= 0:
+                return expr, set()
+            
+            identifiers = re.findall(r'\b[a-zA-Z_]\w*\b', expr)
+            keywords = {'assign', 'wire', 'reg', 'input', 'output'}
+            signals = [id for id in identifiers if id not in keywords]
+            
+            # Check which signals are intermediate (in expressions but not in inputs)
+            intermediate = []
+            actual_inputs = []
+            for sig in signals:
+                is_input = any(sig == s for fb, (s, sb) in wrapper_inputs.items())
+                if not is_input and sig in expressions_dict:
+                    intermediate.append(sig)
+                elif is_input:
+                    actual_inputs.append(sig)
+            
+            # If no intermediates, we're done
+            if not intermediate:
+                return expr, set(actual_inputs)
+            
+            # Expand intermediates
+            expanded_expr = expr
+            all_inputs = set(actual_inputs)
+            for inter in intermediate:
+                inter_expr = expressions_dict[inter]
+                # Recursively expand this intermediate
+                expanded_inter, inter_inputs = expand_expression(inter_expr, expressions_dict, wrapper_inputs, max_depth-1)
+                all_inputs.update(inter_inputs)
+                # Substitute in the expression
+                expanded_expr = re.sub(r'\b' + inter + r'\b', f'({expanded_inter})', expanded_expr)
+            
+            return expanded_expr, all_inputs
+        
+        # Expand the expression
+        expanded_expr, input_signals_set = expand_expression(expression, expressions, wrapper['inputs'])
+        input_signals = list(input_signals_set)
+        
+        # Also extract from expanded expression for safety
+        identifiers = re.findall(r'\b[a-zA-Z_]\w*\b', expanded_expr)
         keywords = {'assign', 'wire', 'reg', 'input', 'output'}
-        input_signals = [id for id in identifiers if id not in keywords and id != output_signal]
+        extra_signals = [id for id in identifiers if id not in keywords and id != output_signal]
+        for sig in extra_signals:
+            if sig not in input_signals:
+                input_signals.append(sig)
         
         # Determine if it's a bitwise operation (element-wise on vectors)
         is_bitwise = any(op in expression for op in ['&', '|', '^', '~']) and '[' not in expression
@@ -679,6 +746,93 @@ class BundledBitTracer:
         plt.close()
 
 
+def generate_dot(graph, bit_index, layout='hierarchical'):
+    """Generate DOT format with different layout options"""
+    
+    if layout == 'hierarchical':
+        # Hierarchical: inputs on left, outputs on right
+        dot = "digraph BitTrace {\n"
+        dot += "  rankdir=LR;\n"
+        dot += "  node [shape=box, style=rounded, fontsize=9];\n\n"
+        
+        # Group inputs on the left
+        external_inputs = [n for n in graph.nodes() if graph.nodes[n]['node_type'] == 'external_input']
+        if external_inputs:
+            dot += "  { rank=same;\n"
+            for inp in sorted(external_inputs):
+                dot += f'    "{inp}";\n'
+            dot += "  }\n\n"
+        
+        # Group output on the right
+        external_outputs = [n for n in graph.nodes() if graph.nodes[n]['node_type'] == 'external_output']
+        if external_outputs:
+            dot += "  { rank=same;\n"
+            for out in external_outputs:
+                dot += f'    "{out}";\n'
+            dot += "  }\n\n"
+    else:
+        # Compact: free-form layout
+        dot = "digraph BitTrace {\n"
+        dot += "  node [shape=box, style=rounded, fontsize=9];\n\n"
+    
+    # Add all nodes with colors
+    for node in graph.nodes():
+        ntype = graph.nodes[node]['node_type']
+        color = {'external_input': 'lightgreen', 
+                 'module_input': 'lightblue', 
+                 'module_output': 'lightyellow', 
+                 'external_output': 'pink'}.get(ntype, 'white')
+        label = node.replace('[', '\\n[')
+        dot += f'  "{node}" [fillcolor="{color}", style=filled, label="{label}"];\n'
+    
+    dot += "\n"
+    
+    # Add edges
+    for u, v, data in graph.edges(data=True):
+        edge_type = data.get('edge_type', 'unknown')
+        expr = data.get('expression', '')[:50].replace('"', '\\"')
+        
+        if edge_type == 'module':
+            # Logic expressions
+            dot += f'  "{u}" -> "{v}" [label="{expr}", fontsize=8, color="darkorange", penwidth=2];\n'
+        else:
+            # Wire connections
+            dot += f'  "{u}" -> "{v}" [label="{expr}", fontsize=8, color="blue", penwidth=1.5];\n'
+    
+    # Add legend
+    dot += "\n  // Legend\n"
+    dot += "  subgraph cluster_legend {\n"
+    dot += "    label=\"Legend\";\n"
+    dot += "    fontsize=12;\n"
+    dot += "    fontname=\"Arial Bold\";\n"
+    dot += "    style=filled;\n"
+    dot += "    color=lightgrey;\n"
+    dot += "    node [shape=box, style=\"rounded,filled\", fontsize=9, fontname=\"Arial\"];\n\n"
+    
+    dot += "    legend_input [label=\"External Input\", fillcolor=lightgreen];\n"
+    dot += "    legend_mod_in [label=\"Module Input\", fillcolor=lightblue];\n"
+    dot += "    legend_mod_out [label=\"Module Output\", fillcolor=lightyellow];\n"
+    dot += "    legend_output [label=\"Target Output\", fillcolor=pink];\n\n"
+    
+    # Edge type examples
+    dot += "    legend_wire_src [label=\"Wire\\nConnection\", shape=plaintext, fontsize=8];\n"
+    dot += "    legend_wire_dst [label=\"[bit]→[bit]\", shape=plaintext, fontsize=8];\n"
+    dot += "    legend_logic_src [label=\"Module\\nLogic\", shape=plaintext, fontsize=8];\n"
+    dot += "    legend_logic_dst [label=\"expression\", shape=plaintext, fontsize=8];\n\n"
+    
+    dot += "    legend_input -> legend_mod_in [style=invis];\n"
+    dot += "    legend_mod_in -> legend_mod_out [style=invis];\n"
+    dot += "    legend_mod_out -> legend_output [style=invis];\n"
+    dot += "    legend_output -> legend_wire_src [style=invis];\n"
+    dot += "    legend_wire_src -> legend_wire_dst [label=\"Wire\", color=blue, penwidth=1.5, fontsize=8];\n"
+    dot += "    legend_wire_dst -> legend_logic_src [style=invis];\n"
+    dot += "    legend_logic_src -> legend_logic_dst [label=\"Logic\", color=darkorange, penwidth=2, fontsize=8, fontcolor=darkgreen];\n"
+    dot += "  }\n"
+    
+    dot += "}\n"
+    return dot
+
+
 def main():
     parser = argparse.ArgumentParser(description='Trace bit with bundled ranges and logic')
     parser.add_argument('--bit', type=int, required=True, help='Output bit to trace')
@@ -686,6 +840,10 @@ def main():
     parser.add_argument('--modules', default='/Users/frank.jin/Desktop/module-fuzz/test_libraries/comprehensive_tests',
                        help='Module directory')
     parser.add_argument('--output', default='trace_bundled.svg', help='Output file')
+    parser.add_argument('--layout', choices=['hierarchical', 'compact', 'both'], default='hierarchical',
+                       help='Graph layout: hierarchical (inputs on left), compact (free-form), or both')
+    parser.add_argument('--format', choices=['matplotlib', 'dot'], default='dot',
+                       help='Output format: matplotlib (old format with straight lines) or dot (newer, faster)')
     
     args = parser.parse_args()
     
@@ -702,8 +860,67 @@ def main():
                      if graph.nodes[n]['node_type'] == 'external_input'])
     print(f"Final: {num_inputs} input bundles")
     
-    tracer.visualize_bundled('out_flat', args.bit, graph, args.output)
-    print(f"\nDone! Open {args.output}")
+    if args.format == 'matplotlib':
+        # Use matplotlib (old format with straight lines and hierarchical layout)
+        print("\nGenerating visualization with matplotlib (old format)...")
+        print("Note: matplotlib uses hierarchical layout with straight lines")
+        tracer.visualize_bundled('out_flat', args.bit, graph, args.output)
+        print(f"Done! Open {args.output}")
+        print(f"\nTo use the newer DOT format, add: --format dot")
+    else:
+        # Use DOT format (recommended)
+        import subprocess
+        import os
+        
+        base_output = args.output.replace('.svg', '')
+        
+        if args.layout == 'both':
+            # Generate both layouts
+            for layout_type in ['hierarchical', 'compact']:
+                dot_file = f"{base_output}_{layout_type}.dot"
+                svg_file = f"{base_output}_{layout_type}.svg"
+                
+                print(f"\nGenerating {layout_type} layout...")
+                dot_content = generate_dot(graph, args.bit, layout_type)
+                with open(dot_file, 'w') as f:
+                    f.write(dot_content)
+                print(f"  Saved DOT: {dot_file}")
+                
+                # Convert to SVG using graphviz
+                try:
+                    subprocess.run(['dot', '-Tsvg', dot_file, '-o', svg_file], check=True)
+                    print(f"  Saved SVG: {svg_file}")
+                    file_size = os.path.getsize(svg_file)
+                    print(f"  Size: {file_size / 1024:.1f} KB")
+                except subprocess.CalledProcessError:
+                    print(f"  Warning: Could not convert to SVG (is graphviz installed?)")
+                except FileNotFoundError:
+                    print(f"  Warning: graphviz 'dot' command not found")
+                    print(f"  Install with: apt-get install graphviz")
+        else:
+            # Generate single layout
+            dot_file = base_output + '.dot'
+            svg_file = args.output
+            
+            print(f"\nGenerating {args.layout} layout...")
+            dot_content = generate_dot(graph, args.bit, args.layout)
+            with open(dot_file, 'w') as f:
+                f.write(dot_content)
+            print(f"  Saved DOT: {dot_file}")
+            
+            # Convert to SVG
+            try:
+                subprocess.run(['dot', '-Tsvg', dot_file, '-o', svg_file], check=True)
+                print(f"  Saved SVG: {svg_file}")
+                file_size = os.path.getsize(svg_file)
+                print(f"  Size: {file_size / 1024:.1f} KB")
+            except subprocess.CalledProcessError:
+                print(f"  Warning: Could not convert to SVG")
+            except FileNotFoundError:
+                print(f"  Warning: graphviz 'dot' command not found")
+                print(f"  You can manually convert: dot -Tsvg {dot_file} -o {svg_file}")
+        
+        print(f"\nDone!")
 
 if __name__ == '__main__':
     main()
