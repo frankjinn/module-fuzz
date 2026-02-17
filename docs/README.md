@@ -27,6 +27,12 @@ New to module-fuzz? Start here:
 | **[YOSYS_CXXRTL_IMPLEMENTATION.md](YOSYS_CXXRTL_IMPLEMENTATION.md)** | How CXXRTL integration works |
 | **[TRIPLE_SIMULATOR_TEST_REPORT.md](TRIPLE_SIMULATOR_TEST_REPORT.md)** | Test results and verification |
 
+### Bug Analysis
+
+| Document | Description |
+|----------|-------------|
+| **[BUG_MINIMIZATION.md](BUG_MINIMIZATION.md)** | Wire-level bug isolation & delta-debugging |
+
 ### Advanced Topics
 
 | Document | Description |
@@ -95,10 +101,18 @@ module-fuzz/
 │   │   ├── tri_fuzz_and_sim_loop.py     # Triple simulator
 │   │   ├── dual_fuzz_and_sim_loop.py    # Dual simulator
 │   │   ├── tri_simulator.py             # Comparison engine
+│   │   ├── minimize_bug.py             # Wire-level bug minimizer
+│   │   ├── trace_bit_bundled.py        # Bit dependency tracer
 │   │   └── ...
 │   └── examples/
 │       ├── simple_tri_sim.py
 │       └── simple_dual_sim.py
+│
+├── isolated_bugs/                        # Bug isolation output
+│   └── minimized/
+│       ├── bug_isolated.sv              # Self-contained isolated bug
+│       ├── top_minimal.sv               # Minimized design
+│       └── reduction_report.json        # Reduction log
 │
 └── test_libraries/                       # Test modules
     └── basic_tests/
@@ -112,6 +126,7 @@ module-fuzz/
 
 - ✅ **Validate my Verilog with 3 simulators** → [TRIPLE_SIMULATOR.md](TRIPLE_SIMULATOR.md)
 - 🐛 **Find simulator bugs** → [TRIPLE_SIMULATOR.md](TRIPLE_SIMULATOR.md)
+- 🔬 **Isolate & minimize a bug** → [BUG_MINIMIZATION.md](BUG_MINIMIZATION.md)
 - 🔧 **Understand the workflow** → [WORKFLOW.md](WORKFLOW.md)
 - 📊 **See test results** → [TRIPLE_SIMULATOR_TEST_REPORT.md](TRIPLE_SIMULATOR_TEST_REPORT.md)
 - 🛠️ **Learn how CXXRTL works** → [YOSYS_CXXRTL_IMPLEMENTATION.md](YOSYS_CXXRTL_IMPLEMENTATION.md)

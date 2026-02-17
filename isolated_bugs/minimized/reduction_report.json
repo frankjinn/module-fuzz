@@ -1,0 +1,938 @@
+{
+  "bug_id": "tribug_1339297989_1762975525",
+  "seed": 1339297989,
+  "first_diff_cycle": 17,
+  "ground_truth": "verilator_cxxrtl",
+  "differing_bits": [
+    10,
+    11,
+    12,
+    13,
+    15,
+    16,
+    24,
+    182,
+    187
+  ],
+  "total_mtm_wires": 90,
+  "traced_mtm_wires": 47,
+  "essential_count": 1,
+  "cut_count": 89,
+  "essential_wires": [
+    {
+      "wire": "array_wrapper_in_flat[14]=arithmetic_reduce_wrapper_out_flat[3]",
+      "reason": "bug_eliminated_when_cut",
+      "in_trace": true,
+      "hop_distance": 2
+    }
+  ],
+  "cut_wires": [
+    "arithmetic_reduce_wrapper_in_flat[13]=numbers_concat_repl_wrapper_out_flat[10]",
+    "arithmetic_reduce_wrapper_in_flat[1]=const_conditional_wrapper_out_flat[18]",
+    "arithmetic_reduce_wrapper_in_flat[4]=const_logic_wrapper_out_flat[4]",
+    "arithmetic_reduce_wrapper_in_flat[7]=const_compare_wrapper_out_flat[5]",
+    "array_wrapper_in_flat[0]=partselect_wrapper_out_flat[0]",
+    "array_wrapper_in_flat[15]=const_logic_wrapper_out_flat[13]",
+    "array_wrapper_in_flat[5]=const_conditional_wrapper_out_flat[7]",
+    "array_wrapper_in_flat[6]=numbers_concat_repl_wrapper_out_flat[12]",
+    "bitwise_logic_wrapper_in_flat[3]=const_concat_repl_wrapper_out_flat[20]",
+    "bitwise_logic_wrapper_in_flat[8]=const_arith_wrapper_out_flat[31]",
+    "bitwise_reduce_wrapper_in_flat[2]=const_concat_repl_wrapper_out_flat[14]",
+    "bitwise_reduce_wrapper_in_flat[4]=numbers_concat_repl_wrapper_out_flat[9]",
+    "bitwise_reduce_wrapper_in_flat[5]=const_shift_wrapper_out_flat[13]",
+    "bitwise_reduce_wrapper_in_flat[6]=const_arith_wrapper_out_flat[26]",
+    "cast_wrapper_in_flat[0]=const_concat_repl_wrapper_out_flat[7]",
+    "cast_wrapper_in_flat[10]=const_partselect_wrapper_out_flat[1]",
+    "cast_wrapper_in_flat[5]=bitwise_logic_wrapper_out_flat[2]",
+    "cast_wrapper_in_flat[7]=width_struct_wrapper_out_flat[1]",
+    "cast_wrapper_in_flat[8]=const_arith_wrapper_out_flat[38]",
+    "cast_wrapper_in_flat[9]=const_compare_wrapper_out_flat[6]",
+    "conditional_wrapper_in_flat[0]=numbers_concat_repl_wrapper_out_flat[8]",
+    "conditional_wrapper_in_flat[2]=array_wrapper_out_flat[9]",
+    "conditional_wrapper_in_flat[3]=const_shift_wrapper_out_flat[22]",
+    "conditional_wrapper_in_flat[4]=const_nested_wrapper_out_flat[0]",
+    "const_compare_wrapper_in_flat[1]=const_arith_wrapper_out_flat[15]",
+    "const_compare_wrapper_in_flat[23]=width_struct_wrapper_out_flat[5]",
+    "const_compare_wrapper_in_flat[4]=const_concat_repl_wrapper_out_flat[15]",
+    "const_concat_repl_wrapper_in_flat[6]=const_arith_wrapper_out_flat[3]",
+    "const_conditional_wrapper_in_flat[0]=bitwise_logic_wrapper_out_flat[11]",
+    "const_conditional_wrapper_in_flat[10]=const_arith_wrapper_out_flat[17]",
+    "const_conditional_wrapper_in_flat[17]=width_logic_wrapper_out_flat[5]",
+    "const_conditional_wrapper_in_flat[21]=width_struct_wrapper_out_flat[0]",
+    "const_conditional_wrapper_in_flat[24]=const_logic_wrapper_out_flat[7]",
+    "const_conditional_wrapper_in_flat[4]=const_partselect_wrapper_out_flat[5]",
+    "const_logic_wrapper_in_flat[1]=width_logic_wrapper_out_flat[5]",
+    "const_logic_wrapper_in_flat[2]=const_arith_wrapper_out_flat[18]",
+    "const_logic_wrapper_in_flat[6]=partselect_wrapper_out_flat[5]",
+    "const_logic_wrapper_in_flat[8]=bitwise_logic_wrapper_out_flat[9]",
+    "const_nested_wrapper_in_flat[10]=const_conditional_wrapper_out_flat[11]",
+    "const_nested_wrapper_in_flat[16]=array_wrapper_out_flat[6]",
+    "const_nested_wrapper_in_flat[8]=arithmetic_reduce_wrapper_out_flat[6]",
+    "const_partselect_wrapper_in_flat[13]=bitwise_logic_wrapper_out_flat[10]",
+    "const_partselect_wrapper_in_flat[15]=const_concat_repl_wrapper_out_flat[1]",
+    "const_partselect_wrapper_in_flat[18]=const_arith_wrapper_out_flat[11]",
+    "const_partselect_wrapper_in_flat[3]=const_compare_wrapper_out_flat[7]",
+    "const_partselect_wrapper_in_flat[4]=width_struct_wrapper_out_flat[11]",
+    "const_reduce_wrapper_in_flat[0]=select_wrapper_out_flat[2]",
+    "const_reduce_wrapper_in_flat[1]=array_wrapper_out_flat[9]",
+    "const_reduce_wrapper_in_flat[3]=shift_wrapper_out_flat[2]",
+    "const_shift_wrapper_in_flat[10]=const_conditional_wrapper_out_flat[21]",
+    "const_shift_wrapper_in_flat[1]=const_arith_wrapper_out_flat[32]",
+    "const_shift_wrapper_in_flat[2]=const_logic_wrapper_out_flat[13]",
+    "const_shift_wrapper_in_flat[5]=const_compare_wrapper_out_flat[1]",
+    "const_shift_wrapper_in_flat[8]=arithmetic_reduce_wrapper_out_flat[1]",
+    "const_shift_wrapper_in_flat[9]=const_nested_wrapper_out_flat[1]",
+    "logical_op_wrapper_in_flat[1]=cast_wrapper_out_flat[6]",
+    "numbers_concat_repl_wrapper_in_flat[0]=const_conditional_wrapper_out_flat[18]",
+    "numbers_concat_repl_wrapper_in_flat[1]=bitwise_logic_wrapper_out_flat[21]",
+    "numbers_concat_repl_wrapper_in_flat[3]=cast_wrapper_out_flat[6]",
+    "numbers_concat_repl_wrapper_in_flat[5]=const_partselect_wrapper_out_flat[6]",
+    "partselect_wrapper_in_flat[10]=const_concat_repl_wrapper_out_flat[17]",
+    "partselect_wrapper_in_flat[18]=bitwise_logic_wrapper_out_flat[16]",
+    "partselect_wrapper_in_flat[1]=cast_wrapper_out_flat[2]",
+    "partselect_wrapper_in_flat[4]=const_arith_wrapper_out_flat[11]",
+    "relational_wrapper_in_flat[0]=width_struct_wrapper_out_flat[11]",
+    "relational_wrapper_in_flat[2]=const_nested_wrapper_out_flat[6]",
+    "relational_wrapper_in_flat[3]=const_shift_wrapper_out_flat[22]",
+    "relational_wrapper_in_flat[4]=array_wrapper_out_flat[14]",
+    "select_wrapper_in_flat[17]=logical_op_wrapper_out_flat[2]",
+    "select_wrapper_in_flat[18]=numbers_concat_repl_wrapper_out_flat[0]",
+    "select_wrapper_in_flat[2]=shift_wrapper_out_flat[10]",
+    "select_wrapper_in_flat[4]=bitwise_reduce_wrapper_out_flat[2]",
+    "select_wrapper_in_flat[8]=width_enum_wrapper_out_flat[2]",
+    "shift_wrapper_in_flat[0]=relational_wrapper_out_flat[4]",
+    "shift_wrapper_in_flat[2]=width_struct_wrapper_out_flat[8]",
+    "shift_wrapper_in_flat[4]=conditional_wrapper_out_flat[3]",
+    "shift_wrapper_in_flat[7]=cast_wrapper_out_flat[10]",
+    "width_enum_wrapper_in_flat[2]=relational_wrapper_out_flat[5]",
+    "width_logic_wrapper_in_flat[0]=partselect_wrapper_out_flat[3]",
+    "width_logic_wrapper_in_flat[3]=cast_wrapper_out_flat[5]",
+    "width_logic_wrapper_in_flat[5]=width_struct_wrapper_out_flat[11]",
+    "width_logic_wrapper_in_flat[6]=const_arith_wrapper_out_flat[33]",
+    "width_struct_wrapper_in_flat[2]=bitwise_logic_wrapper_out_flat[11]",
+    "width_struct_wrapper_in_flat[7]=const_concat_repl_wrapper_out_flat[20]",
+    "width_struct_wrapper_in_flat[9]=const_arith_wrapper_out_flat[8]",
+    "width_union_wrapper_in_flat[15]=width_enum_wrapper_out_flat[1]",
+    "width_union_wrapper_in_flat[2]=numbers_concat_repl_wrapper_out_flat[1]",
+    "width_union_wrapper_in_flat[5]=relational_wrapper_out_flat[4]",
+    "width_union_wrapper_in_flat[6]=const_reduce_wrapper_out_flat[4]"
+  ],
+  "reduction_steps": [
+    {
+      "step": 1,
+      "wire": "array_wrapper_in_flat[0]=partselect_wrapper_out_flat[0]",
+      "in_trace": true,
+      "hop_distance": 2,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 56
+    },
+    {
+      "step": 2,
+      "wire": "array_wrapper_in_flat[5]=const_conditional_wrapper_out_flat[7]",
+      "in_trace": true,
+      "hop_distance": 2,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 48
+    },
+    {
+      "step": 3,
+      "wire": "array_wrapper_in_flat[6]=numbers_concat_repl_wrapper_out_flat[12]",
+      "in_trace": true,
+      "hop_distance": 2,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 4,
+      "wire": "array_wrapper_in_flat[14]=arithmetic_reduce_wrapper_out_flat[3]",
+      "in_trace": true,
+      "hop_distance": 2,
+      "result": "bug_eliminated",
+      "action": "restore"
+    },
+    {
+      "step": 5,
+      "wire": "array_wrapper_in_flat[15]=const_logic_wrapper_out_flat[13]",
+      "in_trace": true,
+      "hop_distance": 2,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 6,
+      "wire": "const_nested_wrapper_in_flat[8]=arithmetic_reduce_wrapper_out_flat[6]",
+      "in_trace": true,
+      "hop_distance": 2,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 7,
+      "wire": "const_nested_wrapper_in_flat[16]=array_wrapper_out_flat[6]",
+      "in_trace": true,
+      "hop_distance": 2,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 8,
+      "wire": "partselect_wrapper_in_flat[1]=cast_wrapper_out_flat[2]",
+      "in_trace": true,
+      "hop_distance": 4,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 9,
+      "wire": "numbers_concat_repl_wrapper_in_flat[1]=bitwise_logic_wrapper_out_flat[21]",
+      "in_trace": true,
+      "hop_distance": 4,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 10,
+      "wire": "numbers_concat_repl_wrapper_in_flat[3]=cast_wrapper_out_flat[6]",
+      "in_trace": true,
+      "hop_distance": 4,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 11,
+      "wire": "const_conditional_wrapper_in_flat[10]=const_arith_wrapper_out_flat[17]",
+      "in_trace": true,
+      "hop_distance": 4,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 12,
+      "wire": "numbers_concat_repl_wrapper_in_flat[0]=const_conditional_wrapper_out_flat[18]",
+      "in_trace": true,
+      "hop_distance": 4,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 13,
+      "wire": "const_conditional_wrapper_in_flat[24]=const_logic_wrapper_out_flat[7]",
+      "in_trace": true,
+      "hop_distance": 4,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 14,
+      "wire": "const_conditional_wrapper_in_flat[4]=const_partselect_wrapper_out_flat[5]",
+      "in_trace": true,
+      "hop_distance": 4,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 15,
+      "wire": "numbers_concat_repl_wrapper_in_flat[5]=const_partselect_wrapper_out_flat[6]",
+      "in_trace": true,
+      "hop_distance": 4,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 16,
+      "wire": "const_conditional_wrapper_in_flat[17]=width_logic_wrapper_out_flat[5]",
+      "in_trace": true,
+      "hop_distance": 4,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 17,
+      "wire": "const_conditional_wrapper_in_flat[21]=width_struct_wrapper_out_flat[0]",
+      "in_trace": true,
+      "hop_distance": 4,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 18,
+      "wire": "const_logic_wrapper_in_flat[8]=bitwise_logic_wrapper_out_flat[9]",
+      "in_trace": true,
+      "hop_distance": 4,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 19,
+      "wire": "arithmetic_reduce_wrapper_in_flat[1]=const_conditional_wrapper_out_flat[18]",
+      "in_trace": true,
+      "hop_distance": 4,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 35
+    },
+    {
+      "step": 20,
+      "wire": "arithmetic_reduce_wrapper_in_flat[4]=const_logic_wrapper_out_flat[4]",
+      "in_trace": true,
+      "hop_distance": 4,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 21,
+      "wire": "cast_wrapper_in_flat[5]=bitwise_logic_wrapper_out_flat[2]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 22,
+      "wire": "width_struct_wrapper_in_flat[2]=bitwise_logic_wrapper_out_flat[11]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 23,
+      "wire": "cast_wrapper_in_flat[0]=const_concat_repl_wrapper_out_flat[7]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 24,
+      "wire": "cast_wrapper_in_flat[7]=width_struct_wrapper_out_flat[1]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 25,
+      "wire": "const_partselect_wrapper_in_flat[13]=bitwise_logic_wrapper_out_flat[10]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 26,
+      "wire": "width_logic_wrapper_in_flat[3]=cast_wrapper_out_flat[5]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 27,
+      "wire": "const_partselect_wrapper_in_flat[18]=const_arith_wrapper_out_flat[11]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 28,
+      "wire": "const_logic_wrapper_in_flat[2]=const_arith_wrapper_out_flat[18]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 29,
+      "wire": "width_logic_wrapper_in_flat[6]=const_arith_wrapper_out_flat[33]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 30,
+      "wire": "cast_wrapper_in_flat[8]=const_arith_wrapper_out_flat[38]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 31,
+      "wire": "cast_wrapper_in_flat[9]=const_compare_wrapper_out_flat[6]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 32,
+      "wire": "const_partselect_wrapper_in_flat[15]=const_concat_repl_wrapper_out_flat[1]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 33,
+      "wire": "cast_wrapper_in_flat[10]=const_partselect_wrapper_out_flat[1]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 34,
+      "wire": "width_logic_wrapper_in_flat[0]=partselect_wrapper_out_flat[3]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 35,
+      "wire": "const_logic_wrapper_in_flat[6]=partselect_wrapper_out_flat[5]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 36,
+      "wire": "width_logic_wrapper_in_flat[5]=width_struct_wrapper_out_flat[11]",
+      "in_trace": true,
+      "hop_distance": 6,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 37,
+      "wire": "const_concat_repl_wrapper_in_flat[6]=const_arith_wrapper_out_flat[3]",
+      "in_trace": true,
+      "hop_distance": 8,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 38,
+      "wire": "bitwise_logic_wrapper_in_flat[3]=const_concat_repl_wrapper_out_flat[20]",
+      "in_trace": true,
+      "hop_distance": 8,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 39,
+      "wire": "partselect_wrapper_in_flat[18]=bitwise_logic_wrapper_out_flat[16]",
+      "in_trace": true,
+      "hop_distance": 8,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 40,
+      "wire": "width_struct_wrapper_in_flat[9]=const_arith_wrapper_out_flat[8]",
+      "in_trace": true,
+      "hop_distance": 8,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 41,
+      "wire": "partselect_wrapper_in_flat[4]=const_arith_wrapper_out_flat[11]",
+      "in_trace": true,
+      "hop_distance": 8,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 42,
+      "wire": "const_partselect_wrapper_in_flat[3]=const_compare_wrapper_out_flat[7]",
+      "in_trace": true,
+      "hop_distance": 8,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 43,
+      "wire": "partselect_wrapper_in_flat[10]=const_concat_repl_wrapper_out_flat[17]",
+      "in_trace": true,
+      "hop_distance": 8,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 44,
+      "wire": "width_struct_wrapper_in_flat[7]=const_concat_repl_wrapper_out_flat[20]",
+      "in_trace": true,
+      "hop_distance": 8,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 34
+    },
+    {
+      "step": 45,
+      "wire": "const_compare_wrapper_in_flat[23]=width_struct_wrapper_out_flat[5]",
+      "in_trace": true,
+      "hop_distance": 8,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 46,
+      "wire": "const_partselect_wrapper_in_flat[4]=width_struct_wrapper_out_flat[11]",
+      "in_trace": true,
+      "hop_distance": 8,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 47,
+      "wire": "bitwise_logic_wrapper_in_flat[8]=const_arith_wrapper_out_flat[31]",
+      "in_trace": true,
+      "hop_distance": 10,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 48,
+      "wire": "const_shift_wrapper_in_flat[8]=arithmetic_reduce_wrapper_out_flat[1]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 49,
+      "wire": "const_reduce_wrapper_in_flat[1]=array_wrapper_out_flat[9]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 50,
+      "wire": "conditional_wrapper_in_flat[2]=array_wrapper_out_flat[9]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 51,
+      "wire": "relational_wrapper_in_flat[4]=array_wrapper_out_flat[14]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 52,
+      "wire": "const_conditional_wrapper_in_flat[0]=bitwise_logic_wrapper_out_flat[11]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 53,
+      "wire": "select_wrapper_in_flat[4]=bitwise_reduce_wrapper_out_flat[2]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 54,
+      "wire": "logical_op_wrapper_in_flat[1]=cast_wrapper_out_flat[6]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 55,
+      "wire": "shift_wrapper_in_flat[7]=cast_wrapper_out_flat[10]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 56,
+      "wire": "shift_wrapper_in_flat[4]=conditional_wrapper_out_flat[3]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 57,
+      "wire": "const_compare_wrapper_in_flat[1]=const_arith_wrapper_out_flat[15]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 58,
+      "wire": "bitwise_reduce_wrapper_in_flat[6]=const_arith_wrapper_out_flat[26]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 59,
+      "wire": "const_shift_wrapper_in_flat[1]=const_arith_wrapper_out_flat[32]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 60,
+      "wire": "const_shift_wrapper_in_flat[5]=const_compare_wrapper_out_flat[1]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 30
+    },
+    {
+      "step": 61,
+      "wire": "arithmetic_reduce_wrapper_in_flat[7]=const_compare_wrapper_out_flat[5]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 62,
+      "wire": "bitwise_reduce_wrapper_in_flat[2]=const_concat_repl_wrapper_out_flat[14]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 63,
+      "wire": "const_compare_wrapper_in_flat[4]=const_concat_repl_wrapper_out_flat[15]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 64,
+      "wire": "const_nested_wrapper_in_flat[10]=const_conditional_wrapper_out_flat[11]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 65,
+      "wire": "const_shift_wrapper_in_flat[10]=const_conditional_wrapper_out_flat[21]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 66,
+      "wire": "const_shift_wrapper_in_flat[2]=const_logic_wrapper_out_flat[13]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 67,
+      "wire": "conditional_wrapper_in_flat[4]=const_nested_wrapper_out_flat[0]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 68,
+      "wire": "const_shift_wrapper_in_flat[9]=const_nested_wrapper_out_flat[1]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 69,
+      "wire": "relational_wrapper_in_flat[2]=const_nested_wrapper_out_flat[6]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 70,
+      "wire": "width_union_wrapper_in_flat[6]=const_reduce_wrapper_out_flat[4]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 71,
+      "wire": "bitwise_reduce_wrapper_in_flat[5]=const_shift_wrapper_out_flat[13]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 72,
+      "wire": "conditional_wrapper_in_flat[3]=const_shift_wrapper_out_flat[22]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 73,
+      "wire": "relational_wrapper_in_flat[3]=const_shift_wrapper_out_flat[22]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 74,
+      "wire": "select_wrapper_in_flat[17]=logical_op_wrapper_out_flat[2]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 75,
+      "wire": "select_wrapper_in_flat[18]=numbers_concat_repl_wrapper_out_flat[0]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 76,
+      "wire": "width_union_wrapper_in_flat[2]=numbers_concat_repl_wrapper_out_flat[1]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 77,
+      "wire": "conditional_wrapper_in_flat[0]=numbers_concat_repl_wrapper_out_flat[8]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 78,
+      "wire": "bitwise_reduce_wrapper_in_flat[4]=numbers_concat_repl_wrapper_out_flat[9]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 79,
+      "wire": "arithmetic_reduce_wrapper_in_flat[13]=numbers_concat_repl_wrapper_out_flat[10]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 80,
+      "wire": "width_union_wrapper_in_flat[5]=relational_wrapper_out_flat[4]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 81,
+      "wire": "shift_wrapper_in_flat[0]=relational_wrapper_out_flat[4]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 82,
+      "wire": "width_enum_wrapper_in_flat[2]=relational_wrapper_out_flat[5]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 83,
+      "wire": "const_reduce_wrapper_in_flat[0]=select_wrapper_out_flat[2]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 84,
+      "wire": "const_reduce_wrapper_in_flat[3]=shift_wrapper_out_flat[2]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 85,
+      "wire": "select_wrapper_in_flat[2]=shift_wrapper_out_flat[10]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 86,
+      "wire": "width_union_wrapper_in_flat[15]=width_enum_wrapper_out_flat[1]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 87,
+      "wire": "select_wrapper_in_flat[8]=width_enum_wrapper_out_flat[2]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 88,
+      "wire": "const_logic_wrapper_in_flat[1]=width_logic_wrapper_out_flat[5]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 89,
+      "wire": "shift_wrapper_in_flat[2]=width_struct_wrapper_out_flat[8]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    },
+    {
+      "step": 90,
+      "wire": "relational_wrapper_in_flat[0]=width_struct_wrapper_out_flat[11]",
+      "in_trace": false,
+      "hop_distance": 1000,
+      "result": "bug_persists",
+      "action": "cut",
+      "diff_cycles": 26
+    }
+  ],
+  "minimal_design_reproduces_bug": true,
+  "baseline_diff_cycles": 58,
+  "minimal_diff_cycles": 26,
+  "files": {
+    "top_minimal": "/opt/module-fuzz/isolated_bugs/minimized/top_minimal.sv",
+    "tb_top": "/opt/module-fuzz/isolated_bugs/minimized/tb_top.sv"
+  }
+}
